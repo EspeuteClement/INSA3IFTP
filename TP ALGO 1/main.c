@@ -36,6 +36,11 @@ void doubleChain_remove(int value, Node* watcher);
 // Print all the values in the doubleChainedList whith the first element watcher
 void doubleChain_print(Node* watcher);
 
+// Destroys an element
+//  PARAMETERS :
+//	theNode The node that has to be cleansed by the fire
+void doubleChain_purgeNode(Node* theNode);
+
 //METHODS :
 #include <stdio.h>
 #include <stdlib.h>
@@ -84,19 +89,28 @@ void doubleChain_print(Node* watcher){
 		}
 		printf("%i\n", currentNode->value);
 	}while(currentNode != watcher);
+
+	printf("\n");
 }
 
 void doubleChain_remove(int value, Node* watcher){
 	Node *currentNode = watcher;
 
-	do{
+	do{ //Go throught the list until value is found
 		currentNode = currentNode->next;
 		if (currentNode->value == value){
-			currentNode->prev->next = currentNode->next;
-			currentNode->next->prev = currentNode->prev;
-			free(currentNode);	
+			doubleChain_purgeNode(currentNode);
+			break;	
 		}
 	}while(currentNode->value < value && currentNode != watcher);
+}
+
+void doubleChain_purgeNode(Node* theNode){
+	//if(theNode->prev->next != NULL) 
+		theNode->prev->next = theNode->next;
+	//if(theNode->next->prev != NULL)
+		theNode->next->prev = theNode->prev;
+	free(theNode);
 }
 
 int main(void){
@@ -104,7 +118,14 @@ int main(void){
 	doubleChain_insert(5,watch);
 	doubleChain_insert(10,watch);
 	doubleChain_insert(55,watch);
+	doubleChain_insert(55,watch);
 	doubleChain_insert(20,watch);
+
+	doubleChain_print(watch);
+
+	doubleChain_remove(55,watch);
+	doubleChain_insert(66,watch);
+
 	doubleChain_print(watch);
 	return 0;
 }
