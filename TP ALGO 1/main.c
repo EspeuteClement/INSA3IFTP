@@ -122,6 +122,15 @@ void doubleChain_destroy(Node* watcher) {
 	}while(currentNode != watcher);
 }
 
+void doubleChain_compress(Node* watcher) {
+	Node *currentNode = watcher->next;
+
+	while(currentNode != watcher){
+		currentNode = currentNode->next;
+		doubleChain_purgeNode(currentNode->last);
+	}
+}
+
 int main(void){
 int val;
 char lecture[100];
