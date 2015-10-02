@@ -119,7 +119,7 @@ void doubleChain_destroy(Node* watcher) {
 	do{
 		currentNode = currentNode->next;
 
-	}while(currentNode->value < value && currentNode != watcher);
+	}while(currentNode != watcher);
 }
 
 int main(void){
