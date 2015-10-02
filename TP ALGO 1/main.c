@@ -113,7 +113,7 @@ void doubleChain_purgeNode(Node* theNode){
 	free(theNode);
 }
 
-void doubleChain_destroy(Node* watcher) {
+void doubleChain_destroy(Node* watcher){
 	Node *currentNode = watcher->next;
 
 	do{
@@ -122,12 +122,14 @@ void doubleChain_destroy(Node* watcher) {
 	}while(currentNode != watcher);
 }
 
-void doubleChain_compress(Node* watcher) {
+void doubleChain_compress(Node* watcher){
 	Node *currentNode = watcher->next;
 
 	while(currentNode != watcher){
 		currentNode = currentNode->next;
-		doubleChain_purgeNode(currentNode->last);
+		if(currentNode->last->value == currentNode->value){
+			doubleChain_purgeNode(currentNode->last);
+		}
 	}
 }
 
