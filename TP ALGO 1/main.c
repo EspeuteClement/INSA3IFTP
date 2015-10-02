@@ -31,10 +31,10 @@ void doubleChain_insert(int value, Node* watcher);
 //  PARAMETERS :
 //	value The value that should be deleted
 //	watcher The first node of the doubleChainedList
-void doubleChain_delete(int value, Node* watcher);
+void doubleChain_remove(int value, Node* watcher);
 
 // Print all the values in the doubleChainedList whith the first element watcher
-void doubleChain_print(const Node* watcher);
+void doubleChain_print(Node* watcher);
 
 //METHODS :
 #include <stdio.h>
@@ -74,11 +74,37 @@ void doubleChain_insert(int value, Node* watcher){
 	currentNode->prev = prevNode->next;
 }
 
+void doubleChain_print(Node* watcher){
+	Node* currentNode = watcher;
 
+	do{
+		currentNode = currentNode->next;
+		if(currentNode == watcher){ //Avoid printing the watcher
+			break;
+		}
+		printf("%i\n", currentNode->value);
+	}while(currentNode != watcher);
+}
 
+void doubleChain_remove(int value, Node* watcher){
+	Node *currentNode = watcher;
 
+	do{
+		currentNode = currentNode->next;
+		if (currentNode->value == value){
+			currentNode->prev->next = currentNode->next;
+			currentNode->next->prev = currentNode->prev;
+			free(currentNode);	
+		}
+	}while(currentNode->value < value && currentNode != watcher);
+}
 
 int main(void){
 	Node* watch = newWatcher();
+	doubleChain_insert(5,watch);
+	doubleChain_insert(10,watch);
+	doubleChain_insert(55,watch);
+	doubleChain_insert(20,watch);
+	doubleChain_print(watch);
 	return 0;
 }
