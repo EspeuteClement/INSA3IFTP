@@ -36,6 +36,9 @@ void doubleChain_remove(int value, Node* watcher);
 // Print all the values in the doubleChainedList whith the first element watcher
 void doubleChain_print(Node* watcher);
 
+// Print all the values in the doubleChainedList in the reverse order
+void doubleChain_printInverted(Node* watcher);
+
 // Destroys an element
 //  PARAMETERS :
 //	theNode The node that has to be cleansed by the fire
@@ -93,6 +96,20 @@ void doubleChain_print(Node* watcher){
 	printf("\n");
 }
 
+void doubleChain_printInverted(Node* watcher){
+	Node* currentNode = watcher;
+
+	do{
+		currentNode = currentNode->prev;
+		if(currentNode == watcher){ //Avoid printing the watcher
+			break;
+		}
+		printf("%i\n", currentNode->value);
+	}while(currentNode != watcher);
+
+	printf("\n");
+}
+
 void doubleChain_remove(int value, Node* watcher){
 	Node *currentNode = watcher;
 
@@ -116,11 +133,12 @@ void doubleChain_purgeNode(Node* theNode){
 void doubleChain_destroy(Node* watcher) {
 	Node *currentNode = watcher->next;
 
-	do{
+	while(currentNode != watcher){
 		currentNode = currentNode->next;
 		doubleChain_purgeNode(currentNode->prev);
+	}
 
-	}while(currentNode != watcher);
+	doubleChain_purgeNode(watcher);
 }
 
 int main(void){
@@ -141,7 +159,7 @@ fscanf(stdin,"%99s",lecture);
 	  } else if (strcmp(lecture,"compress")==0) {
 	     /* mettez ici votre code pour la suppression de doublons dans la liste */
 	  } else if (strcmp(lecture,"printi")==0) {
-	     /* mettez ici votre code pour l'affichage inversé de la liste */
+	     doubleChain_printInverted(watch);
 	  } else if (strcmp(lecture,"remove")==0) {
 	     fscanf(stdin,"%99s",lecture);
 	     val = strtol(lecture,NULL,10);
