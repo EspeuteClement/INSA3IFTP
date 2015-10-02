@@ -67,10 +67,10 @@ void doubleChain_insert(int value, Node* watcher){
 
 	do{
 		currentNode = currentNode->next;
-	}while(currentNode->value < value && currentNode != watcher)
+	}while(currentNode->value < value && currentNode != watcher);
 
 	Node *prevNode = currentNode->prev;
-	prevNode->next = newNode(value,prevNode,curentNode);
+	prevNode->next = newNode(value,prevNode,currentNode);
 	currentNode->prev = prevNode->next;
 }
 
