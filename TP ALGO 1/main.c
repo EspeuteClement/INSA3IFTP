@@ -146,8 +146,8 @@ void doubleChain_compress(Node* watcher){
 
 	while(currentNode != watcher){
 		currentNode = currentNode->next;
-		if(currentNode->last->value == currentNode->value){
-			doubleChain_purgeNode(currentNode->last);
+		if(currentNode->prev->value == currentNode->value){
+			doubleChain_purgeNode(currentNode->prev);
 		}
 	}
 }
@@ -168,7 +168,7 @@ fscanf(stdin,"%99s",lecture);
 	  } else if (strcmp(lecture,"print")==0) {
 	     doubleChain_print(watch);
 	  } else if (strcmp(lecture,"compress")==0) {
-	     /* mettez ici votre code pour la suppression de doublons dans la liste */
+	     doubleChain_compress(watch);
 	  } else if (strcmp(lecture,"printi")==0) {
 	     doubleChain_printInverted(watch);
 	  } else if (strcmp(lecture,"remove")==0) {
