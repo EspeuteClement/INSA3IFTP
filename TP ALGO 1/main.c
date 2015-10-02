@@ -114,12 +114,12 @@ void doubleChain_purgeNode(Node* theNode){
 }
 
 void doubleChain_destroy(Node* watcher) {
-	Node *currentNode = watcher;
+	Node *currentNode = watcher->next;
 
 	do{
 		currentNode = currentNode->next;
-
-	}while(currentNode->value < value && currentNode != watcher);
+		doubleChain_purgeNode(currentNode->last);
+	}while(currentNode != watcher);
 }
 
 int main(void){
@@ -130,24 +130,24 @@ char lecture[100];
 Node* watch = newWatcher();
 
 fscanf(stdin,"%99s",lecture);
-while (strcmp(lecture,"bye")!=0) {
-  if (strcmp(lecture,"insert")==0) {
-     fscanf(stdin,"%99s",lecture);
-     val = strtol(lecture,NULL,10);
-     doubleChain_insert(val, watch);
-  } else if (strcmp(lecture,"print")==0) {
-     doubleChain_print(watch);
-  } else if (strcmp(lecture,"compress")==0) {
-     /* mettez ici votre code pour la suppression de doublons dans la liste */
-  } else if (strcmp(lecture,"printi")==0) {
-     /* mettez ici votre code pour l'affichage inversé de la liste */
-  } else if (strcmp(lecture,"remove")==0) {
-     fscanf(stdin,"%99s",lecture);
-     val = strtol(lecture,NULL,10);
-     doubleChain_remove(val, watch);
-  }
-  fscanf(stdin,"%99s",lecture);
-}
-/* placer ici la libération de la liste */
-return 0;
+	while (strcmp(lecture,"bye")!=0) {
+	  if (strcmp(lecture,"insert")==0) {
+	     fscanf(stdin,"%99s",lecture);
+	     val = strtol(lecture,NULL,10);
+	     doubleChain_insert(val, watch);
+	  } else if (strcmp(lecture,"print")==0) {
+	     doubleChain_print(watch);
+	  } else if (strcmp(lecture,"compress")==0) {
+	     /* mettez ici votre code pour la suppression de doublons dans la liste */
+	  } else if (strcmp(lecture,"printi")==0) {
+	     /* mettez ici votre code pour l'affichage inversé de la liste */
+	  } else if (strcmp(lecture,"remove")==0) {
+	     fscanf(stdin,"%99s",lecture);
+	     val = strtol(lecture,NULL,10);
+	     doubleChain_remove(val, watch);
+	  }
+	  fscanf(stdin,"%99s",lecture);
+	}
+	doubleChain_destroy(watch);
+	return 0;
 }
