@@ -1,4 +1,4 @@
-function [returnValue] = GaussSeidel(A,B)
+function [returnValue] = GaussSeidel(A,B,prec)
   CoefStart = diag(A);
   M = zeros(size(A,1),1);
   k = 0;
@@ -22,7 +22,8 @@ function [returnValue] = GaussSeidel(A,B)
       Temp(i) = (B(i) - sigma - omega)/A(i,i); % Calcul de M.X s = N.X s + B 
                                       %(A(i,i) représente la diagonnale)
     end
-    if (abs(Temp(1) - M(1))<0.000001) or (k>10000);, break end % Break si la précision est atteinte
+    if (abs(Temp(1) - M(1))<prec
+    ) or (k>10000);, break end % Break si la précision est atteinte
     M = Temp;
     k = k+1;
   end

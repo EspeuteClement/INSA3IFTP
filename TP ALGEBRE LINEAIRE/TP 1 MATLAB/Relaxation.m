@@ -1,4 +1,4 @@
-function [X] = Relaxation(A,B)
+function [X] = Relaxation(A,B,prec)
   M = tril(A);
   L = tril(A,1);
   U = triu(A,1);
@@ -39,7 +39,7 @@ function [X] = Relaxation(A,B)
       end % j loop
       TEMP(i)= (1 - minRho) * O(i) + minRho/A(i,i) * (B(i) - sigma);
      end %i loop
-     if (abs(O(1) - TEMP(1))<0.00000001);
+     if (abs(O(1) - TEMP(1))<prec);
       break
      end
      O = TEMP;
