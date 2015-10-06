@@ -54,8 +54,6 @@ function Probleme0()
     end
   end
  
-  %A = A(1:450,1:450);
- 
   % Solving
   X = GaussSeidel(A,B, 0.0001);
   Y = reshape(X, 15, 30);
