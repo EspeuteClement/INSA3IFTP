@@ -27,7 +27,8 @@ function [returnValue] = GaussSeidel(A,B,prec)
     Error = abs(A*Temp - B);
     maxError = max(Error);
     
-    if maxError < prec; break end % Break si la précision est atteinte
+    if maxError < prec; break
+    end % Break si la précision est atteinte
     
     M = Temp;
     k = k+1;
