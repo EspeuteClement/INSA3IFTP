@@ -1,7 +1,9 @@
+% A is the matrix representing the coefficents of the equations system.
+% B is the matrix of the initial values.
 function Probleme0()
   A = zeros(450);
   B = zeros(450, 1);
- 
+  
   for i=1:450
     % Left Side
     if(i >= 2 && i <= 14)
