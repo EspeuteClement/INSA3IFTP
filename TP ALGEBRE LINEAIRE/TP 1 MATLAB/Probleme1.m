@@ -1,7 +1,51 @@
 function Probleme1()
-  A = zeros(450)
-  B = zeros(450, 1)
+  A = zeros(450);
+  B = zeros(450, 1);
   
-  for x=1:450
+  for i=1:450
+    % Left Side 
+    if(i >= 2 and i <= 14)
+      A(i, i-1) = 1;
+      A(i, i+1) = 1;
+      A(i, i+165) = 1;
+      A(i, i+15) = 1;
+      A(i, i) = -4;
+    
+    % Right Side 
+    elseif(i >= 437 and i <= 449)
+      A(i, i-1) = 1;
+      A(i, i+1) = 1;
+      A(i, i-270) = 1;
+      A(i, i-15) = 1;
+      A(i, i) = -4;
+    
+    % Bold Line 
+    elseif(i >= 182 and i <= 194)
+      A(i, i-1) = 1;
+      A(i, i+1) = 1;
+      A(i, i-15) = 1;
+      A(i, i+15) = 1;
+      A(i, i-165) = 1;
+      A(i, i+270) = 1;
+      A(i, i) = -6;
+    
+    % Red Points 
+    elseif(i == 248 or i == 263 or i == 278)
+      A(i, i) = 1;
+      B(i) = 100;
+    
+    % Green Points
+    elseif((i >= 319 and i <= 327) or (i >= 334 and i <= 342))
+      A(i, i) = 1;
+      B(i) = 10;
+    
+    % Blue Points (top and bottom sides)
+    elseif(mod(i-1, 15) == 0 or mod(i-15, 15) == 0)
+      A(i, i) = 1;
+      B(i) = 50;
+      
+    else
+      
+    end
   end  
 end
