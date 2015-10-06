@@ -1,4 +1,4 @@
-function [X] = Relaxation(A,B)
+function [X] = Relaxation(A,B,prec)
   M = tril(A);
   L = tril(A,1);
   U = triu(A,1);
