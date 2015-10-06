@@ -90,10 +90,10 @@ void doubleChain_print(Node* watcher){
 		if(currentNode == watcher){ //Avoid printing the watcher
 			break;
 		}
-		printf("%i\n", currentNode->value);
+		printf("%i\r\n", currentNode->value);
 	}while(currentNode != watcher);
 
-	printf("\n");
+	printf("\r\n");
 }
 
 void doubleChain_printInverted(Node* watcher){
@@ -104,10 +104,10 @@ void doubleChain_printInverted(Node* watcher){
 		if(currentNode == watcher){ //Avoid printing the watcher
 			break;
 		}
-		printf("%i\n", currentNode->value);
+		printf("%i\r\n", currentNode->value);
 	}while(currentNode != watcher);
 
-	printf("\n");
+	printf("\r\n");
 }
 
 void doubleChain_remove(int value, Node* watcher){
