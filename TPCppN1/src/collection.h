@@ -1,88 +1,85 @@
 /*************************************************************************
-                           ${file_base}  -  description
+                           Collection  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    debut                : 2015/10/09
+    copyright            : (C) 2015/10/092015 par cespeute & brenault
 *************************************************************************/
 
-//---------- Interface de la classe <${file_base}> (fichier ${file_name}) ------
-#if ! defined ( XXX_H )
-#define XXX_H
+//---------- Interface de la classe <Collection> (fichier Collection.h) ------
+#if ! defined ( COLLECTION_H )
+#define COLLECTION_H
 
-//--------------------------------------------------- Interfaces utilisées
+//------------------------------------------------------------- Constantes
 
-//------------------------------------------------------------- Constantes 
+//------------------------------------------------------------------ Types
 
-//------------------------------------------------------------------ Types 
-
-//------------------------------------------------------------------------ 
-// Rôle de la classe <${file_base}>
+//------------------------------------------------------------------------
+// Role de la classe <Collection>
 //
 //
-//------------------------------------------------------------------------ 
+//------------------------------------------------------------------------
 
-class ${file_base} : public Ancetre
+class Collection
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
-//----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste de paramètres );
+//----------------------------------------------------- Methodes publiques
+    void Afficher ();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-
-//------------------------------------------------- Surcharge d'opérateurs
-    ${file_base} & operator = ( const ${file_base} & un${file_base} );
+    void Ajouter (int valeur);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
+    void Retirer (int valeur, int occurencesNb);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    void Ajuster (int uneTaille);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    void Reunir (const Collection &Collection);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
 //-------------------------------------------- Constructeurs - destructeur
-    ${file_base} ( const ${file_base} & un${file_base} );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-    ${file_base} ( );
+    Collection (int uneTaille);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~${file_base} ( );
+    Collection (int uneTaille, int *unTableau);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-//------------------------------------------------------------------ PRIVE 
+    virtual ~Collection ();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
-protected:
-//----------------------------------------------------- Méthodes protégées
-
-private:
-//------------------------------------------------------- Méthodes privées
-
-protected:
-//----------------------------------------------------- Attributs protégés
+//------------------------------------------------------------------ PRIVE
 
 private:
-//------------------------------------------------------- Attributs privés
-
-//---------------------------------------------------------- Classes amies
-
-//-------------------------------------------------------- Classes privées
-
-//----------------------------------------------------------- Types privés
-
+//------------------------------------------------------- Attributs prives
+    int taille;
+    int *tableau;
 };
 
-//----------------------------------------- Types dépendants de <${file_base}>
-
-#endif // XXX_H
+#endif // COLLECTION_H
