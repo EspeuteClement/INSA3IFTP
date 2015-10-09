@@ -1,6 +1,6 @@
 % A is the matrix representing the coefficents of the equations system.
 % B is the matrix of the initial values.
-function Probleme1(delta,t)
+function Probleme2(delta,t)
   A = zeros(450);
   B = zeros(450, 1);
  
@@ -26,12 +26,21 @@ function Probleme1(delta,t)
    
     % Right Side
     elseif(i >= 437 && i <= 449)
- 
       A(i, i-1) = 1;
       A(i, i) = -4;
       A(i, i+1) = 1;
       A(i, i-270) = 1;
       A(i, i-15) = 1;
+    elseif(i == 436)
+        A(i, i) = -3;
+        A(i, i+1) = 1;
+        A(i, i-270) = 1;
+        A(i, i-15) = 1;
+    elseif(i==450)
+        A(i, i-1) = 1;
+        A(i, i) = -3;
+        A(i, i-270) = 1;
+        A(i, i-15) = 1;
    
     % Bold Line
     elseif(i >= 167 && i <= 179)
@@ -45,11 +54,6 @@ function Probleme1(delta,t)
    
     % Red Points
      elseif(i == 233 || i == 263-15 || i == 278-15)
-      A(i, i-1) = 1;
-      A(i, i+1) = 1;
-      A(i, i-15) = 1;
-      A(i, i+15) = 1;
-      A(i, i) = -4;
        B(i) = 300;
    
     % Green Points
@@ -90,10 +94,10 @@ function Probleme1(delta,t)
  
   % Solving
   sh=surf(reshape(B,15,30));
-  set(gca,'zlim',[-0.5 10])
+  set(gca,'zlim',[-0.5 300])
   for (i=0:delta:t)
       B = expm(A*delta)*B;
       set(sh,'zdata',reshape(B,15,30))
-      pause(0.05);
+      pause(0.005);
   end
 end
