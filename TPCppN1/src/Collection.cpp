@@ -45,6 +45,9 @@ Collection::Collection (int uneTaille)
 #ifdef MAP
     cout << "Appel au premier constructeur de <Collection>" << endl;
 #endif
+
+    taille = uneTaille;
+    tableau = new int[uneTaille];
 }
 
 Collection::Collection (int uneTaille, int *unTableau)
@@ -52,6 +55,14 @@ Collection::Collection (int uneTaille, int *unTableau)
 #ifdef MAP
     cout << "Appel au second constructeur de <Collection>" << endl;
 #endif
+
+    taille = uneTaille;
+    tableau = new int[uneTaille];
+
+    int i;
+    for (i = 0; i < taille; i++) {
+      tableau[i] = unTableau[i];
+    }
 }
 
 
@@ -60,4 +71,6 @@ Collection::~Collection ()
 #ifdef MAP
     cout << "Appel au destructeur de <Collection>" << endl;
 #endif
+
+    delete tableau;
 }

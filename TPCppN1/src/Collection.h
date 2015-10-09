@@ -8,10 +8,7 @@
 //---------- Interface de la classe <Collection> (fichier Collection.h) ------
 #if ! defined ( COLLECTION_H )
 #define COLLECTION_H
-
-//------------------------------------------------------------- Constantes
-
-//------------------------------------------------------------------ Types
+//#define MAP
 
 //------------------------------------------------------------------------
 // Role de la classe <Collection>
