@@ -11,11 +11,6 @@ objs/%.o : %.cpp
 clean :
 	rm -f $(OBJS) executable core
 
-
-
-
-
-
 # # Makefile TP C++
 # # collection.cpp test.cpp
 

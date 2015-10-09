@@ -9,6 +9,7 @@
 #if ! defined ( COLLECTION_H )
 #define COLLECTION_H
 //#define MAP
+#define DEBUG
 
 
 //----------------------------------------------------------- Enumérations
@@ -61,12 +62,7 @@ public:
     // Contrat :
     //
 
-    /////// CLASSES NON DEMANDEES MAIS UTILES POUR LE TEST /////////////
-    void PrintNbElements () const;
-    // Affiche le nombre d'élements du Collection
     
-    void PrintAlloue () const;
-    //Affiche la taille Allouee de la Collection
 
 //-------------------------------------------- Constructeurs - destructeur
     Collection (int uneTaille);
@@ -99,6 +95,15 @@ private:
     int nbElements;
     int alloue;
     int *tableau;
+
+
+    /////// CLASSES NON DEMANDEES MAIS UTILES POUR LE TEST /////////////
+    void printNbElements () const;
+    // Affiche le nombre d'élements du Collection
+    
+    void printAlloue () const;
+    //Affiche la taille Allouee de la Collection
+
 
 //---------------------------------------------------------- Classes amies
     // On a besion que Test soit ami pour

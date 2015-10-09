@@ -21,18 +21,22 @@ using namespace std;
 //----------------------------------------------------- Methodes publiques
 void Collection::Afficher () const
 {
+#ifdef DEBUG
+    printNbElements();
+    printAlloue();
+#endif
     int i;
-    for (i = 0; i < nbElements; i++) {
-      cout << tableau[i] << "\n";
+    for (i = 0; i < nbElements; i++)
+    {   cout << tableau[i] << "\n";
     }
 }
 
 void Collection::Ajouter (int valeur)
 {
     // Couvre le cas ou la collection est deja pleine.
-    if (alloue == nbElements) {
-      alloue++;
-      Ajuster(alloue);
+    if (alloue == nbElements)
+    {   alloue++;
+        Ajuster(alloue+1);
     }
     tableau[nbElements] = valeur;
     nbElements++;
@@ -41,11 +45,10 @@ void Collection::Ajouter (int valeur)
 void Collection::Retirer (int valeur, int occurencesNb)
 {
     int occurences = 0;
-    int i;
 
     // Copie la derniere valeur de la collection a l'endroit de l'occurence et
     // ajuste la taille de la collection en consequence
-    for (i = 0; i < nbElements; i++) {
+    for (int i = 0; i < nbElements; i++) {
         if (tableau[i] == valeur) {
             occurences++;
             if (occurences <= occurencesNb) {
@@ -136,10 +139,10 @@ Collection::~Collection ()
     delete tableau;
 }
 
-void Collection::PrintNbElements() const
+void Collection::printNbElements() const
 {   cout << "NbElements : " << nbElements << '\n';
 }
 
-void Collection::PrintAlloue () const
+void Collection::printAlloue () const
 {   cout << "Alloue : " << alloue << '\n';
 }
