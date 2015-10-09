@@ -52,6 +52,7 @@ void Collection::Retirer (int valeur, int occurencesNb)
             }
         }
     }
+    Ajuster(nbElements);
 }
 
 int Collection::Ajuster (int uneTaille)
