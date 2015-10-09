@@ -23,7 +23,7 @@ void Collection::Afficher ()
 {
     int i;
     for (i = 0; i < nbElements; i++) {
-      cout << tableau[i] + "\n";
+      cout << tableau[i] << "\n";
     }
 }
 
@@ -60,12 +60,12 @@ int Collection::Ajuster (int uneTaille)
     if (uneTaille < nbElements) 
     {   return ERR_TAILLE;
     }
-    // Recréer un tableau si sa taille est plus grande que celle actuelle
-    else if (uneTaille <= alloue) 
-    {   int nouveauTableau = new int[uneTaille]; // Nouveau tableau qui sera alloué
+    // Recréer un tableau si sa taille est différente que celle actuelle
+    else if (uneTaille != alloue) 
+    {   int *nouveauTableau = new int[uneTaille]; // Nouveau tableau qui sera alloué
         
         // Copie de l'ancien tableau vers le nouveau
-        for (int = 0;i<nbElements;i++)
+        for (int i = 0;i<nbElements;i++)
         {   nouveauTableau[i] = tableau[i];
         }
 

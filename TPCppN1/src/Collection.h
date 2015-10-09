@@ -88,9 +88,13 @@ public:
 
 private:
 //------------------------------------------------------- Attributs prives
-    int nbElements = 0;
-    int alloue = 0;
+    int nbElements;
+    int alloue;
     int *tableau;
+
+//---------------------------------------------------------- Classes amies
+    // On a besion que Test soit ami pour
+    friend class Test;
 };
 
 #endif // COLLECTION_H

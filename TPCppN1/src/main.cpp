@@ -8,4 +8,6 @@ int main()
 	maCol.Ajouter(5);
 	maCol.Ajouter(10);
 	maCol.Afficher();
+	maCol.Ajuster(50);
+	maCol.Ajuster(20);
 }
