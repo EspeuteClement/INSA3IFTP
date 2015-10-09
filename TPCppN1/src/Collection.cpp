@@ -55,15 +55,15 @@ void Collection::Retirer (int valeur, int occurencesNb)
 }
 
 int Collection::Ajuster (int uneTaille)
-{   
+{
     // Erreur si la nouvelle taille est trop petite
-    if (uneTaille < nbElements) 
+    if (uneTaille < nbElements)
     {   return ERR_TAILLE;
     }
     // Recréer un tableau si sa taille est plus grande que celle actuelle
-    else if (uneTaille <= alloue) 
+    else if (uneTaille <= alloue)
     {   int nouveauTableau = new int[uneTaille]; // Nouveau tableau qui sera alloué
-        
+
         // Copie de l'ancien tableau vers le nouveau
         for (int = 0;i<nbElements;i++)
         {   nouveauTableau[i] = tableau[i];
@@ -88,6 +88,7 @@ Collection::Collection (int uneTaille)
 #endif
 
     alloue = uneTaille;
+    nbElements = 0;
     tableau = new int[uneTaille];
 }
 
