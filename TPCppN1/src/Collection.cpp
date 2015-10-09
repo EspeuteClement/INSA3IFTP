@@ -29,6 +29,7 @@ void Collection::Afficher ()
 
 void Collection::Ajouter (int valeur)
 {
+    // Couvre le cas ou la collection est deja pleine.
     if (alloue == nbElements) {
       alloue++;
       Ajuster(alloue);
@@ -41,6 +42,9 @@ void Collection::Retirer (int valeur, int occurencesNb)
 {
     int occurences = 0;
     int i;
+
+    // Copie la derniere valeur de la collection a l'endroit de l'occurence et
+    // ajuste la taille de la collection en consequence
     for (i = 0; i < nbElements; i++) {
         if (tableau[i] == valeur) {
             occurences++;
@@ -49,10 +53,10 @@ void Collection::Retirer (int valeur, int occurencesNb)
                     tableau[i] = tableau[nbElements - 1];
                 }
                 nbElements--;
+                Ajuster(nbElements);
             }
         }
     }
-    Ajuster(nbElements);
 }
 
 int Collection::Ajuster (int uneTaille)
@@ -61,9 +65,9 @@ int Collection::Ajuster (int uneTaille)
     if (uneTaille < nbElements)
     {   return ERR_TAILLE;
     }
-    // Recréer un tableau si sa taille est plus grande que celle actuelle
+    // Recreer un tableau si sa taille est plus grande que celle actuelle
     else if (uneTaille <= alloue)
-    {   int nouveauTableau = new int[uneTaille]; // Nouveau tableau qui sera alloué
+    {   int nouveauTableau = new int[uneTaille]; // Nouveau tableau alloue
 
         // Copie de l'ancien tableau vers le nouveau
         for (int = 0;i<nbElements;i++)
@@ -77,8 +81,21 @@ int Collection::Ajuster (int uneTaille)
     return PAS_ERR;
 }
 
-void Collection::Reunir (const Collection &Collection)
+void Collection::Reunir (const Collection &uneCollection)
 {
+    // Cas ou la collection courante n'est pas assez grande pour accueillir tous
+    // les elements de la seconde.
+    if (alloue < nbElements + uneCollection.nbElements) {
+        Ajuster(nbElements + uneCollection.nbElements);
+    }
+
+    // Copie les valeurs de la seconde collection dans la courante
+    int i;
+    for (i = nbElements; i < alloue; i++) {
+      tableau[i] == uneCollection.tableau[i - nbElements];
+    }
+
+    nbElements = alloue;
 }
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -102,6 +119,7 @@ Collection::Collection (int uneTaille, int *unTableau)
     alloue = uneTaille;
     tableau = new int[uneTaille];
 
+    // Copie les elements du tableau passe en parametre un a un
     int i;
     for (i = 0; i < alloue; i++) {
       tableau[i] = unTableau[i];
