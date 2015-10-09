@@ -39,6 +39,19 @@ void Collection::Ajouter (int valeur)
 
 void Collection::Retirer (int valeur, int occurencesNb)
 {
+    int occurences = 0;
+    int i;
+    for (i = 0; i < nbElements; i++) {
+        if (tableau[i] == valeur) {
+            occurences++;
+            if (occurences <= occurencesNb) {
+                if (i != nbElements - 1) {
+                    tableau[i] = tableau[nbElements - 1];
+                }
+                nbElements--;
+            }
+        }
+    }
 }
 
 int Collection::Ajuster (int uneTaille)
