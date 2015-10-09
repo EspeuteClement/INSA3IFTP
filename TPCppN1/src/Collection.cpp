@@ -23,20 +23,20 @@ void Collection::Afficher ()
 {
 }
 
-void Ajouter (int valeur)
+void Collection::Ajouter (int valeur)
 {
 }
 
-void Retirer (int valeur, int occurencesNb)
+void Collection::Retirer (int valeur, int occurencesNb)
 {
 }
 
-void Ajuster (int uneTaille)
+void Collection::Ajuster (int uneTaille)
 {   int tab = new int[uneTaille];
-    
+
 }
 
-void Reunir (const Collection &Collection)
+void Collection::Reunir (const Collection &Collection)
 {
 }
 
