@@ -75,7 +75,8 @@ public:
 
 private:
 //------------------------------------------------------- Attributs prives
-    int taille;
+    int nbElements = 0;
+    int alloue = 0;
     int *tableau;
 };
 
