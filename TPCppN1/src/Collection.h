@@ -15,11 +15,9 @@
 enum CodesRetour
 {   ERR_TAILLE  = 0,    // Erreur de retour si la nouvelle taille est 
                         //plus petite que le nombre d'élements du tableau
-    PAS_ERR     = 1,    // Si la fonction s'est correctement exécutée
+    PAS_ERR     = 1     // Si la fonction s'est correctement exécutée
 };
 // Enumération des codes de retour pour la fonction Ajuster
-//
-//
 
 //------------------------------------------------------------------------
 // Role de la classe <Collection>
@@ -33,7 +31,7 @@ class Collection
 
 public:
 //----------------------------------------------------- Methodes publiques
-    void Afficher ();
+    void Afficher () const;
     // Mode d'emploi :
     //
     // Contrat :
@@ -63,6 +61,13 @@ public:
     // Contrat :
     //
 
+    /////// CLASSES NON DEMANDEES MAIS UTILES POUR LE TEST /////////////
+    void PrintNbElements () const;
+    // Affiche le nombre d'élements du Collection
+    
+    void PrintAlloue () const;
+    //Affiche la taille Allouee de la Collection
+
 //-------------------------------------------- Constructeurs - destructeur
     Collection (int uneTaille);
     // Mode d'emploi :
@@ -82,6 +87,9 @@ public:
     // Contrat :
     //
 
+    
+
+
 
 
 //------------------------------------------------------------------ PRIVE
@@ -94,7 +102,6 @@ private:
 
 //---------------------------------------------------------- Classes amies
     // On a besion que Test soit ami pour
-    friend class Test;
 };
 
 #endif // COLLECTION_H

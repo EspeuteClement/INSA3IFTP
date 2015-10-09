@@ -4,10 +4,15 @@
 
 int main()
 {	
-	Collection maCol(10);
-	maCol.Ajouter(5);
-	maCol.Ajouter(10);
-	maCol.Afficher();
-	maCol.Ajuster(50);
-	maCol.Ajuster(20);
+	//Création de la classe 
+	Collection collectionTest(10);
+	collectionTest.PrintNbElements();
+
+	collectionTest.Ajouter(5);
+	collectionTest.Ajouter(10);
+	collectionTest.PrintNbElements();
+	
+	collectionTest.Afficher();
+	collectionTest.Ajuster(50);
+	collectionTest.Ajuster(20);
 }

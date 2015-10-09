@@ -19,7 +19,7 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Methodes publiques
-void Collection::Afficher ()
+void Collection::Afficher () const
 {
     int i;
     for (i = 0; i < nbElements; i++) {
@@ -65,17 +65,9 @@ int Collection::Ajuster (int uneTaille)
     if (uneTaille < nbElements)
     {   return ERR_TAILLE;
     }
-<<<<<<< HEAD
-    // Recréer un tableau si sa taille est différente que celle actuelle
+    // Recreer un tableau si sa taille est differente que celle actuelle
     else if (uneTaille != alloue) 
     {   int *nouveauTableau = new int[uneTaille]; // Nouveau tableau qui sera alloué
-        
-=======
-    // Recreer un tableau si sa taille est plus grande que celle actuelle
-    else if (uneTaille <= alloue)
-    {   int nouveauTableau = new int[uneTaille]; // Nouveau tableau alloue
-
->>>>>>> 9bb3ee1c9e273445abedd1f9c23d4201c96e0e07
         // Copie de l'ancien tableau vers le nouveau
         for (int i = 0;i<nbElements;i++)
         {   nouveauTableau[i] = tableau[i];
@@ -142,4 +134,12 @@ Collection::~Collection ()
 #endif
 
     delete tableau;
+}
+
+void Collection::PrintNbElements() const
+{   cout << "NbElements : " << nbElements << '\n';
+}
+
+void Collection::PrintAlloue () const
+{   cout << "Alloue : " << alloue << '\n';
 }
