@@ -1,41 +1,41 @@
 /*************************************************************************
-                           ${file_base}  -  description
+                           Collection  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    debut                : 2015/10/09
+    copyright            : (C) 2015 par cespeute & brenault
 *************************************************************************/
 
-//---------- Réalisation de la classe <${file_base}> (fichier ${file_name}) --
+//---------- Realisation de la classe <Collection> (fichier Collection.cpp) --
 
 //---------------------------------------------------------------- INCLUDE
 
-//-------------------------------------------------------- Include système
+//-------------------------------------------------------- Include systeme
 using namespace std;
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
-#include "${file_base}.h"
+#include "Collection.h"
 
 //------------------------------------------------------------- Constantes
 
 //---------------------------------------------------- Variables de classe
 
-//----------------------------------------------------------- Types privés
+//----------------------------------------------------------- Types prives
 
 
 //----------------------------------------------------------------- PUBLIC
 //-------------------------------------------------------- Fonctions amies
 
-//----------------------------------------------------- Méthodes publiques
-// type ${file_base}::Méthode ( liste de paramètres )
+//----------------------------------------------------- Methodes publiques
+// type Collection::Methode ( liste de parametres )
 // Algorithme :
 //
 //{
-//} //----- Fin de Méthode
+//} //----- Fin de Methode
 
 
-//------------------------------------------------- Surcharge d'opérateurs
-${file_base} & ${file_base}::operator = ( const ${file_base} & un${file_base} )
+//------------------------------------------------- Surcharge d'operateurs
+Collection & Collection::operator = ( const Collection & uneCollection )
 // Algorithme :
 //
 {
@@ -43,38 +43,38 @@ ${file_base} & ${file_base}::operator = ( const ${file_base} & un${file_base} )
 
 
 //-------------------------------------------- Constructeurs - destructeur
-${file_base}::${file_base} ( const ${file_base} & un${file_base} )
+Collection::Collection ( const Collection & uneCollection )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <${file_base}>" << endl;
+    cout << "Appel au constructeur de copie de <Collection>" << endl;
 #endif
-} //----- Fin de ${file_base} (constructeur de copie)
+} //----- Fin de Collection (constructeur de copie)
 
 
-${file_base}::${file_base} ( )
+Collection::Collection ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <${file_base}>" << endl;
+    cout << "Appel au constructeur de <Collection>" << endl;
 #endif
-} //----- Fin de ${file_base}
+} //----- Fin de Collection
 
 
-${file_base}::~${file_base} ( )
+Collection::~Collection ( )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <${file_base}>" << endl;
+    cout << "Appel au destructeur de <Collection>" << endl;
 #endif
-} //----- Fin de ~${file_base}
+} //----- Fin de ~Collection
 
 
 //------------------------------------------------------------------ PRIVE
 
-//----------------------------------------------------- Méthodes protégées
+//----------------------------------------------------- Methodes protegees
 
-//------------------------------------------------------- Méthodes privées
+//------------------------------------------------------- Methodes privees

@@ -1,41 +1,41 @@
 /*************************************************************************
-                           ${file_base}  -  description
+                           Collection  -  description
                              -------------------
-    début                : ${date}
-    copyright            : (C) ${year} par ${user}
+    debut                : 2015/10/09
+    copyright            : (C) 2015/10/092015 par cespeute & brenault
 *************************************************************************/
 
-//---------- Interface de la classe <${file_base}> (fichier ${file_name}) ------
-#if ! defined ( XXX_H )
-#define XXX_H
+//---------- Interface de la classe <Collection> (fichier Collection.h) ------
+#if ! defined ( COLLECTION_H )
+#define COLLECTION_H
 
-//--------------------------------------------------- Interfaces utilisées
+//--------------------------------------------------- Interfaces utilisees
 
-//------------------------------------------------------------- Constantes 
+//------------------------------------------------------------- Constantes
 
-//------------------------------------------------------------------ Types 
+//------------------------------------------------------------------ Types
 
-//------------------------------------------------------------------------ 
-// Rôle de la classe <${file_base}>
+//------------------------------------------------------------------------
+// Role de la classe <Collection>
 //
 //
-//------------------------------------------------------------------------ 
+//------------------------------------------------------------------------
 
-class ${file_base} : public Ancetre
+class Collection : public Ancetre
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
-//----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste de paramètres );
+//----------------------------------------------------- Methodes publiques
+    // type Methode ( liste de parametres );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
 
-//------------------------------------------------- Surcharge d'opérateurs
-    ${file_base} & operator = ( const ${file_base} & un${file_base} );
+//------------------------------------------------- Surcharge d'operateurs
+    Collection & operator = ( const Collection & uneCollection );
     // Mode d'emploi :
     //
     // Contrat :
@@ -43,46 +43,46 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    ${file_base} ( const ${file_base} & un${file_base} );
+    Collection ( const Collection & uneCollection );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    ${file_base} ( );
+    Collection ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~${file_base} ( );
+    virtual ~Collection ( );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-//------------------------------------------------------------------ PRIVE 
+//------------------------------------------------------------------ PRIVE
 
 protected:
-//----------------------------------------------------- Méthodes protégées
+//----------------------------------------------------- Methodes protegees
 
 private:
-//------------------------------------------------------- Méthodes privées
+//------------------------------------------------------- Methodes privees
 
 protected:
-//----------------------------------------------------- Attributs protégés
+//----------------------------------------------------- Attributs proteges
 
 private:
-//------------------------------------------------------- Attributs privés
+//------------------------------------------------------- Attributs prives
 
 //---------------------------------------------------------- Classes amies
 
-//-------------------------------------------------------- Classes privées
+//-------------------------------------------------------- Classes privees
 
-//----------------------------------------------------------- Types privés
+//----------------------------------------------------------- Types prives
 
 };
 
-//----------------------------------------- Types dépendants de <${file_base}>
+//----------------------------------------- Types dependants de <Collection>
 
-#endif // XXX_H
+#endif // COLLECTION_H
