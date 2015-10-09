@@ -31,9 +31,26 @@ void Collection::Retirer (int valeur, int occurencesNb)
 {
 }
 
-void Collection::Ajuster (int uneTaille)
-{   int tab = new int[uneTaille];
+int Collection::Ajuster (int uneTaille)
+{   
+    // Erreur si la nouvelle taille est trop petite
+    if (uneTaille < nbElements) 
+    {   return ERR_TAILLE;
+    }
+    // Recréer un tableau si sa taille est plus grande que celle actuelle
+    else if (uneTaille <= alloue) 
+    {   int nouveauTableau = new int[uneTaille]; // Nouveau tableau qui sera alloué
+        
+        // Copie de l'ancien tableau vers le nouveau
+        for (int = 0;i<nbElements;i++)
+        {   nouveauTableau[i] = tableau[i];
+        }
 
+        delete tableau;
+        tableau = nouveauTableau;
+    }
+    alloue = uneTaille;
+    return NO_ERR;
 }
 
 void Collection::Reunir (const Collection &Collection)
