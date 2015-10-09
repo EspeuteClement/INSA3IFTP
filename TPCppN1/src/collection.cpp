@@ -16,65 +16,48 @@ using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Collection.h"
 
-//------------------------------------------------------------- Constantes
-
-//---------------------------------------------------- Variables de classe
-
-//----------------------------------------------------------- Types prives
-
-
 //----------------------------------------------------------------- PUBLIC
-//-------------------------------------------------------- Fonctions amies
 
 //----------------------------------------------------- Methodes publiques
-// type Collection::Methode ( liste de parametres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Methode
-
-
-//------------------------------------------------- Surcharge d'operateurs
-Collection & Collection::operator = ( const Collection & uneCollection )
-// Algorithme :
-//
+void Collection::Afficher ()
 {
-} //----- Fin de operator =
+}
 
+void Ajouter (int valeur)
+{
+}
+
+void Retirer (int valeur, int occurencesNb)
+{
+}
+
+void Ajuster (int uneTaille)
+{
+}
+
+void Reunir (const Collection &Collection)
+{
+}
 
 //-------------------------------------------- Constructeurs - destructeur
-Collection::Collection ( const Collection & uneCollection )
-// Algorithme :
-//
+Collection::Collection (int uneTaille)
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Collection>" << endl;
+    cout << "Appel au premier constructeur de <Collection>" << endl;
 #endif
-} //----- Fin de Collection (constructeur de copie)
+}
 
-
-Collection::Collection ( )
-// Algorithme :
-//
+Collection::Collection (int uneTaille, int *unTableau)
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Collection>" << endl;
+    cout << "Appel au second constructeur de <Collection>" << endl;
 #endif
-} //----- Fin de Collection
+}
 
 
-Collection::~Collection ( )
-// Algorithme :
-//
+Collection::~Collection ()
 {
 #ifdef MAP
     cout << "Appel au destructeur de <Collection>" << endl;
 #endif
-} //----- Fin de ~Collection
-
-
-//------------------------------------------------------------------ PRIVE
-
-//----------------------------------------------------- Methodes protegees
-
-//------------------------------------------------------- Methodes privees
+}

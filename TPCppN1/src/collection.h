@@ -9,8 +9,6 @@
 #if ! defined ( COLLECTION_H )
 #define COLLECTION_H
 
-//--------------------------------------------------- Interfaces utilisees
-
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -21,41 +19,56 @@
 //
 //------------------------------------------------------------------------
 
-class Collection : public Ancetre
+class Collection
 {
 //----------------------------------------------------------------- PUBLIC
 
 public:
 //----------------------------------------------------- Methodes publiques
-    // type Methode ( liste de parametres );
+    void Afficher ();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-
-//------------------------------------------------- Surcharge d'operateurs
-    Collection & operator = ( const Collection & uneCollection );
+    void Ajouter (int valeur);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
+    void Retirer (int valeur, int occurencesNb);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    void Ajuster (int uneTaille);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    void Reunir (const Collection &Collection);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
 //-------------------------------------------- Constructeurs - destructeur
-    Collection ( const Collection & uneCollection );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-    Collection ( );
+    Collection (int uneTaille);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Collection ( );
+    Collection (int uneTaille, int *unTableau);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    virtual ~Collection ();
     // Mode d'emploi :
     //
     // Contrat :
@@ -63,26 +76,10 @@ public:
 
 //------------------------------------------------------------------ PRIVE
 
-protected:
-//----------------------------------------------------- Methodes protegees
-
-private:
-//------------------------------------------------------- Methodes privees
-
-protected:
-//----------------------------------------------------- Attributs proteges
-
 private:
 //------------------------------------------------------- Attributs prives
-
-//---------------------------------------------------------- Classes amies
-
-//-------------------------------------------------------- Classes privees
-
-//----------------------------------------------------------- Types prives
-
+    int taille;
+    int *tableau;
 };
-
-//----------------------------------------- Types dependants de <Collection>
 
 #endif // COLLECTION_H
