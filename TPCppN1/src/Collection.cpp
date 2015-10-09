@@ -32,7 +32,8 @@ void Retirer (int valeur, int occurencesNb)
 }
 
 void Ajuster (int uneTaille)
-{
+{   int tab = new int[uneTaille];
+    
 }
 
 void Reunir (const Collection &Collection)
