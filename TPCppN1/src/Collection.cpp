@@ -60,7 +60,7 @@ int Collection::Ajuster (int uneTaille)
         tableau = nouveauTableau;
     }
     alloue = uneTaille;
-    return NO_ERR;
+    return PAS_ERR;
 }
 
 void Collection::Reunir (const Collection &Collection)

@@ -1,5 +1,5 @@
 #Youpi, on va compiler des lamas ! :D 
-OBJS = objs/main.o
+OBJS = objs/main.o objs/Collection.o
 
 executable : $(OBJS)
 	g++ -o executable $(OBJS)

@@ -1,5 +1,11 @@
 #include <iostream>
 
+#include "Collection.h"
+
 int main()
-{	return 0;
+{	
+	Collection maCol(10);
+	maCol.Ajouter(5);
+	maCol.Ajouter(10);
+	maCol.Afficher();
 }
