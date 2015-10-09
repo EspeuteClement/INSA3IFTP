@@ -40,7 +40,7 @@ public:
     // Contrat :
     //
 
-    void Ajuster (int uneTaille);
+    int Ajuster (int uneTaille);
     // Mode d'emploi :
     //
     // Contrat :
@@ -69,6 +69,16 @@ public:
     // Mode d'emploi :
     //
     // Contrat :
+    //
+
+//----------------------------------------------------------- Enumérations
+    enum CodesRetour
+    {   ERR_TAILLE  = 0;    // Erreur de retour si la nouvelle taille est 
+                            //plus petite que le nombre d'élements du tableau
+        PAS_ERR     = 1;    // Si la fonction s'est correctement exécutée
+    }
+    // Enumération des codes de retour pour la fonction Ajuster
+    //
     //
 
 //------------------------------------------------------------------ PRIVE
