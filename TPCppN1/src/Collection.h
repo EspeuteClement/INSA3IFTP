@@ -14,7 +14,7 @@
 
 //----------------------------------------------------------- Enumérations
 enum CodesRetour
-{   ERR_TAILLE  = 0,    // Erreur de retour si la nouvelle taille est 
+{   ERR_TAILLE  = 0,    // Erreur de retour si la nouvelle taille est
                         //plus petite que le nombre d'élements du tableau
     PAS_ERR     = 1     // Si la fonction s'est correctement exécutée
 };
@@ -22,10 +22,11 @@ enum CodesRetour
 
 //------------------------------------------------------------------------
 // Role de la classe <Collection>
-//
-//
+// Gere le stockage, la modification et l'affichage d'un ensemble de nombres
+// entiers. Le stockage est realise dans un tableau d'entiers (int) gere de
+// facon dynamique simple. Les redondances sont acceptées. Les valeurs ne sont
+// pas triees.
 //------------------------------------------------------------------------
-
 class Collection
 {
 //----------------------------------------------------------------- PUBLIC
@@ -34,25 +35,24 @@ public:
 //----------------------------------------------------- Methodes publiques
     void Afficher () const;
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Imprime dans un terminal chaque element de la Collection un a un, suivis
+    // par un saut de ligne. Si DEBUG est declare, alors le nombre d'elements et
+    // la taille allouee apres.
 
     void Ajouter (int valeur);
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Ajoute la valeur entiere a l'extremite du tableau contenant la Collection
+    // et ajuste celle-ci si necessaire.
 
     void Retirer (int valeur, int occurencesNb);
     // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    // Supprime au plus un nombre occurencesNb d'occurences de la valeur donnee
+    // en parametre si elle est presente, et ajuste a chaque fois la quantite de
+    // memoire utilisee.
 
     int Ajuster (int uneTaille);
     // Mode d'emploi :
-    //
+    // 
     // Contrat :
     //
 
