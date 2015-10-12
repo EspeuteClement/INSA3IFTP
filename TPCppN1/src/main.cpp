@@ -28,8 +28,11 @@ int main()
 	collectionTest.Ajouter(5);
 	collectionTest.Ajouter(10);
 
+
+
 	collectionTest.Afficher();
 	std::cout << "Patate";
-	collectionTest.Ajuster(50);
-	collectionTest.Ajuster(20);
+	//collectionTest.Ajuster(50);
+	//collectionTest.Ajuster(20);
+	collectionTest.Afficher();
 }

@@ -32,20 +32,16 @@ void Collection::Afficher () const
 }
 
 void Collection::Ajouter (int valeur)
-{
-    // Couvre le cas ou la collection est deja pleine.
+{   // Couvre le cas ou la collection est deja pleine.
     if (alloue == nbElements)
-    {   alloue++;
-        Ajuster(alloue+1);
+    {   Ajuster(alloue+1);
     }
     tableau[nbElements] = valeur;
     nbElements++;
 }
 
 void Collection::Retirer (int valeur, int occurencesNb)
-{
-    int occurences = 0;
-
+{   int occurences = 0;
     // Copie la derniere valeur de la collection a l'endroit de l'occurence et
     // ajuste la taille de la collection en consequence
     for (int i = 0; i < nbElements; i++) {
