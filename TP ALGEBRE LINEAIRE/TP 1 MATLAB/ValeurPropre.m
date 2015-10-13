@@ -1,7 +1,10 @@
-function [ret] = ValeurPropre(A,prec)
+function [ret,v] = ValeurPropre(A,prec)
    v = zeros(size(A,1),size(A,1));
    u = zeros(size(A,1),size(A,1));
    init = rand(size(A,1),1);
+%    for i=1:size(A,1)
+%       init(i) = 1/i;
+%    end
    for i=1:size(A,1)
      [x,y,l] = PuissanceIteree(A,prec,init);
      v(:,i) = x;
