@@ -1,8 +1,9 @@
 function [ret] = ValeurPropre(A,prec)
    v = zeros(size(A,1),size(A,1));
    u = zeros(size(A,1),size(A,1));
+   init = rand(size(A,1),1);
    for i=1:size(A,1)
-     [x,y,l] = PuissanceIteree(A,prec);
+     [x,y,l] = PuissanceIteree(A,prec,init);
      v(:,i) = x;
      u(i,:) = y;
      A = Wielandt(A,v(:,i),u(i,:),l);
@@ -11,29 +12,35 @@ function [ret] = ValeurPropre(A,prec)
 
 end
 
-function [u,v,lambda] = PuissanceIteree(A, prec)
+function [y,v,lambda] = PuissanceIteree(A, prec, init)
     %%x = zeros(size(A,1),1);
-    A = A;
-    u = ones(size(A,1),1);
+    y = init;
     
     while 1
-        x = u / norm(u);
-        u = A * x;
+        x = y / norm(y);
+        y = A * x;
         
-        lambda = x' * u / (norm(x)*norm(x));
+        % Calcul de la norme qui prends en compte le signe
+        %lambda = x' * u / (norm(x)*norm(x));
+        [m,j] = max(x);
+        lambda = A(j,:) * x  / m;
+        if isnan(lambda)
+           lambda = 0;
+        end
         v = (A'* x)';
+        
         % Quitter si l'angle entre les 2 vecteurs est inférieur a prec
-        angle = acos(dot(u,x)/(norm(x) * norm(u)))
+        angle = acos(dot(y,x)/(norm(x) * norm(y)));
         if angle > pi()/2
            angle = angle - pi();
         end
-        if abs(angle)<prec
+        if abs(angle)<prec || isnan(angle)
             break;
         end
     end
 end
 
 function [M] = Wielandt(A,v,u,l)
-    M = A - l * (v*u)/(u*v)
+    M = A - l * (v*u)/(u*v);
 end
 

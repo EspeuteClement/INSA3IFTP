@@ -1,0 +1,9 @@
+function ProblemeP2A1()
+    M = zeros(150)
+    for i=1:150
+        if (not(mod(i-1,10) == 0 || mod(i,10) == 0 || (i>61 && i<66) 
+            
+        end
+    end
+
+end
