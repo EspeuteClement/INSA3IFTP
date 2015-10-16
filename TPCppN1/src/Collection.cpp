@@ -52,7 +52,7 @@ void Collection::Retirer (int valeur, int occurencesNb)
                     tableau[i] = tableau[nbElements - 1];
                 }
                 nbElements--;
-                Ajuster(nbElements);
+                std::cout << Ajuster(nbElements);
             }
         }
     }
