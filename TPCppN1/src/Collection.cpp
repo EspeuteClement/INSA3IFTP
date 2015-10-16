@@ -83,14 +83,14 @@ void Collection::Reunir (const Collection &uneCollection)
 {
     // Cas ou la collection courante n'est pas assez grande pour accueillir tous
     // les elements de la seconde.
-    if (alloue < nbElements + uneCollection.nbElements) {
-        Ajuster(nbElements + uneCollection.nbElements);
+    if (alloue < nbElements + uneCollection.nbElements)
+    {   Ajuster(nbElements + uneCollection.nbElements);
     }
 
     // Copie les valeurs de la seconde collection dans la courante
     int i;
-    for (i = nbElements; i < alloue; i++) {
-      tableau[i] == uneCollection.tableau[i - nbElements];
+    for (i = nbElements; i < alloue; i++) 
+    {   tableau[i] = uneCollection.tableau[i - nbElements];
     }
 
     nbElements = alloue;
@@ -119,8 +119,8 @@ Collection::Collection (int uneTaille, int *unTableau)
 
     // Copie les elements du tableau passe en parametre un a un
     int i;
-    for (i = 0; i < alloue; i++) {
-      tableau[i] = unTableau[i];
+    for (i = 0; i < alloue; i++)
+    {   tableau[i] = unTableau[i];
     }
     nbElements = alloue;
 }

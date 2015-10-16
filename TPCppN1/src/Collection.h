@@ -10,7 +10,7 @@
 #define COLLECTION_H
 //#define MAP
 #define DEBUG
-
+#define MAP
 
 //----------------------------------------------------------- Enumérations
 enum CodesRetour
