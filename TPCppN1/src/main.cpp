@@ -51,6 +51,22 @@ int main()
 	}
 	collectionTest.Afficher();	
 
+	// ============= RERIRER MULTIPLE ==
+	Collection collectionRetirer(5);
+	for (int i = 0; i < 10; ++i)
+	{	collectionRetirer.Ajouter(8);
+	}
+	std::cout << BOLD_SYMBOL << "Test de suppression mutiple : Collection de base \n" <<END_SYMBOL;
+
+	collectionRetirer.Afficher();
+
+	std::cout << BOLD_SYMBOL << "Test de suppression mutiple : Suppression de 3 éléments \n" <<END_SYMBOL;
+	collectionRetirer.Retirer(8,3);
+	collectionRetirer.Afficher();
+
+	std::cout << BOLD_SYMBOL << "Test de suppression mutiple : Suppression du reste des éléments \n" <<END_SYMBOL;
+	collectionRetirer.Retirer(8,-1);
+	collectionRetirer.Afficher();
 
 	// ============ REUNIR =============
 	std::cout << BOLD_SYMBOL << "Test de Réunir :\n" << END_SYMBOL; 
