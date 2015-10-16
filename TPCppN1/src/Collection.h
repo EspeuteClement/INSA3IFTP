@@ -52,15 +52,15 @@ public:
 
     int Ajuster (unsigned long int uneTaille);
     // Mode d'emploi :
-    // Réajuste le tableau pour que sa taille soit égale à uneTaille. 
+    // Réajuste le tableau pour que sa taille soit égale à uneTaille.
     // Si la nouvelle taille est plus petite que le nombre d'éléments
     // présents dans le tableau, l'ajustement n'a pas lieu et la fonction
     // retourne ERR_TAILLE.
     // Si l'ajustement du tableau s'est bien déroulée, la fonction renvoie
     // PAS_ERR (Equivalent à vrai).
     // Contrat :
-    // La nouvelle taille ne doit pas être trop grande (sinon créaion d'une
-    // exeption non gérée)
+    // La nouvelle taille ne doit pas être trop grande (sinon création d'une
+    // exception non gérée)
 
     void Reunir (const Collection &Collection);
     // Mode d'emploi :
@@ -68,31 +68,28 @@ public:
     // Contrat :
     //
 
-    
+    void Reunir (const Collection &Collection);
+    // Mode d'emploi : Ajoute les elements de la collection donnee apres ceux de
+    // la courante en reajustant la taille du tableau de la courante si
+    // necessaire.
 
 //-------------------------------------------- Constructeurs - destructeur
-    Collection (int uneTaille);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    Collection (unsigned int uneTaille);
+    // Mode d'emploi : Cree une collection pouvant accueillir uneTaille elements
+    // sans avoir besoin d'etre redimensionnee. Affiche "Appel au premier
+    // constructeur de <Collection>" si MAP est definie.
 
-    Collection (int uneTaille, int *unTableau);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    Collection (unsigned int uneTaille, int *unTableau);
+    // Mode d'emploi : Cree une collection pouvant accueillir uneTaille elements
+    // sans avoir besoin d'etre redimensionnee, et lui ajoute chacun des
+    // elements du tableau donne. Affiche "Appel au second constructeur de
+    // <Collection>" si MAP est definie.
+    // Contrat : On assume que la taille donnee en parametre est egale a la
+    // taille reelle du tableau donne.
 
     virtual ~Collection ();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    
-
-
-
+    // Mode d'emploi : Detruit la collection courante. Affiche "Appel au
+    // destructeur de <Collection>" si MAP est definie.
 
 //------------------------------------------------------------------ PRIVE
 
@@ -102,17 +99,12 @@ private:
     int alloue;
     int *tableau;
 
-
     /////// CLASSES NON DEMANDEES MAIS UTILES POUR LE TEST /////////////
     void printNbElements () const;
     // Affiche le nombre d'élements du Collection
-    
+
     void printAlloue () const;
     //Affiche la taille Allouee de la Collection
-
-
-//---------------------------------------------------------- Classes amies
-    // On a besion que Test soit ami pour
 };
 
 #endif // COLLECTION_H

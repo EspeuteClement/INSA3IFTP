@@ -65,7 +65,7 @@ int Collection::Ajuster (unsigned long int uneTaille)
     {   return ERR_TAILLE;
     }
     // Recreer un tableau si sa taille est differente que celle actuelle
-    else if (uneTaille != alloue) 
+    else if (uneTaille != alloue)
     {   int *nouveauTableau = new int[uneTaille]; // Nouveau tableau qui sera alloué
         // Copie de l'ancien tableau vers le nouveau
         for (int i = 0;i<nbElements;i++)
