@@ -97,7 +97,7 @@ void Collection::Reunir (const Collection &uneCollection)
 }
 
 //-------------------------------------------- Constructeurs - destructeur
-Collection::Collection (int uneTaille)
+Collection::Collection (unsigned int uneTaille)
 {
 #ifdef MAP
     cout << "Appel au premier constructeur de <Collection>" << endl;
@@ -108,7 +108,7 @@ Collection::Collection (int uneTaille)
     tableau = new int[uneTaille];
 }
 
-Collection::Collection (int uneTaille, int *unTableau)
+Collection::Collection (unsigned int uneTaille, int *unTableau)
 {
 #ifdef MAP
     cout << "Appel au second constructeur de <Collection>" << endl;

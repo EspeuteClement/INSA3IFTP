@@ -63,12 +63,6 @@ public:
     // exception non gérée)
 
     void Reunir (const Collection &Collection);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    void Reunir (const Collection &Collection);
     // Mode d'emploi : Ajoute les elements de la collection donnee apres ceux de
     // la courante en reajustant la taille du tableau de la courante si
     // necessaire.
