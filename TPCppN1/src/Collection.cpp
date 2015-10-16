@@ -51,8 +51,9 @@ void Collection::Retirer (int valeur, int occurencesNb)
                 if (i != nbElements - 1) {
                     tableau[i] = tableau[nbElements - 1];
                 }
+                i--;
                 nbElements--;
-                std::cout << Ajuster(nbElements);
+                Ajuster(nbElements);
             }
         }
     }
@@ -66,6 +67,7 @@ void Collection::Retirer (int valeur, int occurencesNb)
                   if (i != nbElements - 1) {
                       tableau[i] = tableau[nbElements - 1];
                   }
+                  i--;
                   nbElements--;
                   Ajuster(nbElements);
               }
@@ -110,7 +112,7 @@ void Collection::Reunir (const Collection &uneCollection)
 
     // Copie les valeurs de la seconde collection dans la courante
     int i;
-    for (i = nbElements; i < alloue; i++) 
+    for (i = nbElements; i < alloue; i++)
     {   tableau[i] = uneCollection.tableau[i - nbElements];
     }
 
