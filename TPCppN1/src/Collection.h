@@ -50,11 +50,17 @@ public:
     // en parametre si elle est presente, et ajuste a chaque fois la quantite de
     // memoire utilisee.
 
-    int Ajuster (int uneTaille);
+    int Ajuster (unsigned long int uneTaille);
     // Mode d'emploi :
-    // 
+    // Réajuste le tableau pour que sa taille soit égale à uneTaille. 
+    // Si la nouvelle taille est plus petite que le nombre d'éléments
+    // présents dans le tableau, l'ajustement n'a pas lieu et la fonction
+    // retourne ERR_TAILLE.
+    // Si l'ajustement du tableau s'est bien déroulée, la fonction renvoie
+    // PAS_ERR (Equivalent à vrai).
     // Contrat :
-    //
+    // La nouvelle taille ne doit pas être trop grande (sinon créaion d'une
+    // exeption non gérée)
 
     void Reunir (const Collection &Collection);
     // Mode d'emploi :
