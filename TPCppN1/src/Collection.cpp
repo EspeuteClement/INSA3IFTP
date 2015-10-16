@@ -1,15 +1,15 @@
 /*************************************************************************
                            Collection  -  description
                              -------------------
-    debut                : 2015/10/09
+    début                : 2015/10/09
     copyright            : (C) 2015 par cespeute & brenault
 *************************************************************************/
 
-//---------- Realisation de la classe <Collection> (fichier Collection.cpp) --
+//---------- Réalisation de la classe <Collection> (fichier Collection.cpp) --
 
 //---------------------------------------------------------------- INCLUDE
 
-//-------------------------------------------------------- Include systeme
+//-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
 
@@ -18,21 +18,21 @@ using namespace std;
 
 //----------------------------------------------------------------- PUBLIC
 
-//----------------------------------------------------- Methodes publiques
+//----------------------------------------------------- Méthodes publiques
 void Collection::Afficher () const
 {
 #ifdef DEBUG
     printNbElements();
     printAlloue();
 #endif
-    int i;
+    unsigned int i;
     for (i = 0; i < nbElements; i++)
     {   cout << tableau[i] << "\n";
     }
 }
 
 void Collection::Ajouter (int valeur)
-{   // Couvre le cas ou la collection est deja pleine.
+{   // Couvre le cas ou la collection est déjà pleine.
     if (alloue == nbElements)
     {   Ajuster(alloue+1);
     }
@@ -42,11 +42,11 @@ void Collection::Ajouter (int valeur)
 
 void Collection::Retirer (int valeur, int occurencesNb)
 {   // Si occurencesNb < 0 on supprime toutes les occurences de la valeur dans
-    // la collection courante. Pour cela on reporte a chaque fois la derniere
-    // valeur a la place de l'element a supprimer et on reduit la taille du
-    // tableau en consequence.
+    // la collection courante. Pour cela on reporte à chaque fois la dernière
+    // valeur à la place de l'élément à supprimer et on réduit la taille du
+    // tableau en conséquence.
     if (occurencesNb < 0) {
-        for (int i = 0; i < nbElements; i++) {
+        for (unsigned int i = 0; i < nbElements; i++) {
             if (tableau[i] == valeur) {
                 if (i != nbElements - 1) {
                     tableau[i] = tableau[nbElements - 1];
@@ -60,7 +60,7 @@ void Collection::Retirer (int valeur, int occurencesNb)
 
     else {
       int occurences = 0;
-      for (int i = 0; i < nbElements; i++) {
+      for (unsigned int i = 0; i < nbElements; i++) {
           if (tableau[i] == valeur) {
               occurences++;
               if (occurences <= occurencesNb) {
@@ -76,17 +76,18 @@ void Collection::Retirer (int valeur, int occurencesNb)
     }
 }
 
-int Collection::Ajuster (unsigned long int uneTaille)
+int Collection::Ajuster (unsigned int uneTaille)
 {
     // Erreur si la nouvelle taille est trop petite
     if (uneTaille < nbElements)
     {   return ERR_TAILLE;
     }
-    // Recreer un tableau si sa taille est differente que celle actuelle
+    // Recréer un tableau si sa taille est differente que celle actuelle
     else if (uneTaille != alloue)
-    {   int *nouveauTableau = new int[uneTaille]; // Nouveau tableau qui sera alloué
+    {   // Nouveau tableau qui sera alloué
+        int *nouveauTableau = new int[uneTaille];
         // Copie de l'ancien tableau vers le nouveau
-        for (int i = 0;i<nbElements;i++)
+        for (unsigned int i = 0;i<nbElements;i++)
         {   nouveauTableau[i] = tableau[i];
         }
 
@@ -99,14 +100,14 @@ int Collection::Ajuster (unsigned long int uneTaille)
 
 void Collection::Reunir (const Collection &uneCollection)
 {
-    // Cas ou la collection courante n'est pas assez grande pour accueillir tous
-    // les elements de la seconde.
+    // Cas où la collection courante n'est pas assez grande pour accueillir tous
+    // les éléments de la seconde.
     if (alloue < nbElements + uneCollection.nbElements)
     {   Ajuster(nbElements + uneCollection.nbElements);
     }
 
     // Copie les valeurs de la seconde collection dans la courante
-    int i;
+    unsigned int i;
     for (i = nbElements; i < alloue; i++)
     {   tableau[i] = uneCollection.tableau[i - nbElements];
     }
@@ -135,8 +136,8 @@ Collection::Collection (unsigned int uneTaille, int *unTableau)
     alloue = uneTaille;
     tableau = new int[uneTaille];
 
-    // Copie les elements du tableau passe en parametre un a un
-    int i;
+    // Copie les éléments du tableau passé en paramètre un à un
+    unsigned int i;
     for (i = 0; i < alloue; i++)
     {   tableau[i] = unTableau[i];
     }

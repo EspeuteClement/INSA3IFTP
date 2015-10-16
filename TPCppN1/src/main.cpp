@@ -3,7 +3,7 @@
 #include "Collection.h"
 
 
-const int TAILLE_TEST = 20; // Taille qui sera allouée lors du test de taille et du redimentionnement
+const int TAILLE_TEST = 20; // Taille qui sera allouée lors du test de taille et du redimensionnement
 const char BOLD_SYMBOL[] = "\033[1m"; // Code terminal pour afficher les caractères en gras
 const char END_SYMBOL[] = "\033[0m"; // Code terminal pour annuler la mise en forme
 
@@ -30,10 +30,10 @@ int main()
 
 	std::cout <<BOLD_SYMBOL<< "Test de réajustement trop petit\n"<<END_SYMBOL;
 	if(collectionTest.Ajuster(TAILLE_TEST - 1))
-	{	std::cout << "ça aurait du planter !!!\n";
+	{	std::cout << "Ça aurait du planter !!!\n";
 	}
 	else
-	{	std::cout << "Le réajustement à bien échoué\n";
+	{	std::cout << "Le réajustement a bien échoué\n";
 	}
 
 	std::cout <<BOLD_SYMBOL<< "Test de réajustement normal\n"<<END_SYMBOL;
@@ -41,11 +41,11 @@ int main()
 	{	std::cout << "Réajustement réussi\n";
 	}
 	else
-	{	std::cout << "Le réajustement échoué, pas normal\n";
+	{	std::cout << "Le réajustement a échoué, pas normal\n";
 	}
 
 	// ============ RETIRER ===========
-	std::cout << BOLD_SYMBOL << "Test de supprésion de données : On supprime " << TAILLE_TEST/2 << " Elements\n"<<END_SYMBOL;
+	std::cout << BOLD_SYMBOL << "Test de suppression de données : On supprime " << TAILLE_TEST/2 << " Elements\n"<<END_SYMBOL;
 	for (int i = 0; i < TAILLE_TEST/2; ++i)
 	{	collectionTest.Retirer(TAILLE_TEST-i-1,1);
 	}
@@ -56,7 +56,7 @@ int main()
 	for (int i = 0; i < 10; ++i)
 	{	collectionRetirer.Ajouter(8);
 	}
-	std::cout << BOLD_SYMBOL << "Test de suppression mutiple : Collection de base \n" <<END_SYMBOL;
+	std::cout << BOLD_SYMBOL << "Test de suppression mutiple : Collection d'origine \n" <<END_SYMBOL;
 
 	collectionRetirer.Afficher();
 
@@ -76,7 +76,7 @@ int main()
 	std::cout << BOLD_SYMBOL << "Collection 2\n" << END_SYMBOL;
 	collectionReunir.Afficher();
 
-	std::cout << BOLD_SYMBOL << "Reunion des Collection : (Collection 1 + 2)\n" << END_SYMBOL;
+	std::cout << BOLD_SYMBOL << "Réunion des Collections : (Collection 1 + 2)\n" << END_SYMBOL;
 	collectionTest.Reunir(collectionReunir);
 	collectionTest.Afficher();
 }
