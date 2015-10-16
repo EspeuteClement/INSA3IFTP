@@ -48,7 +48,8 @@ public:
     // Mode d'emploi :
     // Supprime au plus un nombre occurencesNb d'occurences de la valeur donnee
     // en parametre si elle est presente, et ajuste a chaque fois la quantite de
-    // memoire utilisee.
+    // memoire utilisee. Si occurencesNb < 0, alors toutes les occurences sont
+    // supprimees.
 
     int Ajuster (unsigned long int uneTaille);
     // Mode d'emploi :
