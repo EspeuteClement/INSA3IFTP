@@ -112,7 +112,7 @@ void Collection::Reunir (const Collection &uneCollection)
     {   tableau[i] = uneCollection.tableau[i - nbElements];
     }
 
-    nbElements = alloue;
+    nbElements += uneCollection.nbElements;
 }
 
 //-------------------------------------------- Constructeurs - destructeur
