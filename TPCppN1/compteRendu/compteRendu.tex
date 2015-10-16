@@ -50,21 +50,15 @@
 \section{Spécifications de la classe <Collection>}
 
 \subsection{Présentation générale}
-	<Collection> a pour rôle de gérer le stockage, la modification et l'affichage d'un ensemble de \emph{nombres entiers}. Le stockage est réalisé dans un tableau d'entiers (int) géré de façon dynamique simple. Le cahier des charges ne l'exigeant pas, les redondances sont acceptées et les valeurs ne sont pas triées.
+<Collection> a pour rôle de gérer le stockage, la modification et l'affichage d'un ensemble de \emph{nombres entiers}. Le stockage est réalisé dans un tableau d'entiers (int) géré de façon dynamique simple, c'est à dire que l'on a également deux attributs de type entier non-signé, l'un servant à connaître le nombre d'éléments dans le tableau, l'autre servant à connaître la taille allouée au tableau. Le cahier des charges ne l'exigeant pas, les redondances sont acceptées et les valeurs ne sont pas triées.
 
 \subsection{Présentation des méthodes}
 
 \subsubsection*{Constructeur n°1}
-Paramètres : un entier représentant la taille (maximale) du tableau.
-
-\noindent Effets : Allocation dynamique du tableau en fonction de la taille max.
+Créé une collection pouvant accueillir un nombre entier non-signé donné d'éléments sans avoir besoin d'être redimensionnée, et alloue la mémoire nécessaire au tableau.
 
 \subsubsection*{Constructeur n°2}
-Paramètres : 
-Un pointeur vers un tableau d’entiers quelconque. 
-Un entier représentant le nombre d’éléments du tableau (part du contrat : il est à la charge de l’utilisateur de donne une taille juste).
-
-\noindent Effets : Allocation dynamique du tableau en fonction de la taille max.
+Créé une collection pouvant accueillir un nombre entier non-signé donné d'éléments sans avoir besoin d'être redimensionnée, et alloue la mémoire nécessaire au tableau. Les valeurs du tableau d'entiers quelconque dont le pointeur est passé en paramètre sont ensuite ajoutées à la collection (part du contrat : il est à la charge de l’utilisateur de donner une taille égale à celle du tableau passé).
 
 \subsubsection*{Méthode Afficher}
 Paramètres : Aucun.

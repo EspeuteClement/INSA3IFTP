@@ -70,8 +70,8 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
     Collection (unsigned int uneTaille);
-    // Mode d'emploi : Crée une collection pouvant accueillir uneTaille éléments
-    // sans avoir besoin d'être redimensionneée. Affiche "Appel au premier
+    // Mode d'emploi : Créé une collection pouvant accueillir uneTaille éléments
+    // sans avoir besoin d'être redimensionnée. Affiche "Appel au premier
     // constructeur de <Collection>" si MAP est définie.
 
     Collection (unsigned int uneTaille, int *unTableau);
