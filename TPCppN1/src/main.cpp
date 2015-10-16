@@ -8,7 +8,7 @@ const char BOLD_SYMBOL[] = "\033[1m"; // Code terminal pour afficher les caract�
 const char END_SYMBOL[] = "\033[0m"; // Code terminal pour annuler la mise en forme
 
 int main()
-{	
+{
 	//Création de la classe
 	std::cout <<BOLD_SYMBOL<< "Test du constructeur par défaut\n"<<END_SYMBOL;
 	Collection collectionTest(TAILLE_TEST/2);
@@ -49,9 +49,9 @@ int main()
 	for (int i = 0; i < TAILLE_TEST/2; ++i)
 	{	collectionTest.Retirer(TAILLE_TEST-i-1,1);
 	}
-	collectionTest.Afficher();	
+	collectionTest.Afficher();
 
-	// ============= RERIRER MULTIPLE ==
+	// ============= RETIRER MULTIPLE ==
 	Collection collectionRetirer(5);
 	for (int i = 0; i < 10; ++i)
 	{	collectionRetirer.Ajouter(8);
@@ -69,7 +69,7 @@ int main()
 	collectionRetirer.Afficher();
 
 	// ============ REUNIR =============
-	std::cout << BOLD_SYMBOL << "Test de Réunir :\n" << END_SYMBOL; 
+	std::cout << BOLD_SYMBOL << "Test de Réunir :\n" << END_SYMBOL;
 
 	std::cout << BOLD_SYMBOL << "Collection 1\n" << END_SYMBOL;
 	collectionTest.Afficher();
