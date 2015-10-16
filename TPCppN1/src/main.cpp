@@ -9,10 +9,16 @@ const char END_SYMBOL[] = "\033[0m"; // Code terminal pour annuler la mise en fo
 
 int main()
 {	
-	//Création de la classe 
+	//Création de la classe
+	std::cout <<BOLD_SYMBOL<< "Test du constructeur par défaut\n"<<END_SYMBOL;
 	Collection collectionTest(TAILLE_TEST/2);
 	// Test pour voir si le tableau fait la bonne taille
 	collectionTest.Afficher();
+
+	std::cout <<BOLD_SYMBOL<< "Test du constructeur avec un tableau\n"<<END_SYMBOL;
+	int leTableau[] = {100,200,300,400,500,600,700,800,900,999};
+	Collection collectionReunir(10,leTableau);
+	collectionReunir.Afficher();
 
 	// Ajout de 20 éléments dans le tableau
 	for (int i = 0; i < TAILLE_TEST; ++i)
@@ -38,6 +44,23 @@ int main()
 	{	std::cout << "Le réajustement échoué, pas normal\n";
 	}
 
+	// ============ RETIRER ===========
+	std::cout << BOLD_SYMBOL << "Test de supprésion de données : On supprime " << TAILLE_TEST/2 << " Elements\n"<<END_SYMBOL;
+	for (int i = 0; i < TAILLE_TEST/2; ++i)
+	{	collectionTest.Retirer(TAILLE_TEST-i-1,1);
+	}
+	collectionTest.Afficher();	
 
 
+	// ============ REUNIR =============
+	std::cout << BOLD_SYMBOL << "Test de Réunir :\n" << END_SYMBOL; 
+
+	std::cout << BOLD_SYMBOL << "Collection 1\n" << END_SYMBOL;
+	collectionTest.Afficher();
+	std::cout << BOLD_SYMBOL << "Collection 2\n" << END_SYMBOL;
+	collectionReunir.Afficher();
+
+	std::cout << BOLD_SYMBOL << "Reunion des Collection : (Collection 1 + 2)\n" << END_SYMBOL;
+	collectionTest.Reunir(collectionReunir);
+	collectionTest.Afficher();
 }

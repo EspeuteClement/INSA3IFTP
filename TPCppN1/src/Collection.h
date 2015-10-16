@@ -10,7 +10,7 @@
 #define COLLECTION_H
 //#define MAP
 #define DEBUG
-
+#define MAP
 
 //----------------------------------------------------------- Enumérations
 enum CodesRetour
@@ -62,12 +62,6 @@ public:
     // Contrat :
     // La nouvelle taille ne doit pas être trop grande (sinon création d'une
     // exception non gérée)
-
-    void Reunir (const Collection &Collection);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
     void Reunir (const Collection &Collection);
     // Mode d'emploi : Ajoute les elements de la collection donnee apres ceux de
