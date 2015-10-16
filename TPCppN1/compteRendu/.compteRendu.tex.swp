@@ -46,6 +46,10 @@
 \begin{document}
 \pagestyle{fancy}
 \maketitle
-\newpage
-Bla bla bla
+\section{Les tests}
+Afin de vérifier que chaque méthode  notre classe fonctionne, on réalise des tests unitaires sur chacune d'entre elles. La méthode Afficher à été modifiée pour pouvoir donner la taille allouée du tableau et le nombre d'éléments a l'intérieur de celui-ci. Cet affichage peut être désactivé en enlevant le \texttt{\#define DEBUG} à l'intérieur de \texttt{Collection.h}.
+
+\subsection{Test pour \tt Retirer}
+Les tests de la méthode retirer sont basés 
+
 \end{document}
