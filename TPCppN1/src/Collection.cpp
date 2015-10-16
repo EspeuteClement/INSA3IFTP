@@ -80,7 +80,7 @@ int Collection::Ajuster (unsigned int uneTaille)
 {
     // Erreur si la nouvelle taille est trop petite
     if (uneTaille < nbElements)
-    {   
+    {
 #ifdef DEBUG
         cout << "\nREAJUSTEMENT ECHOUE\n";
 #endif
@@ -117,7 +117,7 @@ void Collection::Reunir (const Collection &uneCollection)
     {   tableau[i] = uneCollection.tableau[i - nbElements];
     }
 
-    nbElements = alloue;
+    nbElements += uneCollection.nbElements;
 }
 
 //-------------------------------------------- Constructeurs - destructeur
