@@ -78,7 +78,12 @@ int Collection::Ajuster (unsigned long int uneTaille)
 {
     // Erreur si la nouvelle taille est trop petite
     if (uneTaille < nbElements)
-    {   return ERR_TAILLE;
+    {   
+#ifdef DEBUG
+        cout << "\nREAJUSTEMENT ECHOUE\n";
+#endif
+    return ERR_TAILLE;
+
     }
     // Recreer un tableau si sa taille est differente que celle actuelle
     else if (uneTaille != alloue)
