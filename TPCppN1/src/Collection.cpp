@@ -58,7 +58,7 @@ void Collection::Retirer (int valeur, int occurencesNb)
     }
 }
 
-int Collection::Ajuster (int uneTaille)
+int Collection::Ajuster (unsigned long int uneTaille)
 {
     // Erreur si la nouvelle taille est trop petite
     if (uneTaille < nbElements)
