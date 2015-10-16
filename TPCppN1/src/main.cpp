@@ -39,7 +39,25 @@ int main()
 	//Vérification de la cohérence des données (doit être cohérent à la taille alouée)
 	collectionTest.Afficher();
 
-	cout <<BOLD_SYMBOL<< "======= TEST 3 : RETIRER ======\n\n"<<END_SYMBOL;
+	cout <<BOLD_SYMBOL<< "======= TEST 3 : AJUSTER ======\n\n"<<END_SYMBOL;
+
+	cout <<BOLD_SYMBOL<< "Test de réajustement trop petit\n"<<END_SYMBOL;
+	if(collectionTest.Ajuster(TAILLE_TEST - 1))
+	{	cout << "(ERREUR !) Le réajustement a réusi alors qu'il aurait du échouer\n";
+	}
+	else
+	{	cout << "Le réajustement a bien échoué\n";
+	}
+
+	cout <<BOLD_SYMBOL<< "Test de réajustement normal\n"<<END_SYMBOL;
+	if(collectionTest.Ajuster(TAILLE_TEST + 10))
+	{	cout << "Réajustement réussi\n";
+	}
+	else
+	{	cout << "(ERREUR !) Le réajustement a échoué\n";
+	}
+
+	cout <<BOLD_SYMBOL<< "======= TEST 4 : RETIRER ======\n\n"<<END_SYMBOL;
 	// ============ RETIRER ===========
 	cout << BOLD_SYMBOL << "Test de suppression de données : On supprime " << TAILLE_TEST/2 << " Elements\n"<<END_SYMBOL;
 	for (int i = 0; i < TAILLE_TEST/2; ++i)
@@ -47,7 +65,8 @@ int main()
 	}
 	collectionTest.Afficher();
 
-	// ============= RETIRER MULTIPLE ==
+	// ====== RETIRER MULTIPLE =======
+	// Collection de test pour retirer
 	Collection collectionRetirer(5);
 	for (int i = 0; i < 10; ++i)
 	{	collectionRetirer.Ajouter(8);
@@ -64,29 +83,12 @@ int main()
 	collectionRetirer.Retirer(8,-1);
 	collectionRetirer.Afficher();
 
-	cout <<BOLD_SYMBOL<< "======= TEST 4 : AJUSTER ======\n\n"<<END_SYMBOL;
-
-	cout <<BOLD_SYMBOL<< "Test de réajustement trop petit\n"<<END_SYMBOL;
-	if(collectionTest.Ajuster(TAILLE_TEST - 1))
-	{	cout << "Ça aurait du planter !!!\n";
-	}
-	else
-	{	cout << "Le réajustement a bien échoué\n";
-	}
-
-	cout <<BOLD_SYMBOL<< "Test de réajustement normal\n"<<END_SYMBOL;
-	if(collectionTest.Ajuster(50))
-	{	cout << "Réajustement réussi\n";
-	}
-	else
-	{	cout << "Le réajustement a échoué, pas normal\n";
-	}
-
 	cout <<BOLD_SYMBOL<< "======= TEST 5 : REUNIR ======\n\n"<<END_SYMBOL;
 
 	// ============ REUNIR =============
 	cout << BOLD_SYMBOL << "Test de Réunir :\n" << END_SYMBOL;
 
+	collectionTest.Ajuster(50);
 	cout << BOLD_SYMBOL << "Collection 1\n" << END_SYMBOL;
 	collectionTest.Afficher();
 	cout << BOLD_SYMBOL << "Collection 2\n" << END_SYMBOL;
