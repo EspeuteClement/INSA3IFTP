@@ -49,7 +49,8 @@ public:
     // Supprime au plus un nombre occurencesNb d'occurences de la valeur donnée
     // en paramètre si elle est présente, et ajuste a chaque fois la quantité de
     // mémoire utilisée. Si occurencesNb < 0, alors toutes les occurences sont
-    // supprimées.
+    // supprimées. Chaque valeur supprimée est remplacée par une valeur en fin de
+    // la collection.
 
     int Ajuster (unsigned int uneTaille);
     // Mode d'emploi :
