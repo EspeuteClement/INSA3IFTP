@@ -50,7 +50,7 @@
 \section[Spécifications]{Spécifications de la classe <Collection>}
 
 \subsection{Présentation générale}
-<Collection> a pour rôle de gérer le stockage, la modification et l'affichage d'un ensemble de \emph{nombres entiers}. Le stockage est réalisé dans un tableau d'entiers (int) géré de façon dynamique simple, c'est à dire que l'on a également deux attributs de type entier non-signé, l'un servant à connaître le nombre d'éléments dans le tableau, l'autre servant à connaître la taille allouée au tableau. Le cahier des charges ne l'exigeant pas, les redondances sont acceptées et les valeurs ne sont pas triées.
+<Collection> a pour rôle de gérer le stockage, la modification et l'affichage d'un ensemble de \emph{nombres entiers}. Le stockage est réalisé dans un tableau d'entiers (int) géré de façon dynamique simple, c'est à dire que l'on a également deux attributs de type entier non-signé, l'un servant à connaître le nombre d'éléments actuellement présents dans le tableau, l'autre servant à connaître la taille allouée au tableau. Le cahier des charges ne l'exigeant pas, les redondances sont acceptées et les valeurs ne sont pas triées.
 
 \subsection{Présentation des méthodes}
 
@@ -65,25 +65,25 @@ Imprime sur la sortie standard les éléments de la collection dans l'ordre d’
 
 \subsubsection*{Méthode Ajouter}
 Ajoute la valeur entière donnée dans un élément inséré à l'extrêmité du tableau et fait appel à la fonction d'ajustement si l'insertion implique un dépassement de la taille actuellement allouée au tableau.
+\footnote{Tout ajout ou suppression du nombre d'éléments contenus dans le tableau implique bien sûr une mise à jour de l'attribut associé.}
 
 \subsubsection*{Méthode Retirer}
-Supprime un nombre entier d'occurences donné d'une valeur entière donnée. Si le nombre d'occurences à retirer donné est négatif, on supprime toutes les occurrences de la valeur entière donnée. La taille du tableau est réduite à chaque suppression d'une occurence afin de 
+Supprime un nombre entier d'occurences donné d'une valeur entière donnée. Si le nombre d'occurences à retirer donné est négatif, on supprime toutes les occurrences de la valeur entière donnée. La taille du tableau est ajustée après l'opération. 
 
 \subsubsection*{Méthode Ajuster}
-Paramètres : Un entier représentant la nouvel le taille du tableau.
-
-\noindent Effet : Modification de la taille max du tableau et réallocation dynamique de celui-ci.
-
-\noindent Note : Refus de redimension si il y a plus d’éléments que la taille max demandée. Code de retour : “La collection ne peut pas être tronquée !”
+Modifie la taille allouee au tableau et le réalloue dynamiquement à une valeur entière non-signée donnée en paramètre. Le redimensionnement est refusé si la taille demandée est inférieur au nombre actuel d'éléments et renvoie un code de retour \texttt{ERR\_TAILLE}.
     
 \subsubsection*{Méthode Reunir}
-Paramètres : Une collection à concaténer avec la courante.
-\noindent Sortie : Un nouveau tableau contenant les collections bout à bout.
+Ajoute les éléments de la collection donnée après ceux de la courante en réajustant la taille allouee du tableau de la courante si celle-ci n'est actuellement pas assez grande pour les accueillir.
 
 \subsubsection*{Méthode Destructeur}
+<<<<<<< HEAD
 \noindent Effets : Désallocation du tableau.
 \newpage
 
+=======
+Détruit la collection courante et libère la mémoire allouée au tableau associé.
+>>>>>>> d0f41e37c855b94213efc5a34de4b15258795c3d
 
 \section{Les tests}
 

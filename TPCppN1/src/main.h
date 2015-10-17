@@ -32,11 +32,11 @@ void testAjouter1(); // Ajout d'un seul élément sans redimensionnement
 void testAjouter2(); // Ajout de plusieur éléments avec redimensionnement
 
 
-void testRetirer1(); // Retirer 1 élement de la collection
-void testRetirer2(); // Retirer n éléments de la collection d'une valeur donné
-void testRetirer3(); // Retirer touts les éléments d'une valeur donné 
+void testRetirer1(); // Retirer 1 élément de la collection
+void testRetirer2(); // Retirer n éléments de la collection d'une valeur donnée
+void testRetirer3(); // Retirer tous les éléments d'une valeur donnée
 void testRetirer4(); // Retirer un élément non présent dans la collection
-void testRetirer5(); // Retirer tout les éléments de la collection
+void testRetirer5(); // Retirer tous les éléments de la collection
 
 void testAjuster1(); // Ajustement quand il y a plus d'éléments dans le tableau que la nouvelle taille (provoque une erreur)
 void testAjuster2(); // Ajustement quand la nouvelle taille est plus grande que l'ancienne
