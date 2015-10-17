@@ -47,7 +47,7 @@
 \pagestyle{fancy}
 \maketitle
 
-\section{Spécifications de la classe <Collection>}
+\section[Spécifications]{Spécifications de la classe <Collection>}
 
 \subsection{Présentation générale}
 <Collection> a pour rôle de gérer le stockage, la modification et l'affichage d'un ensemble de \emph{nombres entiers}. Le stockage est réalisé dans un tableau d'entiers (int) géré de façon dynamique simple, c'est à dire que l'on a également deux attributs de type entier non-signé, l'un servant à connaître le nombre d'éléments dans le tableau, l'autre servant à connaître la taille allouée au tableau. Le cahier des charges ne l'exigeant pas, les redondances sont acceptées et les valeurs ne sont pas triées.
@@ -82,11 +82,28 @@ Paramètres : Une collection à concaténer avec la courante.
 
 \subsubsection*{Méthode Destructeur}
 \noindent Effets : Désallocation du tableau.
-
+\newpage
 \section{Les tests}
-Afin de vérifier que chaque méthode  notre classe fonctionne, on réalise des tests unitaires sur chacune d'entre elles. La méthode Afficher à été modifiée pour pouvoir donner la taille allouée du tableau et le nombre d'éléments a l'intérieur de celui-ci. Cet affichage peut être désactivé en enlevant le \texttt{\#define DEBUG} à l'intérieur de \texttt{Collection.h}.
+Afin de vérifier que chaque méthode  notre classe fonctionne, on réalise des tests unitaires sur chacune d'entre elles. La méthode Afficher à été modifiée pour pouvoir donner la taille allouée du tableau et le nombre d'éléments a l'intérieur de celui-ci. Cet affichage peut être désactivé en enlevant le mot clef \texttt{\#define DEBUG} à l'intérieur de \texttt{Collection.h}.
+
+Par ailleurs, afin de rendre les tests plus lisibles dans la console, les textes indiquant les différentes étapes des tests sont imprimés en gras. Si la console ne supporte pas les caractères d'échappement permettant la mise en forme des textes affichés, ils peuvent être désactivé en retirant le mot clef \texttt{\#define~BOLD\_USAGE} à l'interieur de \texttt{main.h}.
+\subsection{Test pour le deuxième constructeur}
+\texttt{testConstructeur2\_X()} sont les méthodes qui effectuent le test pour le second constructeur. 
+\begin{description}
+	\item[\texttt{testConstructeur2\_1()}] Teste le cas de base où l'on passe un tableau rempli arbitrairement en paramètre du constructeur de la Collection (ainsi que sa taille).
+	
+	Résultat attendu : La Collection est bien initialisée et elle contient tous les éléments du tableau, et a la même taille.
+	
+	\item[\texttt{testConstructeur2\_2()}] Teste le cas où l'on donne en paramètre un tableau vide.
+	
+	Résultat attendu : La Collection est bien initialisée et elle est vide. Sa taille \texttt{allouee} est de 0.
+	
+	\item[\texttt{testConstructeur2\_3()}] Teste le cas où l'on appelle le constructeur avec en paramètre un tableau et une taille $n$ plus petite que celle du tableau.
+	
+	Résultat attendu : La Collection est bien initialisée, et elle est remplie avec les $n$ premiers éléments du tableau passé en paramètre 
+\end{description}
 
 \subsection{Test pour \tt Retirer}
-Les tests de la méthode retirer sont basés 
+Les tests de la méthode retirer sont basés
 
 \end{document}
