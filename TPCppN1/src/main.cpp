@@ -27,9 +27,9 @@ int main()
 	// testRetirer4();
 	// testRetirer5();
 
-	// testReunir1();
-	// testReunir2();
-	// testReunir3();
+	testReunir1();
+	testReunir2();
+	testReunir3();
 }
 
 void testConstructeur1()
@@ -67,15 +67,28 @@ void testConstructeur2_3(){
 	collectionReunir.Afficher();
 }
 
-void testAjouter()
+void testAjouter1()
+{
+	printTitre("TEST : AJOUTER");
+	printGras("Ajout d'un élément sans redimensionnement");
+	Collection collectionTest(5);
+	printGras("Collection initiale");
+	collectionTest.Afficher();
+
+	collectionTest.Ajouter(5);
+	printGras("Collection après ajout");
+	collectionTest.Afficher();	
+}
+
+void testAjouter2()
 {
 	// Initialisation du talbeau
-	printTitre("TEST 2 : AJOUTER");
+	
 	printGras("Collection de base :");
 	Collection collectionTest(0);
 	collectionTest.Afficher();
 	// Ajout de 20 éléments dans le tableau
-	for (int i = 0; i < TAILLE_TEST; ++i)
+	for (int i = 0; i < 20; ++i)
 	{	collectionTest.Ajouter(i);
 	}
 
@@ -290,7 +303,7 @@ void testReunir3()
 	for (int i = 0; i < 15; ++i)
 	{	col1.Ajouter(i);
 	}
-	Collection col2(10);
+	Collection col2(15);
 	for (int i = 0; i < 10; ++i)
 	{	col2.Ajouter((i+1)*10);
 	}

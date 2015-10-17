@@ -28,7 +28,8 @@ void testConstructeur2_2();
 void testConstructeur2_3();
 
 
-void testAjouter();
+void testAjouter1(); // Ajout d'un seul élément sans redimensionnement
+void testAjouter2(); // Ajout de plusieur éléments avec redimensionnement
 
 
 void testRetirer1(); // Retirer 1 élement de la collection

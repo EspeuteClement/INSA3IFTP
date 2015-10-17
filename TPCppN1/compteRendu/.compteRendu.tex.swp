@@ -83,27 +83,88 @@ Paramètres : Une collection à concaténer avec la courante.
 \subsubsection*{Méthode Destructeur}
 \noindent Effets : Désallocation du tableau.
 \newpage
+
+
 \section{Les tests}
+
 Afin de vérifier que chaque méthode  notre classe fonctionne, on réalise des tests unitaires sur chacune d'entre elles. La méthode Afficher à été modifiée pour pouvoir donner la taille allouée du tableau et le nombre d'éléments a l'intérieur de celui-ci. Cet affichage peut être désactivé en enlevant le mot clef \texttt{\#define DEBUG} à l'intérieur de \texttt{Collection.h}.
 
 Par ailleurs, afin de rendre les tests plus lisibles dans la console, les textes indiquant les différentes étapes des tests sont imprimés en gras. Si la console ne supporte pas les caractères d'échappement permettant la mise en forme des textes affichés, ils peuvent être désactivé en retirant le mot clef \texttt{\#define~BOLD\_USAGE} à l'interieur de \texttt{main.h}.
-\subsection{Test pour le deuxième constructeur}
+
+\subsection{Tests pour le deuxième constructeur}
+
 \texttt{testConstructeur2\_X()} sont les méthodes qui effectuent le test pour le second constructeur. 
 \begin{description}
 	\item[\texttt{testConstructeur2\_1()}] Teste le cas de base où l'on passe un tableau rempli arbitrairement en paramètre du constructeur de la Collection (ainsi que sa taille).
 	
-	Résultat attendu : La Collection est bien initialisée et elle contient tous les éléments du tableau, et a la même taille.
+	Résultat attendu : La Collection est bien initialisée et elle contient tous les éléments du tableau, et a la même taille. ({\tt allouée = nbElements})
 	
 	\item[\texttt{testConstructeur2\_2()}] Teste le cas où l'on donne en paramètre un tableau vide.
 	
-	Résultat attendu : La Collection est bien initialisée et elle est vide. Sa taille \texttt{allouee} est de 0.
+	Résultat attendu : La Collection est bien initialisée et elle est vide. \texttt{allouee} et \texttt{nbElements} est de 0. 
 	
-	\item[\texttt{testConstructeur2\_3()}] Teste le cas où l'on appelle le constructeur avec en paramètre un tableau et une taille $n$ plus petite que celle du tableau.
+	\item[\texttt{testConstructeur2\_3()}] Teste le cas où l'on appelle le constructeur avec en paramètre un tableau et une taille $n$ plus petite que celle du tableau. ({\tt allouée = nbElements =} $n$)
 	
-	Résultat attendu : La Collection est bien initialisée, et elle est remplie avec les $n$ premiers éléments du tableau passé en paramètre 
+	Résultat attendu : La Collection est bien initialisée, et elle est remplie avec les $n$ premiers éléments du tableau passé en paramètre.
 \end{description}
 
-\subsection{Test pour \tt Retirer}
-Les tests de la méthode retirer sont basés
+\subsection{Tests pour \tt Ajouter}
+Le test pour la méthode ajouter comporte 2 tests :
+
+\begin{description}
+
+	\item[\texttt{testAjouter1()}] Ajoute simplement un élément dans la Collection vide avec une taille initiale de 10 (donc pas de redimensionnement nécessaire). On affiche l'état du tableau avant et après l'ajout.
+	
+	Résultat attendu : Le tableau ne comporte que l'élément ajouté. \texttt{nbElement} vaut 1 et \texttt{alouee} vaut toujours 10. 
+	
+	\item[\texttt{testAjouter2()}] Ajoute 20 éléments dans une Collection initialement vide. (Donc redimensionnement nécessaire).
+	
+	Résultat attendu : Le tableau est rempli avec les 20 éléments dans l'ordre dans lequel ils ont été insérés. \texttt{alouee = nbElement = 20}.
+	
+\end{description}
+
+\subsection{Tests pour Retirer}	
+Pour tester la méthode retirer, on remplit au préalable la Collection d'un tableau arbitraire, puis on tente de retirer des éléments. On affiche à chaque fois la Collection avant et après l'opération.
+
+On à alors :
+\begin{description}
+	\item[\texttt{testRetirer1()}] Retire un élément d'une valeur donnée de la collection.
+	
+	Résultat attendu : L'élément est supprimé et la collections à bien été redimensionnée à la taille initiale - 1.
+	
+	\item[\texttt{testRetirer2()}] Retire $n$ éléments d'une valeur donnée de la collection.
+	
+	Résultat attendu : L'élément est supprimé et la collections à bien été redimensionnée à la taille initiale - $n$.
+	
+	\item[\texttt{testRetirer3()}] Retire tous les éléments d'une valeur donnée du tableau.
+	
+	Résultat attendu : Tout les éléments de la valeur donnée sont supprimés et la collections à bien été redimensionnée correctement.
+	
+	\item[\texttt{testRetirer4()}] Tente de retirer une valeur non présente dans le tableau.
+	
+	Résultat attendu : Le tableau ne change pas, et il n'y pas d'erreur produite.
+	
+	\item[\texttt{testRetirer5()}] Retire procéduralement touts les éléments du tableau.
+	
+	Résultat attendu : Le tableau est vide, \texttt{nbElement = alouee = 0}
+\end{description}
+
+\subsection{Tests pour Réunir}
+Pour vérifier le bon fonctionnement de la méthode \texttt{Reunir}, on procède à 3 test différents. On affiche à chaque fois les Collections initiales et la Collection correspondant à la réunion des deux.
+
+\begin{description}
+	\item[\texttt{testReunir1()}] Crée 2 Collections vides et les réunit.
+	
+	Résultat Attendu : Aucune différence entre la première collection et la collection réunie.
+	
+	\item[\texttt{testReunir2()}] Crée 2 Collections et les réunit. Les Collections sont telles que la réunion n'implique pas de redimensionement de la première collection.
+	
+	Résultat Attendu : La collection réunie contient les éléments de la première suivie des éléments de la seconde. Sa taille \texttt{alouee} est égale à celle de la première collection car il n'y a pas eu de redimensionement.
+	
+	\item[\texttt{testReunir3()}] Crée 2 Collections et les réunit. La première collection est remplie ce qui implique qu'un redimensionement sera nécessaire lors de la réunion des Collections.
+	
+	Résultat Attendu : La collection réunie contient les éléments de la première suivie des éléments de la seconde. Sa taille \texttt{alouee} est égale à \texttt{nbElement}
+ 
+\end{description} 
 
 \end{document}
