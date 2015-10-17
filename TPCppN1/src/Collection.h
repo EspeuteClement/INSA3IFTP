@@ -61,9 +61,6 @@ public:
     // retourne ERR_TAILLE.
     // Si l'ajustement du tableau s'est bien déroulée, la fonction renvoie
     // PAS_ERR (Equivalent à vrai).
-    // Contrat :
-    // La nouvelle taille ne doit pas être trop grande (sinon création d'une
-    // exception non gérée)
 
     void Reunir (const Collection &Collection);
     // Mode d'emploi : Ajoute les éléments de la collection donnée après ceux de
