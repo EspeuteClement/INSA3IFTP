@@ -16,7 +16,7 @@ PRINT = @printf
 
 ### FICHIERS
 # Nom du fichier de sortie
-EXEC = executable
+EXEC = executable.out
 # Nom des fichiers sources
 SRC = main.cpp Collection.cpp
 # Nom du dossier avec les fichiers sources
