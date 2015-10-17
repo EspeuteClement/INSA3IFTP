@@ -41,39 +41,23 @@ void Collection::Ajouter (int valeur)
 }
 
 void Collection::Retirer (int valeur, int occurencesNb)
-{   // Si occurencesNb < 0 on supprime toutes les occurences de la valeur dans
-    // la collection courante. Pour cela on reporte à chaque fois la dernière
-    // valeur à la place de l'élément à supprimer et on réduit la taille du
-    // tableau en conséquence.
-    if (occurencesNb < 0) {
-        for (unsigned int i = 0; i < nbElements; i++) {
-            if (tableau[i] == valeur) {
+{   // On remplace chaque occurence de la valeur donnée par la dernière valeur
+    // du tableau et on décrémente nbElements pour signifier le retrait d'une
+    // valeur. On réduit finalement la taille allouee du tableau en conséquence.
+    int occurences = 0;
+    for (unsigned int i = 0; i < nbElements; i++) {
+        if (tableau[i] == valeur) {
+            occurences++;
+            if (occurences <= occurencesNb || occurencesNb < 0) {
                 if (i != nbElements - 1) {
                     tableau[i] = tableau[nbElements - 1];
                 }
                 i--;
                 nbElements--;
-                Ajuster(nbElements);
             }
         }
     }
-
-    else {
-      int occurences = 0;
-      for (unsigned int i = 0; i < nbElements; i++) {
-          if (tableau[i] == valeur) {
-              occurences++;
-              if (occurences <= occurencesNb) {
-                  if (i != nbElements - 1) {
-                      tableau[i] = tableau[nbElements - 1];
-                  }
-                  i--;
-                  nbElements--;
-                  Ajuster(nbElements);
-              }
-          }
-      }
-    }
+    Ajuster(nbElements);
 }
 
 int Collection::Ajuster (unsigned int uneTaille)

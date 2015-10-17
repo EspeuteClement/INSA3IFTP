@@ -35,14 +35,15 @@ public:
 //----------------------------------------------------- Méthodes publiques
     void Afficher () const;
     // Mode d'emploi :
-    // Imprime dans un terminal chaque élément de la Collection un a un, suivis
-    // par un saut de ligne. Si DEBUG est déclaré, alors le nombre d'éléments et
-    // la taille allouée sont affichés après.
+    // Imprime dans un terminal chaque élément de la Collection un a un, dans l'
+    // ordre de leur apparition dans le tabelau, suivis par un saut de ligne. Si
+    // DEBUG est déclaré, alors le nombre d'éléments et la taille allouée sont
+    // affichés après.
 
     void Ajouter (int valeur);
     // Mode d'emploi :
-    // Ajoute la valeur entière a l'extrêmité du tableau contenant la Collection
-    // et ajuste celle-ci si nécessaire.
+    // Ajoute la valeur entière donnée à l'extrêmité du tableau contenant la
+    // Collection et ajuste celle-ci si nécessaire.
 
     void Retirer (int valeur, int occurencesNb);
     // Mode d'emploi :
