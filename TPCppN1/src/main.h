@@ -23,22 +23,27 @@ inline void printTitre(const char* texte)
 }
 
 void testConstructeur1();
-void testConstructeur2();
+void testConstructeur2_1();
+void testConstructeur2_2();
+void testConstructeur2_3();
+
 
 void testAjouter();
 
 
-void testRetirer1(); // Retirer 1 élement de la collection
-void testRetirer2(); // Retirer n éléments de la collection
-void testRetirer3(); // Retirer touts les éléments d'une valeur donné
+void testRetirer1(); // Retirer 1 élément de la collection
+void testRetirer2(); // Retirer n éléments de la collection d'une valeur donnée
+void testRetirer3(); // Retirer tous les éléments d'une valeur donnée
 void testRetirer4(); // Retirer un élément non présent dans la collection
-void testRetirer5(); // Retirer tout les éléments de la collection
+void testRetirer5(); // Retirer tous les éléments de la collection
 
-void testAjuster1();
-void testAjuster2();
-void testAjuster3();
+void testAjuster1(); // Ajustement quand il y a plus d'éléments dans le tableau que la nouvelle taille (provoque une erreur)
+void testAjuster2(); // Ajustement quand la nouvelle taille est plus grande que l'ancienne
+void testAjuster3(); // Ajustement quand la nouvelle taille est plus petite que l'ancienne
 
-void testReunir();
+void testReunir1();	// Réunion de 2 Collections vides
+void testReunir2(); // Réunion de 2 Collections peuplées sans redimentionement nessésaire
+void testReunir3(); // Réunion de 3 Collections peuplées avec redimentionement nessésaire
 
 
 

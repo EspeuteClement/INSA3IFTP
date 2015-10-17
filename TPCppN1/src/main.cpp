@@ -12,21 +12,24 @@ const int TAILLE_TEST = 20; // Taille qui sera allouée lors du test de taille e
 
 int main()
 {
-	// testConstructeur1();
-
+	testConstructeur2_1();
+	testConstructeur2_2();
+	testConstructeur2_3();
 	// testAjouter();
 
 	// testAjuster1();
 	// testAjuster2();
 	// testAjuster3();
 
-	testRetirer1();
-	testRetirer2();
-	testRetirer3();
-	testRetirer4();
-	testRetirer5();
+	// testRetirer1();
+	// testRetirer2();
+	// testRetirer3();
+	// testRetirer4();
+	// testRetirer5();
 
-	//testReunir();
+	// testReunir1();
+	// testReunir2();
+	// testReunir3();
 }
 
 void testConstructeur1()
@@ -42,11 +45,25 @@ void testConstructeur1()
 
 }
 
-void testConstructeur2(){
+void testConstructeur2_1(){
 	printTitre("TEST CONSTRUCTEUR : CONSTRUCTEUR 2");
 	printGras("Test du constructeur avec tableau");
 	int leTableau[] = {100,200,300,400,500,600,700,800,900,999};
 	Collection collectionReunir(10,leTableau);
+	collectionReunir.Afficher();
+}
+
+void testConstructeur2_2(){
+	printGras("Test du constructeur avec tableau vide");
+	int leTableau[] = {};
+	Collection collectionReunir(0,leTableau);
+	collectionReunir.Afficher();
+}
+
+void testConstructeur2_3(){
+	printGras("Test du constructeur avec tableau, et nbElements inférieur à la taille du tableau");
+	int leTableau[] = {100,200,300,400,500,600,700,800,900,999};
+	Collection collectionReunir(5,leTableau);
 	collectionReunir.Afficher();
 }
 
@@ -222,30 +239,35 @@ void testRetirer5()
 }
 
 
-void testReunir()
+void testReunir1()
 {
-	printTitre("TEST 5 : REUNIR");
+	printTitre("TEST : REUNIR");
 	printGras("Initialisation des Collections à réunir vides :");
 
+	// Initialisation des collections
 	Collection col1(10);
 	Collection col2(20);
 
-
+	//
 	printGras("Collection 1");
 	col1.Afficher();
 	printGras("Collection 2");
 	col2.Afficher();
-	printGras("Fusion des 2");
+	printGras("Réunion des 2");
 	col1.Reunir(col2);
 	col1.Afficher();
 
-	printGras("Test avec des Collections à moitié remplis");
-	col1.Ajuster(30);
+}
+
+void testReunir2()
+{
+	// Initialisation des collections
+	printGras("Test avec Collections à moitié rempies");
+	Collection col1(30);
 	for (int i = 0; i < 15; ++i)
 	{	col1.Ajouter(i);
 	}
-
-	col2.Ajuster(10);
+	Collection col2(10);
 	for (int i = 0; i < 5; ++i)
 	{	col2.Ajouter((i+1)*10);
 	}
@@ -254,17 +276,22 @@ void testReunir()
 	col1.Afficher();
 	printGras("Collection 2");
 	col2.Afficher();
-	printGras("Fusion des 2");
+	printGras("Réunion des 2");
 	col1.Reunir(col2);
 	col1.Afficher();
+}
 
-	printGras("Test avec des Collections nécessitant un redimensionnement");
-	col1.Ajuster(15);
+
+void testReunir3()
+{
+	printGras("Test avec Collections néssésitant un redimensionnement");
+	// Initialisation des collections
+	Collection col1(15);
+
 	for (int i = 0; i < 15; ++i)
 	{	col1.Ajouter(i);
 	}
-
-	col2.Ajuster(10);
+	Collection col2(10);
 	for (int i = 0; i < 10; ++i)
 	{	col2.Ajouter((i+1)*10);
 	}
@@ -273,7 +300,7 @@ void testReunir()
 	col1.Afficher();
 	printGras("Collection 2");
 	col2.Afficher();
-	printGras("Fusion des 2");
+	printGras("Réunion des 2");
 	col1.Reunir(col2);
 	col1.Afficher();
 }
