@@ -59,8 +59,8 @@ public:
     // Si la nouvelle taille est plus petite que le nombre d'éléments
     // présents dans le tableau, l'ajustement n'a pas lieu et la fonction
     // retourne ERR_TAILLE.
-    // Si l'ajustement du tableau s'est bien déroulée, la fonction renvoie
-    // PAS_ERR (Equivalent à vrai).
+    // Si l'ajustement du tableau s'est bien déroulé, la fonction renvoie
+    // PAS_ERR (Équivalent à vrai).
     // Contrat :
     // La nouvelle taille ne doit pas être trop grande (sinon création d'une
     // exception non gérée)

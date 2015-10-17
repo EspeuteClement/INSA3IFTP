@@ -38,7 +38,7 @@ void testConstructeur1()
 	// Test pour voir si la Collection fait la bonne taille
 	collectionTest.Afficher();
 
-	
+
 
 }
 
@@ -93,7 +93,7 @@ void testAjuster2()
 {
 	printGras("Test de réajustement dans avec la nouvelle taille plus grande que l'ancienne ");
 	printGras("(De 10 à 20 de taille allouée)");
-	
+
 	printGras("Création d'une collection de taille 10 et population avec 5 éléments");
 	Collection collectionTest(10);
 	for (int i = 0; i < 5; ++i)
@@ -111,9 +111,9 @@ void testAjuster2()
 }
 
 void testAjuster3()
-{	
-	// Redimentionnement de la collection dans le cas où nouvelleTaille < alouée
-	printGras("Test de réajustement dans avec la nouvelle taille plus petite que l'ancienne ");
+{
+	// Redimensionnement de la collection dans le cas où nouvelleTaille < alloue
+	printGras("Test de réajustement avec la nouvelle taille plus petite que l'ancienne ");
 	printGras("(De 20 à 10 de taille allouée)");
 	printGras("Création d'une Collection de taille 20 et population avec 5 éléments");
 	Collection collectionTest(20);
@@ -163,13 +163,12 @@ void testRetirer2()
 
 	// Le test à proprement parler
 
-	
 	collectionTest.Retirer(42,4);
 	collectionTest.Afficher();
 }
 
 void testRetirer3()
-{ 	// Retirer tout les éléments d'une valeur donnée
+{ 	// Retirer tous les éléments d'une valeur donnée
 	printGras("On retire tous les éléments 42");
 	printGras("Collection initiale :");
 		int tabBase[] = {
@@ -188,7 +187,7 @@ void testRetirer3()
 
 void testRetirer4()
 {
-	// Supréssion d'une valeur non comprise dans la Collection
+	// Supression d'une valeur non comprise dans la Collection
 	printGras("On retire une valeur non présente dans la Collection (100)");
 	printGras("Collection initiale :");
 		int tabBase[] = {
@@ -199,14 +198,14 @@ void testRetirer4()
 	collectionTest.Afficher();
 
 	printGras("Collection après Retirer(100,-1)");
-	
+
 	collectionTest.Retirer(100,-1);
 	collectionTest.Afficher();
 }
 
 void testRetirer5()
 {
-	// Supréssion de toutes les valeurs :
+	// Supression de toutes les valeurs :
 	int tabBase[] = {
 			1,9,1,9,8,4,9,9,9,1,8,9,9,9,8,7,3,9,8
 		};
@@ -214,7 +213,7 @@ void testRetirer5()
 	Collection collectionTest(19,tabBase);
 	collectionTest.Afficher();
 
-	printGras("On retire tout les éléments de la Collection");
+	printGras("On retire tous les éléments de la Collection");
 	for (int i = 0; i < 10; ++i)
 	{
 		collectionTest.Retirer(i,-1);
@@ -240,7 +239,7 @@ void testReunir()
 	col1.Reunir(col2);
 	col1.Afficher();
 
-	printGras("Test avec Collections à moitié rempis");
+	printGras("Test avec des Collections à moitié remplis");
 	col1.Ajuster(30);
 	for (int i = 0; i < 15; ++i)
 	{	col1.Ajouter(i);
@@ -259,7 +258,7 @@ void testReunir()
 	col1.Reunir(col2);
 	col1.Afficher();
 
-	printGras("Test avec Collections néssésitant un redimensionnement");
+	printGras("Test avec des Collections nécessitant un redimensionnement");
 	col1.Ajuster(15);
 	for (int i = 0; i < 15; ++i)
 	{	col1.Ajouter(i);

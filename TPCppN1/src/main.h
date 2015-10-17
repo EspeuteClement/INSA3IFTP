@@ -30,7 +30,7 @@ void testAjouter();
 
 void testRetirer1(); // Retirer 1 élement de la collection
 void testRetirer2(); // Retirer n éléments de la collection
-void testRetirer3(); // Retirer touts les éléments d'une valeur donné 
+void testRetirer3(); // Retirer touts les éléments d'une valeur donné
 void testRetirer4(); // Retirer un élément non présent dans la collection
 void testRetirer5(); // Retirer tout les éléments de la collection
 
