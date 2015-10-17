@@ -27,9 +27,9 @@ int main()
 	// testRetirer4();
 	// testRetirer5();
 
-	testReunir1();
-	testReunir2();
-	testReunir3();
+	//testReunir1();
+	//testReunir2();
+	//testReunir3();
 }
 
 void testConstructeur1()

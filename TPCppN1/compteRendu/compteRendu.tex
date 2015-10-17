@@ -7,7 +7,7 @@
 \date{14 septembre 2015}
 
 \usepackage{listings}
-
+\usepackage{graphicx}
 
 \definecolor{commentColor}{rgb}{0.7,0.7,0.7}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -83,12 +83,18 @@ Détruit la collection courante et libère la mémoire allouée au tableau assoc
 \newpage
 
 
-
 \section{Les tests}
 
 Afin de vérifier que chaque méthode  notre classe fonctionne, on réalise des tests unitaires sur chacune d'entre elles. La méthode Afficher à été modifiée pour pouvoir donner la taille allouée du tableau et le nombre d'éléments a l'intérieur de celui-ci. Cet affichage peut être désactivé en enlevant le mot clef \texttt{\#define DEBUG} à l'intérieur de \texttt{Collection.h}.
 
 Par ailleurs, afin de rendre les tests plus lisibles dans la console, les textes indiquant les différentes étapes des tests sont imprimés en gras. Si la console ne supporte pas les caractères d'échappement permettant la mise en forme des textes affichés, ils peuvent être désactivé en retirant le mot clef \texttt{\#define~BOLD\_USAGE} à l'interieur de \texttt{main.h}.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.60]{TestConstructeurs.png}
+\caption{Exemple des tests pour le second constructeur}
+\label{testConstructeur}
+\end{figure}
 
 \subsection{Tests pour le deuxième constructeur}
 
