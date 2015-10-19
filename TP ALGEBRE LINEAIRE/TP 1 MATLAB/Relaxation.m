@@ -13,7 +13,7 @@ function [X] = Relaxation(A,B,prec)
   minRho = 1;
   
   % Calcul du parametre
-  for j=0.01:0.5:1.99;
+  for j=0.01:0.1:1.99;
 
     pi = inv(D + j * L) * ((1-j) * D - j * U);
     rho = max(abs(eig(pi)));
@@ -51,7 +51,4 @@ function [X] = Relaxation(A,B,prec)
   end % while
   
   X = O;
-    
-  
-  
 end
