@@ -90,8 +90,6 @@ function Probleme2(delta,t)
     end
   end
  
-  %A = A(1:450,1:450);
- 
   % Solving
   sh=surf(reshape(B,15,30));
   set(gca,'zlim',[-0.5 300])
