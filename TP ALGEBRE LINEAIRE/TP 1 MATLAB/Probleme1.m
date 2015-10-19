@@ -86,12 +86,12 @@ function Probleme1(delta,t)
     end
   end
  
-  %A = A(1:450,1:450);
+  A = A(1:450,1:450);
  
   % Solving
   sh=surf(reshape(B,15,30));
   set(gca,'zlim',[-0.5 10])
-  for (i=0:delta:t)
+  for i=0:delta:t
       B = expm(A*delta)*B;
       set(sh,'zdata',reshape(B,15,30))
       pause(0.05);

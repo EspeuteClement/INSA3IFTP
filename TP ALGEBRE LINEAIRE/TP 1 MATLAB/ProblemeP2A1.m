@@ -12,7 +12,7 @@ function [v,vecteurs] = ProblemeP2A1()
         end
     end
     [v,vecteurs] = ValeurPropre(M,0.0001);
-    surf(reshape(vecteurs(:,1),10,15))
+    surf(reshape(vecteurs(:,2),10,15))
     
     % TODO FAIRE METHODE ITERATIOSN INVERSE POUR AVOIR UNE REPRESENTATION
     % CORRECTE DE LA REPARTITION DES ONDES
