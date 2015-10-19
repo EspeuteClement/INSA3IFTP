@@ -99,10 +99,10 @@ function Probleme1Bis(delta,t)
  
   % Solving
   sh=surf(reshape(B,15,30));
-  set(gca,'zlim',[-0.5 300])
+  set(gca,'zlim',[-0.5 10])
   for (i=0:delta:t)
       B = expm(A*delta)*B;
       set(sh,'zdata',reshape(B,15,30))
-      pause(0.005);
+      pause(0.05);
   end
 end
