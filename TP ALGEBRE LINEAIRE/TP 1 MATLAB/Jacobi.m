@@ -15,7 +15,13 @@ function [returnValue] = Jacobi(A,B,prec)
       Temp(i) = (B(i) - sigma)/CoefStart(i); % Calcul de M.X s = N.X s + B 
                                       %(A(i,i) représente la diagonnale)
     end
-    if (abs(Temp(1) - M(1))<prec) or (k>10000);, break end % Break si la précision est atteinte
+    
+    error = abs(A*Temp - B);
+    maxError = max(error);
+    
+    if (maxError<prec) || (k>10000); 
+        break 
+    end % Break si la précision est atteinte
     M = Temp;
     k = k+1;
   end

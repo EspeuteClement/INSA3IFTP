@@ -40,9 +40,9 @@ function [X] = Relaxation(A,B,prec)
       TEMP(i)= (1 - minRho) * O(i) + minRho/A(i,i) * (B(i) - sigma);
      end %i loop
      
-     error = abs(A*TEMP - B);
-     maxError = max(error);
-     if maxError<prec;
+     error = A*TEMP - B
+     maxError = max(
+     if (abs(O(1) - TEMP(1))<prec);
       break
      end
      O = TEMP;
