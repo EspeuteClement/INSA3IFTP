@@ -57,7 +57,7 @@ function Probleme0()
   end
  
   % Solving
-  X = GaussSeidel(A,B, 0.0001);
+  X = GaussSeidel(A,B, 0.1);
   Y = reshape(X, 15, 30);
   surf(Y);
 end

@@ -26,7 +26,6 @@ function Probleme1(delta,t)
    
     % Right Side
     elseif(i >= 437 && i <= 449)
- 
       A(i, i-1) = 1;
       A(i, i) = -4;
       A(i, i+1) = 1;
