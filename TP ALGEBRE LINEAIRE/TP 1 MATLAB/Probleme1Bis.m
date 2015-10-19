@@ -103,6 +103,6 @@ function Probleme1Bis(delta,t)
   for (i=0:delta:t)
       B = expm(A*delta)*B;
       set(sh,'zdata',reshape(B,15,30))
-      pause(0.05);
+      pause(0.005);
   end
 end

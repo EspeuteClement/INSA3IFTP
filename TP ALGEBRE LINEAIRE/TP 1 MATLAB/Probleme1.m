@@ -85,7 +85,7 @@ function Probleme1(delta,t)
     end
   end
  
-  %A = A(1:450,1:450);
+  A = A(1:450,1:450);
  
   % Solving
   sh=surf(reshape(B,15,30));
