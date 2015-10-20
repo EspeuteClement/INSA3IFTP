@@ -1,7 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#define BOLD_USAGE // Active ou  désactive le gras dans la console
+#define BOLD_USAGE // Active ou désactive le gras dans la console
 using namespace std;
 
 #ifdef BOLD_USAGE
@@ -43,8 +43,8 @@ void testAjuster2(); // Ajustement quand la nouvelle taille est plus grande que 
 void testAjuster3(); // Ajustement quand la nouvelle taille est plus petite que l'ancienne
 
 void testReunir1();	// Réunion de 2 Collections vides
-void testReunir2(); // Réunion de 2 Collections peuplées sans redimentionement nessésaire
-void testReunir3(); // Réunion de 3 Collections peuplées avec redimentionement nessésaire
+void testReunir2(); // Réunion de 2 Collections peuplées sans redimensionnement nécessaire
+void testReunir3(); // Réunion de 3 Collections peuplées avec redimensionnement nécessaire
 
 
 

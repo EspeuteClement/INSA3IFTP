@@ -36,13 +36,10 @@ void testConstructeur1()
 {
 	//Création de la classe
 	printTitre("TEST CONSTRUCTEUR : CONSTRUCTEUR 1");
-	printGras("Construceur de base");
+	printGras("Constructeur de base");
 	Collection collectionTest(TAILLE_TEST/2);
 	// Test pour voir si la Collection fait la bonne taille
 	collectionTest.Afficher();
-
-
-
 }
 
 void testConstructeur2_1(){
@@ -77,13 +74,13 @@ void testAjouter1()
 
 	collectionTest.Ajouter(5);
 	printGras("Collection après ajout");
-	collectionTest.Afficher();	
+	collectionTest.Afficher();
 }
 
 void testAjouter2()
 {
 	// Initialisation du talbeau
-	
+
 	printGras("Collection de base :");
 	Collection collectionTest(0);
 	collectionTest.Afficher();
@@ -111,7 +108,7 @@ void testAjuster1()
 	printGras("Test de réajustement dans le cas où nbElement > nouvelleTaille");
 	printGras("(de 10 à 4 de taille alouée avec 5 éléments)");
 	if(collectionTest.Ajuster(4))
-	{	cout << "(ERREUR !) Le réajustement a réusi alors qu'il aurait du échouer\n";
+	{	cout << "(ERREUR !) Le réajustement a réussi alors qu'il aurait du échouer\n";
 	}
 	else
 	{	cout << "Le réajustement a bien échoué\n";
@@ -297,7 +294,7 @@ void testReunir2()
 
 void testReunir3()
 {
-	printGras("Test avec Collections néssésitant un redimensionnement");
+	printGras("Test avec Collections nécessitant un redimensionnement");
 	// Initialisation des collections
 	Collection col1(15);
 
