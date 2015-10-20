@@ -25,7 +25,7 @@ function [exitV,exitVec,M] = ProblemeP2A1()
     pos = 1;
     while i <= 10
        if v(pos) > 0
-            exitV(i,1) = 1/(v(pos));
+            exitV(i,1) = -1/(v(pos));
             exitVec(i,:) = vecteurs(:,i)';
             i = i + 1;
         end
@@ -42,7 +42,10 @@ function [exitV,exitVec,M] = ProblemeP2A1()
         pos = pos + 1;
     end
     
-    
+    for i=1:20
+        surf(reshape(exitVec(i,:),10,15));
+        pause(1);
+    end
     %%%%%%%%%%%%%%%%%%%%surf(reshape(vecteurs(:,2),10,15));
     %surf(reshape(vecteurs(20,:),15,10));
     % TODO FAIRE METHODE ITERATIOSN INVERSE POUR AVOIR UNE REPRESENTATION

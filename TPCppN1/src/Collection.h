@@ -40,12 +40,12 @@ public:
     // DEBUG est déclaré, alors le nombre d'éléments et la taille allouée sont
     // affichés après.
 
-    void Ajouter (int valeur);
+    void Ajouter (const int  valeur);
     // Mode d'emploi :
     // Ajoute la valeur entière donnée à l'extrêmité du tableau contenant la
     // Collection et ajuste celle-ci si nécessaire.
 
-    void Retirer (int valeur, int occurencesNb);
+    void Retirer (const int valeur, const int occurencesNb);
     // Mode d'emploi :
     // Supprime au plus un nombre occurencesNb d'occurences de la valeur donnée
     // en paramètre si elle est présente, et ajuste a chaque fois la quantité de
@@ -53,7 +53,7 @@ public:
     // supprimées. Chaque valeur supprimée est remplacée par une valeur en fin de
     // la collection.
 
-    int Ajuster (unsigned int uneTaille);
+    int Ajuster (const unsigned int uneTaille);
     // Mode d'emploi :
     // Réajuste le tableau pour que sa taille soit égale à uneTaille.
     // Si la nouvelle taille est plus petite que le nombre d'éléments
@@ -68,12 +68,12 @@ public:
     // nécessaire.
 
 //-------------------------------------------- Constructeurs - destructeur
-    Collection (unsigned int uneTaille);
+    Collection (const unsigned int uneTaille);
     // Mode d'emploi : Créé une collection pouvant accueillir uneTaille éléments
     // sans avoir besoin d'être redimensionnée. Affiche "Appel au premier
     // constructeur de <Collection>" si MAP est définie.
 
-    Collection (unsigned int uneTaille, int *unTableau);
+    Collection (const unsigned int uneTaille, const int *unTableau);
     // Mode d'emploi : Crée une collection pouvant accueillir uneTaille éléments
     // sans avoir besoin d'etre redimensionnée, et lui ajoute chacun des
     // elements du tableau donné. Affiche "Appel au second constructeur de

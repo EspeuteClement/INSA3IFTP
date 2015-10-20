@@ -31,7 +31,7 @@ void Collection::Afficher () const
     }
 }
 
-void Collection::Ajouter (int valeur)
+void Collection::Ajouter (const int valeur)
 {   // Couvre le cas ou la collection est déjà pleine.
     if (alloue == nbElements)
     {   Ajuster(alloue+1);
@@ -40,7 +40,7 @@ void Collection::Ajouter (int valeur)
     nbElements++;
 }
 
-void Collection::Retirer (int valeur, int occurencesNb)
+void Collection::Retirer (const int valeur, const int occurencesNb)
 {   // On remplace chaque occurence de la valeur donnée par la dernière valeur
     // du tableau et on décrémente nbElements pour signifier le retrait d'une
     // valeur. On réduit finalement la taille allouee du tableau en conséquence.
@@ -60,7 +60,7 @@ void Collection::Retirer (int valeur, int occurencesNb)
     Ajuster(nbElements);
 }
 
-int Collection::Ajuster (unsigned int uneTaille)
+int Collection::Ajuster (const unsigned int uneTaille)
 {
     // Erreur si la nouvelle taille est trop petite
     if (uneTaille < nbElements)
@@ -100,7 +100,7 @@ void Collection::Reunir (const Collection &uneCollection)
 }
 
 //-------------------------------------------- Constructeurs - destructeur
-Collection::Collection (unsigned int uneTaille)
+Collection::Collection (const unsigned int uneTaille)
 {
 #ifdef MAP
     cout << "Appel au premier constructeur de <Collection>" << endl;
@@ -111,7 +111,7 @@ Collection::Collection (unsigned int uneTaille)
     tableau = new int[uneTaille];
 }
 
-Collection::Collection (unsigned int uneTaille, int *unTableau)
+Collection::Collection (const unsigned int uneTaille, const int *unTableau)
 {
 #ifdef MAP
     cout << "Appel au second constructeur de <Collection>" << endl;
