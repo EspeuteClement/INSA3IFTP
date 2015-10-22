@@ -1,0 +1,148 @@
+////////////////////////////////////////////////////////////////////////
+////////////////////// TESTS POUR RETIRER //////////////////////////////
+////////////////////////////////////////////////////////////////////////
+void testRetirer1()
+{
+	printTitre("TEST 4 : RETIRER");
+	// Initialisation de la collection
+	printGras("Collection initiale :");
+	int tabBase[] = {1,42,1,42,8,4,42,42,42,1,8,9,42,42,8,7,3,42,8};
+
+	Collection collectionTest(19,tabBase);
+	collectionTest.Afficher();
+
+	printGras("On retire 1 élément 42");
+	collectionTest.Retirer(42,1);
+	collectionTest.Afficher();
+}
+
+void testRetirer2()
+{
+	printGras("Retirer plusieurs éléments");
+	// Retirer plus d'un seul élément
+	printGras("Collection initiale :");
+	int tabBase[] = {1,42,1,42,8,4,42,42,42,1,8,9,42,42,8,7,3,42,8};
+
+	Collection collectionTest(19,tabBase);
+	collectionTest.Afficher();
+
+	// Le test à proprement parler
+	printGras("On retire 4 éléments 42");
+	collectionTest.Retirer(42,4);
+	collectionTest.Afficher();
+}
+
+void testRetirer3()
+{ 	// Retirer tous les éléments d'une valeur donnée
+	printGras("On retire tous les éléments 42");
+	printGras("Collection initiale :");
+		int tabBase[] = {1,42,1,42,8,4,42,42,42,1,8,9,42,42,8,7,3,42,8};
+
+	Collection collectionTest(19,tabBase);
+	collectionTest.Afficher();
+
+	// Le test à proprement parler
+
+	printGras("Collection après Retirer(42,-1)");
+	collectionTest.Retirer(42,-1);
+	collectionTest.Afficher();
+}
+
+void testRetirer4()
+{
+	// Supression d'une valeur non comprise dans la Collection
+	printGras("On retire une valeur non présente dans la Collection (100)");
+	printGras("Collection initiale :");
+		int tabBase[] = {1,42,1,42,8,4,42,42,42,1,8,9,42,42,8,7,3,42,8};
+
+	Collection collectionTest(19,tabBase);
+	collectionTest.Afficher();
+
+	printGras("Collection après Retirer(100,-1)");
+
+	collectionTest.Retirer(100,-1);
+	collectionTest.Afficher();
+}
+
+void testRetirer5()
+{
+	// Supression de toutes les valeurs :
+	int tabBase[] = {1,9,1,9,8,4,9,9,9,1,8,9,9,9,8,7,3,9,8};
+	printGras("On retire toutes les valeurs du tableau");
+	printGras("Collection initiale :");
+	Collection collectionTest(19,tabBase);
+	collectionTest.Afficher();
+
+	printGras("On retire tous les éléments de la Collection");
+	for (int i = 0; i < 10; ++i)
+	{
+		collectionTest.Retirer(i,-1);
+	}
+	collectionTest.Afficher();
+}
+
+////////////////////////////////////////////////////////////////////////
+/////////////////// TEST POUR AJUSTER //////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+void testAjuster1()
+{
+	printTitre("TEST 3 : AJUSTER");
+	// TESTER SI LE REDIMENTIONNAGE AVEC UNE TAILLE TROP FAIBLE NE MARCHE PAS
+
+	printGras("Création d'une collection de taille 10 et population avec 5 éléments");
+	Collection collectionTest(10);
+	for (int i = 0; i < 5; ++i)
+	{	collectionTest.Ajouter(i);
+	}
+	collectionTest.Afficher();
+	printGras("Test de réajustement dans le cas où nbElement > nouvelleTaille");
+	printGras("(de 10 à 4 de taille alouée avec 5 éléments)");
+	if(collectionTest.Ajuster(4))
+	{	cout << "(ERREUR !) Le réajustement a réussi alors qu'il aurait du échouer\n";
+	}
+	else
+	{	cout << "Le réajustement a bien échoué\n";
+	}
+	collectionTest.Afficher();
+}
+
+void testAjuster2()
+{
+	printGras("Test de réajustement dans avec la nouvelle taille plus grande que l'ancienne ");
+	printGras("(De 10 à 20 de taille allouée)");
+
+	printGras("Création d'une collection de taille 10 et population avec 5 éléments");
+	Collection collectionTest(10);
+	for (int i = 0; i < 5; ++i)
+	{	collectionTest.Ajouter(i);
+	}
+	collectionTest.Afficher();
+
+	if(collectionTest.Ajuster(20))
+	{	cout << "Réajustement réussi\n";
+	}
+	else
+	{	cout << "(ERREUR !) Le réajustement a échoué\n";
+	}
+	collectionTest.Afficher();
+}
+
+void testAjuster3()
+{
+	// Redimensionnement de la collection dans le cas où nouvelleTaille < alloue
+	printGras("Test de réajustement avec la nouvelle taille plus petite que l'ancienne ");
+	printGras("(De 20 à 10 de taille allouée)");
+	printGras("Création d'une Collection de taille 20 et population avec 5 éléments");
+	Collection collectionTest(20);
+	for (int i = 0; i < 5; ++i)
+	{	collectionTest.Ajouter(i);
+	}
+	collectionTest.Afficher();
+	if(collectionTest.Ajuster(10))
+	{	cout << "Réajustement réussi\n";
+	}
+	else
+	{	cout << "(ERREUR !) Le réajustement a échoué\n";
+	}
+	collectionTest.Afficher();
+}

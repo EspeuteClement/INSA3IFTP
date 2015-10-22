@@ -29,7 +29,7 @@ void Collection::Afficher () const
     for (i = 0; i < nbElements; i++)
     {   cout << tableau[i];
         if (i < nbElements - 1)
-        { cout << ","; // Afficher la virgule si on est pas au dernier élément
+        { cout << ","; // Afficher la virgule si on n'est pas au dernier élément
         }
     }
     cout << "\n\n";
