@@ -1,11 +1,11 @@
 function [returnValue] = GaussSeidel(A,B,prec)
+  % On prends en coÈficient de dÈpart la diagonale de A
   CoefStart = diag(A);
   M = zeros(size(A,1),1);
-  k = 0;
-  while true
+  k = 0; % On compte le nombre d'itÈrations
+  while true % Tant qu'on n'a pas atteint la prÈcision requise ...
   Temp = M;
     for i=1:size(A,1);
-      
       sigma = 0;
       for j=1:size(A,1)
         if(j>i)
@@ -20,7 +20,7 @@ function [returnValue] = GaussSeidel(A,B,prec)
         end
       end
       Temp(i) = (B(i) - sigma - omega)/A(i,i); % Calcul de M.X s = N.X s + B 
-                                      %(A(i,i) repr√©sente la diagonnale)
+                                      %(A(i,i) reprsente la diagonnale)
     end
     
     
@@ -28,7 +28,7 @@ function [returnValue] = GaussSeidel(A,B,prec)
     maxError = max(Error);
     
     if maxError < prec; break
-    end % Break si la pr√©cision est atteinte
+    end % Break si la prÈcision est atteinte
     
     M = Temp;
     k = k+1;

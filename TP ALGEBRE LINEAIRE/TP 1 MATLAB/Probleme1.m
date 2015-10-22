@@ -1,6 +1,6 @@
 % A is the matrix representing the coefficents of the equations system.
 % B is the matrix of the initial values.
-function Probleme1(delta,t)
+function Probleme1(delta, ecart)
   A = zeros(450);
   B = zeros(450, 1);
  
@@ -97,10 +97,18 @@ function Probleme1(delta,t)
  
   % Solving
   sh=surf(reshape(B,15,30));
-  set(gca,'zlim',[-0.5 10])
-  for (i=0:delta:t)
+  set(gca,'zlim',[-0.5 10]);
+  moyenne = 0;
+  maxi = 300;
+  counter = 0;
+  while (abs(moyenne-maxi) > ecart)
       B = expm(A*delta)*B;
-      set(sh,'zdata',reshape(B,15,30))
+      moyenne = mean(B);
+      maxi = max(B);
+      counter = counter + delta;
+      set(sh,'zdata',reshape(B,15,30));
       pause(0.05);
   end
+  disp(['Le temps nécessaire pour équilibre est : ' num2str(counter) ' deltas.']);
+  disp(['La température en équilibre est : ' num2str(moyenne) ' degrés.']);
 end
