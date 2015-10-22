@@ -1,5 +1,3 @@
-# VARIABLE MADNESS !!!
-
 ### COPILATION
 # Le compilateur a utiliser
 CC = g++
@@ -11,7 +9,7 @@ CC_OUTPUT_FLAG = -o
 LINK_FLAG =
 # Arguments pour le stade de compilation
 CC_COMP_FLAG = -c -Wall
-
+# Commande d'affichage
 PRINT = @printf
 
 ### FICHIERS
@@ -33,15 +31,23 @@ CLEAN_FLAG = -f
 # Les fichier a clean lors d'un clean
 ADDITIONAL_CLEAN = core $(OBJS) $(EXEC)
 
-### DEBUG
+### TARGET POUR LE DEBUGAGE
 DEBUG = debug
 
-### RUN TARGET
+### TARGET POUR LANCER LE PROGRAME APRES LE MAKE
 RUN = run
+
+### AFFICHER DU GRAS :
+BOLD = \033[1m
+RESET_BOLD = \033[21m
 
 ### VARIABLES ADDITIONELLES CREES AUTOMATIQUEMENT
 #TRUE_SRC = $(addprefix SRC_FOLDER,SRC)
 OBJS = $(subst .cpp,.o,$(addprefix $(OBJS_FOLDER),$(SRC)))
+
+##########################################################################
+############################LES CILBES : #################################
+##########################################################################
 
 # CIBLE ALL POUR TOUT BUILD
 .PHONY : all
@@ -49,12 +55,12 @@ all : directories $(EXEC)
 
 # CIBLE OPTIONNELE POUR LANCER LE PROGRAMME APRES LE BUILD
 $(RUN) : all
-	$(PRINT) "\033[1mEXECUTION DE $(EXEC)\n\033[21m------------------\n"
+	$(PRINT) "$(BOLD)EXECUTION DE $(EXEC)\n$(RESET_BOLD)------------------\n"
 	@./$(EXEC)
 
 # EDITION DES LIENS :
 $(EXEC) : $(OBJS)
-	$(PRINT) "\033[1mEDITION DES LIENS\n\t\033[21m"
+	$(PRINT) "$(BOLD)EDITION DES LIENS\n\t$(RESET_BOLD)"
 	$(LINK) $(CC_OUTPUT_FLAG) $(EXEC) $(OBJS) $(LINK_FLAG)
 
 # CREER LES DOSSIERS MANQUANTS
@@ -62,18 +68,18 @@ $(EXEC) : $(OBJS)
 directories : $(OBJS_FOLDER)
 
 $(OBJS_FOLDER) :
-	$(PRINT) "\033[1mCREATION DU REPERTOIRE $@\n\t\033[21m"
+	$(PRINT) "$(BOLD)CREATION DU REPERTOIRE $@\n\t$(RESET_BOLD)"
 	mkdir -p $(OBJS_FOLDER)
 
 # CREER LES FICHERS OBJETS
 $(OBJS_FOLDER)%.o : %.cpp %.h
-	$(PRINT) "\033[1mCOMPILATION DE $<\n\t\033[21m"
+	$(PRINT) "$(BOLD)COMPILATION DE $<\n\t$(RESET_BOLD)"
 	$(CC) $(CC_OUTPUT_FLAG) $@ $< $(CC_COMP_FLAG)
 
 # PARTIE NETOYAGE
 .PHONY : $(CLEAN)
 $(CLEAN) : 
-	$(PRINT) "\033[1mCLEAN$<\n\t\033[21m"
+	$(PRINT) "$(BOLD)CLEAN$<\n\t$(RESET_BOLD)"
 	$(CLEAN_COMMAND) $(CLEAN_FLAG) $(ADDITIONAL_CLEAN)
 	$(PRINT) "\t"
 	$(CLEAN_COMMAND) -fd $(OBJS_FOLDER)
@@ -81,5 +87,5 @@ $(CLEAN) :
 # PARTIE DEBUG
 .PHONY : $(DEBUG)
 $(DEBUG) : 
-	$(PRINT) "\033[35;1mCOUCOU\n"
+	$(PRINT) "\033[35;1mCible de debug\n"
 

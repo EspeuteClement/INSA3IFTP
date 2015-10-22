@@ -5,31 +5,27 @@
 using namespace std;
 const int TAILLE_TEST = 20; // Taille qui sera allouée lors du test de taille et du redimensionnement
 
-
-
-// POUR AFFIHCER DU GRAS DANS LA CONSOLE (POUR LES TESTS)
-
-
 int main()
 {
-	testConstructeur2_1();
-	testConstructeur2_2();
-	testConstructeur2_3();
-	// testAjouter();
+	// testConstructeur2_1();
+	//testConstructeur2_2();
+	// testConstructeur2_3();
 
+	// testAjouter1();
+	// testAjouter2();
 	// testAjuster1();
 	// testAjuster2();
 	// testAjuster3();
 
-	// testRetirer1();
+	//testRetirer1();
 	// testRetirer2();
 	// testRetirer3();
 	// testRetirer4();
-	// testRetirer5();
+	//testRetirer5();
 
-	//testReunir1();
+	// testReunir1();
 	//testReunir2();
-	//testReunir3();
+	 testReunir3();
 }
 
 void testConstructeur1()
@@ -164,9 +160,7 @@ void testRetirer1()
 	printTitre("TEST 4 : RETIRER");
 	// Initialisation de la collection
 	printGras("Collection initiale :");
-	int tabBase[] = {
-			1,42,1,42,8,4,42,42,42,1,8,9,42,42,8,7,3,42,8
-		};
+	int tabBase[] = {1,42,1,42,8,4,42,42,42,1,8,9,42,42,8,7,3,42,8};
 
 	Collection collectionTest(19,tabBase);
 	collectionTest.Afficher();
@@ -178,18 +172,16 @@ void testRetirer1()
 
 void testRetirer2()
 {
+	printGras("Retirer plusieurs éléments");
 	// Retirer plus d'un seul élément
-	printGras("On retire 4 éléments 42");
 	printGras("Collection initiale :");
-	int tabBase[] = {
-			1,42,1,42,8,4,42,42,42,1,8,9,42,42,8,7,3,42,8
-		};
+	int tabBase[] = {1,42,1,42,8,4,42,42,42,1,8,9,42,42,8,7,3,42,8};
 
 	Collection collectionTest(19,tabBase);
 	collectionTest.Afficher();
 
 	// Le test à proprement parler
-
+	printGras("On retire 4 éléments 42");
 	collectionTest.Retirer(42,4);
 	collectionTest.Afficher();
 }
@@ -198,9 +190,7 @@ void testRetirer3()
 { 	// Retirer tous les éléments d'une valeur donnée
 	printGras("On retire tous les éléments 42");
 	printGras("Collection initiale :");
-		int tabBase[] = {
-			1,42,1,42,8,4,42,42,42,1,8,9,42,42,8,7,3,42,8
-		};
+		int tabBase[] = {1,42,1,42,8,4,42,42,42,1,8,9,42,42,8,7,3,42,8};
 
 	Collection collectionTest(19,tabBase);
 	collectionTest.Afficher();
@@ -217,9 +207,7 @@ void testRetirer4()
 	// Supression d'une valeur non comprise dans la Collection
 	printGras("On retire une valeur non présente dans la Collection (100)");
 	printGras("Collection initiale :");
-		int tabBase[] = {
-			1,42,1,42,8,4,42,42,42,1,8,9,42,42,8,7,3,42,8
-		};
+		int tabBase[] = {1,42,1,42,8,4,42,42,42,1,8,9,42,42,8,7,3,42,8};
 
 	Collection collectionTest(19,tabBase);
 	collectionTest.Afficher();
@@ -233,10 +221,9 @@ void testRetirer4()
 void testRetirer5()
 {
 	// Supression de toutes les valeurs :
-	int tabBase[] = {
-			1,9,1,9,8,4,9,9,9,1,8,9,9,9,8,7,3,9,8
-		};
-
+	int tabBase[] = {1,9,1,9,8,4,9,9,9,1,8,9,9,9,8,7,3,9,8};
+	printGras("On retire toutes les valeurs du tableau");
+	printGras("Collection initiale :");
 	Collection collectionTest(19,tabBase);
 	collectionTest.Afficher();
 

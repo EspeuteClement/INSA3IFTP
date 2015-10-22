@@ -1,11 +1,11 @@
-\documentclass[11pt]{article}
+\documentclass[10pt]{article}
 
 \usepackage{custom}
 
 \title{Compte-Rendu TP C++ \#1}
 \author{{\sc Renault} Benoit, {\sc Espeute} Clément}
 \date{14 septembre 2015}
-
+\usepackage[top=1in, bottom=1.25in, left=1.25in, right=1.25in]{geometry}
 \usepackage{listings}
 \usepackage{graphicx}
 
@@ -55,13 +55,13 @@
 \subsection{Présentation des méthodes}
 
 \subsubsection*{Constructeur n°1}
-Créé une Collection pouvant accueillir un nombre entier non-signé donné d'éléments sans avoir besoin d'être redimensionnée, et alloue la mémoire nécessaire au tableau.
+Créé une collection pouvant accueillir un nombre entier non-signé donné d'éléments sans avoir besoin d'être redimensionnée, et alloue la mémoire nécessaire au tableau.
 
 \subsubsection*{Constructeur n°2}
-Créé une Collection pouvant accueillir un nombre entier non-signé donné d'éléments sans avoir besoin d'être redimensionnée, et alloue la mémoire nécessaire au tableau. Les valeurs du tableau d'entiers quelconque dont le pointeur est passé en paramètre sont ensuite ajoutées à la Collection (part du contrat : il est à la charge de l’utilisateur de donner une taille égale à celle du tableau passé).
+Créé une collection pouvant accueillir un nombre entier non-signé donné d'éléments sans avoir besoin d'être redimensionnée, et alloue la mémoire nécessaire au tableau. Les valeurs du tableau d'entiers quelconque dont le pointeur est passé en paramètre sont ensuite ajoutées à la collection (part du contrat : il est à la charge de l’utilisateur de donner une taille égale à celle du tableau passé).
 
 \subsubsection*{Méthode Afficher}
-Imprime sur la sortie standard les éléments de la Collection dans l'ordre d’apparition du tableau, avec un retour chariot entre chaque élément sur la sortie standard. Si en mode de déboguage, affiche en plus le nombre d’éléments et la taille allouée à la fin de l’affichage des éléments.
+Imprime sur la sortie standard les éléments de la collection dans l'ordre d’apparition du tableau, avec une virgule entre chaque élément sur la sortie standard et deux retours à la ligne à la fin de l'affichage. Si en mode de déboguage (\texttt{\#define DEBUG}), affiche en plus le nombre d’éléments et la taille allouée avent l’affichage des éléments.
 
 \subsubsection*{Méthode Ajouter}
 Ajoute la valeur entière donnée dans un élément inséré à l'extrêmité du tableau et fait appel à la fonction d'ajustement si l'insertion implique un dépassement de la taille actuellement allouée au tableau.
@@ -74,102 +74,261 @@ Supprime un nombre entier d'occurences donné d'une valeur entière donnée. Si 
 Modifie la taille allouee au tableau et le réalloue dynamiquement à une valeur entière non-signée donnée en paramètre. Le redimensionnement est refusé si la taille demandée est inférieur au nombre actuel d'éléments et renvoie un code de retour \texttt{ERR\_TAILLE}.
     
 \subsubsection*{Méthode Reunir}
-Ajoute les éléments de la Collection donnée après ceux de la courante en réajustant la taille allouee du tableau de la courante si celle-ci n'est actuellement pas assez grande pour les accueillir.
+Ajoute les éléments de la collection donnée après ceux de la courante en réajustant la taille allouee du tableau de la courante si celle-ci n'est actuellement pas assez grande pour les accueillir.
 
 \subsubsection*{Méthode Destructeur}
 
 \noindent Effets : Désallocation du tableau.
-Détruit la Collection courante et libère la mémoire allouée au tableau associé.
-\newpage
+Détruit la collection courante et libère la mémoire allouée au tableau associé.
 
+%%%%\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Les tests}
 
-Afin de vérifier que chaque méthode de notre classe fonctionne, on réalise des tests unitaires sur chacune d'entre elles. La méthode Afficher a été modifiée pour pouvoir donner la taille allouée du tableau et le nombre d'éléments à l'intérieur de celui-ci. Cet affichage peut être désactivé en enlevant le mot clef \texttt{\#define DEBUG} à l'intérieur de \texttt{Collection.h}.
+Afin de vérifier que chaque méthode  notre classe fonctionne, on réalise des tests unitaires sur chacune d'entre elles. La méthode Afficher à été modifiée pour pouvoir donner la taille allouée du tableau et le nombre d'éléments a l'intérieur de celui-ci. Cet affichage peut être désactivé en enlevant le mot clef \texttt{\#define DEBUG} à l'intérieur de \texttt{Collection.h}.
 
-Par ailleurs, afin de rendre les tests plus lisibles dans la console, les textes indiquant les différentes étapes des tests sont imprimés en gras. Si la console ne supporte pas les caractères d'échappement permettant la mise en forme des textes affichés, ils peuvent être désactivés en retirant le mot clef \texttt{\#define~BOLD\_USAGE} à l'intérieur de \texttt{main.h}.
+Par ailleurs, afin de rendre les tests plus lisibles dans la console, les textes indiquant les différentes étapes des tests sont imprimés en gras. Si la console ne supporte pas les caractères d'échappement permettant la mise en forme des textes affichés, ils peuvent être désactivé en retirant le mot clef \texttt{\#define~BOLD\_USAGE} à l'interieur de \texttt{main.h}.
 
-\begin{figure}[htp]
-\centering
-\includegraphics[scale=0.60]{TestConstructeurs.png}
-\caption{Exemple des tests pour le second constructeur}
-\label{testConstructeur}
-\end{figure}
+%\begin{figure}[htp]
+%\centering
+%\includegraphics[scale=0.60]{TestConstructeurs.png}
+%\caption{Exemple des tests pour le second constructeur}
+%\label{testConstructeur}
+%\end{figure}
 
 \subsection{Tests pour le deuxième constructeur}
 
 \texttt{testConstructeur2\_X()} sont les méthodes qui effectuent le test pour le second constructeur. 
 \begin{description}
-	\item[\texttt{testConstructeur2\_1()}] Teste le cas de base où l'on passe un tableau d'entiers quelconques en paramètre du constructeur de la Collection (ainsi que sa taille).
+	\item[\texttt{testConstructeur2\_1()}] Teste le cas de base où l'on passe un tableau rempli arbitrairement en paramètre du constructeur de la Collection (ainsi que sa taille). Le tableau initial est :
+	\begin{verbatim}
+	int leTableau[] = {100,200,300,400,500,600,700,800,900,999};
+	\end{verbatim}
 	
-	Résultat attendu : La Collection est bien initialisée et elle contient tous les éléments du tableau, et a la même taille. ({\tt alloue = nbElements})
+	Résultat attendu : La Collection est bien initialisée et elle contient tous les éléments du tableau, et à la même taille. ({\tt allouée = nbElements})
+	
+	Résultat obtenu :
+	\begin{verbatim}
+	NbElements : 10
+	Alloue : 10
+	100,200,300,400,500,600,700,800,900,999
+\end{verbatim}
 	
 	\item[\texttt{testConstructeur2\_2()}] Teste le cas où l'on donne en paramètre un tableau vide.
 	
-	Résultat attendu : La Collection est bien initialisée et elle est vide. \texttt{alloue} et \texttt{nbElements} est de 0. 
+	Résultat attendu : La Collection est bien initialisée et elle est vide. \texttt{allouee} et \texttt{nbElements} est de 0. 
 	
-	\item[\texttt{testConstructeur2\_3()}] Teste le cas où l'on appelle le constructeur avec en paramètre un tableau et une taille $n$ plus petite que celle du tableau. ({\tt alloue = nbElements =} $n$)
+	Résultat obtenu :
+	\begin{verbatim}
+	NbElements : 0
+Alloue : 0
+\end{verbatim}
+	
+	\item[\texttt{testConstructeur2\_3()}] Teste le cas où l'on appelle le constructeur avec en paramètre un tableau et une taille $n$ plus petite que celle du tableau. Le tableau initial est le même que pour le premier test, et on donne en nombre d'élément 5.
+	
 	
 	Résultat attendu : La Collection est bien initialisée, et elle est remplie avec les $n$ premiers éléments du tableau passé en paramètre.
+	
+	Résultat obtenu :
+	\begin{verbatim}
+	NbElements : 5
+Alloue : 5
+100,200,300,400,500
+\end{verbatim}
 \end{description}
-
+\emph{Note : On ne teste pas le cas où l'on appelle le constructeur avec un tableau et un nombre d'éléments supérieur au vrai nombre d'éléments contenu dans le tableau, car le contrat dans le manuel du constructeur interdit ce genre d'appel. L'erreur ne viendra pas de la programmation du constructeur, mais de l'utilisateur.}
 \subsection{Tests pour \tt Ajouter}
-Le test pour la méthode ajouter comporte deux sous-tests :
+Le test pour la méthode ajouter comporte 2 tests :
 
 \begin{description}
 
-	\item[\texttt{testAjouter1()}] Ajoute simplement un élément dans la Collection vide avec une taille initiale de 10 (donc pas de redimensionnement nécessaire). On affiche l'état du tableau avant et après l'ajout.
+	\item[\texttt{testAjouter1()}] Ajoute simplement un élément dans la Collection vide avec une taille initiale de 5 (donc pas de redimensionnement nécessaire). On affiche l'état du tableau avant et après l'ajout.
 	
-	Résultat attendu : Le tableau ne comporte que l'élément ajouté. \texttt{nbElements} vaut 1 et \texttt{alloue} vaut toujours 10. 
+	Résultat attendu : Le tableau ne comporte que l'élément ajouté. \texttt{nbElement} vaut 1 et \texttt{alouee} vaut toujours 5.
+		Résultat obtenu :
+	\begin{verbatim}
+	===== Collection initiale =====
+NbElements : 0
+Alloue : 5
+===== Collection après ajout =====
+NbElements : 1
+Alloue : 5
+5
+\end{verbatim}
 	
 	\item[\texttt{testAjouter2()}] Ajoute 20 éléments dans une Collection initialement vide. (Donc redimensionnement nécessaire).
 	
-	Résultat attendu : Le tableau est rempli avec les 20 éléments dans l'ordre dans lequel ils ont été insérés. \texttt{alloue = nbElements = 20}.
+	Résultat attendu : Le tableau est rempli avec les 20 éléments dans l'ordre dans lequel ils ont été insérés. \texttt{alouee = nbElement = 20}.
+	
+	Résultat obtenu :
+	\begin{verbatim}
+	===== Collection de base : =====
+NbElements : 0
+Alloue : 0
+===== Collection après l'ajout de 20 éléments: =====
+NbElements : 20
+Alloue : 20
+0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
+\end{verbatim}
+
 	
 \end{description}
 
 \subsection{Tests pour Retirer}	
 Pour tester la méthode retirer, on remplit au préalable la Collection d'un tableau arbitraire, puis on tente de retirer des éléments. On affiche à chaque fois la Collection avant et après l'opération.
 
-On a alors :
+Pour les 4 premiers tests, la collection est initialisé avec le tableau suivant :
+\begin{verbatim}
+	int tabBase[] = {1,42,1,42,8,4,42,42,42,1,8,9,42,42,8,7,3,42,8};
+\end{verbatim}
+
+On à alors :
 \begin{description}
-	\item[\texttt{testRetirer1()}] Retire un élément d'une valeur donnée de la Collection.
+	\item[\texttt{testRetirer1()}] Retire un élément (ici 42) d'une valeur donnée de la collection.
 	
-	Résultat attendu : L'élément est supprimé et la Collection à bien été redimensionnée à la taille initiale - 1.
+	Résultat attendu : L'élément est supprimé et la collections à bien été redimensionnée à la taille initiale - 1.
 	
-	\item[\texttt{testRetirer2()}] Retire $n$ éléments d'une valeur donnée de la Collection.
+	Résultat obtenu :
+	\begin{verbatim}
+========== Collection initiale : =====
+NbElements : 19
+Alloue : 19
+1,42,1,42,8,4,42,42,42,1,8,9,42,42,8,7,3,42,8
+===== On retire 1 élément 42 =====
+NbElements : 18
+Alloue : 18
+1,8,1,42,8,4,42,42,42,1,8,9,42,42,8,7,3,42
+\end{verbatim}
+	\emph{Note : le premier élément 42 de la liste à été supprimé, et le dernier élément de la liste (le 8) à pris ça place comme spécifié dans la spécification de la méthode Retirer().}
 	
-	Résultat attendu : L'élément est supprimé et la Collection a bien été redimensionnée à la taille initiale - $n$.
+	\item[\texttt{testRetirer2()}] Retire $n$ éléments d'une valeur donnée de la collection.
+	
+	Résultat attendu : L'élément est supprimé et la collections à bien été redimensionnée à la taille initiale - $n$.
+	
+	Résultat obtenu : 
+	\begin{verbatim}
+	===== Collection initiale : =====
+NbElements : 19
+Alloue : 19
+1,42,1,42,8,4,42,42,42,1,8,9,42,42,8,7,3,42,8
+===== On retire 4 éléments 42 =====
+NbElements : 15
+Alloue : 15
+1,8,1,3,8,4,7,42,42,1,8,9,42,42,8
+\end{verbatim}
 	
 	\item[\texttt{testRetirer3()}] Retire tous les éléments d'une valeur donnée du tableau.
 	
-	Résultat attendu : Tout les éléments de la valeur donnée sont supprimés et la Collections a bien été redimensionnée correctement.
+	Résultat attendu : Tout les éléments de la valeur donnée sont supprimés et la collections à bien été redimensionnée correctement.
+	
+	Résultat obtenu :
+	\begin{verbatim}
+	===== Collection initiale : =====
+NbElements : 19
+Alloue : 19
+1,42,1,42,8,4,42,42,42,1,8,9,42,42,8,7,3,42,8
+===== Collection après Retirer(42,-1) =====
+NbElements : 11
+Alloue : 11
+1,8,1,3,8,4,7,8,9,1,8
+\end{verbatim}
 	
 	\item[\texttt{testRetirer4()}] Tente de retirer une valeur non présente dans le tableau.
 	
 	Résultat attendu : Le tableau ne change pas, et il n'y pas d'erreur produite.
 	
-	\item[\texttt{testRetirer5()}] Retire procéduralement tous les éléments du tableau.
+	Résultat obtenu :
+	\begin{verbatim}
+===== Collection initiale : =====
+NbElements : 19
+Alloue : 19
+1,42,1,42,8,4,42,42,42,1,8,9,42,42,8,7,3,42,8
+===== Collection après Retirer(100,-1) =====
+NbElements : 19
+Alloue : 19
+1,42,1,42,8,4,42,42,42,1,8,9,42,42,8,7,3,42,8
+\end{verbatim}
 	
-	Résultat attendu : Le tableau est vide, \texttt{nbElements = alloue = 0}
+	\item[\texttt{testRetirer5()}] Retire procéduralement touts les éléments du tableau.
+	
+	Résultat attendu : Le tableau est vide, \texttt{nbElement = alouee = 0}
+	
+	Résultat obtenu :
+	\begin{verbatim}
+	===== Collection initiale : =====
+NbElements : 19
+Alloue : 19
+1,9,1,9,8,4,9,9,9,1,8,9,9,9,8,7,3,9,8
+===== On retire tous les éléments de la Collection =====
+NbElements : 0
+Alloue : 0
+\end{verbatim}
 \end{description}
 
-\subsection{Tests pour Reunir}
+\subsection{Tests pour Réunir}
 Pour vérifier le bon fonctionnement de la méthode \texttt{Reunir}, on procède à 3 test différents. On affiche à chaque fois les Collections initiales et la Collection correspondant à la réunion des deux.
 
 \begin{description}
 	\item[\texttt{testReunir1()}] Crée 2 Collections vides et les réunit.
 	
-	Résultat Attendu : Aucune différence entre la première Collection et la Collection réunie.
+	Résultat Attendu : Aucune différence entre la première collection et la collection réunie.
 	
-	\item[\texttt{testReunir2()}] Crée 2 Collections et les réunit. Les Collections sont telles que la réunion n'implique pas de redimensionement de la première Collection.
+	Résultat obtenu :
+	\begin{verbatim}
+===== Collection 1 =====
+NbElements : 0
+Alloue : 10
+===== Collection 2 =====
+NbElements : 0
+Alloue : 20
+===== Réunion des 2 =====
+NbElements : 0
+Alloue : 10
+\end{verbatim}
 	
-	Résultat Attendu : La Collection réunie contient les éléments de la première suivie des éléments de la seconde. Sa taille \texttt{alloue} est égale à celle de la première Collection car il n'y a pas eu de redimensionement.
+	\item[\texttt{testReunir2()}] Crée 2 Collections et les réunit. Les Collections sont telles que la réunion n'implique pas de redimensionement de la première collection.
 	
-	\item[\texttt{testReunir3()}] Crée 2 Collections et les réunit. La première Collection est complètement remplie ce qui implique qu'un redimensionement sera nécessaire lors de la réunion des Collections.
+	Résultat Attendu : La collection réunie contient les éléments de la première suivie des éléments de la seconde. Sa taille \texttt{alouee} est égale à celle de la première collection car il n'y a pas eu de redimensionement.
 	
-	Résultat Attendu : La Collection réunie contient les éléments de la première suivie des éléments de la seconde. Sa taille \texttt{alloue} est égale à \texttt{nbElements}
- 
+	Résultat obtenu :
+	\begin{verbatim}
+	===== Collection 1 =====
+NbElements : 15
+Alloue : 30
+0,1,2,3,4,5,6,7,8,9,10,11,12,13,14
+===== Collection 2 =====
+NbElements : 5
+Alloue : 10
+10,20,30,40,50
+===== Réunion des 2 =====
+NbElements : 20
+Alloue : 30
+0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,10,20,30,40,50
+\end{verbatim}
+	
+	\item[\texttt{testReunir3()}] Crée 2 Collections et les réunit. La première collection est remplie ce qui implique qu'un redimensionement sera nécessaire lors de la réunion des Collections.
+	
+	Résultat Attendu : La collection réunie contient les éléments de la première suivie des éléments de la seconde. Sa taille \texttt{alouee} est égale à \texttt{nbElement}
+	
+	Résultat Obtenu :
+\begin{verbatim}
+	===== Collection 1 =====
+NbElements : 15
+Alloue : 15
+0,1,2,3,4,5,6,7,8,9,10,11,12,13,14
+===== Collection 2 =====
+NbElements : 10
+Alloue : 15
+10,20,30,40,50,60,70,80,90,100
+===== Réunion des 2 =====
+NbElements : 25
+Alloue : 25
+0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,10,20,30,40,50,60,70,80,90,100
+\end{verbatim} 
 \end{description} 
+
+\subsection{Conclusion des tests}
+Nous avons pu voir que tous les tests produisent les résultats attendus. 
 
 \end{document}

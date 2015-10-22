@@ -8,9 +8,8 @@
 //---------- Interface de la classe <Collection> (fichier Collection.h) ------
 #if ! defined ( COLLECTION_H )
 #define COLLECTION_H
-//#define MAP
 #define DEBUG
-#define MAP
+//#define MAP
 
 //----------------------------------------------------------- Enumérations
 enum CodesRetour
@@ -36,9 +35,9 @@ public:
     void Afficher () const;
     // Mode d'emploi :
     // Imprime dans un terminal chaque élément de la Collection un a un, dans l'
-    // ordre de leur apparition dans le tabelau, suivis par un saut de ligne. Si
+    // ordre de leur apparition dans le tabelau, suivis par une virgule. Si
     // DEBUG est déclaré, alors le nombre d'éléments et la taille allouée sont
-    // affichés après.
+    // affichés avant.
 
     void Ajouter (const int  valeur);
     // Mode d'emploi :
