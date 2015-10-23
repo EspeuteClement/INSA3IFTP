@@ -8,7 +8,7 @@ CC_OUTPUT_FLAG = -o
 # Arguments pour le stade d'édition des liens
 LINK_FLAG =
 # Arguments pour le stade de compilation
-CC_COMP_FLAG = -c -Wall
+CC_COMP_FLAG = -c -Wall -std=c++11
 # Commande d'affichage
 PRINT = @printf
 
@@ -16,7 +16,7 @@ PRINT = @printf
 # Nom du fichier de sortie
 EXEC = out/executable.out
 # Nom des fichiers sources
-SRC = main.cpp
+SRC = Main.cpp Event.cpp EventList.cpp Sensor.cpp
 # Nom du dossier avec les fichiers sources
 SRC_FOLDER = src/
 # Le dossier où metre les fichiers objs
@@ -53,7 +53,7 @@ OBJS = $(subst .cpp,.o,$(addprefix $(OBJS_FOLDER),$(SRC)))
 
 # CIBLE ALL POUR TOUT BUILD
 .PHONY : all
-all : directories $(EXEC) 
+all : directories $(EXEC)
 
 # CIBLE OPTIONNELE POUR LANCER LE PROGRAMME APRES LE BUILD
 $(RUN) : all
@@ -84,7 +84,7 @@ $(OBJS_FOLDER)%.o : $(SRC_FOLDER)%.cpp $(SRC_FOLDER)%.h
 
 # PARTIE NETOYAGE
 .PHONY : $(CLEAN)
-$(CLEAN) : 
+$(CLEAN) :
 	$(PRINT) "$(BOLD)CLEAN$<\n\t$(RESET_BOLD)"
 	$(CLEAN_COMMAND) $(CLEAN_FLAG) $(ADDITIONAL_CLEAN)
 	$(PRINT) "\t"
@@ -92,6 +92,5 @@ $(CLEAN) :
 
 # PARTIE DEBUG
 .PHONY : $(DEBUG)
-$(DEBUG) : 
+$(DEBUG) :
 	$(PRINT) "\033[35;1mCible de debug\n"
-

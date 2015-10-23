@@ -1,19 +1,20 @@
 #include "EventList.h"
 
 EventList::EventList(){
-  first = NULL;
+  first = 0;
 }
 
 EventList::~EventList(){
   delete first;
 }
 
-EventList::InsertEvent(uint8_t aMinute, State aState){
+void EventList::InsertEvent(int aMinute, char aState){
   Event *newEvent = new Event(aMinute, aState);
-  if (first == NULL) {
+  if (first == 0) {
     first = newEvent;
   }
   else {
-    newEvent.next = first;
+    newEvent->SetNext(first);
     first = newEvent;
+  }
 }

@@ -1,11 +1,18 @@
 #include "Sensor.h"
 
-Sensor::Sensor(int aID):ID(aID}, uptime(0){}
+Sensor::Sensor(long aID):ID(aID), uptime(0){
+  index = new EventList[NUMBER_OF_DAYS][NUMBER_OF_HOURS];
+}
 
 Sensor::~Sensor () {
-  for (uint8_t i = 0; i < NUMBER_OF_DAYS; i++) {
-    for (uint8_t j = 0; i < NUMBER_OF_HOURS; j++) {
+  for (int i = 0; i < NUMBER_OF_DAYS; i++) {
+    for (int j = 0; i < NUMBER_OF_HOURS; j++) {
       delete index[i][j];
     }
   }
+}
+
+void Sensor::AddEvent(int d7, int h, int aMinute, char aState) {
+  index[d7 - 1][h]->InsertEvent(aMinute, aState);
+  uptime++;
 }

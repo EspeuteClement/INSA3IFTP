@@ -1,17 +1,17 @@
 #ifndef EVENT_H
 #define EVENT_H
 
-enum State {V, J, R, N};
-
 class Event {
   public :
-    Event(uint8_t aMinute, State aState);
+    Event(int aMinute, char aState);
 
     ~Event();
 
+    void SetNext(Event *aNext);
+
   private :
-    uint8_t minute;
-    State state;
+    int minute;
+    char state;
     Event *next;
 };
 #endif //EVENT_H

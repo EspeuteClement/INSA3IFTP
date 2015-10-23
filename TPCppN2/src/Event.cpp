@@ -1,9 +1,13 @@
 #include "Event.h"
 
-Event::Event (uint8_t aMinute, State aState):minute(aMinute), state(aState), next(NULL) {}
+Event::Event (int aMinute, char aState):minute(aMinute), state(aState), next(0) {}
 
 Event::~Event () {
-  if (next != NULL) {
+  if (next != 0) {
     delete next;
   }
+}
+
+void Event::SetNext (Event *aNext) {
+  next = aNext;
 }
