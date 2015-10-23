@@ -1,13 +1,16 @@
-struct Event {
-  int minute;
-  int state;
-}
+#ifndef SENSOR_H
+#define SENSOR_H
 
 class Sensor {
   public :
+    Sensor(int aID);
+
+    inline int GetID(){return ID;};
+
 
   private :
-    Event index = new Event[7][24][];
-    int id;
+    Event *index;
+    int ID;
     int uptime;
 }
+#endif //SENSOR_H
