@@ -1,7 +1,7 @@
-### COPILATION
+### COMPILATION
 # Le compilateur a utiliser
 CC = g++
-# L'editeur de lien à uttiliser
+# L'editeur de lien à utiliser
 LINK = g++
 # Argument pour changer le nom de la sortie du compilo
 CC_OUTPUT_FLAG = -o
@@ -20,7 +20,7 @@ SRC = main.cpp Collection.cpp
 # Nom du dossier avec les fichiers sources
 SRC_FOLDER = ./
 # Le dossier où metre les fichiers objs
-OBJS_FOLDER = ./objs/newFolder/
+OBJS_FOLDER = ./objs/
 
 ### CLEAN
 CLEAN = clean
@@ -28,7 +28,7 @@ CLEAN = clean
 CLEAN_COMMAND = rm
 # Les flags pour clean
 CLEAN_FLAG = -f
-# Les fichier a clean lors d'un clean
+# Les fichier à clean lors d'un clean
 ADDITIONAL_CLEAN = core $(OBJS) $(EXEC)
 
 ### TARGET POUR LE DEBUGAGE
@@ -46,7 +46,7 @@ RESET_BOLD = \033[21m
 OBJS = $(subst .cpp,.o,$(addprefix $(OBJS_FOLDER),$(SRC)))
 
 ##########################################################################
-############################LES CILBES : #################################
+############################LES CIBLES : #################################
 ##########################################################################
 
 # CIBLE ALL POUR TOUT BUILD
@@ -64,7 +64,7 @@ $(EXEC) : $(OBJS)
 	$(LINK) $(CC_OUTPUT_FLAG) $(EXEC) $(OBJS) $(LINK_FLAG)
 
 # CREER LES DOSSIERS MANQUANTS
-.PHONY : createObjsFolder
+.PHONY : directories
 directories : $(OBJS_FOLDER)
 
 $(OBJS_FOLDER) :

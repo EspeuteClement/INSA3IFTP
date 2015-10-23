@@ -3,29 +3,28 @@
 #include "Collection.h"
 
 using namespace std;
-const int TAILLE_TEST = 20; // Taille qui sera allouée lors du test de taille et du redimensionnement
 
 int main()
 {
-	// testConstructeur2_1();
-	//testConstructeur2_2();
-	// testConstructeur2_3();
+	testConstructeur2_1();
+	testConstructeur2_2();
+	testConstructeur2_3();
 
-	// testAjouter1();
-	// testAjouter2();
-	// testAjuster1();
-	// testAjuster2();
-	// testAjuster3();
+	testAjouter1();
+	testAjouter2();
+	testAjuster1();
+	testAjuster2();
+	testAjuster3();
 
-	//testRetirer1();
-	// testRetirer2();
-	// testRetirer3();
-	// testRetirer4();
-	//testRetirer5();
+	testRetirer1();
+	testRetirer2();
+	testRetirer3();
+	testRetirer4();
+	testRetirer5();
 
-	// testReunir1();
-	//testReunir2();
-	 testReunir3();
+	testReunir1();
+	testReunir2();
+	testReunir3();
 }
 
 void testConstructeur1()
@@ -33,7 +32,7 @@ void testConstructeur1()
 	//Création de la classe
 	printTitre("TEST CONSTRUCTEUR : CONSTRUCTEUR 1");
 	printGras("Constructeur de base");
-	Collection collectionTest(TAILLE_TEST/2);
+	Collection collectionTest(10);
 	// Test pour voir si la Collection fait la bonne taille
 	collectionTest.Afficher();
 }
