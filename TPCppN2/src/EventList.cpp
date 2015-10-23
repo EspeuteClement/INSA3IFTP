@@ -1,6 +1,6 @@
 #include "EventList.h"
 
-EventList::EventList)(){
+EventList::EventList(){
   first = NULL;
 }
 
