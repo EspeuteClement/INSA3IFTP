@@ -1,7 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-//#define BOLD_USAGE // Active ou désactive le gras dans la console
+#define BOLD_USAGE // Active ou désactive le gras dans la console
 using namespace std;
 
 #ifdef BOLD_USAGE
