@@ -8,7 +8,6 @@ const int NUMBER_OF_HOURS = 24;
 
 class Sensor {
   public :
-
     Sensor(long aID);
 
     ~Sensor();
