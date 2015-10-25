@@ -12,13 +12,6 @@ Sensor::Sensor(long aID):ID(aID)
     for (int j = 0; j < NUMBER_OF_HOURS; j++)
     {
       index[i][j] = new Stats[NUMBER_OF_MINUTES];
-      for (int k = 0; k < NUMBER_OF_MINUTES; k++)
-      {
-        index[i][j][k].v = 0;
-        index[i][j][k].j = 0;
-        index[i][j][k].r = 0;
-        index[i][j][k].n = 0;
-      }
     }
   }
 }
@@ -53,72 +46,38 @@ void Sensor::AddEvent(int d7, int h, int m, char state)
   }
 }
 
-StatsRel* Sensor::GetStatsByMin (int d7, int h, int m)
+Stats* Sensor::GetStatsByMin (int d7, int h, int m)
 {
-  double total = index[d7 - 1][h][m].Sum();
-  StatsRel *stats = new StatsRel(index[d7 - 1][h][m].v/total, index[d7 - 1][h][m].j/total,
-    index[d7 - 1][h][m].r/total, index[d7 - 1][h][m].n/total);
-  return stats;
+  return &index[d7-1][h][m];
 }
 
-StatsRel* Sensor::GetStatsByHour (int d7, int h)
+Stats* Sensor::GetStatsByHour (int d7, int h)
 {
-  double total = 0;
-  StatsRel *stats = new StatsRel();
+  Stats *stats = new Stats();
   for (int i = 0; i < NUMBER_OF_MINUTES; i++)
   {
-    if (index[d7 - 1][h][i].Sum() != 0)
-    {
-      *stats += index[d7 - 1][h][i];
-      total += index[d7 - 1][h][i].Sum();
-    }
-  }
-  if (total != 0)
-  {
-    *stats /= total;
+    *stats += *GetStatsByMin(d7, h, i);
   }
   return stats;
 }
 
-StatsRel* Sensor::GetStatsByDay (int d7)
+Stats* Sensor::GetStatsByDay (int d7)
 {
-  double total = 0;
-  StatsRel *stats = new StatsRel();
+  Stats *stats = new Stats();
   for (int i = 0; i < NUMBER_OF_HOURS; i++)
   {
-    for (int j = 0; j < NUMBER_OF_MINUTES; j++)
-    {
-      if (index[d7 - 1][i][j].Sum() != 0)
-      {
-        *stats += index[d7 - 1][i][j];
-        total += index[d7 - 1][i][j].Sum();
-      }
-    }
-  }
-  if (total != 0)
-  {
-    *stats /= total;
+    *stats += *GetStatsByHour(d7, i);
   }
   return stats;
 }
 
 StatsRel* Sensor::GetStatsBySensor ()
 {
-  double total = 0;
   StatsRel *stats = new StatsRel();
-  for (int i = 0; i < NUMBER_OF_DAYS; i++) {
-    for (int j = 0; j < NUMBER_OF_HOURS; j++)
-    {
-      for (int k = 0; k < NUMBER_OF_MINUTES; k++)
-      {
-        if (index[i][j][k].Sum() != 0)
-        {
-          *stats += index[i][j][k];
-          total += index[i][j][k].Sum();
-        }
-      }
-    }
+  for (int i = 1; i <= NUMBER_OF_DAYS; i++) {
+    *stats += *GetStatsByDay(i);
   }
+  double total = stats->Sum();
   if (total != 0)
   {
     *stats /= total;

@@ -20,31 +20,31 @@ int main() {
   sensor1->AddEvent(4, 12, 32, 'N');
 
   cout << "------------By Min-------------\n";
-  // Expected : [25, 25, 25 ,25]
+  // Expected : [1, 1, 1, 1]
 
-  cout << "V " << (int)(sensor1->GetStatsByMin(1,12,32)->v*100) << "%\n";
-  cout << "J " << (int)(sensor1->GetStatsByMin(1,12,32)->j*100) << "%\n";
-  cout << "R " << (int)(sensor1->GetStatsByMin(1,12,32)->r*100) << "%\n";
-  cout << "N " << (int)(sensor1->GetStatsByMin(1,12,32)->n*100) << "%\n";
+  cout << "V " << sensor1->GetStatsByMin(1,12,32)->v << "\n";
+  cout << "J " << sensor1->GetStatsByMin(1,12,32)->j << "\n";
+  cout << "R " << sensor1->GetStatsByMin(1,12,32)->r << "\n";
+  cout << "N " << sensor1->GetStatsByMin(1,12,32)->n << "\n";
 
   cout << "------------By Hour-------------\n";
-  // Expected : [20, 40, 20 ,20]
+  // Expected : [1, 2, 1, 1]
 
-  cout << "V " << (int)(sensor1->GetStatsByHour(1,12)->v*100) << "%\n";
-  cout << "J " << (int)(sensor1->GetStatsByHour(1,12)->j*100) << "%\n";
-  cout << "R " << (int)(sensor1->GetStatsByHour(1,12)->r*100) << "%\n";
-  cout << "N " << (int)(sensor1->GetStatsByHour(1,12)->n*100) << "%\n";
+  cout << "V " << sensor1->GetStatsByHour(1,12)->v << "\n";
+  cout << "J " << sensor1->GetStatsByHour(1,12)->j << "\n";
+  cout << "R " << sensor1->GetStatsByHour(1,12)->r << "\n";
+  cout << "N " << sensor1->GetStatsByHour(1,12)->n << "\n";
 
   cout << "------------By Day-------------\n";
-  // Expected : [14, 28, 42 ,14]
+  // Expected : [1, 2, 3, 1]
 
-  cout << "V " << (int)(sensor1->GetStatsByDay(1)->v*100) << "%\n";
-  cout << "J " << (int)(sensor1->GetStatsByDay(1)->j*100) << "%\n";
-  cout << "R " << (int)(sensor1->GetStatsByDay(1)->r*100) << "%\n";
-  cout << "N " << (int)(sensor1->GetStatsByDay(1)->n*100) << "%\n";
+  cout << "V " << sensor1->GetStatsByDay(1)->v << "\n";
+  cout << "J " << sensor1->GetStatsByDay(1)->j << "\n";
+  cout << "R " << sensor1->GetStatsByDay(1)->r << "\n";
+  cout << "N " << sensor1->GetStatsByDay(1)->n << "\n";
 
   cout << "------------By Sensor-------------\n";
-  // Expected : [10, 20, 30 ,40]
+  // Expected : [10%, 20%, 30%, 40%]
 
   cout << "V " << (int)(sensor1->GetStatsBySensor()->v*100) << "%\n";
   cout << "J " << (int)(sensor1->GetStatsBySensor()->j*100) << "%\n";

@@ -12,16 +12,20 @@ const int NUMBER_OF_MINUTES = 60;
 struct Stats
 {
   int v, j, r, n;
-  double Sum ()
+  Stats ():v(0), j(0), r(0), n(0) {};
+  Stats& operator+=(const Stats& stats)
   {
-    return v + j + r + n;
-  }
+    v += stats.v;
+    j += stats.j;
+    r += stats.r;
+    n += stats.n;
+    return *this;
+  };
 };
 
 struct StatsRel {
   double v, j, r, n;
   StatsRel ():v(0), j(0), r(0), n(0) {};
-  StatsRel (double aV, double aJ, double aR, double aN):v(aV), j(aJ), r(aR), n(aN) {};
   StatsRel& operator+=(const Stats& stats)
   {
     v += stats.v;
@@ -60,11 +64,11 @@ class Sensor
       return ID;
     };
 
-    StatsRel* GetStatsByMin (int d7, int h, int m);
+    Stats* GetStatsByMin (int d7, int h, int m);
 
-    StatsRel* GetStatsByHour (int d7, int h);
+    Stats* GetStatsByHour (int d7, int h);
 
-    StatsRel* GetStatsByDay (int d7);
+    Stats* GetStatsByDay (int d7);
 
     StatsRel* GetStatsBySensor ();
 
