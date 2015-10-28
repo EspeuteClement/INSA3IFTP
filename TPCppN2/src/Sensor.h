@@ -3,13 +3,13 @@
 
 class Sensor {
   public :
-    Sensor(uint32_t aID);
+    Sensor(long aID);
 
-    inline uint32_t GetID(){return ID;};
+    inline long GetID(){return ID;};
 
   private :
-    Event *index[7][24];
-    uint32_t ID;
-    uint32_t uptime;
-}
+    //Event *index[7][24];
+    long ID;
+    long uptime;
+};
 #endif //SENSOR_H
