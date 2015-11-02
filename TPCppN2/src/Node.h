@@ -11,17 +11,19 @@ public:
 	// ------------------------------------------------------ GETERS :
 	
 	/** Returns the node at the left of the current node
+	*	@return A pointer to the left node of this node. Returns NULL
+	*	if there is no left node
 	*/
 	inline Node *GetLeft() const {return left;};
 
 	/** Returns the node at the right of the current node
+	*	@return A pointer to the right node of this node. Returns NULL
+	*	if there is no right node
 	*/
 	inline Node *GetRight() const {return right;};
 
 	// TODO : Put those in private or delete them
-	void SetLeft(Node *theLeft); 
-
-	void SetRight(Node *theRight);
+	
 
 	/** Exchanges this node sensor with the one in target
 
@@ -37,37 +39,40 @@ public:
 	// Get the current computed height of this node
 	// NOTE : ComputeHeight is more reliable, but involve maths
 
-	void LeftRotate();
-	// Performs a left rotation using this node as root
+	/**	Performs a LeftRotation using this node as the root
+	*/
+	void LeftRotation();
 
-	void RightRotate();
-	// Performs a right rotation using this node as root
+	/**	Performs a RightRotation using this node as the root
+	*/
+	void RightRotation();
 
+	/** Performs a right rotation on the right subtree of this node,
+		then performs a left roation on this node.
+	*/
 	void DoubleLeftRotation();
-	// Performs a right rotation on the right subtree of this node,
-	// then performs a left roation on this node.
-
+	
+	/** Performs a left rotation on the right subtree of this node,
+		then performs a right roation on this node.
+	*/
 	void DoubleRightRotation();
-	// Performs a left rotation on the right subtree of this node,
-	// then performs a right roation on this node.
+	
 
-	/** Rebalances the tree
+	/** Rebalance this subtree, then this node parent subtree up to this
+	*	tree root.
 	*/
 	void Rebalance();
 
-
-	void SetHeight(long h) {height = h;};
-	// Gets the height of the node
-
+	/** Compute this node Height (the number of node in the longest
+	*	subtree of this node)
+	*	@return this node Height
+	*/
 	long ComputeHeight();
-	// Compute the Height of this node and his childs.
-	// Returns the height of the node
 
 	/** Retruns the substraction of the left tree's height with the 
 	*	right tree's one. A null value indicates that
 	*	this subtree is perfecly balanced. A positive one indicates that
 	*	the tree is left heavy, and a negative one that the tree is right heavy
-	*	
 	*/
 	long GetBalance();
 
@@ -90,26 +95,40 @@ public:
 	/** Print in the standard output a representation of this node
 	*	subtree that can be read as a lua table.\n
 	*	The table will have this form :\n
-	*	{sensor.ID,left{left.Serialize()},right{right.Serialize}}
+	*	{id=sensor.ID,height=height,left={left.Serialize()},=right{right.Serialize()}}
 	*/
 	void Serialize(int depth);
-	// Prints the node so it can be parsed as a lua table
-	// PS : Yes I'm crasy.
 
+	/**	Create a Node.
+	*	@param sensor The sensor contained in this node
+	*/
 	Node(Sensor *sensor, Node *parent = NULL, Node *left = NULL, Node *right = NULL);
-	// Node Constructor
-	// sensor initialize the Node sensor, and left and right the
-	// childs nodes of this node
 
 	~Node();
 
 
 private:
-	Node *parent;
-	Node *left;		//The node on the left
-	Node *right;	//The node on the right
-	long height;
-	Sensor *sensor;	//The sensor contained in the node
+	/** Set the left node of this node to be theLeft
+	*	@param theLeft A pointer to the node that should be inserted
+	*/
+	void setLeft(Node *theLeft); 
+
+	/** Set the right node of this node to be theRight
+	*	@param theRight A pointer to the node that should be inserted
+	*/
+	void setRight(Node *theRight);
+
+	Sensor *sensor;	/**The sensor contained in the node */
+
+	Node *parent;	/**	The parent node to this one. NULL if there is
+					no parent node*/
+
+	Node *left;		/**The node on the left */
+	Node *right;	/**The node on the right*/
+	long height;	/** The height, i.e. the number of nodes in the
+					longest branch under this node */
+
+	
 };
 
 

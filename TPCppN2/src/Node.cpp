@@ -5,24 +5,24 @@
 
 // AVL ALGORITHM : http://www.cise.ufl.edu/~nemo/cop3530/AVL-Tree-Rotations.pdf
 
-void Node::SetLeft(Node *theLeft)
+void Node::setLeft(Node *theLeft)
 {
 	left = theLeft;
 	if (left != NULL)
 	{	left->parent = this;
 	}
 	//height = -1;
-	//ComputeHeight();
+	ComputeHeight();
 }
 
-void Node::SetRight(Node *theRight)
+void Node::setRight(Node *theRight)
 {
 	right = theRight;
 	if (right != NULL)
 	{	right->parent = this;
 	}
 	//height = -1;
-	//ComputeHeight();
+	ComputeHeight();
 }
 
 
@@ -35,7 +35,7 @@ void Node::SwapSensor(Node *target)
 	target->sensor = tmp;
 }
 
-void Node::LeftRotate()
+void Node::LeftRotation()
 {
 	if(right != NULL)
 	{
@@ -46,24 +46,24 @@ void Node::LeftRotate()
 		// the rotation, messing the tree up.
 		SwapSensor(right);
 		Node *oldRight = right->right;
-		right->SetRight(right->left);
-		right->SetLeft(this->left);
-		this->SetLeft(right);
-		this->SetRight(oldRight);
+		right->setRight(right->left);
+		right->setLeft(this->left);
+		this->setLeft(right);
+		this->setRight(oldRight);
 	}
 }
 
-void Node::RightRotate()
+void Node::RightRotation()
 {
 	if(left != NULL)
 	{
-		// This method is a mirror of LeftRotate.
+		// This method is a mirror of LeftRotation.
 		SwapSensor(left);
 		Node *oldLeft = left->left;
-		left->SetLeft(left->right);
-		left->SetRight(this->right);
-		this->SetRight(left);
-		this->SetLeft(oldLeft);
+		left->setLeft(left->right);
+		left->setRight(this->right);
+		this->setRight(left);
+		this->setLeft(oldLeft);
 	}
 }
 
@@ -71,8 +71,8 @@ void Node::DoubleLeftRotation()
 {
 	if(right!=NULL)
 	{
-		right->RightRotate();
-		LeftRotate();
+		right->RightRotation();
+		LeftRotation();
 	}
 }
 
@@ -80,8 +80,8 @@ void Node::DoubleRightRotation()
 {
 	if(left!=NULL)
 	{
-		left->LeftRotate();
-		RightRotate();
+		left->LeftRotation();
+		RightRotation();
 	}
 }
 
@@ -91,12 +91,20 @@ long Node::ComputeHeight()
 	int l = 0; // The height of the left subtree
 	int r = 0; // The height of the right subtree
 	if(left != NULL)
-	{	l = left->ComputeHeight();		
+	{	l = left->height;		
 	}
 	if(right != NULL)
-	{	r = right->ComputeHeight();
+	{	r = right->height;
 	}
+
+	// The height is the max of the subtrees height, plus one
 	height = Utils::max(l,r) + 1;
+	
+	//Then we call this method for this node parent to propagate
+	//The height change
+	if(parent !=NULL)
+	{	parent->ComputeHeight();
+	}
 	return height;
 }
 
@@ -168,7 +176,7 @@ Node *Node::Insert(int aID)
 		else //Else return the pointer to the left part
 		{	
 			Node *n = new Node(new Sensor(aID),this);
-			SetLeft(n);
+			setLeft(n);
 			Rebalance();
 			
 			return n;
@@ -182,7 +190,7 @@ Node *Node::Insert(int aID)
 		else
 		{	
 			Node *n = new Node(new Sensor(aID),this);
-			SetRight(n);
+			setRight(n);
 			Rebalance();
 			return n;
 		}
@@ -209,7 +217,7 @@ long Node::GetBalance()
 
 void Node::Rebalance()
 {
-	ComputeHeight();
+	//ComputeHeight();
 	long bal = GetBalance();
 	//std::cout << "Rebalancing. Bal : " << bal << "\n";
 	if (bal>1) // If the tree is left heavy
@@ -220,7 +228,7 @@ void Node::Rebalance()
 		}
 		else
 		{
-			RightRotate();
+			RightRotation();
 		}
 	}
 	else if (bal < -1) // if the tree is right heavy
@@ -231,7 +239,7 @@ void Node::Rebalance()
 		}
 		else
 		{
-			LeftRotate();
+			LeftRotation();
 		}
 	}
 	if (parent != NULL)
@@ -244,14 +252,14 @@ Node::Node(Sensor *sensor, Node *parent, Node *left, Node *right):
 	sensor(sensor),parent(parent),left(left),right(right)
 {
 #ifdef MAP
-	std::cout << "Constructing a <None>";
+	std::cout << "Constructing a <Node>";
 #endif
 	//height = 0;
 }
 
 Node::~Node(){
 #ifdef MAP
-	std::cout << "Destructing a <None>";
+	std::cout << "Destructing a <Node>";
 #endif
 	if (left != NULL)
 	{	delete left;

@@ -3,18 +3,9 @@
 
 #include "Node.h"
 
-void Add(Sensor *sensor){
-	/*Node *newNode = new Node(sensor);
-	Node *currentNode = root;
-	while(currentNode.left != null)
-	{
-		currentNode
-	}*/
-}
-
-void BinaryTree::Display()
+void BinaryTree::Serialize()
 {
-	root->ComputeHeight();
+	//root->ComputeHeight();
 	std::cout<<"return ";
 	root->Serialize(0);
 	std::cout<<"\n";

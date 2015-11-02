@@ -28,3 +28,8 @@
 *.app
 
 *.swp
+
+*.tags
+
+#doc files
+doc/

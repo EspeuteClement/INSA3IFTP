@@ -1,8 +1,15 @@
+
+
 tab = require "data"
 
 x_init = 400
 y_init = 0
 function love.draw()
+	love.graphics.print("p : zoom +",0,0)
+	love.graphics.print("m : zoom -",0,15)
+	love.graphics.print("left,up,right,down : move around",0,30)
+	love.graphics.print("r : reload data",0,45)
+
 	drawNode(tab,x_init,y_init)	
 end
 
@@ -15,12 +22,14 @@ function drawNode( node,x,y,depth)
 		depth = depth or 1;
 		love.graphics.print(node.id..','..node.height,x,y)
 		
+		love.graphics.setColor(127,127,127)
 		if node.left ~= nil then
 		love.graphics.line(x,y,x-factor*zoom/depth,y+factor*zoom/depth)
 		end
 		if node.right ~= nil then
 		love.graphics.line(x,y,x+factor*zoom/depth,y+factor*zoom/depth)
 		end
+		love.graphics.setColor(255,255,255)
 		drawNode(node.left,x-factor*zoom/depth,y+factor*zoom/depth,depth*2)
 		
 		drawNode(node.right,x +factor*zoom/depth,y+factor*zoom/depth,depth*2)
@@ -49,5 +58,9 @@ function love.keypressed( k )
 	end
 	if k == "down" then
 		y_init = y_init + 50
+	end
+	if k == "r" then
+		f = love.filesystem.load("data.lua")
+		tab = f()
 	end
 end

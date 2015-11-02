@@ -6,19 +6,26 @@
 
 class BinaryTree{
 public:
+	/** Get the sensor where ID equals the sensor sensor ID
+	*	@return A pointer to the sensor
+	*/
 	Sensor *Search(long ID);
-	// Returns the sensor that has it's id matching ID.
 
-	void Add(Sensor *sensor);
-	// Add a sensor in the tree, creating a node.
+	/** Prints a serialized form of the binary tree in the standard output.
+	*	The serialization takes the form of a lua table, so it can be
+	*	parsed by an external vizualizer. Check Node::Serialize for mode info
+	*/
+	void Serialize();
 
-	void Display();
-	// Draw the binary tree
-
-	void GetDepth();
-
+	// TODO : ADD THE OTHER INFO
+	/**	Insert data in the tree.
+	*	@param ID The id of the sensor where the data should be stored. If
+	*	the sensor doesn't exists, it will be created.
+	*/
 	void Insert(int ID);
 
+	/**	BinaryTree constructor.
+	*/
 	BinaryTree(Node *aRoot);
 	// Initialize the BinaryTree with root as the first 
 	// element in the binary tree.
