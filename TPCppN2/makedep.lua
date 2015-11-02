@@ -35,5 +35,4 @@ for _,v in ipairs(arg) do
 	end
 
 	file:write("\n\n")
-
 end

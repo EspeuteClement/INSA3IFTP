@@ -1,7 +1,7 @@
 #ifndef SENSOR_H
 #define SENSOR_H
 
-#include "EventList.h"
+#include "List.h"
 #include <iostream>
 using namespace std;
 
@@ -54,15 +54,6 @@ class Sensor
 {
   public :
     Sensor(long aID);
-<<<<<<< HEAD
-
-    inline long GetID(){return ID;};
-
-  private :
-    //Event *index[7][24];
-    long ID;
-    long uptime;
-=======
 
     ~Sensor();
 
@@ -84,6 +75,5 @@ class Sensor
   private :
     Stats ***index;
     long ID;
->>>>>>> df56590007500ada39f6a254dc3b3103d0aae39b
 };
 #endif //SENSOR_H

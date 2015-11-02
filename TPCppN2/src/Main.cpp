@@ -1,4 +1,4 @@
-
+/*
 #include <iostream>
 #include <stdlib.h>
 #include "Node.h"
@@ -19,8 +19,8 @@ int main()
 	tree.Serialize();
 	
 	return 0;
-}
-/*
+}*/
+
 #include <iostream>
 #include "Sensor.h"
 
@@ -76,4 +76,4 @@ int main() {
 
   return 0;
 }
-*/
+
