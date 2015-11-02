@@ -69,7 +69,7 @@ OBJS = $(subst .cpp,.o,$(addprefix $(OBJS_FOLDER),$(SRC)))
 
 # CIBLE ALL POUR TOUT BUILD
 .PHONY : all
-all : directories $(EXEC) 
+all : directories $(EXEC)
 
 
 
@@ -121,7 +121,7 @@ include $(DEP_FILE)
 
 # PARTIE NETOYAGE
 .PHONY : $(CLEAN)
-$(CLEAN) : 
+$(CLEAN) :
 	$(PRINT) "$(BOLD)CLEAN$<\n\t$(RESET_BOLD)"
 	$(CLEAN_COMMAND) $(CLEAN_FLAG) $(ADDITIONAL_CLEAN)
 	$(PRINT) "\t"
@@ -129,6 +129,5 @@ $(CLEAN) :
 
 # PARTIE DEBUG
 .PHONY : $(DEBUG)
-$(DEBUG) : 
+$(DEBUG) :
 	$(PRINT) "\033[35;1mCible de debug\n"
-
