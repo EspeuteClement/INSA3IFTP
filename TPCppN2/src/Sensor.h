@@ -1,7 +1,7 @@
 #ifndef SENSOR_H
 #define SENSOR_H
 
-#include "EventList.h"
+#include "List.h"
 #include <iostream>
 using namespace std;
 
