@@ -1,0 +1,66 @@
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Add	BinaryTree.cpp	/^void Add(Sensor *sensor){$/;"	f
+BinaryTree	BinaryTree.cpp	/^BinaryTree::BinaryTree(Node* aRoot):root(aRoot)$/;"	f	class:BinaryTree
+Display	BinaryTree.cpp	/^void BinaryTree::Display()$/;"	f	class:BinaryTree
+~BinaryTree	BinaryTree.cpp	/^BinaryTree::~BinaryTree()$/;"	f	class:BinaryTree
+BINRAY_TREE_H	BinaryTree.h	2;"	d
+BinaryTree	BinaryTree.h	/^class BinaryTree{$/;"	c
+root	BinaryTree.h	/^	Node *root; \/\/ The first element in the binary tree.$/;"	m	class:BinaryTree
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+Event	Event.cpp	/^Event::Event (unsigned char aMinute, State aState):minute(aMinute), state(aState) {$/;"	f	class:Event
+EVENT_H	Event.h	2;"	d
+Event	Event.h	/^class Event {$/;"	c
+J	Event.h	/^enum State {V, J, R, N};$/;"	e	enum:State
+N	Event.h	/^enum State {V, J, R, N};$/;"	e	enum:State
+R	Event.h	/^enum State {V, J, R, N};$/;"	e	enum:State
+State	Event.h	/^enum State {V, J, R, N};$/;"	g
+V	Event.h	/^enum State {V, J, R, N};$/;"	e	enum:State
+minute	Event.h	/^    unsigned char minute;$/;"	m	class:Event
+next	Event.h	/^    Event *next;$/;"	m	class:Event
+state	Event.h	/^    State state;$/;"	m	class:Event
+EventList	EventList.cpp	/^EventList::EventList)(){$/;"	f	class:EventList
+~EventList	EventList.cpp	/^~EventList(){}$/;"	f
+EVENTLIST_H	EventList.h	2;"	d
+EventList	EventList.h	/^class EventList {$/;"	c
+InsertEvent	EventList.h	/^    InsertEvent(unsigned char aMinute, State aState){$/;"	f	class:EventList
+first	EventList.h	/^    Event *first;$/;"	m	class:EventList
+last	EventList.h	/^    Event *last;$/;"	m	class:EventList
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+main	Main.cpp	/^int main()$/;"	f
+ComputeHeight	Node.cpp	/^long Node::ComputeHeight()$/;"	f	class:Node
+DoubleLeftRotation	Node.cpp	/^void Node::DoubleLeftRotation()$/;"	f	class:Node
+DoubleRightRotation	Node.cpp	/^void Node::DoubleRightRotation()$/;"	f	class:Node
+Insert	Node.cpp	/^Node *Node::Insert(Sensor *aSensor)$/;"	f	class:Node
+LeftRotate	Node.cpp	/^void Node::LeftRotate()$/;"	f	class:Node
+Node	Node.cpp	/^Node::Node(Sensor *sensor, Node *parent, Node *left, Node *right):$/;"	f	class:Node
+Rebalance	Node.cpp	/^void Node::Rebalance()$/;"	f	class:Node
+RightRotate	Node.cpp	/^void Node::RightRotate()$/;"	f	class:Node
+Search	Node.cpp	/^Node *Node::Search(long aID)$/;"	f	class:Node
+Serialize	Node.cpp	/^void Node::Serialize()$/;"	f	class:Node
+SetLeft	Node.cpp	/^void SetLeft(Node *theLeft)$/;"	f
+SetRight	Node.cpp	/^void SetRight(Node *theRight)$/;"	f
+SwapSensor	Node.cpp	/^void Node::SwapSensor(Node *target)$/;"	f	class:Node
+~Node	Node.cpp	/^Node::~Node(){$/;"	f	class:Node
+GetHeight	Node.h	/^	inline long GetHeight() const {return height;};$/;"	f	class:Node
+GetLeft	Node.h	/^	inline Node *GetLeft() const {return left;};$/;"	f	class:Node
+GetRight	Node.h	/^	inline Node *GetRight() const {return right;};$/;"	f	class:Node
+GetSensorID	Node.h	/^	inline long GetSensorID() const {return sensor->GetID();};$/;"	f	class:Node
+NODE_H	Node.h	2;"	d
+Node	Node.h	/^class Node$/;"	c
+SetHeight	Node.h	/^	void SetHeight(long h) {height = h;};$/;"	f	class:Node
+height	Node.h	/^	long height;$/;"	m	class:Node
+left	Node.h	/^	Node *left;		\/\/The node on the left$/;"	m	class:Node
+parent	Node.h	/^	Node *parent;$/;"	m	class:Node
+right	Node.h	/^	Node *right;	\/\/The node on the right$/;"	m	class:Node
+sensor	Node.h	/^	Sensor *sensor;	\/\/The sensor contained in the node$/;"	m	class:Node
+Sensor	Sensor.cpp	/^Sensor::Sensor(long aID):ID(aID) {$/;"	f	class:Sensor
+GetID	Sensor.h	/^    inline long GetID(){return ID;};$/;"	f	class:Sensor
+ID	Sensor.h	/^    long ID;$/;"	m	class:Sensor
+SENSOR_H	Sensor.h	2;"	d
+Sensor	Sensor.h	/^class Sensor {$/;"	c
+uptime	Sensor.h	/^    long uptime;$/;"	m	class:Sensor
+Utils	Utils.h	/^class Utils{$/;"	c
+max	Utils.h	/^	static inline long max(long a, long b){return a > b ? a : b;}$/;"	f	class:Utils
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/

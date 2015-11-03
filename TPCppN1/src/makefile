@@ -75,6 +75,12 @@ $(OBJS_FOLDER) :
 $(OBJS_FOLDER)%.o : %.cpp %.h
 	$(PRINT) "$(BOLD)COMPILATION DE $<\n\t$(RESET_BOLD)"
 	$(CC) $(CC_OUTPUT_FLAG) $@ $< $(CC_COMP_FLAG)
+	$(CC)  -MM  $< $(CC_COMP_FLAG) > dep/$*.d
+	@cp -f dep/$*.d dep/$*.d.tmp
+	@sed -e 's/.*://' -e 's/\\$$//' < dep/$*.d.tmp | fmt -1 | \
+	  sed -e 's/^ *//' -e 's/$$/:/' >> dep/$*.d
+	@rm -f dep/$*.d.tmp
+
 
 # PARTIE NETOYAGE
 .PHONY : $(CLEAN)

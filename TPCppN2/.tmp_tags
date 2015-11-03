@@ -1,0 +1,61 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Add	src/BinaryTree.cpp	/^void Add(Sensor *sensor){$/;"	f
+BINRAY_TREE_H	src/BinaryTree.h	2;"	d
+BinaryTree	src/BinaryTree.cpp	/^BinaryTree::BinaryTree(Node* aRoot):root(aRoot)$/;"	f	class:BinaryTree
+BinaryTree	src/BinaryTree.h	/^class BinaryTree{$/;"	c
+ComputeHeight	src/Node.cpp	/^long Node::ComputeHeight()$/;"	f	class:Node
+Display	src/BinaryTree.cpp	/^void BinaryTree::Display()$/;"	f	class:BinaryTree
+DoubleLeftRotation	src/Node.cpp	/^void Node::DoubleLeftRotation()$/;"	f	class:Node
+EVENTLIST_H	src/EventList.h	2;"	d
+EVENT_H	src/Event.h	2;"	d
+Event	src/Event.cpp	/^Event::Event (unsigned char aMinute, State aState):minute(aMinute), state(aState) {$/;"	f	class:Event
+Event	src/Event.h	/^class Event {$/;"	c
+EventList	src/EventList.cpp	/^EventList::EventList)(){$/;"	f	class:EventList
+EventList	src/EventList.h	/^class EventList {$/;"	c
+GetHeight	src/Node.h	/^	inline long GetHeight() const {return height;};$/;"	f	class:Node
+GetID	src/Sensor.h	/^    inline long GetID(){return ID;};$/;"	f	class:Sensor
+GetLeft	src/Node.h	/^	inline Node *GetLeft() const {return left;};$/;"	f	class:Node
+GetRight	src/Node.h	/^	inline Node *GetRight() const {return right;};$/;"	f	class:Node
+GetSensorID	src/Node.h	/^	inline long GetSensorID() const {return sensor->GetID();};$/;"	f	class:Node
+ID	src/Sensor.h	/^    long ID;$/;"	m	class:Sensor
+InsertEvent	src/EventList.h	/^    InsertEvent(unsigned char aMinute, State aState){$/;"	f	class:EventList
+J	src/Event.h	/^enum State {V, J, R, N};$/;"	e	enum:State
+LeftRotate	src/Node.cpp	/^void Node::LeftRotate()$/;"	f	class:Node
+N	src/Event.h	/^enum State {V, J, R, N};$/;"	e	enum:State
+NODE_H	src/Node.h	2;"	d
+Node	src/Node.cpp	/^Node::Node(Sensor *sensor, Node *left, Node *right):$/;"	f	class:Node
+Node	src/Node.h	/^class Node$/;"	c
+R	src/Event.h	/^enum State {V, J, R, N};$/;"	e	enum:State
+RightRotate	src/Node.cpp	/^void Node::RightRotate()$/;"	f	class:Node
+SENSOR_H	src/Sensor.h	2;"	d
+Sensor	src/Sensor.cpp	/^Sensor::Sensor(long aID):ID(aID) {$/;"	f	class:Sensor
+Sensor	src/Sensor.h	/^class Sensor {$/;"	c
+Serialize	src/Node.cpp	/^void Node::Serialize()$/;"	f	class:Node
+SetHeight	src/Node.h	/^	void SetHeight(long h) {height = h;};$/;"	f	class:Node
+SetLeft	src/Node.h	/^	inline void SetLeft(Node *theLeft) {left = theLeft;}; $/;"	f	class:Node
+SetRight	src/Node.h	/^	inline void SetRight(Node *theRight) {right = theRight;};$/;"	f	class:Node
+State	src/Event.h	/^enum State {V, J, R, N};$/;"	g
+SwapSensor	src/Node.cpp	/^void Node::SwapSensor(Node *target)$/;"	f	class:Node
+Utils	src/Utils.h	/^class Utils{$/;"	c
+V	src/Event.h	/^enum State {V, J, R, N};$/;"	e	enum:State
+first	src/EventList.h	/^    Event *first;$/;"	m	class:EventList
+height	src/Node.h	/^	long height;$/;"	m	class:Node
+last	src/EventList.h	/^    Event *last;$/;"	m	class:EventList
+left	src/Node.h	/^	Node *left;		\/\/The node on the left$/;"	m	class:Node
+main	src/Main.cpp	/^int main()$/;"	f
+max	src/Utils.h	/^	static inline long max(long a, long b){return a > b ? a : b;}$/;"	f	class:Utils
+minute	src/Event.h	/^    unsigned char minute;$/;"	m	class:Event
+next	src/Event.h	/^    Event *next;$/;"	m	class:Event
+right	src/Node.h	/^	Node *right;	\/\/The node on the right$/;"	m	class:Node
+root	src/BinaryTree.h	/^	Node *root; \/\/ The first element in the binary tree.$/;"	m	class:BinaryTree
+sensor	src/Node.h	/^	Sensor *sensor;	\/\/The sensor contained in the node$/;"	m	class:Node
+state	src/Event.h	/^    State state;$/;"	m	class:Event
+uptime	src/Sensor.h	/^    long uptime;$/;"	m	class:Sensor
+~BinaryTree	src/BinaryTree.cpp	/^BinaryTree::~BinaryTree()$/;"	f	class:BinaryTree
+~EventList	src/EventList.cpp	/^~EventList(){}$/;"	f
+~Node	src/Node.cpp	/^Node::~Node(){$/;"	f	class:Node

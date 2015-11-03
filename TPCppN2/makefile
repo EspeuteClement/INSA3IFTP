@@ -16,7 +16,7 @@ PRINT = @printf
 # Nom du fichier de sortie
 EXEC = out/executable.out
 # Nom des fichiers sources
-SRC = Main.cpp Sensor.cpp
+SRC = Main.cpp BinaryTree.cpp Node.cpp Sensor.cpp
 # Nom du dossier avec les fichiers sources
 SRC_FOLDER = src/
 # Le dossier où metre les fichiers objs
@@ -33,11 +33,25 @@ CLEAN_FLAG = -f
 # Les fichier à clean lors d'un clean
 ADDITIONAL_CLEAN = core $(OBJS) $(EXEC)
 
+# Création de dépendences
+DEP_TARGET = dep
+
+DEP_CMD = lua makedep.lua $(SRC)
+
+DEP_FILE = dep/Deps.dep
+
+
 ### TARGET POUR LE DEBUGAGE
 DEBUG = debug
 
 ### TARGET POUR LANCER LE PROGRAME APRES LE MAKE
 RUN = run
+
+### TARGET POUR LANCER LE PROGRAMME ET STOCKER LA SORTIE DANS UN FICHIER
+RUN_AND_SAVE = runSave
+# Destination de la sauvegarde
+RUNSAVE_FILE = utils/dispTree/data.lua
+
 
 ### AFFICHER DU GRAS :
 BOLD = \033[1m
@@ -51,14 +65,30 @@ OBJS = $(subst .cpp,.o,$(addprefix $(OBJS_FOLDER),$(SRC)))
 ############################LES CIBLES : #################################
 ##########################################################################
 
+
+
 # CIBLE ALL POUR TOUT BUILD
 .PHONY : all
 all : directories $(EXEC)
+
+
 
 # CIBLE OPTIONNELE POUR LANCER LE PROGRAMME APRES LE BUILD
 $(RUN) : all
 	$(PRINT) "$(BOLD)EXECUTION DE $(EXEC)\n$(RESET_BOLD)------------------\n"
 	@./$(EXEC)
+
+$(RUN_AND_SAVE) : all
+	$(PRINT) "$(BOLD)EXECUTION DE $(EXEC)\n$(RESET_BOLD)------------------\n"
+	@./$(EXEC) > $(RUNSAVE_FILE)
+
+.PHONY : $(DEP_TARGET)
+$(DEP_TARGET) : $(DEP_FILE)
+
+.PHONY : $(DEP_FILE)
+$(DEP_FILE) :
+	$(DEP_CMD)
+	
 
 # EDITION DES LIENS :
 $(EXEC) : $(OBJS)
@@ -81,6 +111,13 @@ $(EXEC_FOLDER) :
 $(OBJS_FOLDER)%.o : $(SRC_FOLDER)%.cpp $(SRC_FOLDER)%.h
 	$(PRINT) "$(BOLD)COMPILATION DE $<\n\t$(RESET_BOLD)"
 	$(CC) $(CC_OUTPUT_FLAG) $@ $< $(CC_COMP_FLAG)
+
+# BinaryTree.o
+#$(OBJS_FOLDER)BinaryTree.o : $(SRC_FOLDER)BinaryTree.cpp $(SRC_FOLDER)BinaryTree.h $(SRC_FOLDER)Node.h $(SRC_FOLDER)Sensor.h $(SRC_FOLDER)Node.cpp $(SRC_FOLDER)Sensor.cpp 
+#	$(PRINT) "$(BOLD)COMPILATION DE $<\n\t$(RESET_BOLD)"
+#	$(CC) $(CC_OUTPUT_FLAG) $@ $< $(CC_COMP_FLAG)
+
+include $(DEP_FILE)
 
 # PARTIE NETOYAGE
 .PHONY : $(CLEAN)
