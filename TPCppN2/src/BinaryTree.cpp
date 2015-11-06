@@ -1,6 +1,6 @@
 #include <iostream>
 #include "BinaryTree.h"
-
+#include "Sensor.h"
 #include "Node.h"
 
 void BinaryTree::Serialize()
@@ -34,9 +34,24 @@ void BinaryTree::Serialize()
 	}*/
 }
 
-void BinaryTree::Insert(int ID)
+Sensor *BinaryTree::Search(long ID)
+{
+	Node *nodeMatch = root->Search(ID);
+	if (nodeMatch != NULL)
+	{
+		return nodeMatch->GetSensor();
+	}
+	return NULL;
+}
+
+void BinaryTree::Insert(int ID, 
+				unsigned char d,
+				unsigned char h,
+				unsigned char m,
+				unsigned char value)
 {
 	Node *sensorNode = root->Insert(ID);
+	sensorNode->GetSensor()->AddEvent(d,h,m,value);
 }
 
 BinaryTree::BinaryTree(Node* aRoot):root(aRoot)

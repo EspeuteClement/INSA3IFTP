@@ -99,6 +99,8 @@ public:
 	*/
 	void Serialize(int depth);
 
+	Sensor *GetSensor() {return sensor;};
+
 	/**	Create a Node.
 	*	@param sensor The sensor contained in this node
 	*/

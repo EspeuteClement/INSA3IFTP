@@ -8,7 +8,7 @@ CC_OUTPUT_FLAG = -o
 # Arguments pour le stade d'édition des liens
 LINK_FLAG =
 # Arguments pour le stade de compilation
-CC_COMP_FLAG = -c -Wall
+CC_COMP_FLAG = -c -Wall -O3
 # Commande d'affichage
 PRINT = @printf
 
@@ -16,7 +16,7 @@ PRINT = @printf
 # Nom du fichier de sortie
 EXEC = out/executable.out
 # Nom des fichiers sources
-SRC = Main.cpp BinaryTree.cpp Node.cpp Sensor.cpp
+SRC = Main.cpp BinaryTree.cpp Node.cpp Sensor.cpp IoEngine.cpp
 # Nom du dossier avec les fichiers sources
 SRC_FOLDER = src/
 # Le dossier où metre les fichiers objs

@@ -1,27 +1,33 @@
-/*
+
 #include <iostream>
 #include <stdlib.h>
 #include "Node.h"
 #include "Sensor.h"
 #include "BinaryTree.h"
+
+#include "IoEngine.h"
 int main()
 {
 	srand(127);
 	Node *theRoot = new Node(new Sensor(1));
 	BinaryTree tree(theRoot);
-	//tree.Serialize();
-	for (int i = 15000; i > 0; --i)
-	{
-		tree.Insert(rand()%10000);
-	}
-	//theRoot->DoubleLeftRotation();
-	//int2Node->Rebalance();
-	tree.Serialize();
-	
-	return 0;
-}*/
 
-#include <iostream>
+  IoEngine test(&tree);
+  while(test.ReadInput());
+	//tree.Serialize();
+	//for (int i = 20000000; i > 0; --i)
+	/*{
+		tree.Insert(rand()%1500,1,1,1,'V');
+	}
+
+  std::cout << "V" << theRoot->Search(1)->GetSensor()->GetStatsByMin(1,1,1)->v << "\n";
+	//theRoot->DoubleLeftRotation();*/
+	//int2Node->Rebalance();
+	//tree.Serialize();
+  return 0;
+}
+
+/*#include <iostream>
 #include "Sensor.h"
 
 using namespace std;
@@ -77,3 +83,4 @@ int main() {
   return 0;
 }
 
+*/

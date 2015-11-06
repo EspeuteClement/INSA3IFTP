@@ -1,5 +1,5 @@
 #ifndef BINARY_TREE_H
-#define BINRAY_TREE_H
+#define BINARY_TREE_H
 
 #include "Node.h"
 #include "Sensor.h"
@@ -17,12 +17,18 @@ public:
 	*/
 	void Serialize();
 
-	// TODO : ADD THE OTHER INFO
+	// TODO : ADD THE OTHER INFO 
 	/**	Insert data in the tree.
 	*	@param ID The id of the sensor where the data should be stored. If
 	*	the sensor doesn't exists, it will be created.
 	*/
-	void Insert(int ID);
+	void Insert(int ID, 
+				unsigned char d,
+				unsigned char h,
+				unsigned char m,
+				unsigned char value);
+
+	inline Node *GetRoot() {return root;};
 
 	/**	BinaryTree constructor.
 	*/
