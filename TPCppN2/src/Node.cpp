@@ -2,7 +2,7 @@
 #include "Node.h"
 #include "Sensor.h"
 #include "Utils.h"
-
+//#define MAP
 // AVL ALGORITHM : http://www.cise.ufl.edu/~nemo/cop3530/AVL-Tree-Rotations.pdf
 
 void Node::setLeft(Node *theLeft)
