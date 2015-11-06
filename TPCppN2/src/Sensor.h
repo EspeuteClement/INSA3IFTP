@@ -1,16 +1,23 @@
 #ifndef SENSOR_H
 #define SENSOR_H
 
-using namespace std;
-
 const int NUMBER_OF_DAYS = 7;
 const int NUMBER_OF_HOURS = 24;
 const int NUMBER_OF_MINUTES = 60;
 
+/** Stats is a data structure in which we store event counters for each of the
+* possible traffic states (v, j, r, n).
+*/
 struct Stats
 {
   int v, j, r, n;
   Stats ():v(0), j(0), r(0), n(0) {};
+
+  /** Overloading the += operator in order to be able to add two Stats structs
+  * by adding each attribute separately.
+  * @param stats is the right-side expression of the struct to be added.
+  * @return the reference to the stats struct.
+  */
   Stats& operator+=(const Stats& stats)
   {
     v += stats.v;
@@ -21,6 +28,9 @@ struct Stats
   };
 };
 
+/** StatsRel is a data structure in which we store statistics for each of the
+* possible traffic states (v, j, r, n).
+*/
 struct StatsRel {
   double v, j, r, n;
   StatsRel ():v(0), j(0), r(0), n(0) {};
