@@ -88,7 +88,7 @@ $(DEP_TARGET) : $(DEP_FILE)
 .PHONY : $(DEP_FILE)
 $(DEP_FILE) :
 	$(DEP_CMD)
-	
+
 
 # EDITION DES LIENS :
 $(EXEC) : $(OBJS)
@@ -113,7 +113,7 @@ $(OBJS_FOLDER)%.o : $(SRC_FOLDER)%.cpp $(SRC_FOLDER)%.h
 	$(CC) $(CC_OUTPUT_FLAG) $@ $< $(CC_COMP_FLAG)
 
 # BinaryTree.o
-#$(OBJS_FOLDER)BinaryTree.o : $(SRC_FOLDER)BinaryTree.cpp $(SRC_FOLDER)BinaryTree.h $(SRC_FOLDER)Node.h $(SRC_FOLDER)Sensor.h $(SRC_FOLDER)Node.cpp $(SRC_FOLDER)Sensor.cpp 
+#$(OBJS_FOLDER)BinaryTree.o : $(SRC_FOLDER)BinaryTree.cpp $(SRC_FOLDER)BinaryTree.h $(SRC_FOLDER)Node.h $(SRC_FOLDER)Sensor.h $(SRC_FOLDER)Node.cpp $(SRC_FOLDER)Sensor.cpp
 #	$(PRINT) "$(BOLD)COMPILATION DE $<\n\t$(RESET_BOLD)"
 #	$(CC) $(CC_OUTPUT_FLAG) $@ $< $(CC_COMP_FLAG)
 

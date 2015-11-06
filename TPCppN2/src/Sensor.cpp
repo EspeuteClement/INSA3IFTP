@@ -50,7 +50,7 @@ Stats* Sensor::GetStatsByMin (int d7, int h, int m)
   return &index[d7-1][h][m];
 }
 
-void Sensor::GetStatsByHour (int d7, int h, Stats *stats)
+void Sensor::AddStatsByHour (int d7, int h, Stats *stats)
 {
   for (int i = 0; i < NUMBER_OF_MINUTES; i++)
   {
@@ -58,31 +58,26 @@ void Sensor::GetStatsByHour (int d7, int h, Stats *stats)
   }
 }
 
-void Sensor::GetStatsByDay (int d7, Stats *stats)
+void Sensor::AddStatsByDay (int d7, Stats *stats)
 {
   for (int i = 0; i < NUMBER_OF_HOURS; i++)
   {
-    GetStatsByHour(d7, i, stats);
+    AddStatsByHour(d7, i, stats);
   }
 }
 
-void Sensor::GetStatsBySensor (Stats *stats)
+void Sensor::AddStatsBySensor (Stats *stats)
 {
   for (int i = 1; i <= NUMBER_OF_DAYS; i++) {
-    GetStatsByDay(i, stats);
+    AddStatsByDay(i, stats);
   }
 }
 
-void Sensor::GetStatsRelBySensor (StatsRel *stats) {
+void Sensor::PrintSensorStatsRel ()
+{
   Stats *buffer = new Stats();
-  GetStatsBySensor(buffer);
-
-  *stats = *buffer;
+  AddStatsBySensor(buffer);
+  StatsRel *sensorStatsRel = new StatsRel(buffer);
+  sensorStatsRel->PrintStatsRel();
   delete buffer;
-
-  double total = stats->Sum();
-  if (total != 0)
-  {
-    *stats /= total;
-  }
 }

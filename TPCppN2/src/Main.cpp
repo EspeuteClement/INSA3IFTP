@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <stdlib.h>
 #include "Node.h"
@@ -16,18 +15,18 @@ int main()
   while(test.ReadInput());
 	//tree.Serialize();
 	//for (int i = 20000000; i > 0; --i)
-	/*{
-		tree.Insert(rand()%1500,1,1,1,'V');
-	}
-
-  std::cout << "V" << theRoot->Search(1)->GetSensor()->GetStatsByMin(1,1,1)->v << "\n";
-	//theRoot->DoubleLeftRotation();*/
+	//{
+	//	tree.Insert(rand()%1500,1,1,1,'V');
+	//}
+	//
+  //std::cout << "V" << theRoot->Search(1)->GetSensor()->GetStatsByMin(1,1,1)->v << "\n";
+	//theRoot->DoubleLeftRotation();
 	//int2Node->Rebalance();
 	//tree.Serialize();
   return 0;
 }
-
-/*#include <iostream>
+/*
+#include <iostream>
 #include "Sensor.h"
 
 using namespace std;
@@ -50,37 +49,44 @@ int main() {
 
   cout << "------------By Min-------------\n";
   // Expected : [1, 1, 1, 1]
+	Stats *minStats = sensor1->GetStatsByMin(1,12,32);
 
-  cout << "V " << sensor1->GetStatsByMin(1,12,32)->v << "\n";
-  cout << "J " << sensor1->GetStatsByMin(1,12,32)->j << "\n";
-  cout << "R " << sensor1->GetStatsByMin(1,12,32)->r << "\n";
-  cout << "N " << sensor1->GetStatsByMin(1,12,32)->n << "\n";
+  cout << "V " << minStats->v << "\n";
+  cout << "J " << minStats->j << "\n";
+  cout << "R " << minStats->r << "\n";
+  cout << "N " << minStats->n << "\n";
 
   cout << "------------By Hour-------------\n";
   // Expected : [1, 2, 1, 1]
+	Stats *hourStats = new Stats();
+	sensor1->AddStatsByHour(1,12, hourStats);
 
-  cout << "V " << sensor1->GetStatsByHour(1,12)->v << "\n";
-  cout << "J " << sensor1->GetStatsByHour(1,12)->j << "\n";
-  cout << "R " << sensor1->GetStatsByHour(1,12)->r << "\n";
-  cout << "N " << sensor1->GetStatsByHour(1,12)->n << "\n";
+  cout << "V " << hourStats->v << "\n";
+  cout << "J " << hourStats->j << "\n";
+  cout << "R " << hourStats->r << "\n";
+  cout << "N " << hourStats->n << "\n";
+
+	delete hourStats;
 
   cout << "------------By Day-------------\n";
   // Expected : [1, 2, 3, 1]
+	Stats *dayStats = new Stats();
+	sensor1->AddStatsByDay(1, dayStats);
 
-  cout << "V " << sensor1->GetStatsByDay(1)->v << "\n";
-  cout << "J " << sensor1->GetStatsByDay(1)->j << "\n";
-  cout << "R " << sensor1->GetStatsByDay(1)->r << "\n";
-  cout << "N " << sensor1->GetStatsByDay(1)->n << "\n";
+	cout << "V " << dayStats->v << "\n";
+	cout << "J " << dayStats->j << "\n";
+	cout << "R " << dayStats->r << "\n";
+	cout << "N " << dayStats->n << "\n";
+
+	delete dayStats;
 
   cout << "------------By Sensor-------------\n";
   // Expected : [10%, 20%, 30%, 40%]
 
-  cout << "V " << (int)(sensor1->GetStatsBySensor()->v*100) << "%\n";
-  cout << "J " << (int)(sensor1->GetStatsBySensor()->j*100) << "%\n";
-  cout << "R " << (int)(sensor1->GetStatsBySensor()->r*100) << "%\n";
-  cout << "N " << (int)(sensor1->GetStatsBySensor()->n*100) << "%\n";
+  sensor1->PrintSensorStatsRel();
+
+	delete sensor1;
 
   return 0;
 }
-
 */
