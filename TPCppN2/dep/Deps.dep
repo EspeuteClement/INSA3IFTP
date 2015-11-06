@@ -1,9 +1,5 @@
 #File generated with makedep.lua
+build/Sensor.o : src/Sensor.cpp src/Sensor.h src/Sensor.h 
+
 build/Main.o : src/Main.cpp src/Main.h src/Node.h src/Sensor.h src/BinaryTree.h src/Sensor.h 
-
-build/BinaryTree.o : src/BinaryTree.cpp src/BinaryTree.h src/BinaryTree.h src/Node.h src/Node.h src/Sensor.h 
-
-build/Node.o : src/Node.cpp src/Node.h src/Node.h src/Sensor.h src/Utils.h src/BinaryTree.h src/Sensor.h 
-
-build/Sensor.o : src/Sensor.cpp src/Sensor.h src/Sensor.h src/List.h 
 

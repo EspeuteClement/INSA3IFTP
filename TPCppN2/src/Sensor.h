@@ -1,8 +1,6 @@
 #ifndef SENSOR_H
 #define SENSOR_H
 
-#include "List.h"
-#include <iostream>
 using namespace std;
 
 const int NUMBER_OF_DAYS = 7;
@@ -26,12 +24,12 @@ struct Stats
 struct StatsRel {
   double v, j, r, n;
   StatsRel ():v(0), j(0), r(0), n(0) {};
-  StatsRel& operator+=(const Stats& stats)
+  StatsRel& operator=(const Stats& stats)
   {
-    v += stats.v;
-    j += stats.j;
-    r += stats.r;
-    n += stats.n;
+    v = stats.v;
+    j = stats.j;
+    r = stats.r;
+    n = stats.n;
     return *this;
   };
 
@@ -66,11 +64,13 @@ class Sensor
 
     Stats* GetStatsByMin (int d7, int h, int m);
 
-    Stats* GetStatsByHour (int d7, int h);
+    void GetStatsByHour (int d7, int h, Stats *stats);
 
-    Stats* GetStatsByDay (int d7);
+    void GetStatsByDay (int d7, Stats *stats);
 
-    StatsRel* GetStatsBySensor ();
+    void GetStatsBySensor (Stats *stats);
+
+    void GetStatsRelBySensor (StatsRel *stats);
 
   private :
     Stats ***index;

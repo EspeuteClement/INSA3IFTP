@@ -6,9 +6,6 @@ Sensor::Sensor(long aID):ID(aID)
   for (int i = 0; i < NUMBER_OF_DAYS; i++)
   {
     index[i] = new Stats * [NUMBER_OF_HOURS];
-  }
-  for (int i = 0; i < NUMBER_OF_DAYS; i++)
-  {
     for (int j = 0; j < NUMBER_OF_HOURS; j++)
     {
       index[i][j] = new Stats[NUMBER_OF_MINUTES];
@@ -22,9 +19,11 @@ Sensor::~Sensor ()
   {
     for (int j = 0; j < NUMBER_OF_HOURS; j++)
     {
-      delete index[i][j];
+      delete[] index[i][j];
     }
+    delete[] index[i];
   }
+  delete[] index;
 }
 
 void Sensor::AddEvent(int d7, int h, int m, char state)
@@ -51,36 +50,39 @@ Stats* Sensor::GetStatsByMin (int d7, int h, int m)
   return &index[d7-1][h][m];
 }
 
-Stats* Sensor::GetStatsByHour (int d7, int h)
+void Sensor::GetStatsByHour (int d7, int h, Stats *stats)
 {
-  Stats *stats = new Stats();
   for (int i = 0; i < NUMBER_OF_MINUTES; i++)
   {
     *stats += *GetStatsByMin(d7, h, i);
   }
-  return stats;
 }
 
-Stats* Sensor::GetStatsByDay (int d7)
+void Sensor::GetStatsByDay (int d7, Stats *stats)
 {
-  Stats *stats = new Stats();
   for (int i = 0; i < NUMBER_OF_HOURS; i++)
   {
-    *stats += *GetStatsByHour(d7, i);
+    GetStatsByHour(d7, i, stats);
   }
-  return stats;
 }
 
-StatsRel* Sensor::GetStatsBySensor ()
+void Sensor::GetStatsBySensor (Stats *stats)
 {
-  StatsRel *stats = new StatsRel();
   for (int i = 1; i <= NUMBER_OF_DAYS; i++) {
-    *stats += *GetStatsByDay(i);
+    GetStatsByDay(i, stats);
   }
+}
+
+void Sensor::GetStatsRelBySensor (StatsRel *stats) {
+  Stats *buffer = new Stats();
+  GetStatsBySensor(buffer);
+
+  *stats = *buffer;
+  delete buffer;
+
   double total = stats->Sum();
   if (total != 0)
   {
     *stats /= total;
   }
-  return stats;
 }

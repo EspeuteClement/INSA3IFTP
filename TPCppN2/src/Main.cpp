@@ -17,7 +17,7 @@ int main()
 	//theRoot->DoubleLeftRotation();
 	//int2Node->Rebalance();
 	tree.Serialize();
-	
+
 	return 0;
 }*/
 
@@ -28,6 +28,7 @@ using namespace std;
 
 int main() {
   Sensor *sensor1 = new Sensor(19783);
+
   sensor1->AddEvent(1, 12, 32, 'V');
 
   sensor1->AddEvent(1, 12, 32, 'J');
@@ -44,36 +45,50 @@ int main() {
 
   cout << "------------By Min-------------\n";
   // Expected : [1, 1, 1, 1]
+  Stats *statsMin = sensor1->GetStatsByMin(1,12,32);
 
-  cout << "V " << sensor1->GetStatsByMin(1,12,32)->v << "\n";
-  cout << "J " << sensor1->GetStatsByMin(1,12,32)->j << "\n";
-  cout << "R " << sensor1->GetStatsByMin(1,12,32)->r << "\n";
-  cout << "N " << sensor1->GetStatsByMin(1,12,32)->n << "\n";
+  cout << "V " << statsMin->v << "\n";
+  cout << "J " << statsMin->j << "\n";
+  cout << "R " << statsMin->r << "\n";
+  cout << "N " << statsMin->n << "\n";
 
   cout << "------------By Hour-------------\n";
   // Expected : [1, 2, 1, 1]
+  Stats *statsHour = new Stats();
+  sensor1->GetStatsByHour(1,12, statsHour);
 
-  cout << "V " << sensor1->GetStatsByHour(1,12)->v << "\n";
-  cout << "J " << sensor1->GetStatsByHour(1,12)->j << "\n";
-  cout << "R " << sensor1->GetStatsByHour(1,12)->r << "\n";
-  cout << "N " << sensor1->GetStatsByHour(1,12)->n << "\n";
+  cout << "V " << statsHour->v << "\n";
+  cout << "J " << statsHour->j << "\n";
+  cout << "R " << statsHour->r << "\n";
+  cout << "N " << statsHour->n << "\n";
+
+  delete statsHour;
 
   cout << "------------By Day-------------\n";
   // Expected : [1, 2, 3, 1]
+  Stats *statsDay = new Stats();
+  sensor1->GetStatsByDay(1, statsDay);
 
-  cout << "V " << sensor1->GetStatsByDay(1)->v << "\n";
-  cout << "J " << sensor1->GetStatsByDay(1)->j << "\n";
-  cout << "R " << sensor1->GetStatsByDay(1)->r << "\n";
-  cout << "N " << sensor1->GetStatsByDay(1)->n << "\n";
+  cout << "V " << statsDay->v << "\n";
+  cout << "J " << statsDay->j << "\n";
+  cout << "R " << statsDay->r << "\n";
+  cout << "N " << statsDay->n << "\n";
+
+  delete statsDay;
 
   cout << "------------By Sensor-------------\n";
   // Expected : [10%, 20%, 30%, 40%]
+  StatsRel *statsRelSensor = new StatsRel();
+  sensor1->GetStatsRelBySensor(statsRelSensor);
 
-  cout << "V " << (int)(sensor1->GetStatsBySensor()->v*100) << "%\n";
-  cout << "J " << (int)(sensor1->GetStatsBySensor()->j*100) << "%\n";
-  cout << "R " << (int)(sensor1->GetStatsBySensor()->r*100) << "%\n";
-  cout << "N " << (int)(sensor1->GetStatsBySensor()->n*100) << "%\n";
+  cout << "V " << (int)(statsRelSensor->v*100) << "%\n";
+  cout << "J " << (int)(statsRelSensor->j*100) << "%\n";
+  cout << "R " << (int)(statsRelSensor->r*100) << "%\n";
+  cout << "N " << (int)(statsRelSensor->n*100) << "%\n";
+
+  delete statsRelSensor;
+
+  delete sensor1;
 
   return 0;
 }
-
