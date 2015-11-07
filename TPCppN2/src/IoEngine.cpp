@@ -16,6 +16,7 @@ bool IoEngine::ReadInput()
 {
 	char command[10];
 	scanf("%s",command);
+	
 	if (strcmp(command,"ADD") == 0)
 	{
 		HandleADD();

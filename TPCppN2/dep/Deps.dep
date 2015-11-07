@@ -5,7 +5,7 @@ build/BinaryTree.o : src/BinaryTree.cpp src/BinaryTree.h src/BinaryTree.h src/Se
 
 build/Node.o : src/Node.cpp src/Node.h src/Node.h src/Sensor.h src/Utils.h src/BinaryTree.h src/Sensor.h 
 
-build/Sensor.o : src/Sensor.cpp src/Sensor.h src/Sensor.h src/List.h 
+build/Sensor.o : src/Sensor.cpp src/Sensor.h src/Sensor.h 
 
 build/IoEngine.o : src/IoEngine.cpp src/IoEngine.h src/IoEngine.h src/Sensor.h src/BinaryTree.h 
 

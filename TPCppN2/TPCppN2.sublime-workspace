@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"Han",
+				"HandleADD"
+			],
+			[
+				"get",
+				"GetSensor"
+			],
+			[
+				"Get",
+				"GetSensor"
+			],
+			[
+				"resul",
+				"result2"
+			],
+			[
+				"re",
+				"result2"
+			],
+			[
 				"draw",
 				"drawCanvas"
 			],
@@ -136,10 +156,6 @@
 				"SpriteTexture"
 			],
 			[
-				"get",
-				"GetLeft"
-			],
-			[
 				"cur",
 				"currentPlayer"
 			],
@@ -219,7 +235,7 @@
 			"file": "makefile",
 			"settings":
 			{
-				"buffer_size": 3342,
+				"buffer_size": 3359,
 				"line_ending": "Unix"
 			}
 		},
@@ -243,7 +259,7 @@
 			"file": "utils/dispTree/data.lua",
 			"settings":
 			{
-				"buffer_size": 262012,
+				"buffer_size": 31408,
 				"line_ending": "Unix",
 				"name": "return tree="
 			}
@@ -260,7 +276,7 @@
 			"file": "src/Node.h",
 			"settings":
 			{
-				"buffer_size": 3689,
+				"buffer_size": 3698,
 				"line_ending": "Unix"
 			}
 		},
@@ -276,7 +292,7 @@
 			"file": "src/BinaryTree.h",
 			"settings":
 			{
-				"buffer_size": 928,
+				"buffer_size": 1059,
 				"line_ending": "Unix"
 			}
 		},
@@ -289,15 +305,6 @@
 			}
 		},
 		{
-			"contents": "{id,left={id,left={}},right={}}",
-			"settings":
-			{
-				"buffer_size": 31,
-				"line_ending": "Unix",
-				"name": "{id,left={id,left={}},right={}}"
-			}
-		},
-		{
 			"settings":
 			{
 				"buffer_size": 0,
@@ -305,10 +312,26 @@
 			}
 		},
 		{
+			"file": "src/IoEngine.h",
+			"settings":
+			{
+				"buffer_size": 542,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/IoEngine.cpp",
+			"settings":
+			{
+				"buffer_size": 1186,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "src/Main.cpp",
 			"settings":
 			{
-				"buffer_size": 2206,
+				"buffer_size": 2389,
 				"line_ending": "Unix"
 			}
 		},
@@ -316,15 +339,7 @@
 			"file": "dep/Deps.dep",
 			"settings":
 			{
-				"buffer_size": 417,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/element/Téléchargements/SampleAssignment.tex",
-			"settings":
-			{
-				"buffer_size": 2870,
+				"buffer_size": 543,
 				"line_ending": "Unix"
 			}
 		},
@@ -340,7 +355,7 @@
 			"file": "src/BinaryTree.cpp",
 			"settings":
 			{
-				"buffer_size": 819,
+				"buffer_size": 1131,
 				"line_ending": "Unix"
 			}
 		},
@@ -348,7 +363,7 @@
 			"file": "src/Node.cpp",
 			"settings":
 			{
-				"buffer_size": 4737,
+				"buffer_size": 4750,
 				"line_ending": "Unix"
 			}
 		},
@@ -378,7 +393,7 @@
 			}
 		}
 	],
-	"build_system": "Packages/Markdown Preview/Markdown.sublime-build",
+	"build_system": "Packages/Makefile/Make.sublime-build",
 	"command_palette":
 	{
 		"height": 264.0,
@@ -434,6 +449,9 @@
 	},
 	"file_history":
 	[
+		"/home/element/Documents/CODE/tests/Test/tp-oo_2-test.in",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/BinaryTree.h",
+		"/home/element/Téléchargements/SampleAssignment.tex",
 		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/.tags",
 		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/.tags_sorted_by_file",
 		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/Event.h",
@@ -560,6 +578,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			", ",
+			">>",
 			"<<<<<<",
 			"<<<<<<<",
 			"ComputeHeight()",
@@ -687,7 +707,7 @@
 	"groups":
 	[
 		{
-			"selected": 9,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -695,15 +715,15 @@
 					"file": "makefile",
 					"settings":
 					{
-						"buffer_size": 3342,
+						"buffer_size": 3359,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								518,
-								518
+								349,
+								349
 							]
 						],
 						"settings":
@@ -711,7 +731,7 @@
 							"syntax": "Packages/Makefile/Makefile.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 102.0,
+						"translation.y": 525.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -775,7 +795,7 @@
 					"file": "utils/dispTree/data.lua",
 					"settings":
 					{
-						"buffer_size": 262012,
+						"buffer_size": 31408,
 						"regions":
 						{
 						},
@@ -820,7 +840,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 867.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -830,15 +850,15 @@
 					"file": "src/Node.h",
 					"settings":
 					{
-						"buffer_size": 3689,
+						"buffer_size": 3698,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2158,
-								2158
+								606,
+								606
 							]
 						],
 						"settings":
@@ -851,7 +871,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 714.0,
+						"translation.y": 510.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -887,15 +907,15 @@
 					"file": "src/BinaryTree.h",
 					"settings":
 					{
-						"buffer_size": 928,
+						"buffer_size": 1059,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								190,
-								190
+								207,
+								207
 							]
 						],
 						"settings":
@@ -939,32 +959,6 @@
 					"buffer": 9,
 					"settings":
 					{
-						"buffer_size": 31,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"auto_name": "{id,left={id,left={}},right={}}",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"settings":
-					{
 						"buffer_size": 0,
 						"regions":
 						{
@@ -985,27 +979,80 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 2,
-			"sheets":
-			[
+				},
 				{
-					"buffer": 11,
-					"file": "src/Main.cpp",
+					"buffer": 10,
+					"file": "src/IoEngine.h",
 					"settings":
 					{
-						"buffer_size": 2206,
+						"buffer_size": 542,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1200,
-								1200
+								421,
+								421
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 11,
+					"file": "src/IoEngine.cpp",
+					"settings":
+					{
+						"buffer_size": 1186,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1044,
+								1044
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 816.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "src/Main.cpp",
+					"settings":
+					{
+						"buffer_size": 2389,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								140,
+								140
 							]
 						],
 						"settings":
@@ -1015,17 +1062,17 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 663.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 13,
 					"file": "dep/Deps.dep",
 					"settings":
 					{
-						"buffer_size": 417,
+						"buffer_size": 543,
 						"regions":
 						{
 						},
@@ -1042,32 +1089,6 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 13,
-					"file": "/home/element/Téléchargements/SampleAssignment.tex",
-					"settings":
-					{
-						"buffer_size": 2870,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2870,
-								2870
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1071.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1103,15 +1124,15 @@
 					"file": "src/BinaryTree.cpp",
 					"settings":
 					{
-						"buffer_size": 819,
+						"buffer_size": 1131,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								650,
-								646
+								802,
+								802
 							]
 						],
 						"settings":
@@ -1120,7 +1141,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 51.0,
+						"translation.y": 561.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1130,15 +1151,15 @@
 					"file": "src/Node.cpp",
 					"settings":
 					{
-						"buffer_size": 4737,
+						"buffer_size": 4750,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								417,
-								417
+								79,
+								79
 							]
 						],
 						"settings":
@@ -1147,7 +1168,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1785.0,
+						"translation.y": 2244.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1175,7 +1196,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1224.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

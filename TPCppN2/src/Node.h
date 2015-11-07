@@ -1,6 +1,7 @@
 #ifndef NODE_H
 #define NODE_H
 //#include "BinaryTree.h"
+#include <iostream>
 #include "Sensor.h"
 //#define NULL 0
 
@@ -22,12 +23,11 @@ public:
 	*/
 	inline Node *GetRight() const {return right;};
 
-	// TODO : Put those in private or delete them
 	
 
 	/** Exchanges this node sensor with the one in target
 
-	* @param [in,out] target The node where the swap will happend.
+	* @param [in] target The node where the swap will happend.
 	*/
 	void SwapSensor(Node *target);
 	// Exchanges this object sensor with the one in target
