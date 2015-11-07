@@ -209,5 +209,5 @@ void IoEngine::HandleOPT()
 	delete[] sensorTab;
 
 	// Display the optimal time of departure and the journey's duration
-	cout << d7 << " " << minHourOfStart << " " << minMinOfStart << " " << minDuration;
+	cout << d7 << " " << minHourOfStart << " " << minMinOfStart << " " << minDuration << "\n";
 }
