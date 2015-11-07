@@ -44,10 +44,6 @@ bool IoEngine::ReadInput()
 
 void IoEngine::HandleADD()
 {
-	// The expected command is :
-	// ADD <id> <yyyy(useless)> <mm(useless)> <dd(useless)>
-	// <h> <m> <d7> <trafic>
-
 	int id;
 	int h;
 	int m;
@@ -65,7 +61,7 @@ void IoEngine::HandleSTATS_C()
 
 	cin >> id;
 
-	// Checks if the desired sensor even exists.
+	// Checks if the desired sensor even exists before displaying its data.
 	Sensor *theSensor = theTree->Search(id);
 	if (theSensor != NULL)
 	{
@@ -91,19 +87,19 @@ void IoEngine::HandleJAM_DH()
 	{
 		for (int i = 0; i < NUMBER_OF_HOURS; i++)
 		{
-			iterator->GetSensor()->AddStatsByHour(d7, i, d7StatsTab[i]); // may need a * or &
+			iterator->GetSensor()->AddStatsByHour(d7, i, d7StatsTab[i]);
 		}
 	}
 	for (int i = 0; i < NUMBER_OF_HOURS; i++)
-	{	
+	{
 		long print = 0;
 		long sum = d7StatsTab[i]->Sum();
 		if (sum != 0)
 		{
 			print = (int)((d7StatsTab[i]->counters[R] +
 				d7StatsTab[i]->counters[N]) * 100 / sum);
-		}	
-		
+		}
+
 		cout << d7 << " " << i << " " << print << "%\n";
 		delete d7StatsTab[i];
 	}
