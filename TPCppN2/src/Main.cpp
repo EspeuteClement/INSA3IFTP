@@ -3,21 +3,29 @@
 #include "Node.h"
 #include "Sensor.h"
 #include "BinaryTree.h"
-
+#include "TestEngine.h"
 #include "IoEngine.h"
 int main()
 {
 	srand(127);
-	Node *theRoot = new Node(new Sensor(1));
-	BinaryTree tree(theRoot);
+	BinaryTree tree;
 
   IoEngine test(&tree);
   while(test.ReadInput());
-	//tree.Serialize();
-	//for (int i = 20000000; i > 0; --i)
-	//{
-	//	tree.Insert(rand()%1500,1,1,1,'V');
-	//}
+
+  //TestEngine::Iteration_Test1();
+  // TEST THE ITERATION PROCESS
+  /*
+  tree.InitIterate();
+  Node *daNode = NULL;
+  int counter = 0;
+  while((daNode = tree.Iterate()) != NULL)
+  {
+    std::cout << daNode->GetSensorID() <<'\n';
+    counter ++;
+  }
+  std::cout << counter << '\n';
+  */
 	//
   //std::cout << "V" << theRoot->Search(1)->GetSensor()->GetStatsByMin(1,1,1)->v << "\n";
 	//theRoot->DoubleLeftRotation();

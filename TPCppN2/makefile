@@ -16,7 +16,7 @@ PRINT = @printf
 # Nom du fichier de sortie
 EXEC = out/executable.out
 # Nom des fichiers sources
-SRC = Main.cpp BinaryTree.cpp Node.cpp Sensor.cpp IoEngine.cpp
+SRC = Main.cpp BinaryTree.cpp Node.cpp Sensor.cpp IoEngine.cpp TestEngine.cpp Utils.cpp
 # Nom du dossier avec les fichiers sources
 SRC_FOLDER = src/
 # Le dossier où metre les fichiers objs
@@ -40,6 +40,10 @@ DEP_CMD = lua makedep.lua $(SRC)
 
 DEP_FILE = dep/Deps.dep
 
+# Création de la doc
+DOCTARGET = doc
+
+DOC_COMMAND = doxygen docConfig && ln -s -f doc/html/index.html "open doc.html"
 
 ### TARGET POUR LE DEBUGAGE
 DEBUG = debug
@@ -88,6 +92,10 @@ $(DEP_TARGET) : $(DEP_FILE)
 .PHONY : $(DEP_FILE)
 $(DEP_FILE) :
 	$(DEP_CMD)
+
+.PHONY : $(DOCTARGET)
+$(DOCTARGET) : 
+	$(DOC_COMMAND)
 
 
 # EDITION DES LIENS :

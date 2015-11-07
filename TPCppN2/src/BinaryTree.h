@@ -28,17 +28,38 @@ public:
 				unsigned char m,
 				unsigned char value);
 
+	/** Get the root of this tree
+	*	@param a pointer to this tree's root.
+	*/
 	inline Node *GetRoot() {return root;};
+
+	/** Should always called before using Iterate in a loop.
+	*/
+	void InitIterate();
+
+	/** Each time Iterate is called, it will retrun a node that
+	*	hasn't been returned by the function. Call InitIterate()
+	*	 to reset the Iteration
+	*/
+	Node *Iterate();
 
 	/**	BinaryTree constructor.
 	*/
-	BinaryTree(Node *aRoot);
+	BinaryTree(Node *aRoot = NULL);
 	// Initialize the BinaryTree with root as the first 
 	// element in the binary tree.
 
 	~BinaryTree();
 private:
 	Node *root; // The first element in the binary tree.
+	
+	Node **stack; 
+				 // A stack used for the Iterate method.
+				 // stack[0] contains the root
+				 // stack[stackPos] contains the curently visited node
+
+	int stackDepth; // The max number of elements in the stack
+	int stackPos; // The position of the top element in the stack
 };
 
 

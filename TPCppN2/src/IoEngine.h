@@ -1,6 +1,10 @@
 #ifndef	IO_ENGINE_H
 #define IO_ENGINE_H
 #include "BinaryTree.h"
+
+
+/** Handle all the Inputs and Outputs needed for the application
+*/
 class IoEngine{
 public:
 

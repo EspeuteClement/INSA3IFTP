@@ -5,7 +5,8 @@
 #include "Sensor.h"
 //#define NULL 0
 
-
+/** Represents a BinaryTree Leaf, and contain a Sensor.
+*/
 class Node
 {
 public:
@@ -23,18 +24,20 @@ public:
 	*/
 	inline Node *GetRight() const {return right;};
 
-	
-
 	/** Exchanges this node sensor with the one in target
 
-	* @param [in] target The node where the swap will happend.
+	* @param [in] target The node where the swap will happen.
 	*/
 	void SwapSensor(Node *target);
 	// Exchanges this object sensor with the one in target
 
+	/** Simply returns the ID of this node's sensor.
+	*	@return The sensors's ID
+	*/
 	inline long GetSensorID() const {return sensor->GetID();};
-	// Gets the current node sensor ID
 
+	/** Return this node height.
+	*/
 	inline long GetHeight() const {return height;};
 	// Get the current computed height of this node
 	// NOTE : ComputeHeight is more reliable, but involve maths
@@ -48,45 +51,46 @@ public:
 	void RightRotation();
 
 	/** Performs a right rotation on the right subtree of this node,
-		then performs a left roation on this node.
+		then performs a left rotation on this node.
 	*/
 	void DoubleLeftRotation();
 	
 	/** Performs a left rotation on the right subtree of this node,
-		then performs a right roation on this node.
+		then performs a right rotation on this node.
 	*/
 	void DoubleRightRotation();
 	
 
-	/** Rebalance this subtree, then this node parent subtree up to this
-	*	tree root.
+	/** Re balance this subtree, then this node parent subtree up to 
+	*	this tree root.
 	*/
 	void Rebalance();
 
-	/** Compute this node Height (the number of node in the longest
-	*	subtree of this node)
-	*	@return this node Height
+	/** Compute this Node Height (the number of Node in the longest
+	*	subtree of this node) and then returns it
+	*	@return this Node Height
 	*/
 	long ComputeHeight();
 
-	/** Retruns the substraction of the left tree's height with the 
-	*	right tree's one. A null value indicates that
-	*	this subtree is perfecly balanced. A positive one indicates that
+	/** Returns the subtraction of the left tree's height with the 
+	*	right tree's one. A 0 value indicates that
+	*	this subtree is perfectly balanced. A positive one indicates that
 	*	the tree is left heavy, and a negative one that the tree is right heavy
 	*/
 	long GetBalance();
 
 	/** Returns the pointer to the node that contains a sensor with its ID matching 
 	*	aID
-	*	@param [in] aID The ID used for the search
-	*	@returns If the node is found, return the pointer to the node; 
-	*	else, returns a NULL pointer. 
+	*	@param [in] aID The ID used for the search.
+	*	@returns If the node is found, return the pointer to the node. 
+	*	Else, returns a NULL pointer. 
 	*/
 	Node *Search(long aID);
 
-	/** Insert the given sensor in the tree
+	/** Insert the given sensor in the subtree and returns a pointer to
+	*	the new node.
 	*	@retrun NULL if the node has been inserted. If there is already
-	*	a node containing a sensor with ID equals to aID, retruns the
+	*	a node containing a sensor with ID equals to aID, returns the
 	*	node instead.
 	*/
 	Node *Insert(int aID);
@@ -95,7 +99,7 @@ public:
 	/** Print in the standard output a representation of this node
 	*	subtree that can be read as a lua table.\n
 	*	The table will have this form :\n
-	*	{id=sensor.ID,height=height,left={left.Serialize()},=right{right.Serialize()}}
+	*	<CODE>{id=sensor.ID,height=height,left={left.Serialize()},=right{right.Serialize()}} </CODE>
 	*/
 	void Serialize(int depth);
 

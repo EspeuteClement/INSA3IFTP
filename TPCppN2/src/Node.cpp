@@ -167,7 +167,7 @@ Node *Node::Search(long aID)
 }
 
 Node *Node::Insert(int aID)
-{
+{	
 	if(aID < GetSensorID())
 	{
 		if (left != NULL) //If there is a node, search in this subtree
