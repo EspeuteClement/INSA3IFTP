@@ -30,7 +30,7 @@ bool IoEngine::ReadInput()
 	}
 	else if (strcmp(command, "STATS_D7") == 0)
 	{
-		HandleSTATS_C();
+		HandleSTATS_D7();
 	}
 	else if (strcmp(command,"EXIT") == 0)
 	{
@@ -69,12 +69,10 @@ void IoEngine::HandleSTATS_C()
 	Sensor *theSensor = theTree->Search(id);
 	if (theSensor != NULL)
 	{
-		cout << id << " found !" << "\n";
 		theSensor->PrintSensorStatsRel();
 	}
 	else
 	{
-		cout << id << " not found !" << "\n";
 	}
 }
 
@@ -122,7 +120,7 @@ void IoEngine::HandleSTATS_D7()
 
 	cin >> d7;
 
-	/*Stats *d7Stats = new Stats();
+	Stats *d7Stats = new Stats();
 	// Ready the iteration
 	theTree->InitIterate();
 	Node *iterator = NULL;
@@ -133,7 +131,7 @@ void IoEngine::HandleSTATS_D7()
 	StatsRel *d7StatsRel = new StatsRel(d7Stats);
 	d7StatsRel->PrintStatsRel();
 	delete d7Stats;
-	delete d7StatsRel;*/
+	delete d7StatsRel;
 	
 }
 
@@ -144,13 +142,13 @@ void IoEngine::HandleOPT()
 	int d7, hStart, hEnd, segCount;
 	int segTab[segCount];
 
-	//... Read and affect data to atributes
+	//... Read and affect data to attributes
 
 	//Caches the sensors to avoid redundant parsing of the binary tree
-	Stats *sensorTab = new Stats[segCount];
+	Sensor *sensorTab = new Sensor[segCount];
 	for (int i = 0; i < segCount; i++)
 	{
-		sensorTab[i] += theTree->Search(segTab[i]);
+		sensorTab[i] = theTree->Search(segTab[i]);
 	}
 
 	//Starting from every minute within [hStart, hEnd], we compute the duration of
