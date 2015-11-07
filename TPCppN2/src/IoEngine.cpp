@@ -1,16 +1,15 @@
-#include "IoEngine.h"
 #include <string>
 #include <iostream>
-#include "Sensor.h"
+
 #include <cstdio>
 #include <cstring>
 
+#include "IoEngine.h"
+#include "Sensor.h"
+
 using namespace std;
 
-IoEngine::IoEngine(BinaryTree *tree):theTree(tree)
-{
-
-}
+IoEngine::IoEngine(BinaryTree *tree):theTree(tree){}
 
 bool IoEngine::ReadInput()
 {

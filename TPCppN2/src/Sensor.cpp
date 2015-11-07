@@ -75,10 +75,13 @@ void Sensor::AddStatsBySensor (Stats *stats)
 
 void Sensor::PrintSensorStatsRel ()
 {
+  // Stores sensor data in a temporary Stats struct instance.
   Stats *buffer = new Stats();
   AddStatsBySensor(buffer);
+  // Converts into statistics by using a temporary StatsRel struct instance.
   StatsRel *sensorStatsRel = new StatsRel(buffer);
   sensorStatsRel->PrintStatsRel();
+  // Never forget to dispose of these temporary objects !
   delete buffer;
   delete sensorStatsRel;
 }
