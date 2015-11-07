@@ -65,13 +65,11 @@ void IoEngine::HandleSTATS_C()
 
 	cin >> id;
 
+	// Checks if the desired sensor even exists.
 	Sensor *theSensor = theTree->Search(id);
 	if (theSensor != NULL)
 	{
 		theSensor->PrintSensorStatsRel();
-	}
-	else
-	{
 	}
 }
 
