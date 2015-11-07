@@ -29,7 +29,7 @@ bool IoEngine::ReadInput()
 	}
 	else if (strcmp(command, "STATS_D7") == 0)
 	{
-		HandleSTATS_C();
+		HandleSTATS_D7();
 	}
 	else if (strcmp(command, "OPT") == 0)
 	{
@@ -68,12 +68,10 @@ void IoEngine::HandleSTATS_C()
 	Sensor *theSensor = theTree->Search(id);
 	if (theSensor != NULL)
 	{
-		cout << id << " found !" << "\n";
 		theSensor->PrintSensorStatsRel();
 	}
 	else
 	{
-		cout << id << " not found !" << "\n";
 	}
 }
 
@@ -108,18 +106,19 @@ void IoEngine::HandleSTATS_D7()
 
 	cin >> d7;
 
-	// TODO : Handle "every sensor"
-	/*
-	Stats *d7Stats = new Stats());
-	for (every sensor)
+	Stats *d7Stats = new Stats();
+	// Ready the iteration
+	theTree->InitIterate();
+	Node *iterator = NULL;
+	while ( (iterator = theTree->Iterate() ) != NULL )
+
 	{
-		theSensor->AddStatsByDay(d7, d7Stats)
+		iterator->GetSensor()->AddStatsByDay(d7, d7Stats);
 	}
 	StatsRel *d7StatsRel = new StatsRel(d7Stats);
 	d7StatsRel->PrintStatsRel();
 	delete d7Stats;
 	delete d7StatsRel;
-	*/
 }
 
 void IoEngine::HandleOPT()
@@ -141,6 +140,7 @@ void IoEngine::HandleOPT()
 
 	//Caches the sensors to avoid redundant parsing of the binary tree.
 	Sensor **sensorTab = new Sensor*[segCount];
+
 	for (int i = 0; i < segCount; i++)
 	{
 		sensorTab[i] = theTree->Search(segTab[i]);
