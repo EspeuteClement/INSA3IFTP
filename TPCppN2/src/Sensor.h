@@ -4,16 +4,31 @@
 #include <iostream>
 using namespace std;
 
+const int NUMBER_OF_DAYS = 7;
+const int NUMBER_OF_HOURS = 24;
+const int NUMBER_OF_MINUTES = 60;
+const int NUMBER_OF_STATES = 4;
+const int V = 0;
+const int J = 1;
+const int R = 2;
+const int N = 3;
+
 /** Stores event integer counters for each of the possible traffic states
 * (v, j, r, n).
 */
 struct Stats
 {
-  int v, j, r, n;
+  int counters[NUMBER_OF_STATES];
 
   /** Default constructor sets all attributes to zero.
   */
-  Stats ():v(0), j(0), r(0), n(0) {};
+  Stats ()
+  {
+    for (int i = 0; i < NUMBER_OF_STATES; i++)
+    {
+      counters[i] = 0;
+    }
+  };
 
   /** Overloads the += operator in order to be able to add two Stats structs
   * by adding each attribute separately.
@@ -22,10 +37,10 @@ struct Stats
   */
   Stats& operator+=(const Stats& stats)
   {
-    v += stats.v;
-    j += stats.j;
-    r += stats.r;
-    n += stats.n;
+    for (int i = 0; i < NUMBER_OF_STATES; i++)
+    {
+      counters[i] += stats.counters[i];
+    }
     return *this;
   };
 
@@ -34,7 +49,12 @@ struct Stats
   */
   double Sum ()
   {
-    return v + j + r + n;
+    double total = 0;
+    for (int i = 0; i < NUMBER_OF_STATES; i++)
+    {
+      total += counters[i];
+    }
+    return total;
   }
 };
 
@@ -42,21 +62,17 @@ struct Stats
 * (v, j, r, n).
 */
 struct StatsRel {
-  double v, j, r, n;
+  double counterStats[NUMBER_OF_STATES];
 
-  /** Default constructor sets all attributes to zero.
-  */
-  StatsRel ():v(0), j(0), r(0), n(0) {};
-
-  /** Second constructor converts all the attributes of the passed in Stats
+  /** Default constructor converts all the attributes of the passed in Stats
   * struct into statistics relative to the sum of all the counters.
   */
   StatsRel (Stats *stats) {
     double total = stats->Sum();
-    v = stats->v / total;
-    j = stats->j / total;
-    r = stats->r / total;
-    n = stats->n / total;
+    for (int i = 0; i < NUMBER_OF_STATES; i++)
+    {
+      counterStats[i] = stats->counters[i] / total;
+    }
   };
 
   /** Displays the attributes of the StatsRel struct one per line, rounded into
@@ -64,16 +80,12 @@ struct StatsRel {
   */
   void PrintStatsRel ()
   {
-    cout << "V " << (int)(v*100) << "%\n";
-    cout << "J " << (int)(j*100) << "%\n";
-    cout << "R " << (int)(r*100) << "%\n";
-    cout << "N " << (int)(n*100) << "%\n";
+    cout << "V " << (int)(counterStats[V]*100) << "%\n";
+    cout << "J " << (int)(counterStats[J]*100) << "%\n";
+    cout << "R " << (int)(counterStats[R]*100) << "%\n";
+    cout << "N " << (int)(counterStats[N]*100) << "%\n";
   }
 };
-
-const int NUMBER_OF_DAYS = 7;
-const int NUMBER_OF_HOURS = 24;
-const int NUMBER_OF_MINUTES = 60;
 
 /** Stores the ID of a given sensor and a pointer to a tri-dimensional
 * index of Stats event counters thus allowing easy computation of statistics on
@@ -146,6 +158,15 @@ class Sensor
     *  attribute (v, j, r, n).
     */
     void PrintSensorStatsRel ();
+
+    /**
+    * @param d7 is the day of the week, ranging from 1 to 7 included.
+    * @param h is the hour, ranging from 0 to 23.
+    * @param m is the minute, ranging from 0 to 59.
+    * @return the probable duration of the journey through the road segment
+    * associated with the sensor.
+    */
+    int GetDuration(int d7, int h, int m);
 
   private :
     /** Tri-dimensional index of Stats event counters. Dimensions are in order :

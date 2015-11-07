@@ -92,7 +92,8 @@ void IoEngine::HandleJAM_DH()
 	}
 	for (i = 0; i < NUMBER_OF_HOURS; i++)
 	{
-		cout << d7 << " " << i << " " << (int)((d7Stats->r + d7Stats->n) * 100 / d7Stats->Sum()) << "%\n";
+		cout << d7 << " " << i << " " << (int)((d7StatsTab[i]->counters[R] +
+		d7StatsTab[i]->counters[N]) * 100 / d7StatsTab[i]->Sum()) << "%\n";
 	}
 	delete[] d7StatsTab;
 	*/
@@ -129,10 +130,72 @@ void IoEngine::HandleOPT()
 
 	//Caches the sensors to avoid redundant parsing of the binary tree
 	Stats *sensorTab = new Stats[segCount];
-	for (int i = 0; i < segCount; i++) {
+	for (int i = 0; i < segCount; i++)
+	{
 		sensorTab[i] += theTree->Search(segTab[i]);
 	}
 
+	//Starting from every minute within [hStart, hEnd], we compute the duration of
+	//the journey and only keep the shortest that also complies with hEnd.
+	int minDuration = (hEnd-hStart)*60;
+	int minMinOfStart = 0;
+	int minHourOfStart = hStart;
+
+	int minOfStart = 0;
+	int hourOfStart = hStart;
+
+	int duration = 0;
+	int totalDuration = 0;
+	int currentMin = 0;
+	int currentHour = hourOfStart;
+
+	while (int hourOfStart < hEnd)
+	{
+		// Simulates the journey for the given startTime
+		for (int segNum = 0; segNum < segCount; segNum++)
+		{
+			duration = sensorTab[segNum]->GetDuration(d7, h, m);
+			totalDuration += duration;
+
+			// Incrementation of the current time by duration minutes
+			if (currentMin + duration < NUMBER_OF_MINUTES)
+			{
+				currentMin += duration;
+			}
+			else
+			{
+				currentMin += (duration - NUMBER_OF_MINUTES + 1);
+				currentHour++;
+			}
+		}
+
+		//Only keep the minimum duration of all and the start time associated
+		if (totalDuration < minDuration && currentHour < hEnd) {
+			minDuration = totalDuration;
+			minMinOfStart = minOfStart;
+			minHourOfStart = hourOfStart;
+		}
+
+		// Reinitialize the journey
+		totalDuration = 0;
+		currentMin = 0;
+		currentHour = 0;
+
+		// Incrementation of the time of start by one minute
+		if (minOfStart < NUMBER_OF_MINUTES - 1)
+		{
+			minOfStart++;
+		}
+		else
+		{
+			minOfStart = 0;
+			hourOfStart++;
+		}
+	}
+
 	delete[] segTab;
+
+	// Display the optimal time of departure and the journey's duration
+	cout << d7 << " " << minHourOfStart << " " << minMinOfStart << " " << minDuration;
 	*/
 }
