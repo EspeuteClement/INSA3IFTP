@@ -122,6 +122,17 @@ void IoEngine::HandleOPT()
 {
 	// TODO : Fill the variables with the data
 	/*
-	int d7;
+	int d7, hStart, hEnd, segCount;
+	int segTab[segCount];
+
+	//... Read and affect data to atributes
+
+	//Caches the sensors to avoid redundant parsing of the binary tree
+	Stats *sensorTab = new Stats[segCount];
+	for (int i = 0; i < segCount; i++) {
+		sensorTab[i] += theTree->Search(segTab[i]);
+	}
+
+	delete[] segTab;
 	*/
 }
