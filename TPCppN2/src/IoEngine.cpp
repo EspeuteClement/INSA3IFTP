@@ -75,14 +75,19 @@ void IoEngine::HandleJAM_DH()
 
 	cin >> d7;
 
+	// Caches the hourly statistics data of all sensor in order to avoid to
+	// iterate 24 times through the tree.
 	Stats **d7StatsTab = new Stats*[NUMBER_OF_HOURS];
 	for (int i = 0; i < NUMBER_OF_HOURS; ++i)
 	{
 		d7StatsTab[i] = new Stats();
 	}
-	// Ready the iteration
+
+	// Ready the iteration.
 	theTree->InitIterate();
 	Node *iterator = NULL;
+
+	// Iterates through the entire to collect the hourly statistics.
 	while ( (iterator = theTree->Iterate() ) != NULL )
 	{
 		for (int i = 0; i < NUMBER_OF_HOURS; i++)
@@ -90,6 +95,8 @@ void IoEngine::HandleJAM_DH()
 			iterator->GetSensor()->AddStatsByHour(d7, i, d7StatsTab[i]);
 		}
 	}
+
+	// Computes and displays the hourly jam relative statistics.
 	for (int i = 0; i < NUMBER_OF_HOURS; i++)
 	{
 		long print = 0;
@@ -113,14 +120,19 @@ void IoEngine::HandleSTATS_D7()
 	cin >> d7;
 
 	Stats *d7Stats = new Stats();
+
 	// Ready the iteration
 	theTree->InitIterate();
 	Node *iterator = NULL;
+
+	// Iterates through the entire to collect the daily statistics.
 	while ( (iterator = theTree->Iterate() ) != NULL )
 
 	{
 		iterator->GetSensor()->AddStatsByDay(d7, d7Stats);
 	}
+
+	// Makes relative statistics out of the collected ones and displays them.
 	StatsRel *d7StatsRel = new StatsRel(d7Stats);
 	d7StatsRel->PrintStatsRel();
 	delete d7Stats;
