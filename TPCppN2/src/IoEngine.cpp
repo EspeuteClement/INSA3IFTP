@@ -44,10 +44,6 @@ bool IoEngine::ReadInput()
 
 void IoEngine::HandleADD()
 {
-	// The expected command is :
-	// ADD <id> <yyyy(useless)> <mm(useless)> <dd(useless)>
-	// <h> <m> <d7> <trafic>
-
 	int id;
 	int h;
 	int m;
@@ -65,13 +61,11 @@ void IoEngine::HandleSTATS_C()
 
 	cin >> id;
 
+	// Checks if the desired sensor even exists before displaying its data.
 	Sensor *theSensor = theTree->Search(id);
 	if (theSensor != NULL)
 	{
 		theSensor->PrintSensorStatsRel();
-	}
-	else
-	{
 	}
 }
 
@@ -81,31 +75,38 @@ void IoEngine::HandleJAM_DH()
 
 	cin >> d7;
 
+	// Caches the hourly statistics data of all sensor in order to avoid to
+	// iterate 24 times through the tree.
 	Stats **d7StatsTab = new Stats*[NUMBER_OF_HOURS];
 	for (int i = 0; i < NUMBER_OF_HOURS; ++i)
 	{
 		d7StatsTab[i] = new Stats();
 	}
-	// Ready the iteration
+
+	// Ready the iteration.
 	theTree->InitIterate();
 	Node *iterator = NULL;
+
+	// Iterates through the entire to collect the hourly statistics.
 	while ( (iterator = theTree->Iterate() ) != NULL )
 	{
 		for (int i = 0; i < NUMBER_OF_HOURS; i++)
 		{
-			iterator->GetSensor()->AddStatsByHour(d7, i, d7StatsTab[i]); // may need a * or &
+			iterator->GetSensor()->AddStatsByHour(d7, i, d7StatsTab[i]);
 		}
 	}
+
+	// Computes and displays the hourly jam relative statistics.
 	for (int i = 0; i < NUMBER_OF_HOURS; i++)
-	{	
+	{
 		long print = 0;
 		long sum = d7StatsTab[i]->Sum();
 		if (sum != 0)
 		{
 			print = (int)((d7StatsTab[i]->counters[R] +
 				d7StatsTab[i]->counters[N]) * 100 / sum);
-		}	
-		
+		}
+
 		cout << d7 << " " << i << " " << print << "%\n";
 		delete d7StatsTab[i];
 	}
@@ -119,14 +120,19 @@ void IoEngine::HandleSTATS_D7()
 	cin >> d7;
 
 	Stats *d7Stats = new Stats();
+
 	// Ready the iteration
 	theTree->InitIterate();
 	Node *iterator = NULL;
+
+	// Iterates through the entire to collect the daily statistics.
 	while ( (iterator = theTree->Iterate() ) != NULL )
 
 	{
 		iterator->GetSensor()->AddStatsByDay(d7, d7Stats);
 	}
+
+	// Makes relative statistics out of the collected ones and displays them.
 	StatsRel *d7StatsRel = new StatsRel(d7Stats);
 	d7StatsRel->PrintStatsRel();
 	delete d7Stats;

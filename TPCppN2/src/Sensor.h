@@ -160,7 +160,9 @@ class Sensor
     void PrintSensorStatsRel ();
 
     /** Computes and returns the probable duration of the journey through the
-    * road segment associated with the sensor.
+    * road segment associated with the sensor. Each probable state is associated
+    * with a duration : (v->1, j->2, r->4, n->10). If no data if available, all
+    * the stats are equal to zero, therefore affecting 1 minute ("v" case).
     * @param d7 is the day of the week, ranging from 1 to 7 included.
     * @param h is the hour, ranging from 0 to 23.
     * @param m is the minute, ranging from 0 to 59.
