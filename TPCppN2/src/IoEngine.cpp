@@ -15,7 +15,6 @@ bool IoEngine::ReadInput()
 {
 	char command[10];
 	scanf("%s",command);
-	
 	if (strcmp(command,"ADD") == 0)
 	{
 		HandleADD();
@@ -32,6 +31,10 @@ bool IoEngine::ReadInput()
 	{
 		HandleSTATS_C();
 	}
+	else if (strcmp(command, "OPT") == 0)
+	{
+		HandleOPT();
+	}
 	else if (strcmp(command,"EXIT") == 0)
 	{
 		return false;
@@ -43,7 +46,7 @@ void IoEngine::HandleADD()
 {
 	// The values are :
 	// ADD <id> <yyyy(useless)> <mm(useless)> <dd(useless)>
-	// <h> <m> <d7> <traffic>
+	// <h> <m> <d7> <trafic>
 
 	// Used to gather the useless values
 
@@ -51,13 +54,10 @@ void IoEngine::HandleADD()
 	int h;
 	int m;
 	int d7;
-	unsigned char traffic[10];
+	unsigned char trafic[10];
 
-	// Scanf is used here instead of cin because
-	// it's waaaay faster when you have to deal with
-	// 20 000 000 entries.
-	scanf("%i %*i %*i %*i %i %i %i %s",&id , &h , &m , &d7,traffic);
-	theTree->Insert(id,d7,h,m,traffic[0]);
+	scanf("%i %*i %*i %*i %i %i %i %s",&id , &h , &m , &d7,trafic);
+	theTree->Insert(id,d7,h,m,trafic[0]);
 }
 
 void IoEngine::HandleSTATS_C()
@@ -84,36 +84,23 @@ void IoEngine::HandleJAM_DH()
 
 	cin >> d7;
 
-	Stats **d7StatsTab = new Stats*[NUMBER_OF_HOURS];
-	for (int i = 0; i < NUMBER_OF_HOURS; ++i)
+	// TODO : Handle "every sensor"
+	/*
+	Stats *d7StatsTab = new Stats[NUMBER_OF_HOURS];
+	for (every sensor)
 	{
-		d7StatsTab[i] = new Stats();
-	}
-	// Ready the iteration
-	theTree->InitIterate();
-	Node *iterator = NULL;
-	while ( (iterator = theTree->Iterate() ) != NULL )
-	{
-		for (int i = 0; i < NUMBER_OF_HOURS; i++)
+		for (i = 0; i < NUMBER_OF_HOURS; i++)
 		{
-			iterator->GetSensor()->AddStatsByHour(d7, i, d7StatsTab[i]); // may need a * or &
+			theSensor->AddStatsByHour(d7, i, d7StatsTab[i]); // may need a * or &
 		}
 	}
-	for (int i = 0; i < NUMBER_OF_HOURS; i++)
-	{	
-		long print = 0;
-		long sum = d7StatsTab[i]->Sum();
-		if (sum != 0)
-		{
-			print = (int)((d7StatsTab[i]->counters[R] +
-				d7StatsTab[i]->counters[N]) * 100 / sum);
-		}	
-		
-		cout << d7 << " " << i << " " << print << "%\n";
-		delete d7StatsTab[i];
+	for (i = 0; i < NUMBER_OF_HOURS; i++)
+	{
+		cout << d7 << " " << i << " " << (int)((d7StatsTab[i]->counters[R] +
+		d7StatsTab[i]->counters[N]) * 100 / d7StatsTab[i]->Sum()) << "%\n";
 	}
 	delete[] d7StatsTab;
-	
+	*/
 }
 
 void IoEngine::HandleSTATS_D7()
@@ -122,35 +109,42 @@ void IoEngine::HandleSTATS_D7()
 
 	cin >> d7;
 
-	/*Stats *d7Stats = new Stats();
-	// Ready the iteration
-	theTree->InitIterate();
-	Node *iterator = NULL;
-	while ( (iterator = theTree->Iterate() ) != NULL )
+	// TODO : Handle "every sensor"
+	/*
+	Stats *d7Stats = new Stats());
+	for (every sensor)
 	{
-		iterator->GetSensor()->AddStatsByDay(d7, d7Stats);
+		theSensor->AddStatsByDay(d7, d7Stats)
 	}
 	StatsRel *d7StatsRel = new StatsRel(d7Stats);
 	d7StatsRel->PrintStatsRel();
 	delete d7Stats;
-	delete d7StatsRel;*/
-	
+	delete d7StatsRel;
+	*/
 }
 
 void IoEngine::HandleOPT()
 {
-	// TODO : Fill the variables with the data
-	/*
 	int d7, hStart, hEnd, segCount;
-	int segTab[segCount];
 
-	//... Read and affect data to atributes
+	// Fill the variables with the data
+	cin >> d7;
+	cin >> hStart;
+	cin >> hEnd;
+	cin >> segCount;
 
-	//Caches the sensors to avoid redundant parsing of the binary tree
-	Stats *sensorTab = new Stats[segCount];
+	int *segTab = new int[segCount];
+
 	for (int i = 0; i < segCount; i++)
 	{
-		sensorTab[i] += theTree->Search(segTab[i]);
+		cin >> segTab[i];
+	}
+
+	//Caches the sensors to avoid redundant parsing of the binary tree
+	Sensor **sensorTab = new Sensor*[segCount];
+	for (int i = 0; i < segCount; i++)
+	{
+		sensorTab[i] = theTree->Search(segTab[i]);
 	}
 
 	//Starting from every minute within [hStart, hEnd], we compute the duration of
@@ -167,12 +161,12 @@ void IoEngine::HandleOPT()
 	int currentMin = 0;
 	int currentHour = hourOfStart;
 
-	while (int hourOfStart < hEnd)
+	while (hourOfStart < hEnd)
 	{
 		// Simulates the journey for the given startTime
 		for (int segNum = 0; segNum < segCount; segNum++)
 		{
-			duration = sensorTab[segNum]->GetDuration(d7, h, m);
+			duration = sensorTab[segNum]->GetDuration(d7, currentHour, currentMin);
 			totalDuration += duration;
 
 			// Incrementation of the current time by duration minutes
@@ -212,8 +206,8 @@ void IoEngine::HandleOPT()
 	}
 
 	delete[] segTab;
+	delete[] sensorTab;
 
 	// Display the optimal time of departure and the journey's duration
 	cout << d7 << " " << minHourOfStart << " " << minMinOfStart << " " << minDuration;
-	*/
 }

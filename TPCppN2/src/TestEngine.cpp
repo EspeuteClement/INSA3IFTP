@@ -11,10 +11,10 @@ bool TestEngine::Iteration_Test1(bool verbose)
 {
 	const int NUMBERS = 1500;
 	Utils::printBold("ITERATION TEST 1", true);
-	
+
 	// Create the binary tree
 	BinaryTree testTree = BinaryTree();
-	
+
 	// Create an array that will store if a node has been
 	// traversed
 	bool found[NUMBERS];
@@ -67,7 +67,5 @@ bool TestEngine::Iteration_Test1(bool verbose)
 
 bool TestEngine::BalanceTest_1(bool verbose)
 {
-	
+	return false;
 }
-
-
