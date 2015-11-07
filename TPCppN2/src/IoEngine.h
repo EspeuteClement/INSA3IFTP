@@ -3,7 +3,7 @@
 #include "BinaryTree.h"
 class IoEngine{
 public:
-	
+
 	/** Read the input from the STDIO and modify the tree if needed
 	*	@returns true if the user hasn't quited, false if the command 'EXIT'
 	*	has been issued.
@@ -20,6 +20,10 @@ public:
 	void HandleSTATS_C();
 
 	void HandleJAM_DH();
+
+	void HandleSTATS_D7();
+
+	void HandleOPT();
 
 	IoEngine(BinaryTree *tree);
 private:

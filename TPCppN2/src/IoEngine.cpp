@@ -21,11 +21,18 @@ bool IoEngine::ReadInput()
 	{
 		HandleADD();
 	}
-	/*else if (command.compare("STATS_C") == 0)
+	else if (strcmp(command, "STATS_C") == 0)
 	{
-		//cout << "COUCOU";
 		HandleSTATS_C();
-	}*/
+	}
+	else if (strcmp(command, "JAM_DH") == 0)
+	{
+		HandleJAM_DH();
+	}
+	else if (strcmp(command, "STATS_D7") == 0)
+	{
+		HandleSTATS_C();
+	}
 	else if (strcmp(command,"EXIT") == 0)
 	{
 		return false;
@@ -61,7 +68,7 @@ void IoEngine::HandleSTATS_C()
 	if (theSensor != NULL)
 	{
 		cout << id << " found !" << "\n";
-		//theSensor->GetStatsRelBySensor();
+		theSensor->PrintSensorStatsRel();
 	}
 	else
 	{
@@ -75,5 +82,48 @@ void IoEngine::HandleJAM_DH()
 
 	cin >> d7;
 
-	// TODO : Handle poulet au fromage
+	// TODO : Handle "every sensor"
+	/*
+	Stats *d7StatsTab = new Stats[NUMBER_OF_HOURS];
+	for (every sensor)
+	{
+		for (i = 0; i < NUMBER_OF_HOURS; i++)
+		{
+			theSensor->AddStatsByHour(d7, i, d7StatsTab[i]); // may need a * or &
+		}
+	}
+	for (i = 0; i < NUMBER_OF_HOURS; i++)
+	{
+		cout << d7 << " " << i << " " << (int)((d7Stats->r + d7Stats->n) * 100 / d7Stats->Sum()) << "%\n";
+	}
+	delete[] d7StatsTab;
+	*/
+}
+
+void IoEngine::HandleSTATS_D7()
+{
+	int d7;
+
+	cin >> d7;
+
+	// TODO : Handle "every sensor"
+	/*
+	Stats *d7Stats = new Stats());
+	for (every sensor)
+	{
+		theSensor->AddStatsByDay(d7, d7Stats)
+	}
+	StatsRel *d7StatsRel = new StatsRel(d7Stats);
+	d7StatsRel->PrintStatsRel();
+	delete d7Stats;
+	delete d7StatsRel;
+	*/
+}
+
+void IoEngine::HandleOPT()
+{
+	// TODO : Fill the variables with the data
+	/*
+	int d7;
+	*/
 }
