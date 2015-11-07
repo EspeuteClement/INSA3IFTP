@@ -40,9 +40,13 @@ class IoEngine
 		*/
 		void HandleSTATS_D7();
 
+		/** Performs the OPT operation : computes and displays the optimal time
+		* (which reduces the duration of the journey through the given segments) of
+		* departure and the associated minimal duration.
+		*/
 		void HandleOPT();
 
 	private:
-		BinaryTree *theTree;
+		BinaryTree *theTree; // TODO Documentation
 };
 #endif

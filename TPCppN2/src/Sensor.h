@@ -20,7 +20,7 @@ struct Stats
 {
   int counters[NUMBER_OF_STATES];
 
-  /** Default constructor sets all attributes to zero.
+  /** Default constructor sets all array elements to zero.
   */
   Stats ()
   {
@@ -31,7 +31,7 @@ struct Stats
   };
 
   /** Overloads the += operator in order to be able to add two Stats structs
-  * by adding each attribute separately.
+  * by adding each array element separately.
   * @param stats is the right-side expression of the struct to be added.
   * @return the reference to the current Stats instance.
   */
@@ -45,7 +45,7 @@ struct Stats
   };
 
   /** Adds the statistics together
-  * @return a double type sum of the attributes (v, j, r, n)
+  * @return a double type sum of the array elements (v, j, r, n)
   */
   double Sum ()
   {
@@ -159,12 +159,12 @@ class Sensor
     */
     void PrintSensorStatsRel ();
 
-    /**
+    /** Computes and returns the probable duration of the journey through the
+    * road segment associated with the sensor.
     * @param d7 is the day of the week, ranging from 1 to 7 included.
     * @param h is the hour, ranging from 0 to 23.
     * @param m is the minute, ranging from 0 to 59.
-    * @return the probable duration of the journey through the road segment
-    * associated with the sensor.
+    * @return the duration.
     */
     int GetDuration(int d7, int h, int m);
 
