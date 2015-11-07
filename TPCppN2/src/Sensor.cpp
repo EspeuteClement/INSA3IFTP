@@ -31,16 +31,16 @@ void Sensor::AddEvent(int d7, int h, int m, char state)
   switch (state)
   {
     case 'V':
-      index[d7 - 1][h][m].v++;
+      index[d7 - 1][h][m].counters[V]++;
       break;
     case 'J':
-      index[d7 - 1][h][m].j++;
+      index[d7 - 1][h][m].counters[J]++;
       break;
     case 'R':
-      index[d7 - 1][h][m].r++;
+      index[d7 - 1][h][m].counters[R]++;
       break;
     case 'N':
-      index[d7 - 1][h][m].n++;
+      index[d7 - 1][h][m].counters[N]++;
       break;
   }
 }
@@ -75,10 +75,46 @@ void Sensor::AddStatsBySensor (Stats *stats)
 
 void Sensor::PrintSensorStatsRel ()
 {
+  // Stores sensor data in a temporary Stats struct instance.
   Stats *buffer = new Stats();
   AddStatsBySensor(buffer);
+  // Converts into statistics by using a temporary StatsRel struct instance.
   StatsRel *sensorStatsRel = new StatsRel(buffer);
   sensorStatsRel->PrintStatsRel();
+  // Never forget to dispose of these temporary objects !
   delete buffer;
   delete sensorStatsRel;
+}
+
+int Sensor::GetDuration(int d7, int h, int m)
+{
+  StatsRel *statsRel = new StatsRel(GetStatsByMin(d7, h, m));
+  int buffer = 0;
+  double max = 0;
+
+  for (int i = 0; i < NUMBER_OF_STATES; i++) {
+    if (statsRel->counterStats[i] > max) {
+      max = statsRel->counterStats[i];
+      buffer = i;
+    }
+  }
+
+  switch (buffer) {
+    case V :
+      buffer = 1;
+      break;
+    case J :
+      buffer = 2;
+      break;
+    case R :
+      buffer = 4;
+      break;
+    case N :
+      buffer = 10;
+      break;
+  }
+
+  delete statsRel;
+
+  return buffer;
 }

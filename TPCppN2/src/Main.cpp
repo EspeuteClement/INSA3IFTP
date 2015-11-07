@@ -41,6 +41,7 @@ using namespace std;
 
 int main() {
   Sensor *sensor1 = new Sensor(19783);
+
   sensor1->AddEvent(1, 12, 32, 'V');
 
   sensor1->AddEvent(1, 12, 32, 'J');
@@ -59,20 +60,20 @@ int main() {
   // Expected : [1, 1, 1, 1]
 	Stats *minStats = sensor1->GetStatsByMin(1,12,32);
 
-  cout << "V " << minStats->v << "\n";
-  cout << "J " << minStats->j << "\n";
-  cout << "R " << minStats->r << "\n";
-  cout << "N " << minStats->n << "\n";
+  cout << "V " << minStats->counters[V] << "\n";
+  cout << "J " << minStats->counters[J] << "\n";
+  cout << "R " << minStats->counters[R] << "\n";
+  cout << "N " << minStats->counters[N] << "\n";
 
   cout << "------------By Hour-------------\n";
   // Expected : [1, 2, 1, 1]
 	Stats *hourStats = new Stats();
 	sensor1->AddStatsByHour(1,12, hourStats);
 
-  cout << "V " << hourStats->v << "\n";
-  cout << "J " << hourStats->j << "\n";
-  cout << "R " << hourStats->r << "\n";
-  cout << "N " << hourStats->n << "\n";
+  cout << "V " << hourStats->counters[V] << "\n";
+  cout << "J " << hourStats->counters[J] << "\n";
+  cout << "R " << hourStats->counters[R] << "\n";
+  cout << "N " << hourStats->counters[N] << "\n";
 
 	delete hourStats;
 
@@ -81,10 +82,10 @@ int main() {
 	Stats *dayStats = new Stats();
 	sensor1->AddStatsByDay(1, dayStats);
 
-	cout << "V " << dayStats->v << "\n";
-	cout << "J " << dayStats->j << "\n";
-	cout << "R " << dayStats->r << "\n";
-	cout << "N " << dayStats->n << "\n";
+	cout << "V " << dayStats->counters[V] << "\n";
+	cout << "J " << dayStats->counters[J] << "\n";
+	cout << "R " << dayStats->counters[R] << "\n";
+	cout << "N " << dayStats->counters[N] << "\n";
 
 	delete dayStats;
 
