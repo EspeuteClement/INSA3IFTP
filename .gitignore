@@ -36,3 +36,7 @@ doc/
 
 #test files
 *.in
+
+#config files
+*.sublime-project
+*.sublime-workspace
