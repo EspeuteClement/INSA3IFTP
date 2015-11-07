@@ -5,9 +5,9 @@
 
 void BinaryTree::Serialize()
 {
-	//root->ComputeHeight();
+	// print return (so the lua table will be returned as a function)
 	std::cout<<"return ";
-	root->Serialize(0);
+	root->Serialize();
 	std::cout<<"\n";
 }
 

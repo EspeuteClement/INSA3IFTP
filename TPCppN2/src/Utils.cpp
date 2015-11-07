@@ -13,3 +13,39 @@
 	const string Utils::RED = "";
 	const string Utils::END_COLOR = "";
 #endif //EXTENDED_CONSOLE
+
+void Utils::printBold(string message, bool r)
+{
+	cout << Utils::BOLD;
+	cout << message;
+	cout << Utils::END_BOLD;
+	if (r)
+	{
+		std::cout << '\n';
+	}
+
+}
+
+void Utils::printGreen(string message,bool r)
+{
+	cout << Utils::GREEN;
+	cout << message;
+	cout << Utils::END_COLOR;
+	if (r)
+	{
+		std::cout << '\n';
+	}
+
+}
+
+void Utils::printRed(string message, bool r)
+{
+	cout << Utils::RED;
+	cout << message;
+	cout << Utils::END_COLOR;
+	if (r)
+	{
+		std::cout << '\n';
+	}
+
+}

@@ -26,41 +26,15 @@ public:
 	*	@param r if the function should add a line break at the
 	*	end of the print.
 	*/
-	static inline void printBold(string message, bool r = false)
-	{
-		cout << BOLD;
-		cout << message;
-		cout << END_BOLD;
-		if (r)
-		{
-			std::cout << '\n';
-		}
+	static void printBold(string message, bool r = false);
 
-	};
+	/** Prints a green message.
+	*
+	*/
+	static void printGreen(string message, bool r = false);
 
-	static inline void printGreen(string message, bool r = false)
-	{
-		cout << GREEN;
-		cout << message;
-		cout << END_COLOR;
-		if (r)
-		{
-			std::cout << '\n';
-		}
+	static void printRed(string message, bool r = false);
 
-	};
-
-	static inline void printRed(string message, bool r = false)
-	{
-		cout << RED;
-		cout << message;
-		cout << END_COLOR;
-		if (r)
-		{
-			std::cout << '\n';
-		}
-
-	};
 };
 
 

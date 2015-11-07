@@ -108,7 +108,7 @@ long Node::ComputeHeight()
 	return height;
 }
 
-void Node::Serialize(int depth)
+void Node::Serialize()
 {
 	// Recursivity power :D
 
@@ -121,7 +121,7 @@ void Node::Serialize(int depth)
 	
 	// Serialize the left part of the array
 	if (left != NULL)
-	{	left->Serialize(depth+1);
+	{	left->Serialize();
 	}
 	else // Set the table to nil if the left node is NULL
 	{	std::cout << "nil";
@@ -131,7 +131,7 @@ void Node::Serialize(int depth)
 	std::cout << "right=";
 	// Serialize the right part of the array
 	if (right != NULL)
-	{	right->Serialize(depth+1);
+	{	right->Serialize();
 	}
 	else // Set the table to nil if the right node is NULL
 	{	std::cout << "nil";

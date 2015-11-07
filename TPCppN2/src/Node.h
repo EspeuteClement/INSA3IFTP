@@ -99,10 +99,13 @@ public:
 	/** Print in the standard output a representation of this node
 	*	subtree that can be read as a lua table.\n
 	*	The table will have this form :\n
-	*	<CODE>{id=sensor.ID,height=height,left={left.Serialize()},=right{right.Serialize()}} </CODE>
+	*	<CODE>{id=sensor.ID,height=height,left={left.Serialize()},
+	*	right={right.Serialize()}} </CODE>
 	*/
-	void Serialize(int depth);
+	void Serialize();
 
+	/** Returns this node's sensor.
+	*/
 	Sensor *GetSensor() {return sensor;};
 
 	/**	Create a Node.
