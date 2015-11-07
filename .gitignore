@@ -33,3 +33,6 @@
 
 #doc files
 doc/
+
+#test files
+*.in

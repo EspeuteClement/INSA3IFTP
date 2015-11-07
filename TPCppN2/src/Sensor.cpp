@@ -80,4 +80,5 @@ void Sensor::PrintSensorStatsRel ()
   StatsRel *sensorStatsRel = new StatsRel(buffer);
   sensorStatsRel->PrintStatsRel();
   delete buffer;
+  delete sensorStatsRel;
 }
