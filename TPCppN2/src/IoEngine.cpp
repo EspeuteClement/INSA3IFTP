@@ -82,23 +82,35 @@ void IoEngine::HandleJAM_DH()
 
 	cin >> d7;
 
-	// TODO : Handle "every sensor"
-	/*
-	Stats *d7StatsTab = new Stats[NUMBER_OF_HOURS];
-	for (every sensor)
+	Stats **d7StatsTab = new Stats*[NUMBER_OF_HOURS];
+	for (int i = 0; i < NUMBER_OF_HOURS; ++i)
 	{
-		for (i = 0; i < NUMBER_OF_HOURS; i++)
+		d7StatsTab[i] = new Stats();
+	}
+	// Ready the iteration
+	theTree->InitIterate();
+	Node *iterator = NULL;
+	while ( (iterator = theTree->Iterate() ) != NULL )
+	{
+		for (int i = 0; i < NUMBER_OF_HOURS; i++)
 		{
-			theSensor->AddStatsByHour(d7, i, d7StatsTab[i]); // may need a * or &
+			iterator->GetSensor()->AddStatsByHour(d7, i, d7StatsTab[i]); // may need a * or &
 		}
 	}
-	for (i = 0; i < NUMBER_OF_HOURS; i++)
-	{
-		cout << d7 << " " << i << " " << (int)((d7StatsTab[i]->counters[R] +
-		d7StatsTab[i]->counters[N]) * 100 / d7StatsTab[i]->Sum()) << "%\n";
+	for (int i = 0; i < NUMBER_OF_HOURS; i++)
+	{	
+		long print = 0;
+		long sum = d7StatsTab[i]->Sum();
+		if (sum != 0)
+		{
+			print = (int)((d7StatsTab[i]->counters[R] +
+				d7StatsTab[i]->counters[N]) * 100 / sum);
+		}	
+		
+		cout << d7 << " " << i << " " << print << "%\n";
+		delete d7StatsTab[i];
 	}
 	delete[] d7StatsTab;
-	*/
 }
 
 void IoEngine::HandleSTATS_D7()

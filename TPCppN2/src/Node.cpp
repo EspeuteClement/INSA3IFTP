@@ -254,7 +254,7 @@ Node::Node(Sensor *sensor, Node *parent, Node *left, Node *right):
 #ifdef MAP
 	std::cout << "Constructing a <Node>";
 #endif
-	//height = 0;
+	height = 1;
 }
 
 Node::~Node(){

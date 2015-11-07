@@ -1,6 +1,7 @@
 #include "TestEngine.h"
 #include "BinaryTree.h"
 #include "Utils.h"
+#include <stdlib.h>
 
 #include <iostream>
 
@@ -67,7 +68,37 @@ bool TestEngine::Iteration_Test1(bool verbose)
 
 bool TestEngine::BalanceTest_1(bool verbose)
 {
+	srand(127);
+	const int NUMBERS = 15000;
+	Utils::printBold("BALANCE 1", true);
+	
+	// Create the binary tree
+	BinaryTree testTree = BinaryTree();
+	
 
+	// Populate the tree with random id between 0 and NUMBERS
+	for (int i = 0; i < NUMBERS; i++)
+	{
+		testTree.Insert(rand()%15000,0,0,0,0);
+	}
+	//testTree.Serialize();
+	// Iterate trough the tree
+	testTree.InitIterate();
+	Node *iterator = NULL;
+	while( (iterator = testTree.Iterate() ) != NULL)
+	{
+		int id = iterator->GetSensorID();
+		int balance = iterator->GetBalance();
+		if (verbose)
+		{
+			std::cout << id << " " << balance <<'\n';
+		}
+		if (abs(balance) > 1)
+		{
+			Utils::printRed("WARNING : A NODE WITH A BALANCE OF 2 OR PLUS HAS BEEN FOUND",true);
+		}
+	}
+	return true;
 }
 
 

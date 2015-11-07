@@ -5,6 +5,7 @@
 #include "BinaryTree.h"
 #include "TestEngine.h"
 #include "IoEngine.h"
+
 int main()
 {
 	srand(127);
@@ -13,6 +14,7 @@ int main()
   IoEngine test(&tree);
   while(test.ReadInput());
 
+  //TestEngine::BalanceTest_1();
   //TestEngine::Iteration_Test1();
   // TEST THE ITERATION PROCESS
   /*
