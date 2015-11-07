@@ -88,10 +88,12 @@ void Sensor::PrintSensorStatsRel ()
 
 int Sensor::GetDuration(int d7, int h, int m)
 {
+  // Stores the data in a temporary StatsRel struct instance.
   StatsRel *statsRel = new StatsRel(GetStatsByMin(d7, h, m));
   int buffer = 0;
   double max = 0;
 
+  // Get the position of the maximal probability.
   for (int i = 0; i < NUMBER_OF_STATES; i++) {
     if (statsRel->counterStats[i] > max) {
       max = statsRel->counterStats[i];
@@ -99,6 +101,7 @@ int Sensor::GetDuration(int d7, int h, int m)
     }
   }
 
+  // Affects the duration to the buffer depending on the position it refers to.
   switch (buffer) {
     case V :
       buffer = 1;

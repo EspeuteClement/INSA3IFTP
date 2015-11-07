@@ -44,11 +44,9 @@ bool IoEngine::ReadInput()
 
 void IoEngine::HandleADD()
 {
-	// The values are :
+	// The expected command is :
 	// ADD <id> <yyyy(useless)> <mm(useless)> <dd(useless)>
 	// <h> <m> <d7> <trafic>
-
-	// Used to gather the useless values
 
 	int id;
 	int h;
@@ -56,6 +54,7 @@ void IoEngine::HandleADD()
 	int d7;
 	unsigned char trafic[10];
 
+	// * allows us to ignore the useless data.
 	scanf("%i %*i %*i %*i %i %i %i %s",&id , &h , &m , &d7,trafic);
 	theTree->Insert(id,d7,h,m,trafic[0]);
 }
@@ -138,7 +137,7 @@ void IoEngine::HandleOPT()
 {
 	int d7, hStart, hEnd, segCount;
 
-	// Fill the variables with the data
+	// Fill the variables with the data.
 	cin >> d7;
 	cin >> hStart;
 	cin >> hEnd;
@@ -151,7 +150,7 @@ void IoEngine::HandleOPT()
 		cin >> segTab[i];
 	}
 
-	//Caches the sensors to avoid redundant parsing of the binary tree
+	//Caches the sensors to avoid redundant parsing of the binary tree.
 	Sensor **sensorTab = new Sensor*[segCount];
 
 	for (int i = 0; i < segCount; i++)
@@ -175,13 +174,13 @@ void IoEngine::HandleOPT()
 
 	while (hourOfStart < hEnd)
 	{
-		// Simulates the journey for the given startTime
+		// Simulates the journey for the given startTime.
 		for (int segNum = 0; segNum < segCount; segNum++)
 		{
 			duration = sensorTab[segNum]->GetDuration(d7, currentHour, currentMin);
 			totalDuration += duration;
 
-			// Incrementation of the current time by duration minutes
+			// Incrementation of the current time by duration minutes.
 			if (currentMin + duration < NUMBER_OF_MINUTES)
 			{
 				currentMin += duration;
@@ -193,19 +192,19 @@ void IoEngine::HandleOPT()
 			}
 		}
 
-		//Only keep the minimum duration of all and the start time associated
+		//Only keep the minimum duration of all and the start time associated.
 		if (totalDuration < minDuration && currentHour < hEnd) {
 			minDuration = totalDuration;
 			minMinOfStart = minOfStart;
 			minHourOfStart = hourOfStart;
 		}
 
-		// Reinitialize the journey
+		// Reinitialize the journey for the next simulation.
 		totalDuration = 0;
 		currentMin = 0;
 		currentHour = 0;
 
-		// Incrementation of the time of start by one minute
+		// Incrementation of the time of start by one minute.
 		if (minOfStart < NUMBER_OF_MINUTES - 1)
 		{
 			minOfStart++;
@@ -220,6 +219,7 @@ void IoEngine::HandleOPT()
 	delete[] segTab;
 	delete[] sensorTab;
 
-	// Display the optimal time of departure and the journey's duration
-	cout << d7 << " " << minHourOfStart << " " << minMinOfStart << " " << minDuration << "\n";
+	// Display the optimal time of departure and the journey's duration.
+	cout << d7 << " " << minHourOfStart << " " << minMinOfStart << " " <<
+	minDuration << "\n";
 }
