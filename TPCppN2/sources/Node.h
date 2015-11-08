@@ -24,12 +24,7 @@ public:
 	*/
 	inline Node *GetRight() const {return right;};
 
-	/** Exchanges this node sensor with the one in target
-
-	* @param [in] target The node where the swap will happen.
-	*/
-	void SwapSensor(Node *target);
-	// Exchanges this object sensor with the one in target
+	
 
 	/** Simply returns the ID of this node's sensor.
 	*	@return The sensors's ID
@@ -126,6 +121,13 @@ private:
 	*	@param theRight A pointer to the node that should be inserted
 	*/
 	void setRight(Node *theRight);
+
+	/** Exchanges this node sensor with the one in target
+	* @param [in] target The node where the swap will happen.
+	*/
+	void SwapSensor(Node *target);
+	// Exchanges this object sensor with the one in target
+
 
 	Sensor *sensor;	/**The sensor contained in the node */
 
