@@ -4,20 +4,20 @@
 
 /** Manages the inputs on the standard input stream and displays the according
 * data. It is assumed that the user will issue valid commands ONLY. That is :
-* <yyyy> is the year, an integer.
-* <mm> is the month, an integer.
-* <dd> is the day of the month, an integer.
-* <h> is the hour, integer ranging from 0 to 23.
-* <m> is the minute, integer ranging from 0 to 59.
-* <d7> is the day of the week, integer ranging from 1 to 7 included.
-* <traffic> is the state of the traffic, one of the characters 'V', 'J', 'R', 'N'.
-* <idSensor> is the primary key of a sensor, an integer;
-* <H_start> is the beginning of the timeframe of a journey, integer ranging from
+* 'yyyy' is the year, an integer.
+* 'mm' is the month, an integer.
+* 'dd' is the day of the month, an integer.
+* 'h' is the hour, integer ranging from 0 to 23.
+* 'm' is the minute, integer ranging from 0 to 59.
+* 'd7' is the day of the week, integer ranging from 1 to 7 included.
+* 'traffic' is the state of the traffic, one of the characters 'V', 'J', 'R', 'N'.
+* 'idSensor' is the primary key of a sensor, an integer;
+* 'H_start' is the beginning of the timeframe of a journey, integer ranging from
 * 0 to 23.
-* <H_end> is the end of the timeframe of a journey, integer ranging from
+* 'H_end' is the end of the timeframe of a journey, integer ranging from
 * 0 to 23.
-* <seg_count> is the number of road segments of the journey, an integer.
-* <seg_m> is the id of the sensor associated to the m'th segment.
+* 'seg_count' is the number of road segments of the journey, an integer.
+* 'seg_m' is the id of the sensor associated to the m'th segment.
 * The maximal value of m must be equal to seg_count.
 */
 class IoEngine
@@ -38,9 +38,9 @@ class IoEngine
 		* sensor and creates the sensor (and the associated node in the binary tree)
 		* if they don't exist yet.
 		* The expected command is :
-		* ADD <id> <yyyy> <mm> <dd> <h> <m> <d7> <traffic>
+		* ADD 'id' 'yyyy' 'mm' 'dd' 'h' 'm' 'd7' 'traffic'
 		*
-		* <yyyy>, <mm> and <dd> are not used.
+		* 'yyyy', 'mm' and 'dd' are not used.
 		*/
 		void HandleADD();
 
@@ -48,7 +48,7 @@ class IoEngine
 		* traffic states attributes (v, j, r, n) of a sensor as percentages, one by
 		* line. It is assumed the sensor exists or the function will simply exit.
 		* The expected command is :
-		* STATS_C <idSensor>
+		* STATS_C 'idSensor'
 		*/
 		void HandleSTATS_C();
 
@@ -56,7 +56,7 @@ class IoEngine
 		* traffic jam (corresponding to a "r" or "n" traffic state) for each hour
 		* (0 to 23) of a given day of the week, averaging from every sensor.
 		* The expected command is :
-		* JAM_DH <d7>
+		* JAM_DH 'd7'
 		*/
 		void HandleJAM_DH();
 
@@ -64,7 +64,7 @@ class IoEngine
 		* of every traffic state (v, j, r, n) of a given day of the week, averaging
 		* from every sensor.
 		* The expected command is :
-		* STATS_D7 <d7>
+		* STATS_D7 'd7'
 		*/
 		void HandleSTATS_D7();
 
@@ -73,11 +73,11 @@ class IoEngine
 		* departure and the associated minimal duration. It is assumed that every
 		* required sensor exists or the function will simply exit.
 		* The expected command is :
-		* OPT <d7> <H_start> <H_end> <seg_count> <seg_1> ... <seg_n>
+		* OPT 'd7' 'H_start' 'H_end' 'seg_count' 'seg_1' ... 'seg_n'
 		*/
 		void HandleOPT();
 
 	private:
-		BinaryTree *theTree; // TODO Documentation
+		BinaryTree *theTree; /** Pointer to the binary tree that stores the sensors*/
 };
 #endif

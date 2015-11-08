@@ -2,8 +2,8 @@
 
 \usepackage{custom}
 
-\title{Compte-Rendu TP C++ \#2}
-\author{Binôme B3408 \\ {\sc Renault} Benoit, {\sc Espeute} Clément}
+\title{Report Assignment C++ \#2}
+\author{Pair B3408 \\ {\sc Renault} Benoit, {\sc Espeute} Clément}
 \date{}
 \usepackage[top=1in, bottom=1.25in, left=1.25in, right=1.25in]{geometry}
 \usepackage{listings}
@@ -45,17 +45,68 @@
 \begin{document}
 \pagestyle{fancy}
 \maketitle
-\section[Spécifications]{Spécifications de la classe <Sensor>}
+\section{<Sensor> class specifications}
+\subsection{Global presentation}
+Stores the ID of a given sensor and a pointer to a tri-dimensional index of Stats event counters thus allowing easy computation of statistics on a per minute, hour, day and sensor basis.
 
-\subsection{Présentation générale}
-
-\subsection{Présentation des structures}
+\subsection{Structures overview}
 \subsubsection*{Structure <Stats>}
+Stores event integer counters for each of the possible traffic states (v, j, r, n).
+
+\paragraph{Constructor :}
+Default constructor sets all array elements to zero.
+
+\paragraph{Overload of operator+= :}
+Allows adding two Stats structs by adding each array element separately.
+
+\paragraph{Sum method :}
+Adds the statistics of the struct instance together.
+
 \subsubsection*{Structure <StatsRel>}
+Stores relative statistics for each of the possible traffic states (v, j, r, n).
 
-\subsection{Présentation des méthodes}
+\paragraph{Constructor :}
+Default constructor converts all the attributes of the passed in Stats struct into statistics relative to the sum of all the counters.
 
-\subsubsection*{Constructeur}
-\subsubsection*{Constructeur}
+\paragraph{PrintStatsRel :}
+Displays the attributes of the StatsRel struct one per line, rounded into percentages.
+
+\subsection{Functions overview}
+
+\subsubsection*{Constructor}
+Default constructor sets ID to the one given and dynamically allocates the memory required for the tri-dimensional index.st
+
+\subsubsection*{AddEvent}
+Increments the suitable event state counter for a given day of week, hour and minute by one.
+
+\subsubsection*{GetStatsByMin}
+Getter for the Stats of a given time.
+
+\subsubsection*{AddStatsByDay}
+Adds all the Stats structs comprised in the given day to the Stats struct which pointer is passed in.
+
+\subsubsection*{AddStatsByHour}
+Adds all the Stats structs comprised in the given day and hour to the Stats struct which pointer is passed in.
+
+\subsubsection*{AddStatsBySensor}
+Adds all the Stats structs of the current Sensor to the Stats struct which pointer is passed.
+
+\subsubsection*{GetDuration}
+Computes and returns the probable duration of the journey through the road segment associated with the sensor. Each probable state is associated with a duration : (v->1, j->2, r->4, n->10). If no data if available, all the stats are equal to zero, therefore affecting 1 minute ("v" case).
+
+\subsubsection*{GetID}
+Getter for the sensor ID.
+
+\subsubsection*{PrintSensorStatsRel}
+Computes and displays the statistics of the current Sensor for every attribute (v, j, r, n).
+
+
+\section{<IoEngine> class specifications}
+\subsection{Global presentation}
+Manages the inputs on the standard input stream and displays the according data 
+
+\subsection{Functions overview}
+
+\subsubsection*{Constructor}
 
 \end{document}

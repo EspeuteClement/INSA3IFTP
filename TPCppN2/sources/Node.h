@@ -11,7 +11,7 @@ class Node
 {
 public:
 	// ------------------------------------------------------ GETERS :
-	
+
 	/** Returns the node at the left of the current node
 	*	@return A pointer to the left node of this node. Returns NULL
 	*	if there is no left node
@@ -54,14 +54,14 @@ public:
 		then performs a left rotation on this node.
 	*/
 	void DoubleLeftRotation();
-	
+
 	/** Performs a left rotation on the right subtree of this node,
 		then performs a right rotation on this node.
 	*/
 	void DoubleRightRotation();
-	
 
-	/** Re balance this subtree, then this node parent subtree up to 
+
+	/** Re balance this subtree, then this node parent subtree up to
 	*	this tree root.
 	*/
 	void Rebalance();
@@ -72,24 +72,24 @@ public:
 	*/
 	long ComputeHeight();
 
-	/** Returns the subtraction of the left tree's height with the 
+	/** Returns the subtraction of the left tree's height with the
 	*	right tree's one. A 0 value indicates that
 	*	this subtree is perfectly balanced. A positive one indicates that
 	*	the tree is left heavy, and a negative one that the tree is right heavy
 	*/
 	long GetBalance();
 
-	/** Returns the pointer to the node that contains a sensor with its ID matching 
+	/** Returns the pointer to the node that contains a sensor with its ID matching
 	*	aID
 	*	@param [in] aID The ID used for the search.
-	*	@returns If the node is found, return the pointer to the node. 
-	*	Else, returns a NULL pointer. 
+	*	@return If the node is found, return the pointer to the node.
+	*	Else, returns a NULL pointer.
 	*/
 	Node *Search(long aID);
 
 	/** Insert the given sensor in the subtree and returns a pointer to
 	*	the new node.
-	*	@retrun NULL if the node has been inserted. If there is already
+	*	@return NULL if the node has been inserted. If there is already
 	*	a node containing a sensor with ID equals to aID, returns the
 	*	node instead.
 	*/
@@ -120,7 +120,7 @@ private:
 	/** Set the left node of this node to be theLeft
 	*	@param theLeft A pointer to the node that should be inserted
 	*/
-	void setLeft(Node *theLeft); 
+	void setLeft(Node *theLeft);
 
 	/** Set the right node of this node to be theRight
 	*	@param theRight A pointer to the node that should be inserted
@@ -137,7 +137,7 @@ private:
 	long height;	/** The height, i.e. the number of nodes in the
 					longest branch under this node */
 
-	
+
 };
 
 
