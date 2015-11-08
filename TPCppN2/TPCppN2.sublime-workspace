@@ -256,23 +256,15 @@
 	"buffers":
 	[
 		{
-			"file": "makefile",
+			"file": "sources/makefile",
 			"settings":
 			{
-				"buffer_size": 3555,
+				"buffer_size": 3560,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "utils/dispTree/main.lua",
-			"settings":
-			{
-				"buffer_size": 1395,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "makedep.lua",
+			"file": "sources/makedep.lua",
 			"settings":
 			{
 				"buffer_size": 955,
@@ -280,143 +272,39 @@
 			}
 		},
 		{
-			"file": "utils/dispTree/data.lua",
+			"file": "sources/dependencies.dep",
 			"settings":
 			{
-				"buffer_size": 482,
-				"line_ending": "Unix",
-				"name": "return tree="
-			}
-		},
-		{
-			"file": "src/Sensor.h",
-			"settings":
-			{
-				"buffer_size": 5536,
+				"buffer_size": 558,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/Node.h",
+			"file": "sources/IoEngine.cpp",
 			"settings":
 			{
-				"buffer_size": 3945,
+				"buffer_size": 4979,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/Main.h",
+			"file": "sources/Sensor.h",
 			"settings":
 			{
-				"buffer_size": 361,
+				"buffer_size": 5603,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/BinaryTree.h",
+			"file": "sources/TestEngine.cpp",
 			"settings":
 			{
-				"buffer_size": 2128,
+				"buffer_size": 2027,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/Utils.h",
-			"settings":
-			{
-				"buffer_size": 911,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/IoEngine.h",
-			"settings":
-			{
-				"buffer_size": 2821,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "miniTest.in",
-			"settings":
-			{
-				"buffer_size": 4146,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/TestEngine.h",
-			"settings":
-			{
-				"buffer_size": 644,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/IoEngine.cpp",
-			"settings":
-			{
-				"buffer_size": 4749,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/element/Documents/CODE/tests/Test/tp-oo_2-test.out",
-			"settings":
-			{
-				"buffer_size": 254,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/Main.cpp",
-			"settings":
-			{
-				"buffer_size": 2466,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "dep/Deps.dep",
-			"settings":
-			{
-				"buffer_size": 710,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "docConfig",
-			"settings":
-			{
-				"buffer_size": 100240,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/BinaryTree.cpp",
-			"settings":
-			{
-				"buffer_size": 2271,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/Node.cpp",
-			"settings":
-			{
-				"buffer_size": 4726,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/Sensor.cpp",
+			"file": "sources/Sensor.cpp",
 			"settings":
 			{
 				"buffer_size": 2543,
@@ -424,27 +312,21 @@
 			}
 		},
 		{
-			"contents": "    a\n   /\n  b\n / \\\nc   d",
+			"contents": "#include <iostream>\n#include <stdlib.h>\n#include \"Node.h\"\n#include \"Sensor.h\"\n#include \"BinaryTree.h\"\n#include \"TestEngine.h\"\n#include \"IoEngine.h\"\n\nint main()\n{\n	srand(127);\n	BinaryTree tree;\n\n  IoEngine test(&tree);\n  while(test.ReadInput());\n\n  //TestEngine::BalanceTest_1();\n  //TestEngine::Iteration_Test1();\n  // TEST THE ITERATION PROCESS\n  /*\n  tree.InitIterate();\n  Node *daNode = NULL;\n  int counter = 0;\n  while((daNode = tree.Iterate()) != NULL)\n  {\n    std::cout << daNode->GetSensorID() <<'\\n';\n    counter ++;\n  }\n  std::cout << counter << '\\n';\n  */\n	//\n  //std::cout << \"V\" << theRoot->Search(1)->GetSensor()->GetStatsByMin(1,1,1)->v << \"\\n\";\n	//theRoot->DoubleLeftRotation();\n	//int2Node->Rebalance();\n	//tree.Serialize();\n  return 0;\n}",
+			"file": "sources/Main.cpp",
+			"file_size": 2466,
+			"file_write_time": 1446922536000000,
 			"settings":
 			{
-				"buffer_size": 25,
-				"line_ending": "Unix",
-				"name": "a"
-			}
-		},
-		{
-			"file": "src/Utils.cpp",
-			"settings":
-			{
-				"buffer_size": 946,
+				"buffer_size": 754,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/TestEngine.cpp",
+			"file": "sources/BinaryTree.cpp",
 			"settings":
 			{
-				"buffer_size": 2027,
+				"buffer_size": 2338,
 				"line_ending": "Unix"
 			}
 		}
@@ -452,9 +334,13 @@
 	"build_system": "Packages/Makefile/Make.sublime-build",
 	"command_palette":
 	{
-		"height": 96.0,
+		"height": 392.0,
 		"selected_items":
 		[
+			[
+				"CT",
+				"CTags: Rebuild Tags"
+			],
 			[
 				"tags",
 				"CTags: Rebuild Tags"
@@ -505,17 +391,37 @@
 	},
 	"file_history":
 	[
-		"/home/element/Téléchargements/burning-dot.png",
-		"/home/element/Documents/CODE/tests/Test/tp-oo_2-test.in",
+		"/home/element/Apps/DroidMote/README.txt",
+		"/home/element/Documents/INSA/COURS/CSS/Undertale CSS Premier Semestre/notell/usr/demo_ppt.ejs",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/makefile",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/makedep.lua",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/IoEngine.cpp",
+		"/home/element/Documents/CODE/tests/Test/tp-oo_2-test.out",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/Main.cpp",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/dep/Deps.dep",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/docConfig",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/BinaryTree.cpp",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/Node.cpp",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/Sensor.cpp",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/Utils.cpp",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/TestEngine.cpp",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/TestEngine.h",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/miniTest.in",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/IoEngine.h",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/Utils.h",
 		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/BinaryTree.h",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/Main.h",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/Node.h",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/Sensor.h",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/utils/dispTree/data.lua",
+		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/utils/dispTree/main.lua",
+		"/home/element/Documents/CODE/tests/Test/tp-oo_2-test.in",
 		"/home/element/Téléchargements/SampleAssignment.tex",
 		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/.tags",
 		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/.tags_sorted_by_file",
 		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/Event.h",
 		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/Event.cpp",
 		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src/EventList.h",
-		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/makedep.lua",
-		"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/dep/Deps.dep",
 		"/home/element/.profile",
 		"/home/element/.bashrc",
 		"/home/element/Apps/Ctags/buildCtags",
@@ -612,9 +518,7 @@
 		"/home/element/sketchbook/projects/MiniHeroQuest/converter/tilemapconverter/converter/main.lua",
 		"/home/element/sketchbook/projects/MiniHeroQuest/converter/tilemapconverter/converter/data/01.lua",
 		"/home/element/Documents/CODE/OTHER/Generate typewriting text/output.sh",
-		"/home/element/Documents/CODE/OTHER/Generate typewriting text/generator.lua",
-		"/home/element/Apps/Sublime Text 2/sublime_plugin.py",
-		"/home/element/Apps/Sublime Text 2/PackageSetup.py"
+		"/home/element/Documents/CODE/OTHER/Generate typewriting text/generator.lua"
 	],
 	"find":
 	{
@@ -622,7 +526,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
 			"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src",
@@ -635,6 +539,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"TODO",
+			"todo",
+			"127",
 			"found !",
 			"iteraror",
 			"trafic",
@@ -771,23 +678,23 @@
 	"groups":
 	[
 		{
-			"selected": 8,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "makefile",
+					"file": "sources/makefile",
 					"settings":
 					{
-						"buffer_size": 3555,
+						"buffer_size": 3560,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								296,
-								296
+								976,
+								976
 							]
 						],
 						"settings":
@@ -795,25 +702,25 @@
 							"syntax": "Packages/Makefile/Makefile.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 234.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "utils/dispTree/main.lua",
+					"file": "sources/makedep.lua",
 					"settings":
 					{
-						"buffer_size": 1395,
+						"buffer_size": 955,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								750,
-								750
+								146,
+								146
 							]
 						],
 						"settings":
@@ -829,51 +736,56 @@
 				},
 				{
 					"buffer": 2,
-					"file": "makedep.lua",
+					"file": "sources/dependencies.dep",
 					"settings":
 					{
-						"buffer_size": 955,
+						"buffer_size": 558,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								951,
-								951
+								32,
+								32
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/SublimeLove/Love.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 204.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
 				{
 					"buffer": 3,
-					"file": "utils/dispTree/data.lua",
+					"file": "sources/IoEngine.cpp",
 					"settings":
 					{
-						"buffer_size": 482,
+						"buffer_size": 4979,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								482,
-								482
+								288,
+								288
 							]
 						],
 						"settings":
 						{
-							"auto_name": "return tree=",
-							"syntax": "Packages/SublimeLove/Love.tmLanguage"
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -883,22 +795,23 @@
 				},
 				{
 					"buffer": 4,
-					"file": "src/Sensor.h",
+					"file": "sources/Sensor.h",
 					"settings":
 					{
-						"buffer_size": 5536,
+						"buffer_size": 5603,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1345,
+								1345
 							]
 						],
 						"settings":
 						{
+							"spell_check": true,
 							"syntax": "Packages/C++/C++.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
@@ -911,420 +824,34 @@
 				},
 				{
 					"buffer": 5,
-					"file": "src/Node.h",
+					"file": "sources/TestEngine.cpp",
 					"settings":
 					{
-						"buffer_size": 3945,
+						"buffer_size": 2027,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2970,
-								2970
+								112,
+								112
 							]
 						],
 						"settings":
 						{
-							"rulers":
-							[
-								70
-							],
-							"spell_check": true,
 							"syntax": "Packages/C++/C++.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 209.0,
-						"translation.y": 1377.0,
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 6,
-					"file": "src/Main.h",
-					"settings":
-					{
-						"buffer_size": 361,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "src/BinaryTree.h",
-					"settings":
-					{
-						"buffer_size": 2128,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2100,
-								2100
-							]
-						],
-						"settings":
-						{
-							"spell_check": true,
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 969.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "src/Utils.h",
-					"settings":
-					{
-						"buffer_size": 911,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								838,
-								838
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 193.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "src/IoEngine.h",
-					"settings":
-					{
-						"buffer_size": 2821,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 153.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "miniTest.in",
-					"settings":
-					{
-						"buffer_size": 4146,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								33,
-								33
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 2278.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "src/TestEngine.h",
-					"settings":
-					{
-						"buffer_size": 644,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								575,
-								575
-							]
-						],
-						"settings":
-						{
-							"spell_check": true,
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 9,
-			"sheets":
-			[
-				{
-					"buffer": 13,
-					"file": "src/IoEngine.cpp",
-					"settings":
-					{
-						"buffer_size": 4749,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"auto_name": "",
-							"spell_check": true,
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 204.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 14,
-					"file": "/home/element/Documents/CODE/tests/Test/tp-oo_2-test.out",
-					"settings":
-					{
-						"buffer_size": 254,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								175,
-								175
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 15,
-					"file": "src/Main.cpp",
-					"settings":
-					{
-						"buffer_size": 2466,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								250,
-								250
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 16,
-					"file": "dep/Deps.dep",
-					"settings":
-					{
-						"buffer_size": 710,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 17,
-					"file": "docConfig",
-					"settings":
-					{
-						"buffer_size": 100240,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 2492.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 18,
-					"file": "src/BinaryTree.cpp",
-					"settings":
-					{
-						"buffer_size": 2271,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								221,
-								221
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 19,
-					"file": "src/Node.cpp",
-					"settings":
-					{
-						"buffer_size": 4726,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2580,
-								2580
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2924.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 20,
-					"file": "src/Sensor.cpp",
+					"file": "sources/Sensor.cpp",
 					"settings":
 					{
 						"buffer_size": 2543,
@@ -1345,30 +872,32 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 714.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 21,
+					"buffer": 7,
+					"file": "sources/Main.cpp",
 					"settings":
 					{
-						"buffer_size": 25,
+						"buffer_size": 754,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								4
+								395,
+								395
 							]
 						],
 						"settings":
 						{
-							"auto_name": "a",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1377,19 +906,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 22,
-					"file": "src/Utils.cpp",
+					"buffer": 8,
+					"file": "sources/BinaryTree.cpp",
 					"settings":
 					{
-						"buffer_size": 946,
+						"buffer_size": 2338,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								943,
-								943
+								843,
+								843
 							]
 						],
 						"settings":
@@ -1398,36 +927,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 23,
-					"file": "src/TestEngine.cpp",
-					"settings":
-					{
-						"buffer_size": 2027,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1590,
-								1590
-							]
-						],
-						"settings":
-						{
-							"auto_name": "",
-							"spell_check": true,
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 255.0,
+						"translation.y": 429.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1507,7 +1007,7 @@
 		"width": 0.0
 	},
 	"show_minimap": true,
-	"show_open_files": true,
+	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
 	"side_bar_width": 150.0,

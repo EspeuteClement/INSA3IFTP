@@ -132,7 +132,6 @@ void IoEngine::HandleSTATS_D7()
 
 	// Iterates through the entire to collect the daily statistics.
 	while ( (iterator = theTree->Iterate() ) != NULL )
-
 	{
 		iterator->GetSensor()->AddStatsByDay(d7, d7Stats);
 	}
