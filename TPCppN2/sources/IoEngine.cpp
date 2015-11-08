@@ -14,7 +14,12 @@ IoEngine::IoEngine(BinaryTree *tree):theTree(tree){}
 bool IoEngine::ReadInput()
 {
 	char command[10];
+
+	// Read the command
 	scanf("%s",command);
+
+	// Try to match the command with what we know
+	// and then execute the correct method.
 	if (strcmp(command,"ADD") == 0)
 	{
 		HandleADD();

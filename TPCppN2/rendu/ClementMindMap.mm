@@ -1,6 +1,6 @@
 <map version="0.9.0">
 <!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
-<node CREATED="1446924719176" ID="ID_273007821" MODIFIED="1446924764687" TEXT="New Mindmap">
+<node CREATED="1446924719176" ID="ID_273007821" MODIFIED="1446984116471" TEXT="New Mindmap">
 <node CREATED="1446924724810" ID="ID_1519447860" MODIFIED="1446924731972" POSITION="right" TEXT="Utils">
 <node CREATED="1446924833530" ID="ID_230806177" MODIFIED="1446924938574" TEXT="Sert &#xe0; g&#xe9;r&#xe9;r quelques commandes qui no&apos;nt pas vraiement leurs place dans une des autres classes, comme max() et impression de message en couleur pour les tests"/>
 </node>
@@ -17,5 +17,10 @@
 <node CREATED="1446926302772" ID="ID_512210781" MODIFIED="1446926302772" TEXT=""/>
 </node>
 <node CREATED="1446924768647" ID="ID_1047271021" MODIFIED="1446924772759" POSITION="left" TEXT="TestEngine"/>
+<node CREATED="1446984118571" ID="ID_1612289542" MODIFIED="1446984125643" POSITION="left" TEXT="Ouside tools">
+<node CREATED="1446984127083" ID="ID_845145270" MODIFIED="1446984137131" TEXT="dispTree">
+<node CREATED="1446984571337" ID="ID_55690492" MODIFIED="1446984674002" TEXT="Petit programme &#xe9;crit &#xe0; l&apos;aide du framework lua L&#xd6;VE2d, il permet d&apos;afficher un arbre binaire. Il prends en entr&#xe9;e une table lua, export&#xe9;e depuis le programme a l&apos;aide de la methode BinaryTree::Serialize()."/>
+</node>
+</node>
 </node>
 </map>

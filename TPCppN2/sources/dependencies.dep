@@ -1,0 +1,15 @@
+#File generated with makedep.lua
+build/Main.o : Main.cpp Main.h Node.h Sensor.h BinaryTree.h TestEngine.h IoEngine.h Sensor.h 
+
+build/BinaryTree.o : BinaryTree.cpp BinaryTree.h BinaryTree.h Sensor.h Node.h Node.h Sensor.h 
+
+build/Node.o : Node.cpp Node.h Node.h Sensor.h Utils.h BinaryTree.h Sensor.h 
+
+build/Sensor.o : Sensor.cpp Sensor.h Sensor.h 
+
+build/IoEngine.o : IoEngine.cpp IoEngine.h IoEngine.h Sensor.h BinaryTree.h 
+
+build/TestEngine.o : TestEngine.cpp TestEngine.h TestEngine.h BinaryTree.h Utils.h 
+
+build/Utils.o : Utils.cpp Utils.h Utils.h 
+

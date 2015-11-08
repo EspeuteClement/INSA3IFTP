@@ -13,11 +13,15 @@ void BinaryTree::Serialize()
 
 Sensor *BinaryTree::Search(long ID)
 {
-	Node *nodeMatch = root->Search(ID);
-	if (nodeMatch != NULL)
+	if (root != NULL)
 	{
-		return nodeMatch->GetSensor();
+		Node *nodeMatch = root->Search(ID);
+		if (nodeMatch != NULL)
+		{
+			return nodeMatch->GetSensor();
+		}
 	}
+	
 	return NULL;
 }
 

@@ -11,7 +11,9 @@ void Node::setLeft(Node *theLeft)
 	if (left != NULL)
 	{	left->parent = this;
 	}
-	//height = -1;
+	// We recompute the height because the added node
+	// could have a bigger height than the right sub
+	// tree.
 	ComputeHeight();
 }
 
@@ -21,13 +23,17 @@ void Node::setRight(Node *theRight)
 	if (right != NULL)
 	{	right->parent = this;
 	}
-	//height = -1;
 	ComputeHeight();
 }
 
 
 void Node::SwapSensor(Node *target)
 {
+	// Note : This method is used when we have to swap
+	// 2 nodes in the tree, especially in the left &
+	// right rotations. It has the advantage to not mess
+	// with the parents & child relations, and it preserves
+	// the root in the BinaryTree.
 	Sensor *tmp = this->sensor; // Buffer target sensor
 
 	//Perform the swap
@@ -110,10 +116,9 @@ long Node::ComputeHeight()
 
 void Node::Serialize()
 {
-	// Recursivity power :D
 
 	// The goal is to print something like this :
-	// {id,left={id,left={...}},right={...}}
+	// {id,height,left={id,left={...}},right={...}}
 	std::cout << '{';
 	std::cout << "id=" <<GetSensorID();
 	std::cout << ",height=" << height <<',';

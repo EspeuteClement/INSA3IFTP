@@ -8,7 +8,7 @@ OBJ_FOLDER = "build/"
 DEP_FILENAME = "dependencies.dep"
 
 -- Create .dep file
-file = io.open(DEP_FOLDER..DEP_FILENAME,"w+")
+file = io.open(DEP_FOLDER..DEP_FILENAME,"w")
 file:write("#File generated with makedep.lua\n")
 
 function aWrite(a,file)
