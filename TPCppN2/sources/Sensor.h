@@ -71,7 +71,11 @@ struct StatsRel {
     double total = stats->Sum();
     for (int i = 0; i < NUMBER_OF_STATES; i++)
     {
-      counterStats[i] = stats->counters[i] / total;
+      counterStats[i] = 0;
+      if (total != 0)
+      {
+        counterStats[i] = stats->counters[i] / total;
+      }
     }
   };
 
