@@ -46,17 +46,20 @@ void BinaryTree::Insert(int ID,
 
 void BinaryTree::InitIterate()
 {
-	if (stack == NULL || stackDepth != root->GetHeight()+2)
+	if (root!= NULL)
 	{
-		if (stack != NULL)
+		if (stack == NULL || stackDepth != root->GetHeight()+2)
 		{
-			delete[] stack;
+			if (stack != NULL)
+			{
+				delete[] stack;
+			}
+			stackDepth = root->GetHeight()+2;
+			stack = new Node*[stackDepth];
 		}
-		stackDepth = root->GetHeight()+2;
-		stack = new Node*[stackDepth];
+		stackPos = 0;
+		stack[stackPos] = root;
 	}
-	stackPos = 0;
-	stack[stackPos] = root;
 }
 
 Node *BinaryTree::Iterate()
