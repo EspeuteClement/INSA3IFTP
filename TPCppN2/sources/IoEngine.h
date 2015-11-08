@@ -34,8 +34,9 @@ class IoEngine
 		*/
 		bool ReadInput();
 
-		// TODO Write proper documentation for this function.
-		/**
+		/** Calls the necessary function thats adds the new event to the appropriate
+		* sensor and creates the sensor (and the associated node in the binary tree)
+		* if they don't exist yet.
 		* The expected command is :
 		* ADD <id> <yyyy> <mm> <dd> <h> <m> <d7> <traffic>
 		*
