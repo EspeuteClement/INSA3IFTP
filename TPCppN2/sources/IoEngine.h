@@ -45,7 +45,7 @@ class IoEngine
 
 		/** Performs the STATS_C operation : displays the statistics for each of the
 		* traffic states attributes (v, j, r, n) of a sensor as percentages, one by
-		* line.
+		* line. It is assumed the sensor exists or the function will simply exit.
 		* The expected command is :
 		* STATS_C <idSensor>
 		*/
@@ -69,7 +69,8 @@ class IoEngine
 
 		/** Performs the OPT operation : computes and displays the optimal time
 		* (which reduces the duration of the journey through the given segments) of
-		* departure and the associated minimal duration.
+		* departure and the associated minimal duration. It is assumed that every
+		* required sensor exists or the function will simply exit.
 		* The expected command is :
 		* OPT <d7> <H_start> <H_end> <seg_count> <seg_1> ... <seg_n>
 		*/

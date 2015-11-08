@@ -166,6 +166,12 @@ void IoEngine::HandleOPT()
 	for (int i = 0; i < segCount; i++)
 	{
 		sensorTab[i] = theTree->Search(segTab[i]);
+		
+		// If on of the passed in sensors doesn't exit, the function exits.
+		if (sensorTab[i] == NULL)
+		{
+			return;
+		}
 	}
 
 	//Starting from every minute within [hStart, hEnd], we compute the duration of
