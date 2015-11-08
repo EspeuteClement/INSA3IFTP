@@ -12,14 +12,14 @@ if _in and _out then
 	endHour = 14
 
 	numberOfMinutes = (endHour-startHour) * 60
-	optimalStartTime = math.random(numberOfMinutes - numberOfTrajectSensors - 1)
+	optimalStartTime = 12
 	for sensor=1,numberOfTrajectSensors do
 		for minute=0,numberOfMinutes-1 do
-			_in:write(	"ADD " .. 
-						sensor .. 
-						" 1984 1 1 " .. 
+			_in:write(	"ADD " ..
+						sensor ..
+						" 1984 1 1 " ..
 						math.floor(minute / 60) + startHour ..  -- HOURS
-						" " .. 
+						" " ..
 						minute%60 ..
 						" 1 ");
 			if minute == optimalStartTime+sensor-1 then

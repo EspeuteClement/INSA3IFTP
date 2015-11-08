@@ -166,7 +166,7 @@ void IoEngine::HandleOPT()
 	for (int i = 0; i < segCount; i++)
 	{
 		sensorTab[i] = theTree->Search(segTab[i]);
-		
+
 		// If on of the passed in sensors doesn't exit, the function exits.
 		if (sensorTab[i] == NULL)
 		{
@@ -194,6 +194,7 @@ void IoEngine::HandleOPT()
 		for (int segNum = 0; segNum < segCount; segNum++)
 		{
 			duration = sensorTab[segNum]->GetDuration(d7, currentHour, currentMin);
+			cout << "duration = " << duration << " for " << currentHour << "h" << currentMin << " sensor:" << sensorTab[segNum]->GetID() << "\n";
 			totalDuration += duration;
 
 			// Incrementation of the current time by duration minutes.
@@ -215,11 +216,6 @@ void IoEngine::HandleOPT()
 			minHourOfStart = hourOfStart;
 		}
 
-		// Reinitialize the journey for the next simulation.
-		totalDuration = 0;
-		currentMin = 0;
-		currentHour = 0;
-
 		// Incrementation of the time of start by one minute.
 		if (minOfStart < NUMBER_OF_MINUTES - 1)
 		{
@@ -230,6 +226,11 @@ void IoEngine::HandleOPT()
 			minOfStart = 0;
 			hourOfStart++;
 		}
+
+		// Reinitialize the journey for the next simulation.
+		totalDuration = 0;
+		currentMin = minOfStart;
+		currentHour = hourOfStart;
 	}
 
 	delete[] segTab;
