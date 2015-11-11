@@ -1,18 +1,31 @@
-#include <iostream>
-#include <stdlib.h>
-#include "Node.h"
-#include "Sensor.h"
 #include "BinaryTree.h"
-#include "TestEngine.h"
 #include "IoEngine.h"
 
+// Uncomment following line if you want to execute the tests in TestEngine :
+//#define DEBUG
+
+#ifdef DEBUG
+#include "TestEngine.h"
+#endif
+
+/** Performs the tests from TestEngine if DEBUG is defined.
+* Else, initiates IoEngine to listen for user input and execute it as long as no
+* EXIT command is issued.
+*/
 int main()
 {
-	srand(127);
+#ifndef DEBUG
 	BinaryTree tree;
 
-  IoEngine test(&tree);
-  while(test.ReadInput());
+  IoEngine engine(&tree);
+  while(engine.ReadInput());
+#endif
+
+#ifdef DEBUG
+	TestEngine::Iteration_Test1();
+	TestEngine::BalanceTest_1();
+	TestEngine::SensorTest_1();
+#endif
 
   return 0;
 }
