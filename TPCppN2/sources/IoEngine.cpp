@@ -194,7 +194,7 @@ void IoEngine::HandleOPT()
 		for (int segNum = 0; segNum < segCount; segNum++)
 		{
 			duration = sensorTab[segNum]->GetDuration(d7, currentHour, currentMin);
-			cout << "duration = " << duration << " for " << currentHour << "h" << currentMin << " sensor:" << sensorTab[segNum]->GetID() << "\n";
+			//cout << "duration = " << duration << " for " << currentHour << "h" << currentMin << " sensor:" << sensorTab[segNum]->GetID() << "\n";
 			totalDuration += duration;
 
 			// Incrementation of the current time by duration minutes.

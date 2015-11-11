@@ -22,12 +22,14 @@ if _in and _out then
 						" " ..
 						minute%60 ..
 						" 1 ");
-			if minute == optimalStartTime+sensor-1 then
+			if minute == optimalStartTime+sensor-1 or (sensor == 1) then
 				_in:write("V")
 			else
 				_in:write("R")
 			end
 			_in:write("\n")
+
+			
 		end
 	end
 
