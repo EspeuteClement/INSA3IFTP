@@ -8,6 +8,7 @@
 \usepackage[top=1in, bottom=1.25in, left=1.25in, right=1.25in]{geometry}
 \usepackage{listings}
 \usepackage{graphicx}
+\usepackage{hyperref}
 
 \definecolor{commentColor}{rgb}{0.7,0.7,0.7}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -127,11 +128,20 @@ Performs the STATS\_C operation : displays the statistics for each of the traffi
 \subsubsection*{HandleSTATS\_D7}
 Performs the STATS\_D7 operation : computes and displays the statistics of every traffic state (v, j, r, n) of a given day of the week, averaging from every sensor.
 
+\section{Storing the Sensors}
+We choosed to use a BinaryTree as our storage method for the Sensors. It allows us to have very fast indexing and insertion speed.
+Here some explainations about the vocabulary that we'll use later :
+\begin{description}
+	\item[Node] Represents a element in our tree. Each one has 2 children and one parent. Each node contains a sensor. The Sensor's ID determines the position of the node in the tree, as the left child Sensor's ID is always lower than the one of it's parents, and the right one is higher.
+	\item[Height] The height is the longest chain of node in a subtree.
+	\item[Balance] The balance of a node is determined like this : $ leftSubtreeHeight - rightSubtreeHeight$. It allows to know if a subtree is balanced or not. In our tree, the node balance has to be between $-1$ and $+1$. If it's higher, we have to perform some operations in order to restore the balance.
+\end{description}
+
 \section{<Node> Class Specifications}
 \subsection{Global Presentation}
-We choosed to use a BinaryTree as our storage method for the Sensors. It allows us to have very fast indexing and insertion speed.
 
-Node is a class that represents a BinaryTree leaf. Each one contains a Sensor and 3 Node pointers : 1 for the parent node and 2 for the left and right child nodes. The nodes are sorted with the Sensor ID : Nodes that are at the left of this node will have their Sensor ID lower to this one, and Node to the left will have a Sensor ID higher to this one.
+
+Node is a class that represents a BinaryTree node. Each one contains a Sensor and 3 Node pointers : 1 for the parent node and 2 for the left and right child nodes. The nodes are sorted with the Sensor ID : Nodes that are at the left of this node will have their Sensor ID lower to this one, and Node to the left will have a Sensor ID higher to this one.
 \subsection{Function overview}
 \subsubsection*{Constructor}
 By default, the node constructor only take a Sensor as an argument. You can also specify the parents node and the children (defaulted to NULL).
@@ -139,8 +149,19 @@ By default, the node constructor only take a Sensor as an argument. You can also
 Simple Getters for the Left and Rigth childs of this node.
 \subsection{SwapSensor}
 Exchange the Sensor of this node with another node. It allows to keep links between the nodes. This method is private because if an external user uses it, it could break the structure of the subtree.
+
 \subsection{LeftRotation and RightRotation}
-Left and right rotations are operations that doesn't change the logic of the binary tree. It's used in the rebalancing process.
+Left and right rotations are operations that doesn't change the logic of the binary tree. It's used in the rebalancing process. More explanations can be found here \url{https://en.wikipedia.org/wiki/Tree_rotation}.
+
+This function is not as optimized as it should because I use 5 operations instead of the usual 3. This is because I use a sensor swap so we can keep the tree structure in place. If we didn't do that, some parent-child relations from node not involved in the operations could be messed up.
+
+\subsection{DoubleLeftRotation and DoubleRightRotation}
+Each one performs 2 rotations on the tree. Again, it's used in the rebalancing process of the tree.
+
+\subsection{ComputeHeight}
+This method compute the height of the current node if needed.
+
+
 
 
 

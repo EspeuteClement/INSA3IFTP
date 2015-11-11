@@ -2,15 +2,13 @@
 #include "BinaryTree.h"
 #include "Utils.h"
 #include <stdlib.h>
-
 #include <iostream>
-
-
 
 
 bool TestEngine::Iteration_Test1(bool verbose)
 {
-	const int NUMBERS = 1500;
+	// The numbers of elements to put in the binary tree
+	const int NUMBERS = 15000;
 	Utils::printBold("ITERATION TEST 1", true);
 	
 	// Create the binary tree
@@ -79,7 +77,7 @@ bool TestEngine::BalanceTest_1(bool verbose)
 	// Populate the tree with random id between 0 and NUMBERS
 	for (int i = 0; i < NUMBERS; i++)
 	{
-		testTree.Insert(rand()%15000,0,0,0,0);
+		testTree.Insert(rand()%15000-7500,0,0,0,0);
 	}
 	//testTree.Serialize();
 	// Iterate trough the tree

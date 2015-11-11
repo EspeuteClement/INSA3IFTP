@@ -37,35 +37,12 @@ public:
 	// Get the current computed height of this node
 	// NOTE : ComputeHeight is more reliable, but involve maths
 
-	/**	Performs a LeftRotation using this node as the root
-	*/
-	void LeftRotation();
-
-	/**	Performs a RightRotation using this node as the root
-	*/
-	void RightRotation();
-
-	/** Performs a right rotation on the right subtree of this node,
-		then performs a left rotation on this node.
-	*/
-	void DoubleLeftRotation();
-
-	/** Performs a left rotation on the right subtree of this node,
-		then performs a right rotation on this node.
-	*/
-	void DoubleRightRotation();
+	
 
 
-	/** Re balance this subtree, then this node parent subtree up to
-	*	this tree root.
-	*/
-	void Rebalance();
+	
 
-	/** Compute this Node Height (the number of Node in the longest
-	*	subtree of this node) and then returns it
-	*	@return this Node Height
-	*/
-	long ComputeHeight();
+	
 
 	/** Returns the subtraction of the left tree's height with the
 	*	right tree's one. A 0 value indicates that
@@ -128,6 +105,34 @@ private:
 	void SwapSensor(Node *target);
 	// Exchanges this object sensor with the one in target
 
+	/**	Performs a LeftRotation using this node as the root
+	*/
+	void LeftRotation();
+
+	/**	Performs a RightRotation using this node as the root
+	*/
+	void RightRotation();
+
+	/** Performs a right rotation on the right subtree of this node,
+		then performs a left rotation on this node.
+	*/
+	void DoubleLeftRotation();
+
+	/** Performs a left rotation on the right subtree of this node,
+		then performs a right rotation on this node.
+	*/
+	void DoubleRightRotation();
+
+	/** Re balance this subtree, then this node parent subtree up to
+	*	this tree root.
+	*/
+	void Rebalance();
+
+	/** Compute this Node Height (the number of Node in the longest
+	*	subtree of this node) and then returns it
+	*	@return this Node Height
+	*/
+	long ComputeHeight();
 
 	Sensor *sensor;	/**The sensor contained in the node */
 

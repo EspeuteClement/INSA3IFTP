@@ -103,12 +103,13 @@ long Node::ComputeHeight()
 	{	r = right->height;
 	}
 
+	int oldH = height;
 	// The height is the max of the subtrees height, plus one
 	height = Utils::max(l,r) + 1;
 	
 	//Then we call this method for this node parent to propagate
-	//The height change
-	if(parent !=NULL)
+	//The height change (it the height has changed)
+	if( oldH != height && parent !=NULL)
 	{	parent->ComputeHeight();
 	}
 	return height;

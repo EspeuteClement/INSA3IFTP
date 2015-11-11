@@ -8,7 +8,7 @@ CC_OUTPUT_FLAG = -o
 # Arguments pour le stade d'édition des liens
 LINK_FLAG =
 # Arguments pour le stade de compilation
-CC_COMP_FLAG = -c -Wall -Os
+CC_COMP_FLAG = -c -Wall -O3
 # Commande d'affichage
 PRINT = @printf
 
