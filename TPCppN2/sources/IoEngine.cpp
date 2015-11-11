@@ -167,7 +167,7 @@ void IoEngine::HandleOPT()
 	{
 		sensorTab[i] = theTree->Search(segTab[i]);
 
-		// If on of the passed in sensors doesn't exit, the function exits.
+		// If one of the passed in sensors doesn't exist, the function exits.
 		if (sensorTab[i] == NULL)
 		{
 			return;
@@ -175,7 +175,7 @@ void IoEngine::HandleOPT()
 	}
 
 	//Starting from every minute within [hStart, hEnd], we compute the duration of
-	//the journey and only keep the shortest that also complies with hEnd.
+	//the journey and only keep the shortest.
 	int minDuration = (hEnd-hStart)*60;
 	int minMinOfStart = 0;
 	int minHourOfStart = hStart;
@@ -210,7 +210,7 @@ void IoEngine::HandleOPT()
 		}
 
 		//Only keep the minimum duration of all and the start time associated.
-		if (totalDuration < minDuration && currentHour < hEnd) {
+		if (totalDuration < minDuration) {
 			minDuration = totalDuration;
 			minMinOfStart = minOfStart;
 			minHourOfStart = hourOfStart;
