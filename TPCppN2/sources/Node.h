@@ -24,8 +24,6 @@ public:
 	*/
 	inline Node *GetRight() const {return right;};
 
-	
-
 	/** Simply returns the ID of this node's sensor.
 	*	@return The sensors's ID
 	*/
@@ -34,15 +32,6 @@ public:
 	/** Return this node height.
 	*/
 	inline long GetHeight() const {return height;};
-	// Get the current computed height of this node
-	// NOTE : ComputeHeight is more reliable, but involve maths
-
-	
-
-
-	
-
-	
 
 	/** Returns the subtraction of the left tree's height with the
 	*	right tree's one. A 0 value indicates that
@@ -52,20 +41,20 @@ public:
 	long GetBalance();
 
 	/** Returns the pointer to the node that contains a sensor with its ID matching
-	*	aID
-	*	@param [in] aID The ID used for the search.
+	*	searchID
+	*	@param [in] searchID The ID used for the search.
 	*	@return If the node is found, return the pointer to the node.
 	*	Else, returns a NULL pointer.
 	*/
-	Node *Search(long aID);
+	Node *Search(long searchID);
 
 	/** Insert the given sensor in the subtree and returns a pointer to
 	*	the new node.
 	*	@return NULL if the node has been inserted. If there is already
-	*	a node containing a sensor with ID equals to aID, returns the
+	*	a node containing a sensor with ID equals to searchID, returns the
 	*	node instead.
 	*/
-	Node *Insert(int aID);
+	Node *Insert(int searchID);
 
 
 	/** Print in the standard output a representation of this node

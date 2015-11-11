@@ -3,12 +3,13 @@
 #include "BinaryTree.h"
 
 /** Manages the inputs on the standard input stream and displays the according
-* data. It is assumed that the user will issue valid commands ONLY. That is :
+* data. It is assumed that the user will issue valid commands, otherwise, they
+* will not be excecuted. That is :
 * 'yyyy' is the year, an integer.
 * 'mm' is the month, an integer.
 * 'dd' is the day of the month, an integer.
-* 'h' is the hour, integer ranging from 0 to 23.
-* 'm' is the minute, integer ranging from 0 to 59.
+* 'h' is the hour, integer ranging from 0 to 23 included.
+* 'm' is the minute, integer ranging from 0 to 59 included.
 * 'd7' is the day of the week, integer ranging from 1 to 7 included.
 * 'traffic' is the state of the traffic, one of the characters 'V', 'J', 'R', 'N'.
 * 'idSensor' is the primary key of a sensor, an integer;
@@ -79,5 +80,10 @@ class IoEngine
 
 	private:
 		BinaryTree *theTree; /** Pointer to the binary tree that stores the sensors*/
+
+		bool checkHour(int hour);
+		bool checkMinute(int minute);
+		bool checkD7(int day);
+		bool checkTraffic(char traffic);
 };
 #endif

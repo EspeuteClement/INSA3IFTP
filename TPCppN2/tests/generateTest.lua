@@ -26,9 +26,9 @@ if _in and _out then
 						" " .. 
 						(math.floor((startHour + math.floor(minute / 60))/24)%7)+1);
 			if minute == optimalStartTime+sensor-1 then
-				_in:write("V")
+				_in:write(" V")
 			else
-				_in:write("R")
+				_in:write(" R")
 			end
 			_in:write("\n")
 
