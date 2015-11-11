@@ -11,11 +11,11 @@ int main()
 	srand(127);
 	BinaryTree tree;
 
-  //IoEngine test(&tree);
-  //while(test.ReadInput());
+  IoEngine test(&tree);
+  while(test.ReadInput());
 
-  TestEngine::BalanceTest_1();
-  TestEngine::Iteration_Test1();
+  //TestEngine::BalanceTest_1();
+  //TestEngine::Iteration_Test1();
   // TEST THE ITERATION PROCESS
   /*
   tree.InitIterate();

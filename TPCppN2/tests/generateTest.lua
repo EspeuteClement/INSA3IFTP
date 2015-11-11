@@ -12,9 +12,9 @@ if _in and _out then
 	endHour = 14
 
 	numberOfMinutes = (endHour-startHour) * 60
-	optimalStartTime = 12
+	optimalStartTime = 119
 	for sensor=1,numberOfTrajectSensors do
-		for minute=0,numberOfMinutes-1 do
+		for minute=0,numberOfMinutes*2 do
 			_in:write(	"ADD " ..
 						sensor ..
 						" 1984 1 1 " ..
@@ -22,7 +22,7 @@ if _in and _out then
 						" " ..
 						minute%60 ..
 						" 1 ");
-			if minute == optimalStartTime+sensor-1 or (sensor == 1) then
+			if minute == optimalStartTime+sensor-1 then
 				_in:write("V")
 			else
 				_in:write("R")

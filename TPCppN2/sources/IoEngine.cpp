@@ -176,7 +176,7 @@ void IoEngine::HandleOPT()
 
 	//Starting from every minute within [hStart, hEnd], we compute the duration of
 	//the journey and only keep the shortest.
-	int minDuration = (hEnd-hStart)*60;
+	int minDuration = (hEnd-hStart)*600;
 	int minMinOfStart = 0;
 	int minHourOfStart = hStart;
 
@@ -204,7 +204,7 @@ void IoEngine::HandleOPT()
 			}
 			else
 			{
-				currentMin += (duration - NUMBER_OF_MINUTES + 1);
+				currentMin += (duration - NUMBER_OF_MINUTES);
 				currentHour++;
 			}
 		}
