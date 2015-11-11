@@ -179,14 +179,17 @@ void IoEngine::HandleOPT()
 	int minDuration = (hEnd-hStart)*600;
 	int minMinOfStart = 0;
 	int minHourOfStart = hStart;
+	int minDayOfStart = d7;
 
 	int minOfStart = 0;
 	int hourOfStart = hStart;
+	int dayOfStart = d7;
 
 	int duration = 0;
 	int totalDuration = 0;
-	int currentMin = 0;
+	int currentMin = minOfStart;
 	int currentHour = hourOfStart;
+	int currentDay = dayOfStart;
 
 	while (hourOfStart < hEnd)
 	{
@@ -194,7 +197,7 @@ void IoEngine::HandleOPT()
 		for (int segNum = 0; segNum < segCount; segNum++)
 		{
 			duration = sensorTab[segNum]->GetDuration(d7, currentHour, currentMin);
-			//cout << "duration = " << duration << " for " << currentHour << "h" << currentMin << " sensor:" << sensorTab[segNum]->GetID() << "\n";
+
 			totalDuration += duration;
 
 			// Incrementation of the current time by duration minutes.
@@ -204,8 +207,23 @@ void IoEngine::HandleOPT()
 			}
 			else
 			{
-				currentMin += (duration - NUMBER_OF_MINUTES);
-				currentHour++;
+				if (currentHour + 1 < NUMBER_OF_HOURS)
+				{
+					currentMin += (duration - NUMBER_OF_MINUTES);
+					currentHour++;
+				}
+				else
+				{
+					currentHour = 0;
+					if (currentDay + 1 < NUMBER_OF_DAYS)
+					{
+						currentDay++;
+					}
+					else
+					{
+						currentDay = 0;
+					}
+				}
 			}
 		}
 

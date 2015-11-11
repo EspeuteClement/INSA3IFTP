@@ -145,23 +145,67 @@ Node is a class that represents a BinaryTree node. Each one contains a Sensor an
 \subsection{Function overview}
 \subsubsection*{Constructor}
 By default, the node constructor only take a Sensor as an argument. You can also specify the parents node and the children (defaulted to NULL).
-\subsection{GetLeft and GetRight}
+\subsubsection*{GetLeft and GetRight}
 Simple Getters for the Left and Rigth childs of this node.
-\subsection{SwapSensor}
+\subsubsection*{SwapSensor}
 Exchange the Sensor of this node with another node. It allows to keep links between the nodes. This method is private because if an external user uses it, it could break the structure of the subtree.
 
-\subsection{LeftRotation and RightRotation}
+\subsubsection*{LeftRotation and RightRotation}
 Left and right rotations are operations that doesn't change the logic of the binary tree. It's used in the rebalancing process. More explanations can be found here \url{https://en.wikipedia.org/wiki/Tree_rotation}.
 
 This function is not as optimized as it should because I use 5 operations instead of the usual 3. This is because I use a sensor swap so we can keep the tree structure in place. If we didn't do that, some parent-child relations from node not involved in the operations could be messed up.
 
-\subsection{DoubleLeftRotation and DoubleRightRotation}
+\subsubsection*{DoubleLeftRotation and DoubleRightRotation}
 Each one performs 2 rotations on the tree. Again, it's used in the rebalancing process of the tree.
 
-\subsection{ComputeHeight}
+\subsubsection*{ComputeHeight}
 This method compute the height of the current node if needed.
 
+\subsubsection*{GetHeight}
+Simple getter for the Height parameter.
 
+\subsubsection*{GetBalance}
+Return the balance of this subtree.
+
+\subsubsection*{Search and Insert}
+These two method are fairly similar. The only difference is that search will return the node that has the ID matching the one in parameter, or NULL if it hasn't been found. Insert will return the node with the right ID or create a new one and return it if the ID hasn't been found.
+
+\subsubsection*{Serialize}
+Print the subtree in a form that is readable by a Lua program. Used for some tests for the Node and BinaryTree classes.
+
+\subsubsection*{GetSensor}
+Simple getter for the Sensor.
+
+\section{<BinaryTree> Class Specifications}
+\subsection{Global Presentation}
+While Node can act by itself has a binary tree, the BinaryTree class offers a useful layer of functions that can be used to manipulate the tree. It keeps track of the root (the first node in the tree), allow to iterate thought the Tree. It also allows to add data in a specific Sensor in one command.
+
+\subsection{Function Overview}
+\subsubsection*{Search}
+Simply return the result of Search on the root Node.
+
+\subsubsection*{Serialize}
+Serialize the tree, and add "return " at the start of the output, so it can be easely parsed in lua.
+
+\subsubsection*{Insert}
+Allows to put data from the "ADD" command in the tree easily.
+
+\subsubsection*{GetRoot}
+Returns the root node of the subtree
+
+\subsection{Iterating trough the tree}
+The process of iterating trough the tree is fairly simple. Each time we call Iterate(), we get a pointer to a node in the tree that we haven’t visited yet, until we get a null pointer, indicating that we have traversed the tree. Using InitIterate allows to initialize the variables so the Iteration can run smoothly.
+
+We keep track of our position in the tree via a Stack containing the path from the current node to the tree's root. The stack is just an pointer array with a variable keeping the current number of pointers in the array.
+
+For iterating, We start from the root, and we will return the current node at the end of the method. But before that, we will push the next node to visit in the stack. We prioritize the left nodes, then the right ones. If we can't go down the tree any more (only NULL pointers), we pop nodes in the stack until we can go right again.
+
+\subsubsection*{InitIterate}
+Prepare the Tree for a iteration trough the tree. It initialize the stack using the height of the tree.
+
+\subsubsection*{Iterate}
+Will return a pointer to a node that hasn't been visited yet, or NULL if we reached the end of the tree.
+ 
 
 
 

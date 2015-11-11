@@ -8,9 +8,9 @@ nStrResult="$1 "
 
 echo tp-oo_2-test
 let "nTestCount=$nTestCount+1"
-./$1 < add.1.in > temp1.txt
+./$1 < tp-oo_2-test.in > temp1.txt
 grep -v '^#' temp1.txt > temp2.txt
-diff -wB add.1.out temp2.txt
+diff -wB tp-oo_2-test.out temp2.txt
 if [ $? -eq 0 ]
         then
 		echo PASSED

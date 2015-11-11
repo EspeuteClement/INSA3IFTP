@@ -72,7 +72,7 @@ This test is designed to see if the BinaryTree is balanced after a long series o
 \section{External tests}
 Those tests were created in order to see if our application was properly functioning. We used the \texttt{test.sh} file provided for the TP with some in and out files also provided in order to see if the basic function were properly functioning. We also used a 20 000 000 instruction file provided by another group that allowed us to see if our program was performing well under the worst case scenario for the TP.
 
-Finally, we needed to test the optional instruction, being \texttt{OPT}. For that, I wrote a simple lua script that generated the in and out files for this test. The program choose a random minute between 2 given our as the "optimal" path. Then it write into the .in file ADD commands filling all the minutes between the 2 hours with "R" traffic except for the chosen minute where the traffic is "V". Multiples Sensors are created in the same way, but with the "V" traffic put so the chosen path will be fully "V".
+Finally, we needed to test the optional instruction, being \texttt{OPT}. For that, I wrote a simple lua (\texttt{generateValues.lua} in the \texttt{tests/} folder)script that generated the in and out files for this test. The program choose a random minute between 2 given our as the "optimal" path. Then it write into the .in file ADD commands filling all the minutes between the 2 hours with "R" traffic except for the chosen minute where the traffic is "V". Multiples Sensors are created in the same way, but with the "V" traffic put so the chosen path will be fully "V".
 
 At the end, the program write in the .out file the expected output.
 

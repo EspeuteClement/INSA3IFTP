@@ -1,6 +1,6 @@
 #include "Sensor.h"
 
-Sensor::Sensor(long aID):ID(aID)
+Sensor::Sensor(long sensorID):ID(sensorID)
 {
   index = new Stats ** [ NUMBER_OF_DAYS ];
   for (int i = 0; i < NUMBER_OF_DAYS; i++)
