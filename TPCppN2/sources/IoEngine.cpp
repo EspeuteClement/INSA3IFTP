@@ -162,8 +162,8 @@ void IoEngine::HandleOPT()
 	cin >> segCount;
 
 	if (checkD7(d7)) return;
-	if (checkHour(hStart)) return;
-	if (checkHour(hEnd)) return;
+	if (checkHourTimeFrame(hStart)) return;
+	if (checkHourTimeFrame(hEnd)) return;
 
 	int *segTab = new int[segCount];
 
@@ -276,8 +276,17 @@ void IoEngine::HandleOPT()
 
 bool IoEngine::checkHour(int hour)
 {
-	if (hour < 0 || hour > 23) {
+	if (hour < 0 || hour > NUMBER_OF_HOURS - 1) {
 		cout << "The hour must be an integer ranging from 0 to 23 included.\n";
+		return true;
+	}
+	return false;
+}
+
+bool IoEngine::checkHourTimeFrame(int hour)
+{
+	if (hour < 0 || hour > NUMBER_OF_HOURS) {
+		cout << "The hour of start an end must be integers ranging from 0 to 24 included.\n";
 		return true;
 	}
 	return false;
@@ -285,7 +294,7 @@ bool IoEngine::checkHour(int hour)
 
 bool IoEngine::checkMinute(int minute)
 {
-	if (minute < 0 || minute > 59) {
+	if (minute < 0 || minute > NUMBER_OF_MINUTES - 1) {
 		cout << "The minute must be an integer ranging from 0 to 59 included.\n";
 		return true;
 	}
@@ -294,7 +303,7 @@ bool IoEngine::checkMinute(int minute)
 
 bool IoEngine::checkD7(int day)
 {
-	if (day < 1 || day > 7) {
+	if (day < 1 || day > NUMBER_OF_DAYS) {
 		cout << "The day of week must be an integer ranging from 1 to 7 included.\n";
 		return true;
 	}

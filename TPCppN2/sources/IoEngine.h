@@ -14,9 +14,9 @@
 * 'traffic' is the state of the traffic, one of the characters 'V', 'J', 'R', 'N'.
 * 'idSensor' is the primary key of a sensor, an integer;
 * 'H_start' is the beginning of the timeframe of a journey, integer ranging from
-* 0 to 23.
+* 0 to 24.
 * 'H_end' is the end of the timeframe of a journey, integer ranging from
-* 0 to 23.
+* 0 to 24.
 * 'seg_count' is the number of road segments of the journey, an integer.
 * 'seg_m' is the id of the sensor associated to the m'th segment.
 * The maximal value of m must be equal to seg_count.
@@ -81,7 +81,13 @@ class IoEngine
 	private:
 		BinaryTree *theTree; /** Pointer to the binary tree that stores the sensors*/
 
+		/* Simple check functions for input values according to the requirements.
+		* @param the value to test.
+		* @return true if the passed in value doesn't meet the requirements, false
+		* if it does.
+		*/
 		bool checkHour(int hour);
+		bool checkHourTimeFrame(int hour);
 		bool checkMinute(int minute);
 		bool checkD7(int day);
 		bool checkTraffic(char traffic);
