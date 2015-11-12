@@ -2,7 +2,7 @@
 #include "IoEngine.h"
 #include <ctime>
 // Uncomment following line if you want to execute the tests in TestEngine :
-#define DEBUG
+//#define DEBUG
 
 #ifdef DEBUG
 #include "TestEngine.h"
@@ -19,10 +19,7 @@ int main()
 	BinaryTree tree;
 
   IoEngine engine(&tree);
-  clock_t begin = clock();
   while(engine.ReadInput());
-  clock_t end = clock();
-  cout << "Time taken by all operations: "<<double(end-begin)/ CLOCKS_PER_SEC <<" sec\n";
 #endif
 
 #ifdef DEBUG
