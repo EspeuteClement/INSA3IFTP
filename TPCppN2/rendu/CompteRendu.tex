@@ -129,20 +129,20 @@ Performs the STATS\_C operation : displays the statistics for each of the traffi
 Performs the STATS\_D7 operation : computes and displays the statistics of every traffic state (v, j, r, n) of a given day of the week, averaging from every sensor.
 
 \section{Storing the Sensors}
-We chose to use a BinaryTree as our storage method for the Sensors. It allows us to have very fast indexing and insertion speed.
-Here some explanations about the vocabulary that we'll use later :
+
+We chose to use a BinaryTree to store the Sensors. It allows us to have a very fast indexing and insertion speed.
+Here are some explanations about the vocabulary that we will use later :
+
 \begin{description}
-	\item[Node] Represents a element in our tree. Each one has 2 children and one parent. Each node contains a sensor. The Sensor's ID determines the position of the node in the tree, as the left child Sensor's ID is always lower than the one of it's parents, and the right one is higher.
-	\item[Height] The height is the longest chain of node in a subtree.
-	\item[Balance] The balance of a node is determined like this : $ leftSubtreeHeight - rightSubtreeHeight$. It allows to know if a subtree is balanced or not. In our tree, the node balance has to be between $-1$ and $+1$. If it's higher, we have to perform some operations in order to restore the balance.
-	\item[Root] The first node in a tree. The entry point of all the methods that deals with the structure.
+	\item[Node] Represents an element in our tree. Each node has two children and one parent and contains a pointer to a Sensor. The Sensor's ID determines the position of the node in the tree, as the left child Sensor's ID is always lower than the one of it's parents, and the right one is higher.
+	\item[Height] The height is defined as the longest chain of nodes in a subtree.
+	\item[Balance] The balance of a node is determined like this : $ leftSubtreeHeight - rightSubtreeHeight$. It allows to know if a subtree is balanced or not. In our tree, the node balance has to be between $-1$ and $+1$. If it is higher/lower, we have to perform some balancing operations.
 \end{description}
 
 \section{<Node> Class Specifications}
 \subsection{Global Presentation}
+Node is a class that represents a BinaryTree element. Again, each node contains a Sensor pointer and three Node pointers : one for the parent node and two for the left and right child nodes. The nodes are sorted with the Sensor ID : Nodes that are at the left of this node will have their Sensor ID lower to this one, and Node to the left will have a Sensor ID higher to this one.
 
-
-Node is a class that represents a BinaryTree node. Each one contains a Sensor and 3 Node pointers : 1 for the parent node and 2 for the left and right child nodes. The nodes are sorted with the Sensor ID : Nodes that are at the left of this node will have their Sensor ID lower to this one, and Node to the left will have a Sensor ID higher to this one.
 \subsection{Function overview}
 \subsubsection*{\tt Node(Sensor *sensor, Node *parent, Node *left, Node *right)}
 By default, the node constructor only take a pointer to a Sensor as an argument. You can also specify pointers to the \emph{parents} Node and the children \emph{left} and \emph{right} nodes (defaulted to NULL).
@@ -166,9 +166,6 @@ This implementation almost identical to Search, expect that when we find a NULL 
 \subsubsection*{\tt Sensor *GetSensor()}
 Simple getter for the Sensor. Return a pointer to the Node's Sensor.
 
-\subsubsection*{\tt long GetSensorID()}
-Allow to directly get the SensorsID. This is purely syntactic sugar.
-
 \section{<BinaryTree> Class Specifications}
 \subsection{Global Presentation}
 While Node can act by itself has a binary tree, the BinaryTree class offers a useful layer of functions that can be used to manipulate the tree. It keeps track of the root (the first node in the tree), allow to iterate thought the Tree. It also allows to add data in a specific Sensor in one command.
@@ -189,19 +186,47 @@ Allows to put data from the "ADD" in the sensor with the right \texttt{ID}. \tex
 Returns the root Node of the subtree as a pointer to this Node.
 
 \subsection{Iterating trough the tree}
-
-We needed some sort if iterator for when we had some \texttt{for each node in the tree do} scenarios, this especially for the STATS\_D7 and JAM\_DH commands.
-
 The process of iterating trough the tree is fairly simple. Each time we call Iterate(), we get a pointer to a node in the tree that we haven’t visited yet, until we get a null pointer, indicating that we have traversed the tree. Using InitIterate allows to initialize the variables so the Iteration can run smoothly.
 
 We keep track of our position in the tree via a Stack containing the path from the current node to the tree's root. The stack is just an pointer array with a variable keeping the current number of pointers in the array.
 
 For iterating, We start from the root, and we will return the current node at the end of the method. But before that, we will push the next node to visit in the stack. We prioritize the left nodes, then the right ones. If we can't go down the tree any more (only NULL pointers), we pop nodes in the stack until we can go right again.
 
-\subsubsection*{\tt void InitIterate()}
+\subsubsection*{InitIterate}
 Prepare the Tree for a iteration trough the tree. It initialize the stack using the height of the tree.
 
 \subsubsection*{\tt Node *Iterate()}
 Will return a pointer to a Node that hasn't been visited yet, or NULL if we reached the end of the tree.
+
+\section{<IoEngine> class specifications}
+\subsection{Global presentation}
+Manages the user inputs on the standard input stream that are described in the assignment and displays the according data. For that, it is assigned as an attribute the pointer to the BinaryTree used to store the Sensors. For details about the commands format or meaning, please directly refer either to the assignement or the documentation of the class.
+
+\subsection{Functions overview}
+
+\subsubsection*{Constructor}
+The default constructor affects the passed in BinaryTree pointer to the attribute.
+
+\subsubsection*{ReadInput}
+Reads the input from the standard input stream and calls for the methods associated to the user commands. Returns a boolean value of false if the command 'EXIT' has been issued, true otherwise.
+
+\subsubsection*{HandleADD}
+Reads the details of the ADD command and calls the necessary function thats adds the new event to the appropriate sensor and creates the sensor (and the associated node in the binary tree) if they don't exist yet\footnote{ If the command is valid (respects the assignment format)}.
+
+\subsubsection*{HandleJAM\_DH}
+Performs the JAM\_DH operation : computes and displays the percentage of traffic jam (corresponding to a 'R' or 'N' traffic state) for each hour of a given day of the week, averaging from every sensor\footnotemark[2].
+
+\subsubsection*{HandleOPT}
+Performs the OPT operation : computes and displays the optimal time (which reduces the duration of the journey through the given segments) of departure and the associated minimal duration of the journey\footnotemark[2]'\footnote{ It is assumed that every required sensor exists or the method will simply exit.}. As it calls for the GetDuration function, same consequences apply if Sensor data is missing for given time.
+
+\subsubsection*{HandleSTATS\_C}
+Performs the STATS\_C operation : displays the statistics for each of the traffic states attributes ('V', 'J', 'R', or 'N') of a sensor as percentages, one by line, according to the assignement\footnotemark[2]'\footnotemark[3].
+
+\subsubsection*{HandleSTATS\_D7}
+Performs the STATS\_D7 operation : computes and displays the statistics of every traffic state ('V', 'J', 'R', or 'N') of a given day of the week, averaging from every sensor\footnotemark[2].
+
+\section{<Main> class specifications}
+Last, but not least, this class contains the entry point of the program. In this entry point function, the BinaryTree which will contain all the Sensors is created, and then passed in to the IoEngine, which will then loop until the user issues the 'EXIT' command. Before ending, the program will display the time used to perform in seconds.
+If in debug mode, (\texttt{\#define DEBUG}), this function will rather execute the tests described in the dedicated report.
 
 \end{document}

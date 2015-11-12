@@ -2,7 +2,7 @@
 
 \usepackage{custom}
 
-\title{Test for TP C++ \#2}
+\title{Tests for C++ Assignment \#2}
 \author{Pair B3408 \\ {\sc Renault} Benoit, {\sc Espeute} Clément}
 \date{}
 \usepackage[top=1in, bottom=1.25in, left=1.25in, right=1.25in]{geometry}
@@ -47,21 +47,24 @@
 \maketitle
 We used multiples kind of tests in order to see if our program works.
 
-\section{Early Visual Testes}
-During the prototyping of the binary tree, I quickly realised I needed to have a tool that allows me to display a graphical representation of the binary tree. I needed that so I could easely see if my tree was balanced with a quick glance. Because I didn't known much about C++ libraries, I choose to create an external tool with a framework I knew how to use.
 
-I created a Lua application that used the LÖVE2d framework. It's normally intended as a set of libraries for 2d videogame making, so it has all the tool I needed to display info on the screen.
+\section{Early Visual Tests}
+During the prototyping phase of the BinaryTree, we quickly realised that we needed to have a tool that allowed us to display a graphical representation of the BinaryTree. More precisely, we needed that so we could easily see if the tree was balanced with a quick glance. Because of our lack of knowledge of the C++ libraries, we chose to create an external tool with a framework we knew how to use.
 
-In order to pass the information from out application to the utility I created, I choose to Serialize the binary tree into a Lua table (An associative array capable of storing many types of data, including other tables). The serialization was done recursively on the BinaryTree's nodes, and can be found in the \texttt{Node::Serialize()} method.
+
+We created a Lua application that used the LÖVE2d framework. It's normally intended as a set of libraries for 2d videogame making, so it had all the tools we needed to display graphical info on the screen.
+
+In order to pass the information from the application to the utility we created, we made a serializing method for the BinaryTree to make it into a Lua table (an associative array capable of storing many types of data, including other tables). The serialization was done recursively on the BinaryTree's Nodes, and can be found in the \texttt{Node::Serialize()} method.
 
 Once the data was serialized, it was just a matter of loading that data into the Lua program and display that data on the screen.
 
 \subsection*{Using the tool}
-If you which to try the tool, you'll need the \texttt{love} package on a linux machine, then run \texttt{love~utils/dispTree/} from the project root. Unfortunately, reading the data from the program is now a bit tricky because we have implemented a proper I/O interface. Because of that, you can't export the
-binaryTree anymore unless you modify the main. As I said earlier, that tool was mostly used when creating the binary tree and wasn't much needed in the later development of the application when proper test where implemented.
+If you wish to try the tool out, you'll need to install the \texttt{love} and \texttt{lua} packages on a Gnu/Linux machine, and then run the following command : \texttt{love~utils/dispTree/} from the project root. The data needed to display the tree should already be in the right file, but if you want to export that data again, all you have to do is add the {\tt \#define DEBUG} and {\tt \#define SERIALIZE} in the Main.cpp, and then run \texttt{make runSave} in the source folder. That should export all the needed data in the \texttt{utils/dispTree/data.lua} file.
 
-\section{TestEngine}
-Because the visualisation tool wasn't meant to find small imperfections in the tree, I had to implement some automatics tests in order to see I the tree's balance met the requirement of a AVL tree. I created 2 tests designed to find those small flaws. Because those tests works using the internals features of the programs, they needed to be put in the code. Thus we created the TestEngine class. This class only uses static methods, with each method corresponding to a different test.
+\section{<TestEngine> Class}
+The <TestEngine> class contains static functions meant to test the different core classes of the application. These were used really often used during the development to ensure modifications to the data structures did not cause any unforeseen behaviour.
+
+Especially, because the visualisation tool wasn't meant to find small imperfections in the tree, we had to implement some automatics tests in order to see if the tree's balance met all the requirements of a self-balancing binary search tree (abb. "AVL tree"). We created two tests designed to find those small flaws. Because those tests works using the internals features of the programs, they needed to be put in the code. Thus we created the TestEngine class. This class only uses static methods, with each method corresponding to a different test.
 
 \subsection{\tt bool IterationTest\_1()}
 This test is designed to see if the Iteration method visited all the nodes in the tree exactly once. A boolean array is created that keeps in memory what nodes are visited. Then we create and fill the binary tree, and we iterate through it. The function will return $true$ if all the node where visited once. If an error is found, a message will appear in the console.
@@ -79,16 +82,14 @@ These two function are almost identical. They sole purpose is to test the perfor
 Useful macro that allows to measure the time that a function \emph{func} takes to execute. Used for some performance tests. \emph{name} should be a string containing the function name that will be put in the output message.
 
 \section{External tests}
-Those tests were created in order to see if our application was properly functioning. We used the \texttt{test.sh} file provided for the TP with some in and out files also provided in order to see if the basic function were properly functioning. We also used a 20 000 000 instruction file provided by another group that allowed us to see if our program was performing well under the worst case scenario for the TP.
+Those tests were created in order to see if our application was properly functioning according to the inputs/outputs described in the assignement. We used the \texttt{test.sh} file provided with some in and out files also provided in order to see if the basic functions were properly functioning (that is, passing them into the program, and automatically checking the results it provided). We also used a 20 000 000 instructions long file provided by another group that allowed us to see if our program was performing well under the worst case scenario for the TP.
 
 I wrote 2 i/o files, that are viciousTests.io and .out, that tests incorrect function calls like asking measures with an empty array to see if the program doesn't crash.
 
-Finally, we needed to test the optional instruction, being \texttt{OPT}. For that, I wrote a simple lua (\texttt{generateValues.lua} in the \texttt{tests/} folder)script that generated the in and out files for this test. The program choose a random minute between 2 given our as the "optimal" path. Then it write into the .in file ADD commands filling all the minutes between the 2 hours with "R" traffic except for the chosen minute where the traffic is "V". Multiples Sensors are created in the same way, but with the "V" traffic put so the chosen path will be fully "V".
+Finally, we needed to test the optional instruction, being \texttt{OPT}, for which no test files were provided. For that, we wrote a simple lua script : (\texttt{generateValues.lua} in the \texttt{tests/} folder) that generated the in and out files for this test. The program chooses a random minute between 2 given hours as the "optimal" path. Then it writes into the .in file ADD commands filling all the minutes between the 2 hours with "R" traffic except for the chosen minute where the traffic is "V". Multiples Sensors are created in the same way, but with the "V" traffic put so the chosen path will be fully composed of "V" traffic states.
 
-At the end, the program write in the .out file the expected output.
+At the end, the program writes in the .out file the expected output.
 
-This allowed us to see if the program was fully functioning.
+This allowed us to see if the program behaved as expected.
 
-\section{Other tests}
-We used the {\tt valgrind} command to see if we had any memory leaks and errors. That allowed to find some hidden flaws in our programs and help optimizing it.
 \end{document}
