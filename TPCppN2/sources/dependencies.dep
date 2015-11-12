@@ -3,7 +3,7 @@ build/Main.o : Main.cpp Main.h BinaryTree.h IoEngine.h TestEngine.h Utils.h
 
 build/BinaryTree.o : BinaryTree.cpp BinaryTree.h BinaryTree.h Node.h Sensor.h 
 
-build/Node.o : Node.cpp Node.h Node.h Sensor.h Utils.h BinaryTree.h Sensor.h 
+build/Node.o : Node.cpp Node.h Node.h Sensor.h Utils.h Sensor.h 
 
 build/Sensor.o : Sensor.cpp Sensor.h Sensor.h 
 

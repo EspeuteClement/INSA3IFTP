@@ -51,6 +51,21 @@ if [ $? -eq 0 ]
 		nStrResult=$nStrResult" 0"
 fi
 
+echo VICIOUSTESTS.4
+let "nTestCount=$nTestCount+1"
+./$1 < viciousTests.in > temp1.txt
+grep -v '^#' temp1.txt > temp2.txt
+diff -wB viciousTests.out temp2.txt
+if [ $? -eq 0 ]
+        then
+		echo PASSED
+            	let "nSuccesfulTests=$nSuccesfulTests+1"
+		nStrResult=$nStrResult" 1"
+	else
+		echo FAILED
+		nStrResult=$nStrResult" 0"
+fi
+
 echo -----------------------------------------------------------
 echo RESULTS
 echo -----------------------------------------------------------

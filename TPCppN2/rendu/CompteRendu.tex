@@ -46,65 +46,93 @@
 \begin{document}
 \pagestyle{fancy}
 \maketitle
-
 \section{<Sensor> class specifications}
 \subsection{Global presentation}
-Stores the ID of a given sensor (which is a unique integer specific to each sensor) and a tri-dimensional array (abb. "index") of Stats structures pointers, the first dimension reprensenting the day of the week (abb. "d7" or "D7"), an integer ranging from 1 to 7, the second dimension representing the hour, an integer ranging from 0 to 23, the third one representing the minute, an integer ranging from 0 to 59. Therefore, the Stats structure (abb. "struct") corresponding to a combination of [D7][Hour][Minute] allows us to access to the number of times a given state of the traffic has happened for a given Sensor at the given [D7][Hour][Minute] combination.
+Stores the ID of a given sensor and a pointer to a tri-dimensional index of Stats event counters thus allowing easy computation of statistics on a per minute, hour, day and sensor basis.
 
 \subsection{Structures overview}
 \subsubsection*{Structure <Stats>}
-Stores positive integer counters for each of the possible traffic states ('V', 'J', 'R', or 'N') into an array of size 4.
+Stores event integer counters for each of the possible traffic states (v, j, r, n).
 
 \paragraph{Constructor :}
-The default constructor sets all the counters to zero.
+Default constructor sets all array elements to zero.
 
 \paragraph{Overload of operator+= :}
-Allows adding two Stats structs by adding each corresponding array element separately. It is especially useful when adding Stats of different [D7][Hour][Minute] combinations to get, say, the overall Stats of the sensor for example.
+Allows adding two Stats structs by adding each array element separately.
 
 \paragraph{Sum method :}
-Adds the array elements of the Stats struct together and returns it as a double-precision float. It is used to know if any counter of the Stats struct has been incremented since it's creation, or to be able to computes the relative statistics of StatsRel.
+Adds the statistics of the struct instance together.
 
 \subsubsection*{Structure <StatsRel>}
-Stores relative statistics for each of the possible traffic states ('V', 'J', 'R', or 'N') as double-precision floats into an array of size 4.
+Stores relative statistics for each of the possible traffic states (v, j, r, n).
 
 \paragraph{Constructor :}
-The default constructor converts each of the four counters of the passed in Stats struct pointer into corresponding relative statistics for each traffic state.
+Default constructor converts all the attributes of the passed in Stats struct into statistics relative to the sum of all the counters.
 
 \paragraph{PrintStatsRel :}
-Displays the array elements of the StatsRel struct one per line, rounded into percentages, in the format specified in the assignment.
+Displays the attributes of the StatsRel struct one per line, rounded into percentages.
 
 \subsection{Functions overview}
 
 \subsubsection*{Constructor}
-Default constructor takes an integer in parameter and assign it as the ID of the Sensor. It then dynamically allocates the memory required for the tri-dimensional index of Stats structs pointers.
+Default constructor sets ID to the one given and dynamically allocates the memory required for the tri-dimensional index.st
 
 \subsubsection*{AddEvent}
-Takes integer parameters for the D7, hour and minute\footnote{ Respecting the conditions mentioned at the beginning.} and a character parameter describing the state of the traffic ('V', 'J', 'R', or 'N') of the event to be added and increments the suitable Stats struct array element in the tri-dimensional array for a given day of week, hour and minute by one.
+Increments the suitable event state counter for a given day of week, hour and minute by one.
 
 \subsubsection*{GetStatsByMin}
-Takes integer parameters for the D7, hour and minute\footnotemark[1] and returns the corresponding Stats struct pointer from the index array.
-
-\subsubsection*{AddStatsByHour}
-Takes integer parameters for the D7 and hour\footnotemark[1], and a pointer to a Stats struct. Adds all the Stats structs in the index matching the given day and hour into the Stats struct which pointer is passed in.
+Getter for the Stats of a given time.
 
 \subsubsection*{AddStatsByDay}
-Takes integer parameters for the D7\footnotemark[1], and a pointer to a Stats struct. Adds all the Stats structs in the index matching the given day into the Stats struct which pointer is passed in.
+Adds all the Stats structs comprised in the given day to the Stats struct which pointer is passed in.
+
+\subsubsection*{AddStatsByHour}
+Adds all the Stats structs comprised in the given day and hour to the Stats struct which pointer is passed in.
 
 \subsubsection*{AddStatsBySensor}
-Takes a pointer to a Stats struct as parameter. Adds all the Stats structs in the index of the current Sensor into the Stats struct which pointer is passed in.
+Adds all the Stats structs of the current Sensor to the Stats struct which pointer is passed.
 
 \subsubsection*{GetDuration}
-Takes integer parameters for the D7, hour and minute\footnotemark[1]. Computes and returns the most probable duration of the journey through the road segment associated with the sensor at the specified [D7][Hour][Minute] time combination. Each state is associated with a duration : (V$\to$1, J$\to$2, R$\to$4, N$\to$10). If no data is available for the given moment, all the Stats counters are equal to zero, therefore affecting 1 minute ('V' case).
+Computes and returns the probable duration of the journey through the road segment associated with the sensor. Each probable state is associated with a duration : (v$\to$1, j$\to$2, r$\to$4, n$\to$10). If no data if available, all the stats are equal to zero, therefore affecting 1 minute ("v" case).
 
 \subsubsection*{GetID}
-Getter for the sensor ID which returns the said integer value.
+Getter for the sensor ID.
 
 \subsubsection*{PrintSensorStatsRel}
-Computes and displays the statistics of the current Sensor according to the format given in the assignment.
+Computes and displays the statistics of the current Sensor for every attribute (v, j, r, n).
+
+\section{<IoEngine> class specifications}
+\subsection{Global presentation}
+Manages the inputs on the standard input stream and displays the according data. For details about the commands format or meaning, please directly refer either to the assignement or the documentation of the class.
+
+\subsection{Functions overview}
+
+\subsubsection*{Constructor}
+Default constructor affects the BinaryTree pointer to the attribute.
+
+\subsubsection*{ReadInput}
+Reads the input from the STDIO and modify the tree if needed.
+
+\subsubsection*{HandleADD}
+Calls the necessary function thats adds the new event to the appropriate sensor and creates the sensor (and the associated node in the binary tree) if they don't exist yet.
+
+\subsubsection*{HandleJAM\_DH}
+Performs the JAM\_DH operation : computes and displays the percentage of traffic jam (corresponding to a "r" or "n" traffic state) for each hour (0 to 23) of a given day of the week, averaging from every sensor.
+
+\subsubsection*{HandleOPT}
+Performs the OPT operation : computes and displays the optimal time (which reduces the duration of the journey through the given segments) of departure and the associated minimal duration. It is assumed that every required sensor exists or the function will simply exit.
+
+\subsubsection*{HandleSTATS\_C}
+Performs the STATS\_C operation : displays the statistics for each of the traffic states attributes (v, j, r, n) of a sensor as percentages, one by line. It is assumed the sensor exists or the function will simply exit.
+
+\subsubsection*{HandleSTATS\_D7}
+Performs the STATS\_D7 operation : computes and displays the statistics of every traffic state (v, j, r, n) of a given day of the week, averaging from every sensor.
 
 \section{Storing the Sensors}
+
 We chose to use a BinaryTree to store the Sensors. It allows us to have a very fast indexing and insertion speed.
 Here are some explanations about the vocabulary that we will use later :
+
 \begin{description}
 	\item[Node] Represents an element in our tree. Each node has two children and one parent and contains a pointer to a Sensor. The Sensor's ID determines the position of the node in the tree, as the left child Sensor's ID is always lower than the one of it's parents, and the right one is higher.
 	\item[Height] The height is defined as the longest chain of nodes in a subtree.
@@ -116,71 +144,60 @@ Here are some explanations about the vocabulary that we will use later :
 Node is a class that represents a BinaryTree element. Again, each node contains a Sensor pointer and three Node pointers : one for the parent node and two for the left and right child nodes. The nodes are sorted with the Sensor ID : Nodes that are at the left of this node will have their Sensor ID lower to this one, and Node to the left will have a Sensor ID higher to this one.
 
 \subsection{Function overview}
-\subsubsection*{Constructor}
-By default, the node constructor only takes a Sensor as an argument. You can also specify the parents node and the children (defaulted to NULL).
+\subsubsection*{\tt Node(Sensor *sensor, Node *parent, Node *left, Node *right)}
+By default, the node constructor only take a pointer to a Sensor as an argument. You can also specify pointers to the \emph{parents} Node and the children \emph{left} and \emph{right} nodes (defaulted to NULL).
+\subsubsection*{\tt Node *GetLeft()  and Node *GetRight() }
+Simple Getters for the left and ligth childs of this node.
 
-\subsubsection*{GetLeft and GetRight}
-Simple Getters for the Left and Rigth childs of this node, returns pointers to these.
+\subsubsection*{\tt long GetHeight()}
+Return the height (as a long) of the subtree.
 
-\subsubsection*{SwapSensor}
-Exchange the Sensor pointer of the current node with another node's. It allows to keep links between the nodes. This method is private because if an external user uses it, it could break the structure of the subtree.
+\subsubsection*{\tt long GetBalance()}
+Return the balance (as a long) of this subtree.
 
-\subsubsection*{LeftRotation and RightRotation}
-Left and right rotations are operations that don't change the logic of the BinaryTree. They are used in the rebalancing process. Detailed explanations can be found here \url{https://en.wikipedia.org/wiki/Tree_rotation}.
+\subsubsection*{\tt Node *Search(long searchID)}
+Search and return a Node with a sensor that has the same ID as searchID in this subtree. If the node hasn't been found, will return a NULL pointer instead.
+The node works as the tree's root for this search. This function use recursive implementation : If this Node's Sensor ID doesn't match \emph{searchID}, we call Search again on the left of right child of the node depending if \emph{searchID} is lesser or greater than the Node Sensor ID. If the ID match, we simply return the pointer to the current Node, and if we can't go further in the tree (because there are NULL pointers) we return NULL. 
 
-This function is not as optimized as it could because we use five operations instead of the usual three. This is because we use a Sensor swap so we can keep the tree structure in place. If we didn't do that, some parent-child relations from Nodes not involved in the operations could get messed up.
+\subsubsection*{\tt Node *Insert(int searchID)}
+Insert will return the node with the right ID (matching searchID) in the tree, or create a new one and return it if the ID hasn't been found. It's mainly used by the BinaryTree::Insert method, as this method will always return a valid Node.
+This implementation almost identical to Search, expect that when we find a NULL pointer (meaning that our sensor is missing from the tree), we insert a New node to fill the hole, and then we call Rebalance (private method of Node) so
 
-\subsubsection*{DoubleLeftRotation and DoubleRightRotation}
-Each one performs two rotations on the tree (see documentation of the class for details). Again, it is only used in the rebalancing process of the tree.
-
-\subsubsection*{ComputeHeight}
-This method computes the height of the current Node, and returns it too as an integer.
-
-\subsubsection*{GetHeight}
-Simple getter for the Height attribute, returns it as an integer.
-
-\subsubsection*{GetBalance}
-Returns the balance of this subtree.
-
-\subsubsection*{Search and Insert}
-These two method are fairly similar. The only difference is that search will return the node that has the ID matching the one in parameter, or NULL if it hasn't been found. Insert will return the node with the right ID or create a new one and return it if the ID hasn't been found.
-
-\subsubsection*{Serialize}
-Print the subtree in a form that is readable by a Lua program. Used for some tests for the Node and BinaryTree classes.
-
-\subsubsection*{GetSensor}
-Simple getter for the Sensor.
+\subsubsection*{\tt Sensor *GetSensor()}
+Simple getter for the Sensor. Return a pointer to the Node's Sensor.
 
 \section{<BinaryTree> Class Specifications}
 \subsection{Global Presentation}
 While Node can act by itself has a binary tree, the BinaryTree class offers a useful layer of functions that can be used to manipulate the tree. It keeps track of the root (the first node in the tree), allow to iterate thought the Tree. It also allows to add data in a specific Sensor in one command.
 
 \subsection{Function Overview}
-\subsubsection*{Search}
-Simply return the result of Search on the root Node.
+\subsubsection*{\tt Sensor *Search(long ID)}
+Simply return a pointer to the Sensor with the ID matching \emph{ID}. Will return NULL if that sensor hasn't been found.
 
-\subsubsection*{Serialize}
-Serialize the tree, and add "return " at the start of the output, so it can be easely parsed in lua.
+\subsubsection*{\tt void Insert(int ID, 
+				unsigned char d,
+				unsigned char h,
+				unsigned char m,
+				char value)}
 
-\subsubsection*{Insert}
-Allows to put data from the "ADD" command in the tree easily.
+Allows to put data from the "ADD" in the sensor with the right \texttt{ID}. \texttt d correspond to the day in the d7 format, \texttt h and \texttt m corresponds to the hours and minutes respectively. Because this methods calls {\tt Node *Insert(int searchID)}, we are assured that our Sensor will be in the tree (because it will be created if he doesn't exists).
 
-\subsubsection*{GetRoot}
-Returns the root node of the subtree
+\subsubsection*{\tt Node *GetRoot()}
+Returns the root Node of the subtree as a pointer to this Node.
 
 \subsection{Iterating trough the tree}
 The process of iterating trough the tree is fairly simple. Each time we call Iterate(), we get a pointer to a node in the tree that we haven’t visited yet, until we get a null pointer, indicating that we have traversed the tree. Using InitIterate allows to initialize the variables so the Iteration can run smoothly.
 
 We keep track of our position in the tree via a Stack containing the path from the current node to the tree's root. The stack is just an pointer array with a variable keeping the current number of pointers in the array.
 
-For iterating, We start from the root, and we will return the current node at the end of the method. But before that, we will push the next node to visit in the stack. We prioritize the left nodes, then the right ones. If we can't go D7n the tree any more (only NULL pointers), we pop nodes in the stack until we can go right again.
+For iterating, We start from the root, and we will return the current node at the end of the method. But before that, we will push the next node to visit in the stack. We prioritize the left nodes, then the right ones. If we can't go down the tree any more (only NULL pointers), we pop nodes in the stack until we can go right again.
 
 \subsubsection*{InitIterate}
 Prepare the Tree for a iteration trough the tree. It initialize the stack using the height of the tree.
 
-\subsubsection*{Iterate}
-Will return a pointer to a node that hasn't been visited yet, or NULL if we reached the end of the tree.
- 
+\subsubsection*{\tt Node *Iterate()}
+Will return a pointer to a Node that hasn't been visited yet, or NULL if we reached the end of the tree.
+
 \section{<IoEngine> class specifications}
 \subsection{Global presentation}
 Manages the user inputs on the standard input stream that are described in the assignment and displays the according data. For that, it is assigned as an attribute the pointer to the BinaryTree used to store the Sensors. For details about the commands format or meaning, please directly refer either to the assignement or the documentation of the class.
