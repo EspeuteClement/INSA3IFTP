@@ -46,45 +46,47 @@
 \begin{document}
 \pagestyle{fancy}
 \maketitle
+
 \section{<Sensor> class specifications}
 \subsection{Global presentation}
-Stores the ID of a given sensor and a pointer to a tri-dimensional index of Stats event counters thus allowing easy computation of statistics on a per minute, hour, day and sensor basis.
+Stores the ID of a given sensor (which is a unique integer specific to each sensor) and a tri-dimensional array (abb. "index") of Stats structures pointers, the first dimension reprensenting the day of the week (abb. "d7" or "dow"), an integer ranging from 1 to 7, the second dimension representing the hour, an integer ranging from 0 to 23, the third one representing the minute, an integer ranging from 0 to 59. Therefore, the Stats structure corresponding to a combination of [D7][Hour][Minute] allows us to access to the number of times a given state of the traffic has happened for a given Sensor at the given [D7][Hour][Minute] combination.
 
 \subsection{Structures overview}
 \subsubsection*{Structure <Stats>}
-Stores event integer counters for each of the possible traffic states (v, j, r, n).
+Stores positive integer counters for each of the possible traffic states (V, J, R, N) into an array of size 4.
 
 \paragraph{Constructor :}
-Default constructor sets all array elements to zero.
+The default constructor sets all the counters to zero.
 
 \paragraph{Overload of operator+= :}
-Allows adding two Stats structs by adding each array element separately.
+Allows adding two Stats structs by adding each corresponding array element separately. It is especially useful when adding Stats of different [D7][Hour][Minute] combinations to get, say, the overall Stats of the sensor for example.
 
 \paragraph{Sum method :}
-Adds the statistics of the struct instance together.
+Adds the array elements of the Stats structure together and returns it as a double-precision float. It is used to know if any counter of the Stats structure has been incremented since it's creation, or to be able to computes the relative statistics of StatsRel.
 
 \subsubsection*{Structure <StatsRel>}
-Stores relative statistics for each of the possible traffic states (v, j, r, n).
+Stores relative statistics for each of the possible traffic states (V, J, R, N) as double-precision floats into an array of size 4.
 
 \paragraph{Constructor :}
-Default constructor converts all the attributes of the passed in Stats struct into statistics relative to the sum of all the counters.
+The default constructor converts each of the four counters of the passed in Stats structure pointer into corresponding relative statistics for each traffic state.
 
 \paragraph{PrintStatsRel :}
-Displays the attributes of the StatsRel struct one per line, rounded into percentages.
+Displays the array elements of the StatsRel struct one per line, rounded into percentages, in the format specified in the assignment.
 
 \subsection{Functions overview}
 
 \subsubsection*{Constructor}
-Default constructor sets ID to the one given and dynamically allocates the memory required for the tri-dimensional index.st
+Default constructor takes an integer in parameter and assign it as the ID of the Sensor. It then dynamically allocates the memory required for the tri-dimensional index of Stats structures pointers.
 
 \subsubsection*{AddEvent}
-Increments the suitable event state counter for a given day of week, hour and minute by one.
+Takes integer parameters for the DoW, hour and minute respecting the conditions previously mentioned and a character parameter describing the state of the traffic ('V', 'J', 'R', or 'N') of the event to be added and increments the suitable Stats structure instance array element in the tri-dimensional array for a given day of week, hour and minute by one.
 
 \subsubsection*{GetStatsByMin}
-Getter for the Stats of a given time.
+Takes integer parameters for the DoW, hour and minute respecting the conditions previously mentioned and returns the corresponding Stats structure pointer from the index array.
 
+---------------------------------TODO-----------------------------
 \subsubsection*{AddStatsByDay}
-Adds all the Stats structs comprised in the given day to the Stats struct which pointer is passed in.
+Adds all the Stats structures comprised in the given day to the Stats structure which is passed in.
 
 \subsubsection*{AddStatsByHour}
 Adds all the Stats structs comprised in the given day and hour to the Stats struct which pointer is passed in.
@@ -99,7 +101,7 @@ Computes and returns the probable duration of the journey through the road segme
 Getter for the sensor ID.
 
 \subsubsection*{PrintSensorStatsRel}
-Computes and displays the statistics of the current Sensor for every attribute (v, j, r, n).
+Computes and displays the statistics of the current Sensor for every attribute (V, J, R, N).
 
 \section{<IoEngine> class specifications}
 \subsection{Global presentation}
@@ -123,10 +125,10 @@ Performs the JAM\_DH operation : computes and displays the percentage of traffic
 Performs the OPT operation : computes and displays the optimal time (which reduces the duration of the journey through the given segments) of departure and the associated minimal duration. It is assumed that every required sensor exists or the function will simply exit.
 
 \subsubsection*{HandleSTATS\_C}
-Performs the STATS\_C operation : displays the statistics for each of the traffic states attributes (v, j, r, n) of a sensor as percentages, one by line. It is assumed the sensor exists or the function will simply exit.
+Performs the STATS\_C operation : displays the statistics for each of the traffic states attributes (V, J, R, N) of a sensor as percentages, one by line. It is assumed the sensor exists or the function will simply exit.
 
 \subsubsection*{HandleSTATS\_D7}
-Performs the STATS\_D7 operation : computes and displays the statistics of every traffic state (v, j, r, n) of a given day of the week, averaging from every sensor.
+Performs the STATS\_D7 operation : computes and displays the statistics of every traffic state (V, J, R, N) of a given day of the week, averaging from every sensor.
 
 \section{Storing the Sensors}
 We choosed to use a BinaryTree as our storage method for the Sensors. It allows us to have very fast indexing and insertion speed.
