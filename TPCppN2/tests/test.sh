@@ -1,16 +1,23 @@
+EXEC=../sources/out/executable.out
+
 echo -----------------------------------------------------------
-echo Tests pour le binome : $1
+echo Tests pour le binome B408: $EXEC
 echo -----------------------------------------------------------
 
 nTestCount=0
 nSuccesfulTests=0
-nStrResult="$1 "
+nStrResult="$EXEC "
 
-echo ADD.1
+file1=add.1
+file2=add.2
+file3=testOPT
+file4=viciousTests
+
+echo $file1
 let "nTestCount=$nTestCount+1"
-./$1 < add.1.in > temp1.txt
+./$EXEC < $file1.in > temp1.txt
 grep -v '^#' temp1.txt > temp2.txt
-diff -wB add.1.out temp2.txt
+diff -wB $file1.out temp2.txt
 if [ $? -eq 0 ]
         then
 		echo PASSED
@@ -21,11 +28,11 @@ if [ $? -eq 0 ]
 		nStrResult=$nStrResult" 0"
 fi
 
-echo ADD.2
+echo $file2
 let "nTestCount=$nTestCount+1"
-./$1 < add.2.in > temp1.txt
+./$EXEC < $file2.in > temp1.txt
 grep -v '^#' temp1.txt > temp2.txt
-diff -wB add.2.out temp2.txt
+diff -wB $file2.out temp2.txt
 if [ $? -eq 0 ]
         then
 		echo PASSED
@@ -36,11 +43,11 @@ if [ $? -eq 0 ]
 		nStrResult=$nStrResult" 0"
 fi
 
-echo DIVERS.3
+echo $file3
 let "nTestCount=$nTestCount+1"
-./$1 < divers.3.in > temp1.txt
+./$EXEC < $file3.in > temp1.txt
 grep -v '^#' temp1.txt > temp2.txt
-diff -wB divers.3.out temp2.txt
+diff -wB $file3.out temp2.txt
 if [ $? -eq 0 ]
         then
 		echo PASSED
@@ -51,11 +58,11 @@ if [ $? -eq 0 ]
 		nStrResult=$nStrResult" 0"
 fi
 
-echo VICIOUSTESTS.4
+echo $file4
 let "nTestCount=$nTestCount+1"
-./$1 < viciousTests.in > temp1.txt
+./$EXEC < $file4.in > temp1.txt
 grep -v '^#' temp1.txt > temp2.txt
-diff -wB viciousTests.out temp2.txt
+diff -wB $file4.out temp2.txt
 if [ $? -eq 0 ]
         then
 		echo PASSED

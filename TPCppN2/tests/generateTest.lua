@@ -1,7 +1,9 @@
 -- Generate a test for the OPT command :
 
-_in = io.open("divers.3.in","w")
-_out = io.open("divers.3.out","w")
+_in = io.open("testOPT.in","w")
+_out = io.open("testOPT.out","w")
+
+
 
 if _in and _out then
 	-- choose one time to be optimal, then fill the rest of the table with R traffic
@@ -12,7 +14,7 @@ if _in and _out then
 	endHour = 24
 
 	numberOfMinutes = (endHour-startHour) * 60
-	optimalStartTime = 119
+	optimalStartTime = math.random(0,numberOfMinutes-1)
 	for sensor=1,numberOfTrajectSensors do
 		for minute=0,numberOfMinutes*2 do
 			_in:write(	"ADD " ..

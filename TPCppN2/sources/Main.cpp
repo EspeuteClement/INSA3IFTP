@@ -2,10 +2,10 @@
 #include "IoEngine.h"
 #include <ctime>
 // Uncomment following line if you want to execute the tests in TestEngine :
-#define DEBUG
+//#define DEBUG
 
 // Uncomment if you want to export a binary tree as a lua table. Need debug enabled
-#define SERIALIZE
+//#define SERIALIZE
 
 #ifdef DEBUG
 

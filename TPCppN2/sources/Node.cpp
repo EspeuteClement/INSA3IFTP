@@ -3,6 +3,7 @@
 #include "Sensor.h"
 #include "Utils.h"
 //#define MAP
+
 // AVL ALGORITHM : http://www.cise.ufl.edu/~nemo/cop3530/AVL-Tree-Rotations.pdf
 
 void Node::setLeft(Node *theLeft)
@@ -92,8 +93,7 @@ void Node::DoubleRightRotation()
 }
 
 long Node::ComputeHeight()
-{
-	//if (height != -1) return height;
+{ 
 	int l = 0; // The height of the left subtree
 	int r = 0; // The height of the right subtree
 	if(left != NULL)
@@ -225,9 +225,7 @@ long Node::GetBalance()
 
 void Node::Rebalance()
 {
-	//ComputeHeight();
 	long bal = GetBalance();
-	//std::cout << "Rebalancing. Bal : " << bal << "\n";
 	if (bal>1) // If the tree is left heavy
 	{
 		if (left->GetBalance()<=-1) // If the left subtree is right heavy

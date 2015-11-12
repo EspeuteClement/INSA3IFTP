@@ -227,6 +227,6 @@ Performs the STATS\_D7 operation : computes and displays the statistics of every
 
 \section{<Main> class specifications}
 Last, but not least, this class contains the entry point of the program. In this entry point function, the BinaryTree which will contain all the Sensors is created, and then passed in to the IoEngine, which will then loop until the user issues the 'EXIT' command. Before ending, the program will display the time used to perform in seconds.
-If in debug mode, (\texttt{\#define DEBUG}), this function will rather execute the tests described in the dedicated report.
+If in debug mode, (\texttt{\#define DEBUG}), this function will rather execute the tests described in the dedicated report. If (\texttt{\#define SERIALIZE}) is defined with  (\texttt{\#define DEBUG}), the program will instead create and fill a binary tree, then print a lua table representation of this BinaryTree in the standard output.
 
 \end{document}

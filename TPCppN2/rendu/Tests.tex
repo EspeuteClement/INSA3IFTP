@@ -51,15 +51,14 @@ We used multiples kind of tests in order to see if our program works.
 \section{Early Visual Tests}
 During the prototyping phase of the BinaryTree, we quickly realised that we needed to have a tool that allowed us to display a graphical representation of the BinaryTree. More precisely, we needed that so we could easily see if the tree was balanced with a quick glance. Because of our lack of knowledge of the C++ libraries, we chose to create an external tool with a framework we knew how to use.
 
-
 We created a Lua application that used the LÖVE2d framework. It's normally intended as a set of libraries for 2d videogame making, so it had all the tools we needed to display graphical info on the screen.
 
 In order to pass the information from the application to the utility we created, we made a serializing method for the BinaryTree to make it into a Lua table (an associative array capable of storing many types of data, including other tables). The serialization was done recursively on the BinaryTree's Nodes, and can be found in the \texttt{Node::Serialize()} method.
 
-Once the data was serialized, it was just a matter of loading that data into the Lua program and display that data on the screen.
+Once the data was serialized, it was just a matter of loading that data into the Lua program and display that data on the screen. The displayed data shows ID of the Node's sensor, and the height of the node subtree (to see if the Node height was correctly computed).
 
 \subsection*{Using the tool}
-If you wish to try the tool out, you'll need to install the \texttt{love} and \texttt{lua} packages on a Gnu/Linux machine, and then run the following command : \texttt{love~utils/dispTree/} from the project root. The data needed to display the tree should already be in the right file, but if you want to export that data again, all you have to do is add the {\tt \#define DEBUG} and {\tt \#define SERIALIZE} in the Main.cpp, and then run \texttt{make runSave} in the source folder. That should export all the needed data in the \texttt{utils/dispTree/data.lua} file.
+If you wish to try the tool out, you'll need to install the \texttt{love} package on a Gnu/Linux machine, and then run the following command : \texttt{love~utils/dispTree/} from the project root. The data needed to display the tree should already be in the right file, but if you want to export that data again, all you have to do is add the {\tt \#define DEBUG} and {\tt \#define SERIALIZE} in the Main.cpp, and then run \texttt{make runSave} in the source folder. That should export all the needed data in the \texttt{utils/dispTree/data.lua} file. If you don't want to install love, there is a screenshot of the program in the \texttt{utils/dispTree/} folder.
 
 \section{<TestEngine> Class}
 The <TestEngine> class contains static functions meant to test the different core classes of the application. These were used really often used during the development to ensure modifications to the data structures did not cause any unforeseen behaviour.

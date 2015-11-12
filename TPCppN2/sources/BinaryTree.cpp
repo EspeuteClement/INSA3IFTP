@@ -15,7 +15,10 @@ Sensor *BinaryTree::Search(long ID)
 {
 	if (root != NULL)
 	{
+		// Simpli executre search on the tree's root
 		Node *nodeMatch = root->Search(ID);
+
+		//If we found a Node, then return the node sensor
 		if (nodeMatch != NULL)
 		{
 			return nodeMatch->GetSensor();
@@ -32,6 +35,7 @@ void BinaryTree::Insert(int ID,
 				unsigned char value)
 {
 	Node *sensorNode = NULL;
+	// If there is no root, create a root !
 	if (root == NULL)
 	{
 		root = new Node(new Sensor(ID));
@@ -39,8 +43,10 @@ void BinaryTree::Insert(int ID,
 	}
 	else
 	{
+		// Else simply call insert on the tree's root.
 		sensorNode = root->Insert(ID);
 	}
+	// Then add the Evelnt.
 	sensorNode->GetSensor()->AddEvent(d,h,m,value);
 }
 
