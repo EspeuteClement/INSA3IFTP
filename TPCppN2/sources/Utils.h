@@ -45,6 +45,8 @@ public:
 	*/
 	static void printGreen(string message, bool r = false);
 
+	/* Print a red message
+	*/
 	static void printRed(string message, bool r = false);
 
 };

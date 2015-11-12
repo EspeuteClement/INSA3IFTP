@@ -68,6 +68,9 @@ This test is designed to see if the Iteration method visited all the nodes in th
 \subsection{\tt TestEngine::BalanceTest\_1()}
 This test is designed to see if the BinaryTree is balanced after a long series of random insertions. It create and fills a BinaryTree with random sensors ID, and then iterate through all the node, checking the balance of every node and prompting an error if a balance of 2 or more is found (indicating that we don't fill the AVL tree requirements.
 
+\subsection{\tt static bool SearchTest\_1()}
+A almost copy of the Iteration Test. It just creates the nodes in the tree and sees if Search node on all the ID works.
+
 \section{External tests}
 Those tests were created in order to see if our application was properly functioning. We used the \texttt{test.sh} file provided for the TP with some in and out files also provided in order to see if the basic function were properly functioning. We also used a 20 000 000 instruction file provided by another group that allowed us to see if our program was performing well under the worst case scenario for the TP.
 
@@ -75,5 +78,8 @@ Finally, we needed to test the optional instruction, being \texttt{OPT}. For tha
 
 At the end, the program write in the .out file the expected output.
 
-This allowed us to see if the program was fully functioning, and it was !
+This allowed us to see if the program was fully functioning.
+
+\section{Other tests}
+We used the {\tt valgrind} command to see if we had any memory leaks and errors. That allowed to find some hidden flaws in our programs and help optimizing it.
 \end{document}

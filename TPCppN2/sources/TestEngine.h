@@ -14,7 +14,7 @@ public:
 	*	@param verbose Will display more information about the tests at execution.
 	*	@return true if the test is successful, false else
 	*/
-	static bool Iteration_Test1(bool verbose = DEFAULT_VERBOSE);
+	static bool IterationTest_1(bool verbose = DEFAULT_VERBOSE);
 
 	/** Print the number of unbalanced nodes
 	*	@param verbose Will display more information about the tests at execution.
@@ -22,18 +22,30 @@ public:
 	*/
 	static bool BalanceTest_1(bool verbose = DEFAULT_VERBOSE);
 
+	/** Tests the Search function
+	*	@param verbose Will display more information about the tests at execution.
+	*	@return true if the test is successful, false else
+	*/
+	static bool SearchTest_1(bool verbose = DEFAULT_VERBOSE);
+
 	/** Creates a Sensor object, adds events to it, and displays statistics
 	*	@param verbose Will display more information about the tests at execution.
 	*	@return true if the test is successful, false else
 	*/
 	static bool SensorTest_1(bool verbose = DEFAULT_VERBOSE);
 
-	/** Teste the difference between Search and Add :
-	*	
+	/** Create 1500 sensors and performs
+	*	20000000 search operations on them
+	*	Allow to make some speed testes
 	*/
 	static void PerformanceSearch();
 
+	/** Create 1500 sensors and performs
+	*	20000000 insert operations on them
+	*	Allow to make some speed testes
+	*/
 	static void PerformanceInsert();
+
 };
 
 #undef DEFAULT_VERBOSE

@@ -24,26 +24,20 @@ HandleSTATS_C	IoEngine.cpp	/^void IoEngine::HandleSTATS_C()$/;"	f	class:IoEngine
 HandleSTATS_D7	IoEngine.cpp	/^void IoEngine::HandleSTATS_D7()$/;"	f	class:IoEngine
 IoEngine	IoEngine.cpp	/^IoEngine::IoEngine(BinaryTree *tree):theTree(tree){}$/;"	f	class:IoEngine
 ReadInput	IoEngine.cpp	/^bool IoEngine::ReadInput()$/;"	f	class:IoEngine
-checkD7	IoEngine.cpp	/^bool IoEngine::checkD7(int day)$/;"	f	class:IoEngine
-checkHour	IoEngine.cpp	/^bool IoEngine::checkHour(int hour)$/;"	f	class:IoEngine
-checkHourTimeFrame	IoEngine.cpp	/^bool IoEngine::checkHourTimeFrame(int hour)$/;"	f	class:IoEngine
-checkMinute	IoEngine.cpp	/^bool IoEngine::checkMinute(int minute)$/;"	f	class:IoEngine
-checkTraffic	IoEngine.cpp	/^bool IoEngine::checkTraffic(char traffic)$/;"	f	class:IoEngine
 IO_ENGINE_H	IoEngine.h	2;"	d
 IoEngine	IoEngine.h	/^class IoEngine$/;"	c
-theTree	IoEngine.h	/^		BinaryTree *theTree; \/** Pointer to the binary tree that stores the sensors*\/$/;"	m	class:IoEngine
-DEBUG	Main.cpp	5;"	d	file:
+theTree	IoEngine.h	/^		BinaryTree *theTree; \/\/ TODO Documentation$/;"	m	class:IoEngine
 main	Main.cpp	/^int main()$/;"	f
 ComputeHeight	Node.cpp	/^long Node::ComputeHeight()$/;"	f	class:Node
 DoubleLeftRotation	Node.cpp	/^void Node::DoubleLeftRotation()$/;"	f	class:Node
 DoubleRightRotation	Node.cpp	/^void Node::DoubleRightRotation()$/;"	f	class:Node
 GetBalance	Node.cpp	/^long Node::GetBalance()$/;"	f	class:Node
-Insert	Node.cpp	/^Node *Node::Insert(int aID)$/;"	f	class:Node
+Insert	Node.cpp	/^Node *Node::Insert(int searchID)$/;"	f	class:Node
 LeftRotation	Node.cpp	/^void Node::LeftRotation()$/;"	f	class:Node
 Node	Node.cpp	/^Node::Node(Sensor *sensor, Node *parent, Node *left, Node *right):$/;"	f	class:Node
 Rebalance	Node.cpp	/^void Node::Rebalance()$/;"	f	class:Node
 RightRotation	Node.cpp	/^void Node::RightRotation()$/;"	f	class:Node
-Search	Node.cpp	/^Node *Node::Search(long aID)$/;"	f	class:Node
+Search	Node.cpp	/^Node *Node::Search(long searchID)$/;"	f	class:Node
 Serialize	Node.cpp	/^void Node::Serialize()$/;"	f	class:Node
 SwapSensor	Node.cpp	/^void Node::SwapSensor(Node *target)$/;"	f	class:Node
 setLeft	Node.cpp	/^void Node::setLeft(Node *theLeft)$/;"	f	class:Node
@@ -68,7 +62,7 @@ AddStatsBySensor	Sensor.cpp	/^void Sensor::AddStatsBySensor (Stats *stats)$/;"	f
 GetDuration	Sensor.cpp	/^int Sensor::GetDuration(int d7, int h, int m)$/;"	f	class:Sensor
 GetStatsByMin	Sensor.cpp	/^Stats* Sensor::GetStatsByMin (int d7, int h, int m)$/;"	f	class:Sensor
 PrintSensorStatsRel	Sensor.cpp	/^void Sensor::PrintSensorStatsRel ()$/;"	f	class:Sensor
-Sensor	Sensor.cpp	/^Sensor::Sensor(long sensorID):ID(sensorID)$/;"	f	class:Sensor
+Sensor	Sensor.cpp	/^Sensor::Sensor(long searchID):ID(searchID)$/;"	f	class:Sensor
 ~Sensor	Sensor.cpp	/^Sensor::~Sensor ()$/;"	f	class:Sensor
 GetID	Sensor.h	/^    inline long GetID()$/;"	f	class:Sensor
 ID	Sensor.h	/^    long ID;$/;"	m	class:Sensor
@@ -93,12 +87,9 @@ counters	Sensor.h	/^  int counters[NUMBER_OF_STATES];$/;"	m	struct:Stats
 index	Sensor.h	/^    Stats ***index;$/;"	m	class:Sensor
 operator +=	Sensor.h	/^  Stats& operator+=(const Stats& stats)$/;"	f	struct:Stats
 BalanceTest_1	TestEngine.cpp	/^bool TestEngine::BalanceTest_1(bool verbose)$/;"	f	class:TestEngine
-Iteration_Test1	TestEngine.cpp	/^bool TestEngine::Iteration_Test1(bool verbose)$/;"	f	class:TestEngine
-PerformanceInsert	TestEngine.cpp	/^void TestEngine::PerformanceInsert()$/;"	f	class:TestEngine
-PerformanceSearch	TestEngine.cpp	/^void TestEngine::PerformanceSearch()$/;"	f	class:TestEngine
-SensorTest_1	TestEngine.cpp	/^bool TestEngine::SensorTest_1(bool verbose) {$/;"	f	class:TestEngine
-DEFAULT_VERBOSE	TestEngine.h	39;"	d
-DEFAULT_VERBOSE	TestEngine.h	7;"	d
+IterationTest_1	TestEngine.cpp	/^bool TestEngine::IterationTest_1(bool verbose)$/;"	f	class:TestEngine
+DEFAULT_VERBOSE	TestEngine.h	27;"	d
+DEFAULT_VERBOSE	TestEngine.h	9;"	d
 TEST_ENGINE_H	TestEngine.h	2;"	d
 TestEngine	TestEngine.h	/^class TestEngine$/;"	c
 BOLD	Utils.cpp	/^	const string Utils::BOLD = "=== ";$/;"	m	class:Utils	file:
@@ -117,9 +108,8 @@ printRed	Utils.cpp	/^void Utils::printRed(string message, bool r)$/;"	f	class:Ut
 BOLD	Utils.h	/^	static const string BOLD;$/;"	m	class:Utils
 END_BOLD	Utils.h	/^	static const string END_BOLD;$/;"	m	class:Utils
 END_COLOR	Utils.h	/^	static const string END_COLOR;$/;"	m	class:Utils
-EXTENDED_CONSOLE	Utils.h	18;"	d
+EXTENDED_CONSOLE	Utils.h	6;"	d
 GREEN	Utils.h	/^	static const string GREEN;$/;"	m	class:Utils
-MESURE_TIME	Utils.h	11;"	d
 RED	Utils.h	/^	static const string RED;$/;"	m	class:Utils
 UTILS_H	Utils.h	2;"	d
 Utils	Utils.h	/^class Utils{$/;"	c
@@ -131,7 +121,7 @@ string.gsub(v,"(.-).cpp",function(a) fileName 	makedep.lua	/^	string.gsub(v,"(.-
 ADDITIONAL_CLEAN	makefile	/^ADDITIONAL_CLEAN = core $(OBJS) $(EXEC)$/;"	m
 BOLD	makefile	/^BOLD = \\033[1m$/;"	m
 CC	makefile	/^CC = g++$/;"	m
-CC_COMP_FLAG	makefile	/^CC_COMP_FLAG = -c -Wall -O3 -g$/;"	m
+CC_COMP_FLAG	makefile	/^CC_COMP_FLAG = -c -Wall -Os$/;"	m
 CC_OUTPUT_FLAG	makefile	/^CC_OUTPUT_FLAG = -o$/;"	m
 CLEAN	makefile	/^CLEAN = clean$/;"	m
 CLEAN_COMMAND	makefile	/^CLEAN_COMMAND = rm$/;"	m

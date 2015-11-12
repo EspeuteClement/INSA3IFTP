@@ -29,7 +29,7 @@ void BinaryTree::Insert(int ID,
 				unsigned char d,
 				unsigned char h,
 				unsigned char m,
-				char value)
+				unsigned char value)
 {
 	Node *sensorNode = NULL;
 	if (root == NULL)
@@ -122,7 +122,7 @@ BinaryTree::~BinaryTree()
 {
 	if (stack != NULL)
 	{
-		delete stack;
+		delete[] stack;
 	} 
 	if (root != NULL)
 	{

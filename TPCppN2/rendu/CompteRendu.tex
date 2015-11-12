@@ -109,6 +109,7 @@ Here some explainations about the vocabulary that we'll use later :
 	\item[Node] Represents a element in our tree. Each one has 2 children and one parent. Each node contains a sensor. The Sensor's ID determines the position of the node in the tree, as the left child Sensor's ID is always lower than the one of it's parents, and the right one is higher.
 	\item[Height] The height is the longest chain of node in a subtree.
 	\item[Balance] The balance of a node is determined like this : $ leftSubtreeHeight - rightSubtreeHeight$. It allows to know if a subtree is balanced or not. In our tree, the node balance has to be between $-1$ and $+1$. If it's higher, we have to perform some operations in order to restore the balance.
+	\item[Root] The first node in a tree. The entry point of all the methods that deals with the structure.
 \end{description}
 
 \section{<Node> Class Specifications}
@@ -119,65 +120,61 @@ Node is a class that represents a BinaryTree node. Each one contains a Sensor an
 \subsection{Function overview}
 \subsubsection*{Constructor}
 By default, the node constructor only take a Sensor as an argument. You can also specify the parents node and the children (defaulted to NULL).
-\subsubsection*{GetLeft and GetRight}
+\subsubsection*{\tt Node *GetLeft()  and Node *GetRight() }
 Simple Getters for the Left and Rigth childs of this node.
-\subsubsection*{SwapSensor}
-Exchange the Sensor of this node with another node. It allows to keep links between the nodes. This method is private because if an external user uses it, it could break the structure of the subtree.
 
-\subsubsection*{LeftRotation and RightRotation}
-Left and right rotations are operations that doesn't change the logic of the binary tree. It's used in the rebalancing process. More explanations can be found here \url{https://en.wikipedia.org/wiki/Tree_rotation}.
+\subsubsection*{\tt long GetHeight()}
+Return the height of the subtree.
 
-This function is not as optimized as it should because I use 5 operations instead of the usual 3. This is because I use a sensor swap so we can keep the tree structure in place. If we didn't do that, some parent-child relations from node not involved in the operations could be messed up.
-
-\subsubsection*{DoubleLeftRotation and DoubleRightRotation}
-Each one performs 2 rotations on the tree. Again, it's used in the rebalancing process of the tree.
-
-\subsubsection*{ComputeHeight}
-This method compute the height of the current node if needed.
-
-\subsubsection*{GetHeight}
-Simple getter for the Height parameter.
-
-\subsubsection*{GetBalance}
+\subsubsection*{\tt long GetBalance()}
 Return the balance of this subtree.
 
-\subsubsection*{Search and Insert}
-These two method are fairly similar. The only difference is that search will return the node that has the ID matching the one in parameter, or NULL if it hasn't been found. Insert will return the node with the right ID or create a new one and return it if the ID hasn't been found.
+\subsubsection*{\tt Node *Search(long searchID)}
+Search and return a Node with a sensor that has the same ID as searchID in this subtree. If the node hasn't been found, will return a NULL pointer instead.
+The node works as the tree's root for this search. This function use a non recursive implementation : We have a pointer that contains out position in the tree. We then compare searchID with the sensor in the pointer's node, and we choose if we goes left or right in the tree. When we found the node, we return it.
 
-\subsubsection*{Serialize}
-Print the subtree in a form that is readable by a Lua program. Used for some tests for the Node and BinaryTree classes.
+\subsubsection*{\tt Node *Insert(int searchID)}
+Insert will return the node with the right ID in the tree, or create a new one and return it if the ID hasn't been found. It's mainly used by the BinaryTree::Insert method, as this method will always return a valid Node.
+This implementation is recursive : Instead of using a pointer to the current node, we just call the function again on the sub tree where we should go until we find the good node.
 
-\subsubsection*{GetSensor}
+\subsubsection*{\tt Sensor *GetSensor()}
 Simple getter for the Sensor.
+
+\subsubsection*{\tt long GetSensorID()}
+Allow to directly get the SensorsID. This is purely syntactic sugar.
 
 \section{<BinaryTree> Class Specifications}
 \subsection{Global Presentation}
 While Node can act by itself has a binary tree, the BinaryTree class offers a useful layer of functions that can be used to manipulate the tree. It keeps track of the root (the first node in the tree), allow to iterate thought the Tree. It also allows to add data in a specific Sensor in one command.
 
 \subsection{Function Overview}
-\subsubsection*{Search}
+\subsubsection*{\tt Sensor *Search(long ID)}
 Simply return the result of Search on the root Node.
 
-\subsubsection*{Serialize}
-Serialize the tree, and add "return " at the start of the output, so it can be easely parsed in lua.
+\subsubsection*{\tt void Insert(int ID, 
+				unsigned char d,
+				unsigned char h,
+				unsigned char m,
+				char value)}
+Allows to put data from the "ADD" in the sensor with the right \texttt{ID}. \texttt d correspond to the day in the d7 format, \texttt h and \texttt m corresponds to the hours and minutes respectively. Because this methods calls {\tt Node *Insert(int searchID)}, we are assured that our Sensor will be in the tree (because it will be created if he doesn't exists).
 
-\subsubsection*{Insert}
-Allows to put data from the "ADD" command in the tree easily.
-
-\subsubsection*{GetRoot}
+\subsubsection*{\tt Node *GetRoot()}
 Returns the root node of the subtree
 
 \subsection{Iterating trough the tree}
+
+We needed some sort if iterator for when we had some \texttt{for each node in the tree do} scenarios, this especially for the STATS\_D7 and JAM\_DH commands.
+
 The process of iterating trough the tree is fairly simple. Each time we call Iterate(), we get a pointer to a node in the tree that we haven’t visited yet, until we get a null pointer, indicating that we have traversed the tree. Using InitIterate allows to initialize the variables so the Iteration can run smoothly.
 
 We keep track of our position in the tree via a Stack containing the path from the current node to the tree's root. The stack is just an pointer array with a variable keeping the current number of pointers in the array.
 
 For iterating, We start from the root, and we will return the current node at the end of the method. But before that, we will push the next node to visit in the stack. We prioritize the left nodes, then the right ones. If we can't go D7n the tree any more (only NULL pointers), we pop nodes in the stack until we can go right again.
 
-\subsubsection*{InitIterate}
+\subsubsection*{\tt void InitIterate()}
 Prepare the Tree for a iteration trough the tree. It initialize the stack using the height of the tree.
 
-\subsubsection*{Iterate}
+\subsubsection*{\tt Node *Iterate()}
 Will return a pointer to a node that hasn't been visited yet, or NULL if we reached the end of the tree.
  
 \section{<IoEngine> class specifications}

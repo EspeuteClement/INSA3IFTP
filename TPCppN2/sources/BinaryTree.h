@@ -35,7 +35,7 @@ public:
 				unsigned char d,
 				unsigned char h,
 				unsigned char m,
-				char value);
+				unsigned char value);
 
 	/** Get the root of this tree.
 	*/

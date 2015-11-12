@@ -19,17 +19,18 @@ int main()
 	BinaryTree tree;
 
   IoEngine engine(&tree);
-  clock_t begin = clock();
   while(engine.ReadInput());
-  clock_t end = clock();
-  cout << "Time taken by all operations: "<<double(end-begin)/ CLOCKS_PER_SEC <<" sec\n";
 #endif
 
 #ifdef DEBUG
-	//MESURE_TIME((TestEngine::Iteration_Test1()),"Iteration_Test1");
-	// TestEngine::BalanceTest_1();
-	// TestEngine::SensorTest_1();
-  //TestEngine::PerformanceSearch();
+  // Tests the BinaryTree features
+  TestEngine::IterationTest_1();
+	TestEngine::BalanceTest_1();
+
+  // Tests the sensors features
+	TestEngine::SensorTest_1();
+
+  // Test the overall performance of the binary tree operations
   MESURE_TIME((TestEngine::PerformanceSearch()), "PerformanceSearch");
   MESURE_TIME((TestEngine::PerformanceInsert()), "PerformanceInsert");
 #endif

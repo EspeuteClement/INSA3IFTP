@@ -63,7 +63,7 @@ void IoEngine::HandleADD()
 	if (checkD7(d7)) return;
 	if (checkTraffic(traffic[0])) return;
 
-	theTree->Insert(id,d7,h,m,'V');
+	theTree->Insert(id,d7,h,m,traffic[0]);
 }
 
 void IoEngine::HandleSTATS_C()
