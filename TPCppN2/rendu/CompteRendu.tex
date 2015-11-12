@@ -161,7 +161,7 @@ The node works as the tree's root for this search. This function use recursive i
 
 \subsubsection*{\tt Node *Insert(int searchID)}
 Insert will return the node with the right ID (matching searchID) in the tree, or create a new one and return it if the ID hasn't been found. It's mainly used by the BinaryTree::Insert method, as this method will always return a valid Node.
-This implementation almost identical to Search, expect that when we find a NULL pointer (meaning that our sensor is missing from the tree), we insert a New node to fill the hole, and then we call Rebalance (private method of node) on the
+This implementation almost identical to Search, expect that when we find a NULL pointer (meaning that our sensor is missing from the tree), we insert a New node to fill the hole, and then we call Rebalance (private method of Node) so
 
 \subsubsection*{\tt Sensor *GetSensor()}
 Simple getter for the Sensor. Return a pointer to the Node's Sensor.
