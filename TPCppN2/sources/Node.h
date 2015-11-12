@@ -7,17 +7,10 @@
 class Node
 {
 public:
-<<<<<<< HEAD
-	// ------------------------------------------------------ GETERS :
 
 	/** Returns the Node at the left of the current Node
 	*	@return A pointer to the left Node of this Node. Returns NULL
 	*	if there is no left Node
-=======
-	/** Returns the node at the left of the current node
-	*	@return A pointer to the left node of this node. Returns NULL
-	*	if there is no left node
->>>>>>> 70ec4105610ffc0a668fc45ed750cf2f5e1fad11
 	*/
 	inline Node *GetLeft() const {return left;};
 
@@ -74,13 +67,8 @@ public:
 	*/
 	Sensor *GetSensor() const {return sensor;};
 
-<<<<<<< HEAD
 	/**	Create a Node.
 	*	@param sensor The sensor contained in this Node
-=======
-	/**	Creates a Node.
-	*	@param sensor The sensor contained in this node
->>>>>>> 70ec4105610ffc0a668fc45ed750cf2f5e1fad11
 	*/
 	Node(Sensor *sensor, Node *parent = NULL, Node *left = NULL, Node *right = NULL);
 
@@ -132,19 +120,6 @@ private:
 	*/
 	long ComputeHeight();
 
-<<<<<<< HEAD
-	Sensor *sensor;	/**The sensor contained in the Node */
-
-	Node *parent;	/**	The parent Node to this one. NULL if there is
-					no parent Node*/
-
-	Node *left;		/**The Node on the left */
-	Node *right;	/**The Node on the right*/
-	long height;	/** The height, i.e. the number of Nodes in the
-					longest branch under this Node */
-
-
-=======
 	/**The sensor contained in the node */
 	Sensor *sensor;
 	/**	The parent node to this one. NULL if there is no parent node*/
@@ -155,7 +130,6 @@ private:
 	Node *right;
 	/** The height, i.e. the number of nodes in the longest branch under this node*/
 	long height;
->>>>>>> 70ec4105610ffc0a668fc45ed750cf2f5e1fad11
 };
 
 #endif	//NODE_H

@@ -2,12 +2,9 @@
 #include "Node.h"
 #include "Sensor.h"
 #include "Utils.h"
-<<<<<<< HEAD
-//#define MAP
 
-=======
 using namespace std;
->>>>>>> 70ec4105610ffc0a668fc45ed750cf2f5e1fad11
+
 // AVL ALGORITHM : http://www.cise.ufl.edu/~nemo/cop3530/AVL-Tree-Rotations.pdf
 
 //------------------------------------------------------------------------------
@@ -265,43 +262,11 @@ long Node::GetBalance()
 	return lHeight - rHeight;
 }
 
-<<<<<<< HEAD
-void Node::Rebalance()
-{
-	long bal = GetBalance();
-	if (bal>1) // If the tree is left heavy
-	{
-		if (left->GetBalance()<=-1) // If the left subtree is right heavy
-		{
-			DoubleRightRotation();
-		}
-		else
-		{
-			RightRotation();
-		}
-	}
-	else if (bal < -1) // if the tree is right heavy
-	{
-		if (right->GetBalance()>=1) // If the right subtree is left heavy
-		{
-			DoubleLeftRotation();
-		}
-		else
-		{
-			LeftRotation();
-		}
-	}
-	if (parent != NULL)
-	{	parent->Rebalance();
-	}
-}
 
-
-=======
 //------------------------------------------------------------------------------
 // Constructors or/and Destructors
 //------------------------------------------------------------------------------
->>>>>>> 70ec4105610ffc0a668fc45ed750cf2f5e1fad11
+
 Node::Node(Sensor *sensor, Node *parent, Node *left, Node *right):
 	sensor(sensor),parent(parent),left(left),right(right)
 {

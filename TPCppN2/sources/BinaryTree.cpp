@@ -48,7 +48,7 @@ void BinaryTree::Insert(int ID,
 		sensorNode = root->Insert(ID);
 	}
 	// Then add the Evelnt.
-	sensorNode->GetSensor()->AddEvent(d,h,m,value);
+	sensorNode->GetSensor()->AddEvent(d7,h,m,value);
 }
 
 void BinaryTree::InitIterate()
