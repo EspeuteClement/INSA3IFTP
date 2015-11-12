@@ -6,7 +6,7 @@
 #include <iostream>
 using namespace std;
 
-bool TestEngine::Iteration_Test1(bool verbose)
+bool TestEngine::IterationTest_1(bool verbose)
 {
 	// The numbers of elements to put in the binary tree
 	const int NUMBERS = 15000;
@@ -64,6 +64,65 @@ bool TestEngine::Iteration_Test1(bool verbose)
 	Utils::printGreen("TEST SUCESSFUL",true);
 	return true;
 }
+
+bool TestEngine::SearchTest_1(bool verbose)
+{
+	// The numbers of elements to put in the binary tree
+	const int NUMBERS = 15000;
+	Utils::printBold("SEARCH TEST 1", true);
+
+	// Create the binary tree
+	BinaryTree testTree = BinaryTree();
+
+	// Create an array that will store if a node has been
+	// traversed
+	bool found[NUMBERS];
+	for (int i = 0; i < NUMBERS; ++i)
+	{
+		found[i] = false;
+	}
+
+	// Populate the tree with id between 0 and NUMBERS
+	for (int i = 0; i < NUMBERS; ++i)
+	{
+		testTree.Insert(i,0,0,0,0);
+	}
+
+	// Iterate trough the tree
+	for(int i = 0; i < NUMBERS; ++i)
+	{
+		Sensor *result = testTree.Search(i);
+		int id = i;
+		if (verbose)
+		{
+			cout << id << '\n';
+		}
+		// If we haven't visited this node yet ...
+		if (result != NULL)
+		{
+			int id = result->GetID();
+			if (found[id] == false)
+				{
+					// Now we have :)
+					found[id] = true;
+				}
+		}
+		
+	}
+
+	for (int i = 0; i< NUMBERS; ++i)
+	{
+		if (!found[i])
+		{
+			Utils::printRed("ERROR, A NODE WAS NOT FOUND",true);
+			return false;
+		}
+	}
+
+	Utils::printGreen("TEST SUCESSFUL",true);
+	return true;
+}
+
 
 bool TestEngine::BalanceTest_1(bool verbose)
 {
@@ -242,4 +301,3 @@ void TestEngine::PerformanceInsert()
 		testTree.Insert(rand()%1500,1,1,1,'V');
 	}
 }
-

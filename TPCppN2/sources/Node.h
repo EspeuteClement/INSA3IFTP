@@ -67,7 +67,7 @@ public:
 
 	/** Returns this node's sensor.
 	*/
-	Sensor *GetSensor() {return sensor;};
+	Sensor *GetSensor() const {return sensor;};
 
 	/**	Create a Node.
 	*	@param sensor The sensor contained in this node

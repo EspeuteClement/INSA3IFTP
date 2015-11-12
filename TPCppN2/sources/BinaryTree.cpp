@@ -122,7 +122,7 @@ BinaryTree::~BinaryTree()
 {
 	if (stack != NULL)
 	{
-		delete stack;
+		delete[] stack;
 	} 
 	if (root != NULL)
 	{

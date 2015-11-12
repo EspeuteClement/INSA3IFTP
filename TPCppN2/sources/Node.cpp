@@ -148,51 +148,30 @@ void Node::Serialize()
 
 Node *Node::Search(long searchID)
 {
-	//Go to the left if 
-	Node *current = this;
+	
+	Node *current = this; // Pointer to the current node
+	
 	long id = current->GetSensorID();
-	while(!(id == searchID))
+	//While we havn't found the right node or there is no more node left ...
+	while(current != NULL && !(id == searchID))
 	{
+		// Go left if searchID is inferior to current node id
 		if (searchID < current->GetSensorID())
 		{
 			current = current->left;
 		}
+		// Else go right
 		else if (searchID > current->GetSensorID())
 		{
 			current = current->right;
 		}
+		// If current is not null, get it's id
 		if (current != NULL)
 		{
 			id = current->GetSensorID();
 		}
-		else
-		{
-			break;
-		}
 	}
 	return current;
-	/*if(searchID < GetSensorID())
-	{
-		if (left != NULL) //If there is a node, search in this subtree
-		{	return left->Search(searchID);
-		}
-		else //Else return the pointer to the left part
-		{	return NULL;
-		}
-	}
-	else if(searchID > GetSensorID())
-	{
-		if (right != NULL)
-		{	return right->Search(searchID);
-		}
-		else
-		{	return NULL;
-		}
-	}
-	else
-	{
-		return this;
-	}*/
 }
 
 Node *Node::Insert(int searchID)

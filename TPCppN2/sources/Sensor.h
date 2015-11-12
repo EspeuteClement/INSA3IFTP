@@ -102,7 +102,7 @@ class Sensor
     /** Default constructor sets ID to the one given and dynamically allocates
     * the memory required for the tri-dimensional index.
     */
-    Sensor(long aID);
+    Sensor(long sensorID);
 
     /** Default destructor deletes the tri-dimensional index.
     */
