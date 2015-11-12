@@ -146,21 +146,44 @@ void Node::Serialize()
 	std::cout << '}';
 }
 
-Node *Node::Search(long aID)
+Node *Node::Search(long searchID)
 {
-	if(aID < GetSensorID())
+	//Go to the left if 
+	Node *current = this;
+	long id = current->GetSensorID();
+	while(!(id == searchID))
+	{
+		if (searchID < current->GetSensorID())
+		{
+			current = current->left;
+		}
+		else if (searchID > current->GetSensorID())
+		{
+			current = current->right;
+		}
+		if (current != NULL)
+		{
+			id = current->GetSensorID();
+		}
+		else
+		{
+			break;
+		}
+	}
+	return current;
+	/*if(searchID < GetSensorID())
 	{
 		if (left != NULL) //If there is a node, search in this subtree
-		{	return left->Search(aID);
+		{	return left->Search(searchID);
 		}
 		else //Else return the pointer to the left part
 		{	return NULL;
 		}
 	}
-	else if(aID > GetSensorID())
+	else if(searchID > GetSensorID())
 	{
 		if (right != NULL)
-		{	return right->Search(aID);
+		{	return right->Search(searchID);
 		}
 		else
 		{	return NULL;
@@ -169,33 +192,33 @@ Node *Node::Search(long aID)
 	else
 	{
 		return this;
-	}
+	}*/
 }
 
-Node *Node::Insert(int aID)
+Node *Node::Insert(int searchID)
 {	
-	if(aID < GetSensorID())
+	if(searchID < GetSensorID())
 	{
 		if (left != NULL) //If there is a node, search in this subtree
-		{	return left->Insert(aID);
+		{	return left->Insert(searchID);
 		}
 		else //Else return the pointer to the left part
 		{	
-			Node *n = new Node(new Sensor(aID),this);
+			Node *n = new Node(new Sensor(searchID),this);
 			setLeft(n);
 			Rebalance();
 			
 			return n;
 		}
 	}
-	else if(aID > GetSensorID())
+	else if(searchID > GetSensorID())
 	{
 		if (right != NULL)
-		{	return right->Insert(aID);
+		{	return right->Insert(searchID);
 		}
 		else
 		{	
-			Node *n = new Node(new Sensor(aID),this);
+			Node *n = new Node(new Sensor(searchID),this);
 			setRight(n);
 			Rebalance();
 			return n;

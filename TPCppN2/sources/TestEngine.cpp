@@ -211,3 +211,35 @@ bool TestEngine::SensorTest_1(bool verbose) {
 	Utils::printGreen("TEST SUCESSFUL",true);
 	return true;
 }
+
+void TestEngine::PerformanceSearch()
+{
+	srand(127);
+	BinaryTree testTree = BinaryTree();
+	char c[] = "R";
+	for (int i = 0; i < 1500; ++i)
+	{
+		testTree.Insert(i,1,1,1,'V');
+	}
+
+	for (int i = 0; i< 20000000;i++)
+	{
+		testTree.Search(rand()%1500);
+	}
+}
+
+void TestEngine::PerformanceInsert()
+{
+	srand(127);
+	BinaryTree testTree = BinaryTree();
+	for (int i = 0; i < 1500; i++)
+	{
+		testTree.Insert(i,1,1,1,'V');
+	}
+
+	for (int i = 0; i< 20000000;i++)
+	{
+		testTree.Insert(rand()%1500,1,1,1,'V');
+	}
+}
+
