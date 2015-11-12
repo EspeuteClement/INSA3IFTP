@@ -2,6 +2,18 @@
 #define UTILS_H
 #include <iostream>
 #include <string>
+#include <ctime>
+
+// Usefull macro that allows to mesure the time that a function takes
+// USAGE
+// func = the function to test surounded by ()
+// name = a string that contains the name of the function.
+#define MESURE_TIME(func,name) {clock_t begin = clock(); \
+							  func; \
+							  clock_t end = clock(); \
+							  cout << "Time taken by " <<name " : "<<double(end-begin)/ CLOCKS_PER_SEC <<" sec\n";}
+
+
 // define if you want pretty
 #define EXTENDED_CONSOLE
 using namespace std;

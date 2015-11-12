@@ -27,6 +27,13 @@ public:
 	*	@return true if the test is successful, false else
 	*/
 	static bool SensorTest_1(bool verbose = DEFAULT_VERBOSE);
+
+	/** Teste the difference between Search and Add :
+	*	
+	*/
+	static void PerformanceSearch();
+
+	static void PerformanceInsert();
 };
 
 #undef DEFAULT_VERBOSE
