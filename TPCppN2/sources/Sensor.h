@@ -93,7 +93,7 @@ struct StatsRel {
 
 /** Stores the ID of a given sensor and a pointer to a tri-dimensional
 * index of Stats event counters thus allowing easy computation of statistics on
-* a per minute, hour, day and sensor basis.
+* a per minute, hour, day and Sensor basis.
 */
 class Sensor
 {

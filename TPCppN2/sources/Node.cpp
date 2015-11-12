@@ -2,9 +2,12 @@
 #include "Node.h"
 #include "Sensor.h"
 #include "Utils.h"
-//#define MAP
+using namespace std;
 // AVL ALGORITHM : http://www.cise.ufl.edu/~nemo/cop3530/AVL-Tree-Rotations.pdf
 
+//------------------------------------------------------------------------------
+// Private functions and methods
+//------------------------------------------------------------------------------
 void Node::setLeft(Node *theLeft)
 {
 	left = theLeft;
@@ -91,143 +94,11 @@ void Node::DoubleRightRotation()
 	}
 }
 
-long Node::ComputeHeight()
-{
-	//if (height != -1) return height;
-	int l = 0; // The height of the left subtree
-	int r = 0; // The height of the right subtree
-	if(left != NULL)
-	{	l = left->height;		
-	}
-	if(right != NULL)
-	{	r = right->height;
-	}
-
-	int oldH = height;
-	// The height is the max of the subtrees height, plus one
-	height = Utils::max(l,r) + 1;
-	
-	//Then we call this method for this node parent to propagate
-	//The height change (it the height has changed)
-	if( oldH != height && parent !=NULL)
-	{	parent->ComputeHeight();
-	}
-	return height;
-}
-
-void Node::Serialize()
-{
-
-	// The goal is to print something like this :
-	// {id,height,left={id,left={...}},right={...}}
-	std::cout << '{';
-	std::cout << "id=" <<GetSensorID();
-	std::cout << ",height=" << height <<',';
-	std::cout << "left=";
-	
-	// Serialize the left part of the array
-	if (left != NULL)
-	{	left->Serialize();
-	}
-	else // Set the table to nil if the left node is NULL
-	{	std::cout << "nil";
-	}
-	std::cout << ',';
-
-	std::cout << "right=";
-	// Serialize the right part of the array
-	if (right != NULL)
-	{	right->Serialize();
-	}
-	else // Set the table to nil if the right node is NULL
-	{	std::cout << "nil";
-	}
-
-	std::cout << '}';
-}
-
-Node *Node::Search(long searchID)
-{
-	
-	Node *current = this; // Pointer to the current node
-	
-	long id = current->GetSensorID();
-	//While we havn't found the right node or there is no more node left ...
-	while(current != NULL && !(id == searchID))
-	{
-		// Go left if searchID is inferior to current node id
-		if (searchID < current->GetSensorID())
-		{
-			current = current->left;
-		}
-		// Else go right
-		else if (searchID > current->GetSensorID())
-		{
-			current = current->right;
-		}
-		// If current is not null, get it's id
-		if (current != NULL)
-		{
-			id = current->GetSensorID();
-		}
-	}
-	return current;
-}
-
-Node *Node::Insert(int searchID)
-{	
-	if(searchID < GetSensorID())
-	{
-		if (left != NULL) //If there is a node, search in this subtree
-		{	return left->Insert(searchID);
-		}
-		else //Else return the pointer to the left part
-		{	
-			Node *n = new Node(new Sensor(searchID),this);
-			setLeft(n);
-			Rebalance();
-			
-			return n;
-		}
-	}
-	else if(searchID > GetSensorID())
-	{
-		if (right != NULL)
-		{	return right->Insert(searchID);
-		}
-		else
-		{	
-			Node *n = new Node(new Sensor(searchID),this);
-			setRight(n);
-			Rebalance();
-			return n;
-		}
-	}
-	else
-	{
-		return this;
-	}
-}
-
-long Node::GetBalance()
-{
-	long lHeight = 0;
-	if (left != NULL)
-	{	lHeight = left->height;
-	}
-	long rHeight = 0;
-	if (right != NULL)
-	{	rHeight = right->height;
-	}
-
-	return lHeight - rHeight;
-}
-
 void Node::Rebalance()
 {
 	//ComputeHeight();
 	long bal = GetBalance();
-	//std::cout << "Rebalancing. Bal : " << bal << "\n";
+	//cout << "Rebalancing. Bal : " << bal << "\n";
 	if (bal>1) // If the tree is left heavy
 	{
 		if (left->GetBalance()<=-1) // If the left subtree is right heavy
@@ -255,20 +126,151 @@ void Node::Rebalance()
 	}
 }
 
+long Node::ComputeHeight()
+{
+	//if (height != -1) return height;
+	int l = 0; // The height of the left subtree
+	int r = 0; // The height of the right subtree
+	if(left != NULL)
+	{	l = left->height;
+	}
+	if(right != NULL)
+	{	r = right->height;
+	}
 
+	int oldH = height;
+	// The height is the max of the subtrees height, plus one
+	height = Utils::max(l,r) + 1;
+
+	//Then we call this method for this node parent to propagate
+	//The height change (it the height has changed)
+	if( oldH != height && parent !=NULL)
+	{	parent->ComputeHeight();
+	}
+	return height;
+}
+
+//------------------------------------------------------------------------------
+// Public functions and methods
+//------------------------------------------------------------------------------
+void Node::Serialize()
+{
+
+	// The goal is to print something like this :
+	// {id,height,left={id,left={...}},right={...}}
+	cout << '{';
+	cout << "id=" <<GetSensorID();
+	cout << ",height=" << height <<',';
+	cout << "left=";
+
+	// Serialize the left part of the array
+	if (left != NULL)
+	{	left->Serialize();
+	}
+	else // Set the table to nil if the left node is NULL
+	{	cout << "nil";
+	}
+	cout << ',';
+
+	cout << "right=";
+	// Serialize the right part of the array
+	if (right != NULL)
+	{	right->Serialize();
+	}
+	else // Set the table to nil if the right node is NULL
+	{	cout << "nil";
+	}
+
+	cout << '}';
+}
+
+Node *Node::Search(long searchID)
+{
+
+	Node *current = this; // Pointer to the current node
+
+	long id = current->GetSensorID();
+	//While we havn't found the right node or there is no more node left ...
+	while(current != NULL && !(id == searchID))
+	{
+		// Go left if searchID is inferior to current node id
+		if (searchID < current->GetSensorID())
+		{
+			current = current->left;
+		}
+		// Else go right
+		else if (searchID > current->GetSensorID())
+		{
+			current = current->right;
+		}
+		// If current is not null, get it's id
+		if (current != NULL)
+		{
+			id = current->GetSensorID();
+		}
+	}
+	return current;
+}
+
+Node *Node::Insert(int searchID)
+{
+	if(searchID < GetSensorID())
+	{
+		if (left != NULL) //If there is a node, search in this subtree
+		{	return left->Insert(searchID);
+		}
+		else //Else return the pointer to the left part
+		{
+			Node *n = new Node(new Sensor(searchID),this);
+			setLeft(n);
+			Rebalance();
+
+			return n;
+		}
+	}
+	else if(searchID > GetSensorID())
+	{
+		if (right != NULL)
+		{	return right->Insert(searchID);
+		}
+		else
+		{
+			Node *n = new Node(new Sensor(searchID),this);
+			setRight(n);
+			Rebalance();
+			return n;
+		}
+	}
+	else
+	{
+		return this;
+	}
+}
+
+long Node::GetBalance()
+{
+	long lHeight = 0;
+	if (left != NULL)
+	{	lHeight = left->height;
+	}
+	long rHeight = 0;
+	if (right != NULL)
+	{	rHeight = right->height;
+	}
+
+	return lHeight - rHeight;
+}
+
+//------------------------------------------------------------------------------
+// Constructors or/and Destructors
+//------------------------------------------------------------------------------
 Node::Node(Sensor *sensor, Node *parent, Node *left, Node *right):
 	sensor(sensor),parent(parent),left(left),right(right)
 {
-#ifdef MAP
-	std::cout << "Constructing a <Node>";
-#endif
 	height = 1;
 }
 
 Node::~Node(){
-#ifdef MAP
-	std::cout << "Destructing a <Node>";
-#endif
 	if (left != NULL)
 	{	delete left;
 	}
@@ -277,4 +279,3 @@ Node::~Node(){
 	}
 	delete sensor;
 }
-

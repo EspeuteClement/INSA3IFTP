@@ -3,9 +3,9 @@
 
 #include <string>
 
-// Set to true if you want all the Tests to be verbose
+// Set to true if you want all the Tests to be more explicit
 #define DEFAULT_VERBOSE false
-/** A class that tests the binary tree and the sensor classes
+/** A class that tests the BinaryTree and the sensor classes
 */
 class TestEngine
 {

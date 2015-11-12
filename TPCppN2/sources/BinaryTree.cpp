@@ -1,11 +1,12 @@
 #include <iostream>
 #include "BinaryTree.h"
-#include "Sensor.h"
-#include "Node.h"
 
+//------------------------------------------------------------------------------
+// Public functions and methods
+//------------------------------------------------------------------------------
 void BinaryTree::Serialize()
 {
-	// print return (so the lua table will be returned as a function)
+	// Prints "return " so that the lua table will be returned as a function
 	std::cout<<"return ";
 	root->Serialize();
 	std::cout<<"\n";
@@ -21,12 +22,12 @@ Sensor *BinaryTree::Search(long ID)
 			return nodeMatch->GetSensor();
 		}
 	}
-	
+
 	return NULL;
 }
 
-void BinaryTree::Insert(int ID, 
-				unsigned char d,
+void BinaryTree::Insert(int ID,
+				unsigned char d7,
 				unsigned char h,
 				unsigned char m,
 				unsigned char value)
@@ -41,7 +42,7 @@ void BinaryTree::Insert(int ID,
 	{
 		sensorNode = root->Insert(ID);
 	}
-	sensorNode->GetSensor()->AddEvent(d,h,m,value);
+	sensorNode->GetSensor()->AddEvent(d7,h,m,value);
 }
 
 void BinaryTree::InitIterate()
@@ -68,30 +69,29 @@ Node *BinaryTree::Iterate()
 	{
 		// Ready the current node for the return
 		Node *returnValue = stack[stackPos];;
-		
-		//If there is a value at the left of the current node,
-		// push it into the stack
+
+		// If there is a value at the left of the current node,
+		// push it into the stack.
 		if (returnValue->GetLeft() != NULL)
 		{
 			++stackPos;
 			stack[stackPos] = returnValue->GetLeft();
 		}
-		//Else, if there is a value right to this node,
-		// push in into the stack
+		// Else, if there is a value right to this node,
+		// push in into the stack.
 		else if (returnValue->GetRight() != NULL)
 		{
 			++stackPos;
 			stack[stackPos] = returnValue->GetRight();
 		}
-		//Else, pop all the values until we found a node
-		//the right that we havn't visited, then push
-		// that node in
+		// Else, pop all the values until we find a node
+		// at the right we haven't visited, then push
+		// that node.
 		else
 		{
-			//stackPos;
 			while(stack[stackPos]->GetRight() == NULL || stack[stackPos+1] == stack[stackPos]->GetRight())
 			{
-				//pop
+				// Pop
 				--stackPos;
 				if (stackPos < 0)
 				{
@@ -100,7 +100,7 @@ Node *BinaryTree::Iterate()
 				}
 
 			}
-			// Then we have found our node, push it
+			// After we have found our node, we push it.
 			++stackPos;
 			stack[stackPos] = stack[stackPos-1]->GetRight();
 		}
@@ -110,7 +110,9 @@ Node *BinaryTree::Iterate()
 	return NULL;
 }
 
-
+//------------------------------------------------------------------------------
+// Constructors or/and Destructors
+//------------------------------------------------------------------------------
 BinaryTree::BinaryTree(Node* aRoot):root(aRoot)
 {
 	stack = NULL;
@@ -123,9 +125,9 @@ BinaryTree::~BinaryTree()
 	if (stack != NULL)
 	{
 		delete[] stack;
-	} 
+	}
 	if (root != NULL)
 	{
-		delete root;	
+		delete root;
 	}
 }

@@ -24,11 +24,6 @@
 class IoEngine
 {
 	public:
-		/** Default constructor. Affects the BinaryTree pointer to the attribute.
-		* @param tree is a pointer to the BinaryTree we will be using for Sensors
-		*/
-		IoEngine(BinaryTree *tree);
-
 		/** Reads the input from the standard input stream and calls for the methods
 		* associated to the user commands.
 		*	@returns true if the user didn't exit, false if the command 'EXIT'
@@ -78,6 +73,11 @@ class IoEngine
 		* OPT 'd7' 'H_start' 'H_end' 'seg_count' 'seg_1' ... 'seg_n'
 		*/
 		void HandleOPT();
+
+		/** Default constructor. Affects the BinaryTree pointer to the attribute.
+		* @param tree is a pointer to the BinaryTree we will be using for Sensors
+		*/
+		IoEngine(BinaryTree *tree);
 
 	private:
 		BinaryTree *theTree; /** Pointer to the binary tree that stores the sensors*/
