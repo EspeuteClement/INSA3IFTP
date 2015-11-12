@@ -46,6 +46,10 @@ public:
 	*/
 	static void PerformanceInsert();
 
+	/** Create a tree and Serialize it
+	*/
+	static void SerializeTest();
+
 };
 
 #undef DEFAULT_VERBOSE

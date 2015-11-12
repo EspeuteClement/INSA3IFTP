@@ -2,9 +2,13 @@
 #include "IoEngine.h"
 #include <ctime>
 // Uncomment following line if you want to execute the tests in TestEngine :
-//#define DEBUG
+#define DEBUG
+
+// Uncomment if you want to export a binary tree as a lua table. Need debug enabled
+#define SERIALIZE
 
 #ifdef DEBUG
+
 #include "TestEngine.h"
 #include "Utils.h"
 #endif
@@ -23,6 +27,7 @@ int main()
 #endif
 
 #ifdef DEBUG
+#ifndef SERIALIZE
   // Tests the BinaryTree features
   TestEngine::IterationTest_1();
 	TestEngine::BalanceTest_1();
@@ -33,6 +38,10 @@ int main()
   // Test the overall performance of the binary tree operations
   MESURE_TIME((TestEngine::PerformanceSearch()), "PerformanceSearch");
   MESURE_TIME((TestEngine::PerformanceInsert()), "PerformanceInsert");
+#else
+  TestEngine::SerializeTest();
+#endif
+
 #endif
 
   return 0;

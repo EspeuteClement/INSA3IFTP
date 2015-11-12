@@ -301,3 +301,15 @@ void TestEngine::PerformanceInsert()
 		testTree.Insert(rand()%1500,1,1,1,'V');
 	}
 }
+
+void TestEngine::SerializeTest()
+{
+	srand(127);
+	BinaryTree testTree = BinaryTree();
+	for (int i = 0; i < 1500; ++i)
+	{
+		testTree.Insert(i,1,1,1,'V');
+	}
+
+	testTree.Serialize();
+}
