@@ -101,33 +101,6 @@ Getter for the sensor ID.
 \subsubsection*{PrintSensorStatsRel}
 Computes and displays the statistics of the current Sensor for every attribute (v, j, r, n).
 
-\section{<IoEngine> class specifications}
-\subsection{Global presentation}
-Manages the inputs on the standard input stream and displays the according data. For details about the commands format or meaning, please directly refer either to the assignement or the documentation of the class.
-
-\subsection{Functions overview}
-
-\subsubsection*{Constructor}
-Default constructor affects the BinaryTree pointer to the attribute.
-
-\subsubsection*{ReadInput}
-Reads the input from the STDIO and modify the tree if needed.
-
-\subsubsection*{HandleADD}
-Calls the necessary function thats adds the new event to the appropriate sensor and creates the sensor (and the associated node in the binary tree) if they don't exist yet.
-
-\subsubsection*{HandleJAM\_DH}
-Performs the JAM\_DH operation : computes and displays the percentage of traffic jam (corresponding to a "r" or "n" traffic state) for each hour (0 to 23) of a given day of the week, averaging from every sensor.
-
-\subsubsection*{HandleOPT}
-Performs the OPT operation : computes and displays the optimal time (which reduces the duration of the journey through the given segments) of departure and the associated minimal duration. It is assumed that every required sensor exists or the function will simply exit.
-
-\subsubsection*{HandleSTATS\_C}
-Performs the STATS\_C operation : displays the statistics for each of the traffic states attributes (v, j, r, n) of a sensor as percentages, one by line. It is assumed the sensor exists or the function will simply exit.
-
-\subsubsection*{HandleSTATS\_D7}
-Performs the STATS\_D7 operation : computes and displays the statistics of every traffic state (v, j, r, n) of a given day of the week, averaging from every sensor.
-
 \section{Storing the Sensors}
 
 We chose to use a BinaryTree to store the Sensors. It allows us to have a very fast indexing and insertion speed.
