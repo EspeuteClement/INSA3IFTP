@@ -14,7 +14,7 @@ const int R = 2;
 const int N = 3;
 
 /** Stores event integer counters for each of the possible traffic states
-* (v, j, r, n).
+* ('V', 'J', 'R', 'N').
 */
 struct Stats
 {
@@ -45,7 +45,7 @@ struct Stats
   };
 
   /** Adds the statistics together
-  * @return a double type sum of the array elements (v, j, r, n)
+  * @return a double type sum of the array elements ('V', 'J', 'R', 'N')
   */
   double Sum ()
   {
@@ -59,12 +59,12 @@ struct Stats
 };
 
 /** Stores statistics for each of the possible traffic states
-* (v, j, r, n).
+* ('V', 'J', 'R', 'N').
 */
 struct StatsRel {
   double counterStats[NUMBER_OF_STATES];
 
-  /** Default constructor converts all the attributes of the passed in Stats
+  /** Default constructor converts all the array elements of the passed in Stats
   * struct into statistics relative to the sum of all the counters.
   */
   StatsRel (Stats *stats) {
@@ -79,8 +79,8 @@ struct StatsRel {
     }
   };
 
-  /** Displays the attributes of the StatsRel struct one per line, rounded into
-  * percentages.
+  /** Displays the array elements of the StatsRel struct one per line, rounded
+  * into percentages.
   */
   void PrintStatsRel ()
   {
@@ -159,14 +159,14 @@ class Sensor
     void AddStatsBySensor (Stats *stats);
 
     /** Computes and displays the statistics of the current Sensor for every
-    *  attribute (v, j, r, n).
+    *  array element ('V', 'J', 'R', 'N').
     */
     void PrintSensorStatsRel ();
 
     /** Computes and returns the probable duration of the journey through the
     * road segment associated with the sensor. Each probable state is associated
-    * with a duration : (v->1, j->2, r->4, n->10). If no data if available, all
-    * the stats are equal to zero, therefore affecting 1 minute ("v" case).
+    * with a duration : (v->1, j->2, r->4, n->10). If no data is available, all
+    * the stats are equal to zero, therefore affecting 1 minute ('V' case).
     * @param d7 is the day of the week, ranging from 1 to 7 included.
     * @param h is the hour, ranging from 0 to 23.
     * @param m is the minute, ranging from 0 to 59.
