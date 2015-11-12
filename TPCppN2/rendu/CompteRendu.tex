@@ -8,6 +8,7 @@
 \usepackage[top=1in, bottom=1.25in, left=1.25in, right=1.25in]{geometry}
 \usepackage{listings}
 \usepackage{graphicx}
+\usepackage{hyperref}
 
 \definecolor{commentColor}{rgb}{0.7,0.7,0.7}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -92,7 +93,7 @@ Adds all the Stats structs comprised in the given day and hour to the Stats stru
 Adds all the Stats structs of the current Sensor to the Stats struct which pointer is passed.
 
 \subsubsection*{GetDuration}
-Computes and returns the probable duration of the journey through the road segment associated with the sensor. Each probable state is associated with a duration : (v->1, j->2, r->4, n->10). If no data if available, all the stats are equal to zero, therefore affecting 1 minute ("v" case).
+Computes and returns the probable duration of the journey through the road segment associated with the sensor. Each probable state is associated with a duration : (v$\to$1, j$\to$2, r$\to$4, n$\to$10). If no data if available, all the stats are equal to zero, therefore affecting 1 minute ("v" case).
 
 \subsubsection*{GetID}
 Getter for the sensor ID.
@@ -126,5 +127,87 @@ Performs the STATS\_C operation : displays the statistics for each of the traffi
 
 \subsubsection*{HandleSTATS\_D7}
 Performs the STATS\_D7 operation : computes and displays the statistics of every traffic state (v, j, r, n) of a given day of the week, averaging from every sensor.
+
+\section{Storing the Sensors}
+We choosed to use a BinaryTree as our storage method for the Sensors. It allows us to have very fast indexing and insertion speed.
+Here some explainations about the vocabulary that we'll use later :
+\begin{description}
+	\item[Node] Represents a element in our tree. Each one has 2 children and one parent. Each node contains a sensor. The Sensor's ID determines the position of the node in the tree, as the left child Sensor's ID is always lower than the one of it's parents, and the right one is higher.
+	\item[Height] The height is the longest chain of node in a subtree.
+	\item[Balance] The balance of a node is determined like this : $ leftSubtreeHeight - rightSubtreeHeight$. It allows to know if a subtree is balanced or not. In our tree, the node balance has to be between $-1$ and $+1$. If it's higher, we have to perform some operations in order to restore the balance.
+\end{description}
+
+\section{<Node> Class Specifications}
+\subsection{Global Presentation}
+
+
+Node is a class that represents a BinaryTree node. Each one contains a Sensor and 3 Node pointers : 1 for the parent node and 2 for the left and right child nodes. The nodes are sorted with the Sensor ID : Nodes that are at the left of this node will have their Sensor ID lower to this one, and Node to the left will have a Sensor ID higher to this one.
+\subsection{Function overview}
+\subsubsection*{Constructor}
+By default, the node constructor only take a Sensor as an argument. You can also specify the parents node and the children (defaulted to NULL).
+\subsubsection*{GetLeft and GetRight}
+Simple Getters for the Left and Rigth childs of this node.
+\subsubsection*{SwapSensor}
+Exchange the Sensor of this node with another node. It allows to keep links between the nodes. This method is private because if an external user uses it, it could break the structure of the subtree.
+
+\subsubsection*{LeftRotation and RightRotation}
+Left and right rotations are operations that doesn't change the logic of the binary tree. It's used in the rebalancing process. More explanations can be found here \url{https://en.wikipedia.org/wiki/Tree_rotation}.
+
+This function is not as optimized as it should because I use 5 operations instead of the usual 3. This is because I use a sensor swap so we can keep the tree structure in place. If we didn't do that, some parent-child relations from node not involved in the operations could be messed up.
+
+\subsubsection*{DoubleLeftRotation and DoubleRightRotation}
+Each one performs 2 rotations on the tree. Again, it's used in the rebalancing process of the tree.
+
+\subsubsection*{ComputeHeight}
+This method compute the height of the current node if needed.
+
+\subsubsection*{GetHeight}
+Simple getter for the Height parameter.
+
+\subsubsection*{GetBalance}
+Return the balance of this subtree.
+
+\subsubsection*{Search and Insert}
+These two method are fairly similar. The only difference is that search will return the node that has the ID matching the one in parameter, or NULL if it hasn't been found. Insert will return the node with the right ID or create a new one and return it if the ID hasn't been found.
+
+\subsubsection*{Serialize}
+Print the subtree in a form that is readable by a Lua program. Used for some tests for the Node and BinaryTree classes.
+
+\subsubsection*{GetSensor}
+Simple getter for the Sensor.
+
+\section{<BinaryTree> Class Specifications}
+\subsection{Global Presentation}
+While Node can act by itself has a binary tree, the BinaryTree class offers a useful layer of functions that can be used to manipulate the tree. It keeps track of the root (the first node in the tree), allow to iterate thought the Tree. It also allows to add data in a specific Sensor in one command.
+
+\subsection{Function Overview}
+\subsubsection*{Search}
+Simply return the result of Search on the root Node.
+
+\subsubsection*{Serialize}
+Serialize the tree, and add "return " at the start of the output, so it can be easely parsed in lua.
+
+\subsubsection*{Insert}
+Allows to put data from the "ADD" command in the tree easily.
+
+\subsubsection*{GetRoot}
+Returns the root node of the subtree
+
+\subsection{Iterating trough the tree}
+The process of iterating trough the tree is fairly simple. Each time we call Iterate(), we get a pointer to a node in the tree that we haven’t visited yet, until we get a null pointer, indicating that we have traversed the tree. Using InitIterate allows to initialize the variables so the Iteration can run smoothly.
+
+We keep track of our position in the tree via a Stack containing the path from the current node to the tree's root. The stack is just an pointer array with a variable keeping the current number of pointers in the array.
+
+For iterating, We start from the root, and we will return the current node at the end of the method. But before that, we will push the next node to visit in the stack. We prioritize the left nodes, then the right ones. If we can't go down the tree any more (only NULL pointers), we pop nodes in the stack until we can go right again.
+
+\subsubsection*{InitIterate}
+Prepare the Tree for a iteration trough the tree. It initialize the stack using the height of the tree.
+
+\subsubsection*{Iterate}
+Will return a pointer to a node that hasn't been visited yet, or NULL if we reached the end of the tree.
+ 
+
+
+
 
 \end{document}

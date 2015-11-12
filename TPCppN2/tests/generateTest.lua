@@ -8,26 +8,31 @@ if _in and _out then
 	numberOfTrajectSensors = 5
 	numberOfOtherSensors = 0
 
-	startHour = 12
-	endHour = 14
+	startHour = 22
+	endHour = 24
 
 	numberOfMinutes = (endHour-startHour) * 60
-	optimalStartTime = 12
+	optimalStartTime = 119
 	for sensor=1,numberOfTrajectSensors do
-		for minute=0,numberOfMinutes-1 do
+		for minute=0,numberOfMinutes*2 do
 			_in:write(	"ADD " ..
 						sensor ..
-						" 1984 1 1 " ..
-						math.floor(minute / 60) + startHour ..  -- HOURS
+						" 1984 1 " ..
+						(math.floor((startHour + math.floor(minute / 60))/24)%7)+1 ..
+						" " ..
+						(math.floor(minute / 60) + startHour)%24 ..  -- HOURS
 						" " ..
 						minute%60 ..
-						" 1 ");
+						" " .. 
+						(math.floor((startHour + math.floor(minute / 60))/24)%7)+1);
 			if minute == optimalStartTime+sensor-1 then
-				_in:write("V")
+				_in:write(" V")
 			else
-				_in:write("R")
+				_in:write(" R")
 			end
 			_in:write("\n")
+
+			
 		end
 	end
 
@@ -40,6 +45,6 @@ if _in and _out then
 	_in:write("\nEXIT")
 
 	-- Write the expected result
-	_out:write("1 " .. math.floor(optimalStartTime / 60) + startHour.. " " .. optimalStartTime%60 .. " " .. numberOfTrajectSensors )
+	_out:write((math.floor((startHour + math.floor(numberOfTrajectSensors / 60))/24)%7)+1 .. " " .. math.floor(optimalStartTime / 60) + startHour.. " " .. optimalStartTime%60 .. " " .. numberOfTrajectSensors )
 
 end

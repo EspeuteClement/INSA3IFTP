@@ -53,11 +53,17 @@ void IoEngine::HandleADD()
 	int h;
 	int m;
 	int d7;
-	unsigned char trafic[10];
+	unsigned char traffic[2];
 
 	// * allows us to ignore the useless data.
-	scanf("%i %*i %*i %*i %i %i %i %s",&id , &h , &m , &d7,trafic);
-	theTree->Insert(id,d7,h,m,trafic[0]);
+	scanf("%i %*i %*i %*i %i %i %i %s",&id , &h , &m , &d7,traffic);
+
+	if (checkHour(h)) return;
+	if (checkMinute(m)) return;
+	if (checkD7(d7)) return;
+	if (checkTraffic(traffic[0])) return;
+
+	theTree->Insert(id,d7,h,m,traffic[0]);
 }
 
 void IoEngine::HandleSTATS_C()
@@ -79,6 +85,7 @@ void IoEngine::HandleJAM_DH()
 	int d7;
 
 	cin >> d7;
+	if (checkD7(d7)) return;
 
 	// Caches the hourly statistics data of all sensor in order to avoid to
 	// iterate 24 times through the tree.
@@ -123,6 +130,7 @@ void IoEngine::HandleSTATS_D7()
 	int d7;
 
 	cin >> d7;
+	if (checkD7(d7)) return;
 
 	Stats *d7Stats = new Stats();
 
@@ -153,6 +161,10 @@ void IoEngine::HandleOPT()
 	cin >> hEnd;
 	cin >> segCount;
 
+	if (checkD7(d7)) return;
+	if (checkHourTimeFrame(hStart)) return;
+	if (checkHourTimeFrame(hEnd)) return;
+
 	int *segTab = new int[segCount];
 
 	for (int i = 0; i < segCount; i++)
@@ -167,7 +179,7 @@ void IoEngine::HandleOPT()
 	{
 		sensorTab[i] = theTree->Search(segTab[i]);
 
-		// If on of the passed in sensors doesn't exit, the function exits.
+		// If one of the passed in sensors doesn't exist, the function exits.
 		if (sensorTab[i] == NULL)
 		{
 			return;
@@ -175,18 +187,25 @@ void IoEngine::HandleOPT()
 	}
 
 	//Starting from every minute within [hStart, hEnd], we compute the duration of
-	//the journey and only keep the shortest that also complies with hEnd.
+	//the journey and only keep the shortest.
+
+	//
 	int minDuration = (hEnd-hStart)*60;
+
 	int minMinOfStart = 0;
 	int minHourOfStart = hStart;
 
+	// Start values for each simulation
 	int minOfStart = 0;
 	int hourOfStart = hStart;
+	int dayOfStart = d7;
 
+	// Values that evolve during a given simulation
 	int duration = 0;
 	int totalDuration = 0;
-	int currentMin = 0;
+	int currentMin = minOfStart;
 	int currentHour = hourOfStart;
+	int currentDay = dayOfStart;
 
 	while (hourOfStart < hEnd)
 	{
@@ -194,7 +213,7 @@ void IoEngine::HandleOPT()
 		for (int segNum = 0; segNum < segCount; segNum++)
 		{
 			duration = sensorTab[segNum]->GetDuration(d7, currentHour, currentMin);
-			cout << "duration = " << duration << " for " << currentHour << "h" << currentMin << " sensor:" << sensorTab[segNum]->GetID() << "\n";
+
 			totalDuration += duration;
 
 			// Incrementation of the current time by duration minutes.
@@ -204,13 +223,28 @@ void IoEngine::HandleOPT()
 			}
 			else
 			{
-				currentMin += (duration - NUMBER_OF_MINUTES + 1);
-				currentHour++;
+				if (currentHour + 1 < NUMBER_OF_HOURS)
+				{
+					currentMin += (duration - NUMBER_OF_MINUTES);
+					currentHour++;
+				}
+				else
+				{
+					currentHour = 0;
+					if (currentDay + 1 < NUMBER_OF_DAYS)
+					{
+						currentDay++;
+					}
+					else
+					{
+						currentDay = 0;
+					}
+				}
 			}
 		}
 
 		//Only keep the minimum duration of all and the start time associated.
-		if (totalDuration < minDuration && currentHour < hEnd) {
+		if (totalDuration < minDuration) {
 			minDuration = totalDuration;
 			minMinOfStart = minOfStart;
 			minHourOfStart = hourOfStart;
@@ -239,4 +273,49 @@ void IoEngine::HandleOPT()
 	// Display the optimal time of departure and the journey's duration.
 	cout << d7 << " " << minHourOfStart << " " << minMinOfStart << " " <<
 	minDuration << "\n";
+}
+
+bool IoEngine::checkHour(int hour)
+{
+	if (hour < 0 || hour > NUMBER_OF_HOURS - 1) {
+		cout << "The hour must be an integer ranging from 0 to 23 included.\n";
+		return true;
+	}
+	return false;
+}
+
+bool IoEngine::checkHourTimeFrame(int hour)
+{
+	if (hour < 0 || hour > NUMBER_OF_HOURS) {
+		cout << "The hour of start an end must be integers ranging from 0 to 24 included.\n";
+		return true;
+	}
+	return false;
+}
+
+bool IoEngine::checkMinute(int minute)
+{
+	if (minute < 0 || minute > NUMBER_OF_MINUTES - 1) {
+		cout << "The minute must be an integer ranging from 0 to 59 included.\n";
+		return true;
+	}
+	return false;
+}
+
+bool IoEngine::checkD7(int day)
+{
+	if (day < 1 || day > NUMBER_OF_DAYS) {
+		cout << "The day of week must be an integer ranging from 1 to 7 included.\n";
+		return true;
+	}
+	return false;
+}
+
+bool IoEngine::checkTraffic(char traffic)
+{
+	if (!(traffic == 'V' || traffic == 'J' || traffic == 'R' || traffic == 'N')) {
+		cout << "Traffic state must be either 'V', 'J', 'R' or 'N'.\n";
+		return true;
+	}
+	return false;
 }

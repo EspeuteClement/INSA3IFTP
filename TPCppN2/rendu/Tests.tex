@@ -1,0 +1,80 @@
+\documentclass[10pt]{article}
+
+\usepackage{custom}
+
+\title{Test for TP C++ \#2}
+\author{Pair B3408 \\ {\sc Renault} Benoit, {\sc Espeute} Clément}
+\date{}
+\usepackage[top=1in, bottom=1.25in, left=1.25in, right=1.25in]{geometry}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\definecolor{commentColor}{rgb}{0.7,0.7,0.7}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{language=bash} 
+\lstset{ %
+  backgroundcolor=\color{black!5},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize\ttfamily,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{commentColor},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=C++,                 % the language of the code
+  otherkeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black!20},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname,                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+  postbreak=\raisebox{0ex}[0ex][0ex]{\tt\color{red}-> }
+}
+\begin{document}
+\pagestyle{fancy}
+\maketitle
+We used multiples kind of tests in order to see if our program works.
+
+\section{Early Visual Testes}
+During the prototyping of the binary tree, I quickly realised I needed to have a tool that allows me to display a graphical representation of the binary tree. I needed that so I could easely see if my tree was balanced with a quick glance. Because I didn't known much about C++ libraries, I choose to create an external tool with a framework I knew how to use.
+
+I created a Lua application that used the LÖVE2d framework. It's normally intended as a set of libraries for 2d videogame making, so it has all the tool I needed to display info on the screen.
+
+In order to pass the information from out application to the utility I created, I choose to Serialize the binary tree into a Lua table (An associative array capable of storing many types of data, including other tables). The serialization was done recursively on the BinaryTree's nodes, and can be found in the \texttt{Node::Serialize()} method.
+
+Once the data was serialized, it was just a matter of loading that data into the Lua program and display that data on the screen.
+
+\subsection*{Using the tool}
+If you which to try the tool, you'll need the \texttt{love} package on a linux machine, then run \texttt{love~utils/dispTree/} from the project root. Unfortunately, reading the data from the program is now a bit tricky because we have implemented a proper I/O interface. Because of that, you can't export the
+binaryTree anymore unless you modify the main. As I said earlier, that tool was mostly used when creating the binary tree and wasn't much needed in the later development of the application when proper test where implemented.
+
+\section{TestEngine}
+Because the visualisation tool wasn't meant to find small imperfections in the tree, I had to implement some automatics tests in order to see I the tree's balance met the requirement of a AVL tree. I created 2 tests designed to find those small flaws. Because those tests works using the internals features of the programs, they needed to be put in the code. Thus we created the TestEngine class. This class only uses static methods, with each method corresponding to a different test.
+
+\subsection{\tt TestEngine::Iteration\_Test1()}
+This test is designed to see if the Iteration method visited all the nodes in the tree exactly once. A boolean array is created that keeps in memory what nodes are visited. Then we create and fill the binary tree, and we iterate through it. The function will return $true$ if all the node where visited once. If an error is found, a message will appear in the console.
+
+\subsection{\tt TestEngine::BalanceTest\_1()}
+This test is designed to see if the BinaryTree is balanced after a long series of random insertions. It create and fills a BinaryTree with random sensors ID, and then iterate through all the node, checking the balance of every node and prompting an error if a balance of 2 or more is found (indicating that we don't fill the AVL tree requirements.
+
+\section{External tests}
+Those tests were created in order to see if our application was properly functioning. We used the \texttt{test.sh} file provided for the TP with some in and out files also provided in order to see if the basic function were properly functioning. We also used a 20 000 000 instruction file provided by another group that allowed us to see if our program was performing well under the worst case scenario for the TP.
+
+Finally, we needed to test the optional instruction, being \texttt{OPT}. For that, I wrote a simple lua (\texttt{generateValues.lua} in the \texttt{tests/} folder)script that generated the in and out files for this test. The program choose a random minute between 2 given our as the "optimal" path. Then it write into the .in file ADD commands filling all the minutes between the 2 hours with "R" traffic except for the chosen minute where the traffic is "V". Multiples Sensors are created in the same way, but with the "V" traffic put so the chosen path will be fully "V".
+
+At the end, the program write in the .out file the expected output.
+
+This allowed us to see if the program was fully functioning, and it was !
+\end{document}

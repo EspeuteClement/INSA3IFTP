@@ -24,13 +24,6 @@ public:
 	*/
 	inline Node *GetRight() const {return right;};
 
-	/** Exchanges this node sensor with the one in target
-
-	* @param [in] target The node where the swap will happen.
-	*/
-	void SwapSensor(Node *target);
-	// Exchanges this object sensor with the one in target
-
 	/** Simply returns the ID of this node's sensor.
 	*	@return The sensors's ID
 	*/
@@ -39,38 +32,6 @@ public:
 	/** Return this node height.
 	*/
 	inline long GetHeight() const {return height;};
-	// Get the current computed height of this node
-	// NOTE : ComputeHeight is more reliable, but involve maths
-
-	/**	Performs a LeftRotation using this node as the root
-	*/
-	void LeftRotation();
-
-	/**	Performs a RightRotation using this node as the root
-	*/
-	void RightRotation();
-
-	/** Performs a right rotation on the right subtree of this node,
-		then performs a left rotation on this node.
-	*/
-	void DoubleLeftRotation();
-
-	/** Performs a left rotation on the right subtree of this node,
-		then performs a right rotation on this node.
-	*/
-	void DoubleRightRotation();
-
-
-	/** Re balance this subtree, then this node parent subtree up to
-	*	this tree root.
-	*/
-	void Rebalance();
-
-	/** Compute this Node Height (the number of Node in the longest
-	*	subtree of this node) and then returns it
-	*	@return this Node Height
-	*/
-	long ComputeHeight();
 
 	/** Returns the subtraction of the left tree's height with the
 	*	right tree's one. A 0 value indicates that
@@ -80,20 +41,20 @@ public:
 	long GetBalance();
 
 	/** Returns the pointer to the node that contains a sensor with its ID matching
-	*	aID
-	*	@param [in] aID The ID used for the search.
+	*	searchID
+	*	@param [in] searchID The ID used for the search.
 	*	@return If the node is found, return the pointer to the node.
 	*	Else, returns a NULL pointer.
 	*/
-	Node *Search(long aID);
+	Node *Search(long searchID);
 
 	/** Insert the given sensor in the subtree and returns a pointer to
 	*	the new node.
 	*	@return NULL if the node has been inserted. If there is already
-	*	a node containing a sensor with ID equals to aID, returns the
+	*	a node containing a sensor with ID equals to searchID, returns the
 	*	node instead.
 	*/
-	Node *Insert(int aID);
+	Node *Insert(int searchID);
 
 
 	/** Print in the standard output a representation of this node
@@ -126,6 +87,41 @@ private:
 	*	@param theRight A pointer to the node that should be inserted
 	*/
 	void setRight(Node *theRight);
+
+	/** Exchanges this node sensor with the one in target
+	* @param [in] target The node where the swap will happen.
+	*/
+	void SwapSensor(Node *target);
+	// Exchanges this object sensor with the one in target
+
+	/**	Performs a LeftRotation using this node as the root
+	*/
+	void LeftRotation();
+
+	/**	Performs a RightRotation using this node as the root
+	*/
+	void RightRotation();
+
+	/** Performs a right rotation on the right subtree of this node,
+		then performs a left rotation on this node.
+	*/
+	void DoubleLeftRotation();
+
+	/** Performs a left rotation on the right subtree of this node,
+		then performs a right rotation on this node.
+	*/
+	void DoubleRightRotation();
+
+	/** Re balance this subtree, then this node parent subtree up to
+	*	this tree root.
+	*/
+	void Rebalance();
+
+	/** Compute this Node Height (the number of Node in the longest
+	*	subtree of this node) and then returns it
+	*	@return this Node Height
+	*/
+	long ComputeHeight();
 
 	Sensor *sensor;	/**The sensor contained in the node */
 

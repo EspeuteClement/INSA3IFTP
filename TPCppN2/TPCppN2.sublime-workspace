@@ -283,7 +283,7 @@
 			"file": "sources/IoEngine.cpp",
 			"settings":
 			{
-				"buffer_size": 4979,
+				"buffer_size": 5135,
 				"line_ending": "Unix"
 			}
 		},
@@ -312,10 +312,7 @@
 			}
 		},
 		{
-			"contents": "#include <iostream>\n#include <stdlib.h>\n#include \"Node.h\"\n#include \"Sensor.h\"\n#include \"BinaryTree.h\"\n#include \"TestEngine.h\"\n#include \"IoEngine.h\"\n\nint main()\n{\n	srand(127);\n	BinaryTree tree;\n\n  IoEngine test(&tree);\n  while(test.ReadInput());\n\n  //TestEngine::BalanceTest_1();\n  //TestEngine::Iteration_Test1();\n  // TEST THE ITERATION PROCESS\n  /*\n  tree.InitIterate();\n  Node *daNode = NULL;\n  int counter = 0;\n  while((daNode = tree.Iterate()) != NULL)\n  {\n    std::cout << daNode->GetSensorID() <<'\\n';\n    counter ++;\n  }\n  std::cout << counter << '\\n';\n  */\n	//\n  //std::cout << \"V\" << theRoot->Search(1)->GetSensor()->GetStatsByMin(1,1,1)->v << \"\\n\";\n	//theRoot->DoubleLeftRotation();\n	//int2Node->Rebalance();\n	//tree.Serialize();\n  return 0;\n}",
 			"file": "sources/Main.cpp",
-			"file_size": 2466,
-			"file_write_time": 1446922536000000,
 			"settings":
 			{
 				"buffer_size": 754,
@@ -327,6 +324,14 @@
 			"settings":
 			{
 				"buffer_size": 2338,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "sources/Node.h",
+			"settings":
+			{
+				"buffer_size": 3938,
 				"line_ending": "Unix"
 			}
 		}
@@ -526,7 +531,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"/home/element/Documents/INSA/TP/INSA3IFTP/TPCppN2/src",
@@ -678,7 +683,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -702,7 +707,7 @@
 							"syntax": "Packages/Makefile/Makefile.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 234.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -771,15 +776,15 @@
 					"file": "sources/IoEngine.cpp",
 					"settings":
 					{
-						"buffer_size": 4979,
+						"buffer_size": 5135,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								288,
-								288
+								3974,
+								3974
 							]
 						],
 						"settings":
@@ -787,8 +792,8 @@
 							"syntax": "Packages/C++/C++.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": 12.0,
+						"translation.y": 2223.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -817,7 +822,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 234.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -928,6 +933,33 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 429.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "sources/Node.h",
+					"settings":
+					{
+						"buffer_size": 3938,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3433,
+								3433
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 101.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
