@@ -3,9 +3,10 @@
 
 #include <string>
 
-// Set to true if you want all the Tests to be verbose
+// Set to true if you want all the Tests to be more explicit
 #define DEFAULT_VERBOSE false
-/** A class that tests the binary tree and the sensor classes
+
+/** A class that tests the BinaryTree and the sensor classes
 */
 class TestEngine
 {
@@ -34,19 +35,19 @@ public:
 	*/
 	static bool SensorTest_1(bool verbose = DEFAULT_VERBOSE);
 
-	/** Create 1500 sensors and performs
+	/** Creates 1500 sensors and performs
 	*	20000000 search operations on them
-	*	Allow to make some speed testes
+	*	Allows to make some speed tests
 	*/
 	static void PerformanceSearch();
 
-	/** Create 1500 sensors and performs
+	/** Creates 1500 sensors and performs
 	*	20000000 insert operations on them
-	*	Allow to make some speed testes
+	*	Allows to make some speed tests
 	*/
 	static void PerformanceInsert();
 
-	/** Create a tree and Serialize it
+	/** Creates a tree and Serializes it
 	*/
 	static void SerializeTest();
 

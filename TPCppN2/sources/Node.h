@@ -1,20 +1,23 @@
 #ifndef NODE_H
 #define NODE_H
-//#include "BinaryTree.h"
-#include <iostream>
 #include "Sensor.h"
-//#define NULL 0
 
-/** Represents a BinaryTree Leaf, and contain a Sensor.
+/** Represents a BinaryTree Leaf, and contains a pointer to a Sensor.
 */
 class Node
 {
 public:
+<<<<<<< HEAD
 	// ------------------------------------------------------ GETERS :
 
 	/** Returns the Node at the left of the current Node
 	*	@return A pointer to the left Node of this Node. Returns NULL
 	*	if there is no left Node
+=======
+	/** Returns the node at the left of the current node
+	*	@return A pointer to the left node of this node. Returns NULL
+	*	if there is no left node
+>>>>>>> 70ec4105610ffc0a668fc45ed750cf2f5e1fad11
 	*/
 	inline Node *GetLeft() const {return left;};
 
@@ -71,13 +74,17 @@ public:
 	*/
 	Sensor *GetSensor() const {return sensor;};
 
+<<<<<<< HEAD
 	/**	Create a Node.
 	*	@param sensor The sensor contained in this Node
+=======
+	/**	Creates a Node.
+	*	@param sensor The sensor contained in this node
+>>>>>>> 70ec4105610ffc0a668fc45ed750cf2f5e1fad11
 	*/
 	Node(Sensor *sensor, Node *parent = NULL, Node *left = NULL, Node *right = NULL);
 
 	~Node();
-
 
 private:
 	/** Set the left Node of this Node to be theLeft
@@ -125,6 +132,7 @@ private:
 	*/
 	long ComputeHeight();
 
+<<<<<<< HEAD
 	Sensor *sensor;	/**The sensor contained in the Node */
 
 	Node *parent;	/**	The parent Node to this one. NULL if there is
@@ -136,7 +144,18 @@ private:
 					longest branch under this Node */
 
 
+=======
+	/**The sensor contained in the node */
+	Sensor *sensor;
+	/**	The parent node to this one. NULL if there is no parent node*/
+	Node *parent;
+	/**The node on the left */
+	Node *left;
+	/**The node on the right*/
+	Node *right;
+	/** The height, i.e. the number of nodes in the longest branch under this node*/
+	long height;
+>>>>>>> 70ec4105610ffc0a668fc45ed750cf2f5e1fad11
 };
-
 
 #endif	//NODE_H

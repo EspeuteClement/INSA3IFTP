@@ -2,10 +2,17 @@
 #include "Node.h"
 #include "Sensor.h"
 #include "Utils.h"
+<<<<<<< HEAD
 //#define MAP
 
+=======
+using namespace std;
+>>>>>>> 70ec4105610ffc0a668fc45ed750cf2f5e1fad11
 // AVL ALGORITHM : http://www.cise.ufl.edu/~nemo/cop3530/AVL-Tree-Rotations.pdf
 
+//------------------------------------------------------------------------------
+// Private functions and methods
+//------------------------------------------------------------------------------
 void Node::setLeft(Node *theLeft)
 {
 	left = theLeft;
@@ -92,12 +99,44 @@ void Node::DoubleRightRotation()
 	}
 }
 
+void Node::Rebalance()
+{
+	//ComputeHeight();
+	long bal = GetBalance();
+	//cout << "Rebalancing. Bal : " << bal << "\n";
+	if (bal>1) // If the tree is left heavy
+	{
+		if (left->GetBalance()<=-1) // If the left subtree is right heavy
+		{
+			DoubleRightRotation();
+		}
+		else
+		{
+			RightRotation();
+		}
+	}
+	else if (bal < -1) // if the tree is right heavy
+	{
+		if (right->GetBalance()>=1) // If the right subtree is left heavy
+		{
+			DoubleLeftRotation();
+		}
+		else
+		{
+			LeftRotation();
+		}
+	}
+	if (parent != NULL)
+	{	parent->Rebalance();
+	}
+}
+
 long Node::ComputeHeight()
 { 
 	int l = 0; // The height of the left subtree
 	int r = 0; // The height of the right subtree
 	if(left != NULL)
-	{	l = left->height;		
+	{	l = left->height;
 	}
 	if(right != NULL)
 	{	r = right->height;
@@ -106,7 +145,7 @@ long Node::ComputeHeight()
 	int oldH = height;
 	// The height is the max of the subtrees height, plus one
 	height = Utils::max(l,r) + 1;
-	
+
 	//Then we call this method for this node parent to propagate
 	//The height change (it the height has changed)
 	if( oldH != height && parent !=NULL)
@@ -115,42 +154,45 @@ long Node::ComputeHeight()
 	return height;
 }
 
+//------------------------------------------------------------------------------
+// Public functions and methods
+//------------------------------------------------------------------------------
 void Node::Serialize()
 {
 
 	// The goal is to print something like this :
 	// {id,height,left={id,left={...}},right={...}}
-	std::cout << '{';
-	std::cout << "id=" <<GetSensorID();
-	std::cout << ",height=" << height <<',';
-	std::cout << "left=";
-	
+	cout << '{';
+	cout << "id=" <<GetSensorID();
+	cout << ",height=" << height <<',';
+	cout << "left=";
+
 	// Serialize the left part of the array
 	if (left != NULL)
 	{	left->Serialize();
 	}
 	else // Set the table to nil if the left node is NULL
-	{	std::cout << "nil";
+	{	cout << "nil";
 	}
-	std::cout << ',';
+	cout << ',';
 
-	std::cout << "right=";
+	cout << "right=";
 	// Serialize the right part of the array
 	if (right != NULL)
 	{	right->Serialize();
 	}
 	else // Set the table to nil if the right node is NULL
-	{	std::cout << "nil";
+	{	cout << "nil";
 	}
 
-	std::cout << '}';
+	cout << '}';
 }
 
 Node *Node::Search(long searchID)
 {
-	
+
 	Node *current = this; // Pointer to the current node
-	
+
 	long id = current->GetSensorID();
 	//While we havn't found the right node or there is no more node left ...
 	while(current != NULL && !(id == searchID))
@@ -175,18 +217,18 @@ Node *Node::Search(long searchID)
 }
 
 Node *Node::Insert(int searchID)
-{	
+{
 	if(searchID < GetSensorID())
 	{
 		if (left != NULL) //If there is a node, search in this subtree
 		{	return left->Insert(searchID);
 		}
 		else //Else return the pointer to the left part
-		{	
+		{
 			Node *n = new Node(new Sensor(searchID),this);
 			setLeft(n);
 			Rebalance();
-			
+
 			return n;
 		}
 	}
@@ -196,7 +238,7 @@ Node *Node::Insert(int searchID)
 		{	return right->Insert(searchID);
 		}
 		else
-		{	
+		{
 			Node *n = new Node(new Sensor(searchID),this);
 			setRight(n);
 			Rebalance();
@@ -223,6 +265,7 @@ long Node::GetBalance()
 	return lHeight - rHeight;
 }
 
+<<<<<<< HEAD
 void Node::Rebalance()
 {
 	long bal = GetBalance();
@@ -254,19 +297,18 @@ void Node::Rebalance()
 }
 
 
+=======
+//------------------------------------------------------------------------------
+// Constructors or/and Destructors
+//------------------------------------------------------------------------------
+>>>>>>> 70ec4105610ffc0a668fc45ed750cf2f5e1fad11
 Node::Node(Sensor *sensor, Node *parent, Node *left, Node *right):
 	sensor(sensor),parent(parent),left(left),right(right)
 {
-#ifdef MAP
-	std::cout << "Constructing a <Node>";
-#endif
 	height = 1;
 }
 
 Node::~Node(){
-#ifdef MAP
-	std::cout << "Destructing a <Node>";
-#endif
 	if (left != NULL)
 	{	delete left;
 	}
@@ -275,4 +317,3 @@ Node::~Node(){
 	}
 	delete sensor;
 }
-

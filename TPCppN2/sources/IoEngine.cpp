@@ -1,4 +1,3 @@
-#include <string>
 #include <iostream>
 
 #include <cstdio>
@@ -9,8 +8,57 @@
 
 using namespace std;
 
-IoEngine::IoEngine(BinaryTree *tree):theTree(tree){}
+//------------------------------------------------------------------------------
+// Private functions and methods
+//------------------------------------------------------------------------------
+bool IoEngine::checkHour(int hour)
+{
+	if (hour < 0 || hour > NUMBER_OF_HOURS - 1) {
+		cout << "The hour must be an integer ranging from 0 to 23 included.\n";
+		return true;
+	}
+	return false;
+}
 
+bool IoEngine::checkHourTimeFrame(int hour)
+{
+	if (hour < 0 || hour > NUMBER_OF_HOURS) {
+		cout << "The hour of start an end must be integers ranging from 0 to 24 included.\n";
+		return true;
+	}
+	return false;
+}
+
+bool IoEngine::checkMinute(int minute)
+{
+	if (minute < 0 || minute > NUMBER_OF_MINUTES - 1) {
+		cout << "The minute must be an integer ranging from 0 to 59 included.\n";
+		return true;
+	}
+	return false;
+}
+
+bool IoEngine::checkD7(int day)
+{
+	if (day < 1 || day > NUMBER_OF_DAYS) {
+		cout << "The day of week must be an integer ranging from 1 to 7 included.\n";
+		return true;
+	}
+	return false;
+}
+
+bool IoEngine::checkTraffic(char traffic)
+{
+	if (!(traffic == 'V' || traffic == 'J' || traffic == 'R' || traffic == 'N')) {
+		cout << "Traffic state must be either 'V', 'J', 'R' or 'N'.\n";
+		return true;
+	}
+	return false;
+}
+
+//------------------------------------------------------------------------------
+// Public functions and methods
+//------------------------------------------------------------------------------
 bool IoEngine::ReadInput()
 {
 	char command[10];
@@ -99,7 +147,7 @@ void IoEngine::HandleJAM_DH()
 	theTree->InitIterate();
 	Node *iterator = NULL;
 
-	// Iterates through the entire to collect the hourly statistics.
+	// Iterates through the entire tree to collect the hourly statistics.
 	while ( (iterator = theTree->Iterate() ) != NULL )
 	{
 		for (int i = 0; i < NUMBER_OF_HOURS; i++)
@@ -138,7 +186,7 @@ void IoEngine::HandleSTATS_D7()
 	theTree->InitIterate();
 	Node *iterator = NULL;
 
-	// Iterates through the entire to collect the daily statistics.
+	// Iterates through the entire tree to collect the daily statistics.
 	while ( (iterator = theTree->Iterate() ) != NULL )
 	{
 		iterator->GetSensor()->AddStatsByDay(d7, d7Stats);
@@ -275,47 +323,7 @@ void IoEngine::HandleOPT()
 	minDuration << "\n";
 }
 
-bool IoEngine::checkHour(int hour)
-{
-	if (hour < 0 || hour > NUMBER_OF_HOURS - 1) {
-		cout << "The hour must be an integer ranging from 0 to 23 included.\n";
-		return true;
-	}
-	return false;
-}
-
-bool IoEngine::checkHourTimeFrame(int hour)
-{
-	if (hour < 0 || hour > NUMBER_OF_HOURS) {
-		cout << "The hour of start an end must be integers ranging from 0 to 24 included.\n";
-		return true;
-	}
-	return false;
-}
-
-bool IoEngine::checkMinute(int minute)
-{
-	if (minute < 0 || minute > NUMBER_OF_MINUTES - 1) {
-		cout << "The minute must be an integer ranging from 0 to 59 included.\n";
-		return true;
-	}
-	return false;
-}
-
-bool IoEngine::checkD7(int day)
-{
-	if (day < 1 || day > NUMBER_OF_DAYS) {
-		cout << "The day of week must be an integer ranging from 1 to 7 included.\n";
-		return true;
-	}
-	return false;
-}
-
-bool IoEngine::checkTraffic(char traffic)
-{
-	if (!(traffic == 'V' || traffic == 'J' || traffic == 'R' || traffic == 'N')) {
-		cout << "Traffic state must be either 'V', 'J', 'R' or 'N'.\n";
-		return true;
-	}
-	return false;
-}
+//------------------------------------------------------------------------------
+// Constructors or/and Destructors
+//------------------------------------------------------------------------------
+IoEngine::IoEngine(BinaryTree *tree):theTree(tree){}
