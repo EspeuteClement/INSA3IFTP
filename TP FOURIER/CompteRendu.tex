@@ -55,11 +55,28 @@ La période d'échantillonage est de $T_e = \frac{b-a}{N} = \frac{5+5}{32768} \a
 La période d'échantillonage est de $f_e = \frac{N}{b-a} = \frac{32768}{10} = 3276,8$ hertzs.
 
 \subsection{Affichage des fonctions et leurs spectres :}
-Cf. : Exécuter 
+Cf. : Exécuter les programmes MatLab.
 
 \subsection{Comment choisir $f_0$ pour avoir un nombre entier de périodes entre a et b ?}
 Il suffit de choisir $f_0$ tel que $Nb_\text{périodes} = \frac{f_0}{b-a}\in Z$.
 
+\subsection{Et si on choisit $f_0$ pour que ça ne soit pas le cas ?}
+On obtient des décompositions complètement à côté de la plaque (Cf. Screenshots). Cela s'explique par le fait que les fonctions ne sont alors plus périodiques.
 
+\subsection{Calcul de la transformée de Fourier de $x_7(t)$ :}
+$$X_7(\omega) = \int_{-\infty}^{+\infty} x_7(t) e^{-i\omega t}dt$$
 
+$$= \int_{-\infty}^{+\infty} e^{-\pi t^2} e^{-i\omega t}dt$$
+
+$$= \int_{-\infty}^{+\infty} e^{-\pi t^2 -i\omega t}dt$$
+
+$$= \int_{-\infty}^{+\infty} e^{-((\sqrt{\pi} t)^2 +i\omega t + (\frac{i\omega}{2})^2) + (\frac{i\omega}{2\sqrt{\pi}})^2}dt$$
+
+$$= e^{(\frac{i\omega}{2\sqrt{\pi}})^2} \int_{-\infty}^{+\infty} e^{-(\sqrt{\pi}t + \frac{i\omega}{2\sqrt{\pi}})^2}dt$$
+
+$$= \frac{e^{(\frac{i\omega}{2\sqrt{\pi}})^2}}{\sqrt{\pi}} \int_{-\infty}^{+\infty} e^{-x^2}dx$$
+
+$$= e^{(\frac{i\pi f}{\sqrt{\pi}})^2}$$
+
+$$= e^{-\pi f^2}$$
 \end{document}
