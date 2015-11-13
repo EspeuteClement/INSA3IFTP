@@ -18,6 +18,7 @@ const int N = 3;
 */
 struct Stats
 {
+  /** Array of integer counters for each traffic state.*/
   int counters[NUMBER_OF_STATES];
 
   /** Default constructor sets all array elements to zero.
@@ -62,6 +63,7 @@ struct Stats
 * ('V', 'J', 'R', 'N').
 */
 struct StatsRel {
+  /** Array of relative statistics for each traffic state.*/
   double counterStats[NUMBER_OF_STATES];
 
   /** Default constructor converts all the array elements of the passed in Stats

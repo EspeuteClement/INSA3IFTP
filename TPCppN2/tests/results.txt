@@ -80,3 +80,4 @@
 ../sources/out/executable.out 1 1 1 1
 ../sources/out/executable.out 1 1 1 1
 ../sources/out/executable.out 1 1 0 0
+../sources/out/executable.out 1 1 0 0

@@ -1,31 +1,8 @@
 #include "Sensor.h"
 
-Sensor::Sensor(long sensorID):ID(sensorID)
-{
-  index = new Stats ** [ NUMBER_OF_DAYS ];
-  for (int i = 0; i < NUMBER_OF_DAYS; i++)
-  {
-    index[i] = new Stats * [NUMBER_OF_HOURS];
-    for (int j = 0; j < NUMBER_OF_HOURS; j++)
-    {
-      index[i][j] = new Stats[NUMBER_OF_MINUTES];
-    }
-  }
-}
-
-Sensor::~Sensor ()
-{
-  for (int i = 0; i < NUMBER_OF_DAYS; i++)
-  {
-    for (int j = 0; j < NUMBER_OF_HOURS; j++)
-    {
-      delete[] index[i][j];
-    }
-    delete[] index[i];
-  }
-  delete[] index;
-}
-
+//------------------------------------------------------------------------------
+// Public functions and methods
+//------------------------------------------------------------------------------
 void Sensor::AddEvent(int d7, int h, int m, char state)
 {
   switch (state)
@@ -93,7 +70,7 @@ int Sensor::GetDuration(int d7, int h, int m)
   int buffer = 0;
   double max = 0;
 
-  // Get the position of the maximal probability.
+  // Gets the position of the maximal probability.
   for (int i = 0; i < NUMBER_OF_STATES; i++) {
     if (statsRel->counterStats[i] > max) {
       max = statsRel->counterStats[i];
@@ -120,4 +97,33 @@ int Sensor::GetDuration(int d7, int h, int m)
   delete statsRel;
 
   return buffer;
+}
+
+//------------------------------------------------------------------------------
+// Constructors or/and Destructors
+//------------------------------------------------------------------------------
+Sensor::Sensor(long sensorID):ID(sensorID)
+{
+  index = new Stats ** [ NUMBER_OF_DAYS ];
+  for (int i = 0; i < NUMBER_OF_DAYS; i++)
+  {
+    index[i] = new Stats * [NUMBER_OF_HOURS];
+    for (int j = 0; j < NUMBER_OF_HOURS; j++)
+    {
+      index[i][j] = new Stats[NUMBER_OF_MINUTES];
+    }
+  }
+}
+
+Sensor::~Sensor ()
+{
+  for (int i = 0; i < NUMBER_OF_DAYS; i++)
+  {
+    for (int j = 0; j < NUMBER_OF_HOURS; j++)
+    {
+      delete[] index[i][j];
+    }
+    delete[] index[i];
+  }
+  delete[] index;
 }
