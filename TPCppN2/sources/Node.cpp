@@ -16,9 +16,8 @@ void Node::setLeft(Node *theLeft)
 	if (left != NULL)
 	{	left->parent = this;
 	}
-	// We recompute the height because the added node
-	// could have a bigger height than the right sub
-	// tree.
+	// We recompute the height because the added Node
+	// could have a bigger height than the right subtree.
 	ComputeHeight();
 }
 
@@ -35,13 +34,13 @@ void Node::setRight(Node *theRight)
 void Node::SwapSensor(Node *target)
 {
 	// Note : This method is used when we have to swap
-	// 2 nodes in the tree, especially in the left &
-	// right rotations. It has the advantage to not mess
-	// with the parents & child relations, and it preserves
+	// 2 Nodes in the tree, especially in the left &
+	// right rotations. It has the advantage not to mess
+	// with the parents & child relations, and preserves
 	// the root in the BinaryTree.
-	Sensor *tmp = this->sensor; // Buffer target sensor
+	Sensor *tmp = this->sensor; // Buffers target Sensor.
 
-	//Perform the swap
+	//Performs the swap.
 	this->sensor = target->sensor;
 	target->sensor = tmp;
 }
@@ -50,10 +49,10 @@ void Node::LeftRotation()
 {
 	if(right != NULL)
 	{
-		// We swap this sensor ID with this node right one
+		// We swap this Sensor's ID with this Node's right one
 		// so pointers don't get messed up.
-		// If we don't, parent node of this node will
-		// still point to the same node after
+		// If we don't, the parent Node of this Node will
+		// still point to the same Node after
 		// the rotation, messing the tree up.
 		SwapSensor(right);
 		Node *oldRight = right->right;
@@ -98,12 +97,11 @@ void Node::DoubleRightRotation()
 
 void Node::Rebalance()
 {
-	//ComputeHeight();
 	long bal = GetBalance();
-	//cout << "Rebalancing. Bal : " << bal << "\n";
-	if (bal>1) // If the tree is left heavy
+
+	if (bal>1) // If the tree is left heavy.
 	{
-		if (left->GetBalance()<=-1) // If the left subtree is right heavy
+		if (left->GetBalance()<=-1) // If the left subtree is right heavy.
 		{
 			DoubleRightRotation();
 		}
@@ -112,9 +110,9 @@ void Node::Rebalance()
 			RightRotation();
 		}
 	}
-	else if (bal < -1) // if the tree is right heavy
+	else if (bal < -1) // If the tree is right heavy.
 	{
-		if (right->GetBalance()>=1) // If the right subtree is left heavy
+		if (right->GetBalance()>=1) // If the right subtree is left heavy.
 		{
 			DoubleLeftRotation();
 		}
@@ -130,8 +128,8 @@ void Node::Rebalance()
 
 long Node::ComputeHeight()
 {
-	int l = 0; // The height of the left subtree
-	int r = 0; // The height of the right subtree
+	int l = 0; // The height of the left subtree.
+	int r = 0; // The height of the right subtree.
 	if(left != NULL)
 	{	l = left->height;
 	}
@@ -140,11 +138,11 @@ long Node::ComputeHeight()
 	}
 
 	int oldH = height;
-	// The height is the max of the subtrees height, plus one
+	// The height is the max of the subtrees height, plus one.
 	height = Utils::max(l,r) + 1;
 
-	//Then we call this method for this node parent to propagate
-	//The height change (it the height has changed)
+	// Then we call this method for this node parent to propagate
+	// the height change (it the height has changed).
 	if( oldH != height && parent !=NULL)
 	{	parent->ComputeHeight();
 	}
@@ -164,21 +162,21 @@ void Node::Serialize()
 	cout << ",height=" << height <<',';
 	cout << "left=";
 
-	// Serialize the left part of the array
+	// Serializes the left part of the array.
 	if (left != NULL)
 	{	left->Serialize();
 	}
-	else // Set the table to nil if the left node is NULL
+	else // Sets the table to "nil" if the left Node is NULL.
 	{	cout << "nil";
 	}
 	cout << ',';
 
 	cout << "right=";
-	// Serialize the right part of the array
+	// Serializes the right part of the array.
 	if (right != NULL)
 	{	right->Serialize();
 	}
-	else // Set the table to nil if the right node is NULL
+	else // Sets the table to "nil" if the right Node is NULL.
 	{	cout << "nil";
 	}
 
@@ -188,23 +186,23 @@ void Node::Serialize()
 Node *Node::Search(long searchID)
 {
 
-	Node *current = this; // Pointer to the current node
+	Node *current = this; // Pointer to the current Node.
 
 	long id = current->GetSensorID();
-	//While we havn't found the right node or there is no more node left ...
+	//While we haven't found the appropriate Node or there is no more Nodes left.
 	while(current != NULL && !(id == searchID))
 	{
-		// Go left if searchID is inferior to current node id
+		// Go left if searchID is inferior to current Node's ID.
 		if (searchID < current->GetSensorID())
 		{
 			current = current->left;
 		}
-		// Else go right
+		// Else go right.
 		else if (searchID > current->GetSensorID())
 		{
 			current = current->right;
 		}
-		// If current is not null, get it's id
+		// If current is not null, get it's ID.
 		if (current != NULL)
 		{
 			id = current->GetSensorID();
@@ -217,10 +215,10 @@ Node *Node::Insert(long searchID)
 {
 	if(searchID < GetSensorID())
 	{
-		if (left != NULL) //If there is a node, search in this subtree
+		if (left != NULL) //If there is a Node, search in this subtree.
 		{	return left->Insert(searchID);
 		}
-		else //Else return the pointer to the left part
+		else //Else return the pointer to the left part.
 		{
 			Node *n = new Node(new Sensor(searchID),this);
 			setLeft(n);
@@ -261,7 +259,6 @@ long Node::GetBalance()
 
 	return lHeight - rHeight;
 }
-
 
 //------------------------------------------------------------------------------
 // Constructors or/and Destructors

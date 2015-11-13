@@ -2,30 +2,29 @@
 #define NODE_H
 #include "Sensor.h"
 
-/** Represents a BinaryTree Leaf, and contains a pointer to a Sensor.
+/** Represents a BinaryTree Leaf and contains a pointer to a Sensor.
 */
 class Node
 {
 public:
-
-	/** Returns the Node at the left of the current Node
+	/** Returns the Node at the left of the current Node.
 	*	@return A pointer to the left Node of this Node. Returns NULL
-	*	if there is no left Node
+	*	if there is no left Node.
 	*/
 	inline Node *GetLeft() const {return left;};
 
-	/** Returns the Node at the right of the current Node
+	/** Returns the Node at the right of the current Node.
 	*	@return A pointer to the right Node of this Node. Returns NULL
-	*	if there is no right Node
+	*	if there is no right Node.
 	*/
 	inline Node *GetRight() const {return right;};
 
 	/** Simply returns the ID of this Node's sensor.
-	*	@return The sensors's ID
+	*	@return The sensors's ID.
 	*/
 	inline long GetSensorID() const {return sensor->GetID();};
 
-	/** Return this Node's height.
+	/** Returns this Node's height.
 	*/
 	inline long GetHeight() const {return height;};
 
@@ -34,29 +33,30 @@ public:
 	*	this subtree is perfectly balanced. A positive one indicates that
 	*	the tree is left heavy (more elements in the left subtree than in the right)
 	* , and a negative one that the tree is right heavy.
+	* @return the said balance.
 	*/
 	long GetBalance();
 
-	/** Returns the pointer to the Node that contains a sensor with its ID matching
-	*	searchID
-	*	@param [in] searchID The ID used for the search.
+	/** Returns the pointer to the Node that contains a sensor with its ID
+	* matching searchID.
+	*	@param searchID The ID used for the search.
 	*	@return If the Node is found, return the pointer to the Node.
 	*	Else, returns a NULL pointer.
 	*/
 	Node *Search(long searchID);
 
-	/** Insert the given sensor in the subtree and returns a pointer to
+	/** Inserts the given sensor in the subtree and returns a pointer to
 	*	the new Node.
-	*	@param searchID [in] the ID to match in the insertion.
-	*	@return A pointer to the new Node that has been inserted.
-	*	If there was already a Node containing a sensor with ID equals
+	*	@param searchID the ID to match in the insertion.
+	*	@return a pointer to the new Node that has been inserted.
+	*	If there was already a Node containing a sensor with an ID equal
 	*	to searchID, returns a pointer to that Node instead.
 	*/
 	Node *Insert(long searchID);
 
 
-	/** Print in the standard output a representation of this Node
-	*	subtree that can be read as a lua table.\n
+	/** Prints out a representation of this Node subtree that can be read as a lua
+	* table.\n
 	*	The table will have this form :\n
 	*	<CODE>{id=sensor.ID,height=height,left={left.Serialize()},
 	*	right={right.Serialize()}} </CODE>
@@ -67,35 +67,36 @@ public:
 	*/
 	Sensor *GetSensor() const {return sensor;};
 
-	/**	Create a Node.
-	*	@param sensor The sensor contained in this Node
+	/**	Default constructor creates a Node with NULL parent and children by default.
+	*	@param sensor The sensor contained in this Node.
 	*/
 	Node(Sensor *sensor, Node *parent = NULL, Node *left = NULL, Node *right = NULL);
 
+	/** Default destructor deletes the children of the Node and its Sensor.
+	*/
 	~Node();
 
 private:
-	/** Set the left Node of this Node to be theLeft
-	*	@param theLeft A pointer to the Node that should be inserted
+	/** Sets the left Node of this Node to be theLeft.
+	*	@param theLeft A pointer to the Node that should be inserted.
 	*/
 	void setLeft(Node *theLeft);
 
-	/** Set the right Node of this Node to be theRight
-	*	@param theRight A pointer to the Node that should be inserted
+	/** Sets the right Node of this Node to be theRight.
+	*	@param theRight A pointer to the Node that should be inserted.
 	*/
 	void setRight(Node *theRight);
 
-	/** Exchanges this Node sensor with the one in target
+	/** Exchanges this Node sensor with the one in target.
 	* @param [in] target The Node where the swap will happen.
 	*/
 	void SwapSensor(Node *target);
-	// Exchanges this object sensor with the one in target
 
-	/**	Performs a LeftRotation using this Node as the root
+	/**	Performs a LeftRotation using this Node as the root.
 	*/
 	void LeftRotation();
 
-	/**	Performs a RightRotation using this Node as the root
+	/**	Performs a RightRotation using this Node as the root.
 	*/
 	void RightRotation();
 
@@ -109,12 +110,12 @@ private:
 	*/
 	void DoubleRightRotation();
 
-	/** Re balance this subtree, then this Node parent subtree up to
+	/** Re-balances this subtree, then this Node parent subtree up to
 	*	this tree root.
 	*/
 	void Rebalance();
 
-	/** Compute this Node Height (the number of Node in the longest
+	/** Computes this Node's Height (the number of Nodes in the longest
 	*	subtree of this Node) and then returns it
 	*	@return this Node Height
 	*/
