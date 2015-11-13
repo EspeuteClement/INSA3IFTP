@@ -3,10 +3,10 @@ function [ret] = prepareFourierData(data,samples,lowerBound,higherBound,isReal)
     ret = zeros(2,samples);
     % Bake the ret
     
-    if isReal == 1
-       ret(2,:) = real(data);
+    if spectre == 'real'
+       ret(2,:) = angle(data);
     else
-        ret(2,:) = real(data);
+       ret(2,:) = imag(data);
     end
     
     % Add the frequencies :
