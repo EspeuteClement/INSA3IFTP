@@ -109,6 +109,6 @@ function Probleme1(delta, ecart)
       set(sh,'zdata',reshape(B,15,30));
       pause(0.05);
   end
-  disp(['Le temps nécessaire pour équilibre est : ' num2str(counter) ' deltas.']);
-  disp(['La température en équilibre est : ' num2str(moyenne) ' degrés.']);
+  disp(['Le temps e�cessaire pour equilibre est : ' num2str(counter) ' deltas.']);
+  disp(['La temperature en equilibre est : ' num2str(moyenne) ' degres.']);
 end
