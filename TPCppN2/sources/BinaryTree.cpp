@@ -6,7 +6,7 @@
 //------------------------------------------------------------------------------
 void BinaryTree::Serialize()
 {
-	// Prints "return " so that the lua table will be returned as a function
+	// Prints "return " so that the lua table will be returned as a function.
 	std::cout<<"return ";
 	root->Serialize();
 	std::cout<<"\n";
@@ -16,10 +16,10 @@ Sensor *BinaryTree::Search(long ID)
 {
 	if (root != NULL)
 	{
-		// Simpli executre search on the tree's root
+		// Simply calls for Node::Search() on the tree's root.
 		Node *nodeMatch = root->Search(ID);
 
-		//If we found a Node, then return the node sensor
+		//If we find a matching Node, then return the Node's sensor.
 		if (nodeMatch != NULL)
 		{
 			return nodeMatch->GetSensor();
@@ -47,7 +47,7 @@ void BinaryTree::Insert(int ID,
 		// Else simply call insert on the tree's root.
 		sensorNode = root->Insert(ID);
 	}
-	// Then add the Evelnt.
+	// Then add the Event.
 	sensorNode->GetSensor()->AddEvent(d7,h,m,value);
 }
 
@@ -73,7 +73,7 @@ Node *BinaryTree::Iterate()
 {
 	if (stack != NULL && stack[0] != NULL && root != NULL)
 	{
-		// Ready the current node for the return
+		// Ready the current node for the return.
 		Node *returnValue = stack[stackPos];;
 
 		// If there is a value at the left of the current node,

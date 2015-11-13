@@ -4,20 +4,20 @@
 #include "Node.h"
 #include "Sensor.h"
 
-
 /** Data structure used for holding all the Sensor Objects in the application.
 */
 class BinaryTree{
 public:
 
-	/** Gets the sensor where ID equals the sensor ID
-	*	@return A pointer to the sensor
+	/** Gets the sensor where ID equals the sensor ID.
+	*	@return A pointer to the sensor.
+	* @param the ID of the Sensor we are looking for.
 	*/
 	Sensor *Search(long ID);
 
 	/** Prints out a serialized form of the binary tree in the standard output.
 	*	The serialization takes the form of a lua table, so it can be
-	*	parsed by an external visualizer. Check Node::Serialize() for more info
+	*	parsed by an external visualizer. Check Node::Serialize() for more info.
 	*/
 	void Serialize();
 
@@ -28,7 +28,7 @@ public:
 	*	1 = Monday ... 7 = Sunday.
 	*	@param h The hour where to put the data.
 	*	@param m The minute where to put the data.
-	*	@param value a char corresponding to the traffic to put in the
+	*	@param value a char corresponding to the traffic state to put in the
 	*	sensor.
 	*/
 	void Insert(int ID,
@@ -37,16 +37,17 @@ public:
 				unsigned char m,
 				unsigned char value);
 
-	/** Get the root of this tree.
+	/** Gets the root of this tree.
 	* @return a pointer to the root Node of the BinaryTree.
 	*/
 	inline Node *GetRoot() {return root;};
 
-	/** Should always be called before using Iterate in a loop.
+	/** Should always be called before using Iterate in a loop. Resets the
+	* iteration.
 	*/
 	void InitIterate();
 
-	/** Each time Iterate is called, it will return a node that
+	/** Each time Iterate() is called, it will return a node that
 	*	hasn't already been returned by the function. Call InitIterate()
 	*	to reset the Iteration.
 	*	@return A pointer to the next node in the tree to iterate, or
@@ -63,6 +64,7 @@ public:
 	/** BinaryTree destructor. Deletes all the nodes of the tree if they exist.
 	*/
 	~BinaryTree();
+	
 private:
 	/** The first element in the binary tree.*/
 	Node *root;
