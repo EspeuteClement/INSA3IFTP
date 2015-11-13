@@ -5,11 +5,9 @@ end
 function [ret] = heaviside(t)
     if (t < 0)
         ret = 0;
-    end
-    if (t == 0)
+    elseif (t == 0)
         ret = 0.5;
-    end
-    if (t > 0)
+    elseif (t > 0)
         ret = 1;
     end
 end
