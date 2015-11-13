@@ -64,6 +64,9 @@ Especially, because the visualisation tool wasn't meant to find small imperfecti
 
 You may want to get more specific error messages. If so please set (\texttt{\#define DEFAULT\_VERBOSE}) to true.
 
+To execute these run in the sources folder after updating the Main.h:
+\texttt{make run}
+
 \subsection{IterationTest\_1}
 Checks if the Iteration method visited every single Node in the tree exactly once. A boolean array keeps in memory which Nodes have been visited or not and the binary tree is filled with empty Sensors (that is to say, with all Stats array elements equal to 0). As we iterate through the tree, the boolean array is updated. The function returns a true boolean value if all the Node where visited once (if the entire boolean array has its elements set to true). If an error is found, a message will appear in the console either warning that a Node hasn't been visited at the end, or if a Node has been visited twice.
 
@@ -88,5 +91,9 @@ Those tests were created in order to see if our application was properly functio
 We also wrote two other pairs of i/o files, the first being viciousTests, which tests incorrect function calls like asking for statistics with an empty array to see if the program doesn't crash in front of invalid user commands.
 
 Finally, we needed to test the optional instruction \texttt{OPT}, for which no test files were provided. For that, we wrote a simple lua script : (\texttt{generateValues.lua} in the \texttt{tests/} folder) that generated the in and out files for this test. The program chooses a random minute between 2 given hours as the "optimal" path. It then writes ADD commands filling all the minutes between the 2 hours with "R" traffic except for the chosen minute where the traffic is "V" into the .in file. Multiples Sensors are created in the same way, but with the "V" traffic put so the chosen path will be fully composed of "V" traffic states. Finally, the script writes in the .out file the expected output.
+
+To test these run in the sources folder :
+
+\texttt{make \&\& cd ../tests \&\& ./test.sh ../sources/out/executable.out}
 
 \end{document}
