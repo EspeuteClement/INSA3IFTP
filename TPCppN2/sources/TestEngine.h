@@ -3,7 +3,7 @@
 
 #include <string>
 
-// Set to true if you want all the Tests to be more explicit
+// Set to true if you want all the Tests to display more explicit messages.
 #define DEFAULT_VERBOSE false
 
 /** A class that tests the BinaryTree and the sensor classes

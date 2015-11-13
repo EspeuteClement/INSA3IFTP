@@ -48,11 +48,11 @@ public:
 	/** Insert the given sensor in the subtree and returns a pointer to
 	*	the new Node.
 	*	@param searchID [in] the ID to match in the insertion.
-	*	@return A pointer to the new Node that has been inserted. 
-	*	If there was already a Node containing a sensor with ID equals 
+	*	@return A pointer to the new Node that has been inserted.
+	*	If there was already a Node containing a sensor with ID equals
 	*	to searchID, returns a pointer to that Node instead.
 	*/
-	Node *Insert(int searchID);
+	Node *Insert(long searchID);
 
 
 	/** Print in the standard output a representation of this Node

@@ -10,12 +10,12 @@
 class BinaryTree{
 public:
 
-	/** Get the sensor where ID equals the sensor ID
+	/** Gets the sensor where ID equals the sensor ID
 	*	@return A pointer to the sensor
 	*/
 	Sensor *Search(long ID);
 
-	/** Prints a serialized form of the binary tree in the standard output.
+	/** Prints out a serialized form of the binary tree in the standard output.
 	*	The serialization takes the form of a lua table, so it can be
 	*	parsed by an external visualizer. Check Node::Serialize() for more info
 	*/
@@ -38,6 +38,7 @@ public:
 				unsigned char value);
 
 	/** Get the root of this tree.
+	* @return a pointer to the root Node of the BinaryTree.
 	*/
 	inline Node *GetRoot() {return root;};
 

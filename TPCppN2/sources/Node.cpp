@@ -129,7 +129,7 @@ void Node::Rebalance()
 }
 
 long Node::ComputeHeight()
-{ 
+{
 	int l = 0; // The height of the left subtree
 	int r = 0; // The height of the right subtree
 	if(left != NULL)
@@ -213,7 +213,7 @@ Node *Node::Search(long searchID)
 	return current;
 }
 
-Node *Node::Insert(int searchID)
+Node *Node::Insert(long searchID)
 {
 	if(searchID < GetSensorID())
 	{

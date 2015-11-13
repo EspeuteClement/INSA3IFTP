@@ -45,50 +45,46 @@
 \begin{document}
 \pagestyle{fancy}
 \maketitle
-We used multiples kind of tests in order to see if our program works.
-
-
 \section{Early Visual Tests}
-During the prototyping phase of the BinaryTree, we quickly realised that we needed to have a tool that allowed us to display a graphical representation of the BinaryTree. More precisely, we needed that so we could easily see if the tree was balanced with a quick glance. Because of our lack of knowledge of the C++ libraries, we chose to create an external tool with a framework we knew how to use.
+During the prototyping phase of the BinaryTree, we quickly realised that we needed to have a tool that allowed us to display a graphical representation of the BinaryTree. More precisely, we needed that so we could easily see if the tree was balanced with a quick glance. Because of our lack of knowledge of the C++ libraries, we chose to create an external tool with a framework we already knew how to use.
 
 We created a Lua application that used the LÖVE2d framework. It's normally intended as a set of libraries for 2d videogame making, so it had all the tools we needed to display graphical info on the screen.
 
-In order to pass the information from the application to the utility we created, we made a serializing method for the BinaryTree to make it into a Lua table (an associative array capable of storing many types of data, including other tables). The serialization was done recursively on the BinaryTree's Nodes, and can be found in the \texttt{Node::Serialize()} method.
+In order to pass the information from the application to the utility we created, we made a serializing method for the BinaryTree to turn it into a Lua table (an associative array capable of storing many types of data, including other tables). The serialization was done recursively on the BinaryTree's Nodes, and can be found in the \texttt{Node::Serialize()} method.
 
-Once the data was serialized, it was just a matter of loading that data into the Lua program and display that data on the screen. The displayed data shows ID of the Node's sensor, and the height of the node subtree (to see if the Node height was correctly computed).
+Once the data was serialized, it was just a matter of loading that data into the Lua program and display it on the screen. The displayed data shows ID of the Node's sensor, and the height of the Node subtree (to see if the Node height was correctly computed).
 
 \subsection*{Using the tool}
-If you wish to try the tool out, you'll need to install the \texttt{love} package on a Gnu/Linux machine, and then run the following command : \texttt{love~utils/dispTree/} from the project root. The data needed to display the tree should already be in the right file, but if you want to export that data again, all you have to do is add the {\tt \#define DEBUG} and {\tt \#define SERIALIZE} in the Main.cpp, and then run \texttt{make runSave} in the source folder. That should export all the needed data in the \texttt{utils/dispTree/data.lua} file. If you don't want to install love, there is a screenshot of the program in the \texttt{utils/dispTree/} folder.
+If you wish to try the tool out, you'll need to install the \texttt{love} package on a Gnu/Linux machine, and then run the following command : \texttt{love~utils/dispTree/} from the project root. The data needed to display the tree should already be in the right file, but if you want to export that data again, all you have to do is add the {\tt \#define DEBUG} and {\tt \#define SERIALIZE} in the Main.cpp, and then run : \texttt{make runSave} in the source folder. That should export all the needed data in the \texttt{utils/dispTree/data.lua} file. If you don't want to install love, there is a screenshot of the program in the \texttt{utils/dispTree/} folder.
 
 \section{<TestEngine> Class}
-The <TestEngine> class contains static functions meant to test the different core classes of the application. These were used really often used during the development to ensure modifications to the data structures did not cause any unforeseen behaviour.
+The <TestEngine> class contains static functions meant to test the different core classes of the application. These were used really often during the development to ensure modifications to the data structures did not cause any unforeseen behaviour.
 
-Especially, because the visualisation tool wasn't meant to find small imperfections in the tree, we had to implement some automatics tests in order to see if the tree's balance met all the requirements of a self-balancing binary search tree (abb. "AVL tree"). We created two tests designed to find those small flaws. Because those tests works using the internals features of the programs, they needed to be put in the code. Thus we created the TestEngine class. This class only uses static methods, with each method corresponding to a different test.
+Especially, because the visualisation tool wasn't meant to find small imperfections in the tree, we had to implement some automatics tests in order to see if the tree's balance met all the requirements of a self-balancing binary search tree (abb. "AVL tree"). The first two tests below are designed to find those small flaws.
 
-\subsection{\tt bool IterationTest\_1()}
-This test is designed to see if the Iteration method visited all the nodes in the tree exactly once. A boolean array is created that keeps in memory what nodes are visited. Then we create and fill the binary tree, and we iterate through it. The function will return $true$ if all the node where visited once. If an error is found, a message will appear in the console.
+\subsection{IterationTest\_1}
+Checks if the Iteration method visited every single Node in the tree exactly once. A boolean array keeps in memory which Nodes have been visited or not and the binary tree is filled with empty Sensors (that is to say, with all Stats array elements equal to 0). As we iterate through the tree, the boolean array is updated. The function returns a true boolean value if all the Node where visited once (if the entire boolean array has its elements set to true). If an error is found, a message will appear in the console either warning that a Node hasn't been visited at the end, or if a Node has been visited twice.
 
-\subsection{\tt bool BalanceTest\_1()}
-This test is designed to see if the BinaryTree is balanced after a long series of random insertions. It create and fills a BinaryTree with random sensors ID, and then iterate through all the node, checking the balance of every node and prompting an error if a balance of 2 or more is found (indicating that we don't fill the AVL tree requirements. Again, the function returns true if the tests are successful, and false otherwise.
+\subsection{BalanceTest\_1}
+Checks if the BinaryTree is balanced after a long series of random insertions. It creates and fills a BinaryTree with random sensors ID, and then iterates through all the Nodes, checking the balance of every Node and prompting an error if a balance of 2 or more is found (indicating that we don't fill the AVL tree requirements). Again, the function returns true if the tests are successful, and false otherwise.
 
-\subsection{\tt static bool SearchTest\_1()}
-A almost copy of the Iteration Test. It just creates the nodes in the tree and sees if Search node on all the ID works. Will return true if the test are successful and false otherwise.
+\subsection{SearchTest\_1}
+Almost a copy of the Iteration Test. It just creates the Nodes in the tree and checks if the Search function of the Node class works with all the IDs. Returns true if the test is successful and false otherwise.
 
-\subsection{\tt void PerformanceSearch() and void PerformanceInsert()}
-These two function are almost identical. They sole purpose is to test the performance of the BinaryTree. For that each function initialise the tree with 1500 Sensors, then it performs random Search OR Insert functions on the tree (depending of which function is called). They are used in conjonction with the macro \texttt{MESURE\_TIME(func,name)}
+\subsection{SensorTest\_1}
+This test checks if the basic functionnalities of Sensor are working. Simply put, it creates a single Sensor object, adds events to it, and displays statistics about the sensor. It returns a boolean value of true if the test is successful, false else.
 
-\subsection{\texttt{MESURE\_TIME(func,name)} (in Utils.h)}
-Useful macro that allows to measure the time that a function \emph{func} takes to execute. Used for some performance tests. \emph{name} should be a string containing the function name that will be put in the output message.
+\subsection{PerformanceSearch and PerformanceInsert}
+These two functions are almost identical. They sole purpose is to test the performance of the BinaryTree. For that, each function initializes the tree with 1500 Sensors, then performs random Search OR Insert function calls on the tree (depending of which function is called). They are used in conjonction with the macro \texttt{MESURE\_TIME(func,name)}
+
+\subsection{\texttt{MESURE\_TIME} (in Utils.h)}
+Useful macro that allows to measure the time that a function \emph{func} takes to execute, and display it in seconds. Used for some performance tests. \emph{name} should be a String containing the function name that is to be displayed in the output message.
 
 \section{External tests}
-Those tests were created in order to see if our application was properly functioning according to the inputs/outputs described in the assignement. We used the \texttt{test.sh} file provided with some in and out files also provided in order to see if the basic functions were properly functioning (that is, passing them into the program, and automatically checking the results it provided). We also used a 20 000 000 instructions long file provided by another group that allowed us to see if our program was performing well under the worst case scenario for the TP.
+Those tests were created in order to see if our application was properly functioning according to the inputs/outputs described in the assignement. We used the \texttt{test.sh} file provided with some in and out files also provided in order to see if the basic functions were properly working (that is, passing them into the program, and automatically checking the results it provided). We also used a 20 000 000 instructions long file provided by another group that allowed us to see if our program was performing well under the worst case scenario for the TP.
 
-I wrote 2 i/o files, that are viciousTests.io and .out, that tests incorrect function calls like asking measures with an empty array to see if the program doesn't crash.
+We also wrote two other pairs of i/o files, the first being viciousTests, which tests incorrect function calls like asking for statistics with an empty array to see if the program doesn't crash in front of invalid user commands.
 
-Finally, we needed to test the optional instruction, being \texttt{OPT}, for which no test files were provided. For that, we wrote a simple lua script : (\texttt{generateValues.lua} in the \texttt{tests/} folder) that generated the in and out files for this test. The program chooses a random minute between 2 given hours as the "optimal" path. Then it writes into the .in file ADD commands filling all the minutes between the 2 hours with "R" traffic except for the chosen minute where the traffic is "V". Multiples Sensors are created in the same way, but with the "V" traffic put so the chosen path will be fully composed of "V" traffic states.
-
-At the end, the program writes in the .out file the expected output.
-
-This allowed us to see if the program behaved as expected.
+Finally, we needed to test the optional instruction \texttt{OPT}, for which no test files were provided. For that, we wrote a simple lua script : (\texttt{generateValues.lua} in the \texttt{tests/} folder) that generated the in and out files for this test. The program chooses a random minute between 2 given hours as the "optimal" path. It then writes ADD commands filling all the minutes between the 2 hours with "R" traffic except for the chosen minute where the traffic is "V" into the .in file. Multiples Sensors are created in the same way, but with the "V" traffic put so the chosen path will be fully composed of "V" traffic states. Finally, the script writes in the .out file the expected output.
 
 \end{document}
