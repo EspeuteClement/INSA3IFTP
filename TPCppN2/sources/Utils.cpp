@@ -14,6 +14,10 @@
 	const string Utils::END_COLOR = "";
 #endif //EXTENDED_CONSOLE
 
+
+//------------------------------------------------------------------------------
+// Public functions and methods
+//------------------------------------------------------------------------------
 void Utils::printBold(string message, bool r)
 {
 	cout << Utils::BOLD;
@@ -23,7 +27,6 @@ void Utils::printBold(string message, bool r)
 	{
 		std::cout << '\n';
 	}
-
 }
 
 void Utils::printGreen(string message,bool r)
@@ -35,7 +38,6 @@ void Utils::printGreen(string message,bool r)
 	{
 		std::cout << '\n';
 	}
-
 }
 
 void Utils::printRed(string message, bool r)
@@ -47,5 +49,4 @@ void Utils::printRed(string message, bool r)
 	{
 		std::cout << '\n';
 	}
-
 }
