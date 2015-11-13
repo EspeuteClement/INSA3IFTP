@@ -4,5 +4,5 @@
 * look at the rest of the documentation. We recommend starting by the IoEngine
 * class in which you will find the description of the Input commands of the
 * program.
-* Enjoy your reading !
+* Please enjoy your reading !
 */
