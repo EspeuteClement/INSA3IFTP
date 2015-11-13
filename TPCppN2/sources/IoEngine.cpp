@@ -63,7 +63,7 @@ bool IoEngine::ReadInput()
 {
 	char command[10];
 
-	// Read the command
+	// Read the command.
 	scanf("%s",command);
 
 	// Try to match the command with what we know

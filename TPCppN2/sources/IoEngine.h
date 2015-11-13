@@ -80,7 +80,8 @@ class IoEngine
 		IoEngine(BinaryTree *tree);
 
 	private:
-		BinaryTree *theTree; /** Pointer to the binary tree that stores the sensors*/
+		/** Pointer to the binary tree that stores the sensors*/
+		BinaryTree *theTree;
 
 		/* Simple check functions for input values according to the requirements.
 		* @param the value to test.
