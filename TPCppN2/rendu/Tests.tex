@@ -62,6 +62,8 @@ The <TestEngine> class contains static functions meant to test the different cor
 
 Especially, because the visualisation tool wasn't meant to find small imperfections in the tree, we had to implement some automatics tests in order to see if the tree's balance met all the requirements of a self-balancing binary search tree (abb. "AVL tree"). The first two tests below are designed to find those small flaws.
 
+You may want to get more specific error messages. If so please set (\texttt{\#define DEFAULT\_VERBOSE}) to true.
+
 \subsection{IterationTest\_1}
 Checks if the Iteration method visited every single Node in the tree exactly once. A boolean array keeps in memory which Nodes have been visited or not and the binary tree is filled with empty Sensors (that is to say, with all Stats array elements equal to 0). As we iterate through the tree, the boolean array is updated. The function returns a true boolean value if all the Node where visited once (if the entire boolean array has its elements set to true). If an error is found, a message will appear in the console either warning that a Node hasn't been visited at the end, or if a Node has been visited twice.
 

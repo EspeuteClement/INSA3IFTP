@@ -66,7 +66,7 @@ bool IoEngine::ReadInput()
 	// Read the command.
 	scanf("%s",command);
 
-	// Try to match the command with what we know
+	// Tries to match the command with what we know
 	// and then execute the correct method.
 	if (strcmp(command,"ADD") == 0)
 	{
@@ -203,7 +203,7 @@ void IoEngine::HandleOPT()
 {
 	int d7, hStart, hEnd, segCount;
 
-	// Fill the variables with the data.
+	// Fills the variables with the data.
 	cin >> d7;
 	cin >> hStart;
 	cin >> hEnd;
@@ -291,7 +291,7 @@ void IoEngine::HandleOPT()
 			}
 		}
 
-		//Only keep the minimum duration of all and the start time associated.
+		//Only keeps the minimum duration of all and the start time associated.
 		if (totalDuration < minDuration) {
 			minDuration = totalDuration;
 			minMinOfStart = minOfStart;
@@ -309,7 +309,7 @@ void IoEngine::HandleOPT()
 			hourOfStart++;
 		}
 
-		// Reinitialize the journey for the next simulation.
+		// Reinitializes the journey for the next simulation.
 		totalDuration = 0;
 		currentMin = minOfStart;
 		currentHour = hourOfStart;
@@ -318,7 +318,7 @@ void IoEngine::HandleOPT()
 	delete[] segTab;
 	delete[] sensorTab;
 
-	// Display the optimal time of departure and the journey's duration.
+	// Displays the optimal time of departure and the journey's duration.
 	cout << d7 << " " << minHourOfStart << " " << minMinOfStart << " " <<
 	minDuration << "\n";
 }

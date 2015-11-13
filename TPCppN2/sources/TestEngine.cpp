@@ -6,30 +6,32 @@
 #include <iostream>
 using namespace std;
 
+//------------------------------------------------------------------------------
+// Public functions and methods
+//------------------------------------------------------------------------------
 bool TestEngine::IterationTest_1(bool verbose)
 {
-	// The numbers of elements to put in the binary tree
+	// The numbers of elements to put in the tree.
 	const int NUMBERS = 15000;
 	Utils::printBold("ITERATION TEST 1", true);
 
-	// Create the binary tree
+	// Creates the BinaryTree.
 	BinaryTree testTree = BinaryTree();
 
-	// Create an array that will store if a node has been
-	// traversed
+	// Creates an array that will store if a Node has been passed through.
 	bool found[NUMBERS];
 	for (int i = 0; i < NUMBERS; ++i)
 	{
 		found[i] = false;
 	}
 
-	// Populate the tree with id between 0 and NUMBERS
+	// Populates the tree with IDs between 0 and NUMBERS.
 	for (int i = 0; i < NUMBERS; ++i)
 	{
 		testTree.Insert(i,0,0,0,0);
 	}
 
-	// Iterate trough the tree
+	// Iterates trough the tree..
 	testTree.InitIterate();
 	Node *iterator = NULL;
 	while( (iterator = testTree.Iterate() ) != NULL)
@@ -39,13 +41,13 @@ bool TestEngine::IterationTest_1(bool verbose)
 		{
 			cout << id << '\n';
 		}
-		// If we haven't visited this node yet ...
+		// If we haven't visited this Node yet ...
 		if (found[id] == false)
 		{
-			// Now we have :)
+			// Now we have.
 			found[id] = true;
 		}
-		else // We've gone trough the node twice !!!
+		else // We've gone through the Node twice !!!
 		{
 			Utils::printRed("ERROR, A NODE WAS FOUND TWICE",true);
 			return false;
@@ -67,28 +69,27 @@ bool TestEngine::IterationTest_1(bool verbose)
 
 bool TestEngine::SearchTest_1(bool verbose)
 {
-	// The numbers of elements to put in the binary tree
+	// The numbers of elements to put in the tree.
 	const int NUMBERS = 15000;
 	Utils::printBold("SEARCH TEST 1", true);
 
-	// Create the binary tree
+	// Creates the BinaryTree.
 	BinaryTree testTree = BinaryTree();
 
-	// Create an array that will store if a node has been
-	// traversed
+	// Creates an array that will store if a Node has been passed through.
 	bool found[NUMBERS];
 	for (int i = 0; i < NUMBERS; ++i)
 	{
 		found[i] = false;
 	}
 
-	// Populate the tree with id between 0 and NUMBERS
+	// Populates the tree with id between 0 and NUMBERS.
 	for (int i = 0; i < NUMBERS; ++i)
 	{
 		testTree.Insert(i,0,0,0,0);
 	}
 
-	// Iterate trough the tree
+	// Iterates trough the tree.
 	for(int i = 0; i < NUMBERS; ++i)
 	{
 		Sensor *result = testTree.Search(i);
@@ -97,13 +98,13 @@ bool TestEngine::SearchTest_1(bool verbose)
 		{
 			cout << id << '\n';
 		}
-		// If we haven't visited this node yet ...
+		// If we haven't visited this Node yet ...
 		if (result != NULL)
 		{
 			int id = result->GetID();
 			if (found[id] == false)
 				{
-					// Now we have :)
+					// Now we have.
 					found[id] = true;
 				}
 		}
@@ -130,17 +131,16 @@ bool TestEngine::BalanceTest_1(bool verbose)
 	const int NUMBERS = 15000;
 	Utils::printBold("BALANCE 1", true);
 
-	// Create the binary tree
+	// Creates the BinaryTree.
 	BinaryTree testTree = BinaryTree();
 
-
-	// Populate the tree with random id between 0 and NUMBERS
+	// Populates the tree with random IDs between 0 and NUMBERS.
 	for (int i = 0; i < NUMBERS; i++)
 	{
 		testTree.Insert(rand()%15000-7500,0,0,0,0);
 	}
-	//testTree.Serialize();
-	// Iterate trough the tree
+
+	// Iterates through the tree.s
 	testTree.InitIterate();
 	Node *iterator = NULL;
 	while( (iterator = testTree.Iterate() ) != NULL)
