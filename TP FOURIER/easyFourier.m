@@ -5,8 +5,7 @@ function easyFourier(theFunction, samples, lowerBound, higherBound,C,f0,beta,tho
     
     
    
-    fig1 = figure(1);
-    set(fig1,'name','Fonction')
+    subplot(3,2,1);
     easyPlot(real(SampledData));
 
     
@@ -22,21 +21,22 @@ function easyFourier(theFunction, samples, lowerBound, higherBound,C,f0,beta,tho
         FourierMod = prepareFourierData(FourierData, samples, lowerBound, higherBound,'mod');
         FourierArg = prepareFourierData(FourierData, samples, lowerBound, higherBound,'arg');
         
-        fig2 = figure(2);
-        set(fig2,'name','Partie Réelle')
+        subplot(3,2,2);
         easyPlot(FourierReal);
+        title('Partie réele')
         
-        fig3 = figure(3);
-        set(fig3,'name','Partie Imaginaire')
+        subplot(3,2,3);
         easyPlot(FourierImag);
+        title('Partie imaginaire')
         
-        fig4 = figure(4);
-        set(fig4,'name','Amplitude')
+        subplot(3,2,4);
         easyPlot(FourierMod);
+        title('Partie module')
         
-        fig5 = figure(5);
-        set(fig5,'name','Phase')
+        subplot(3,2,5);
+        
         easyPlot(FourierArg);
+        title('Partie argument')
         
         
         

@@ -3,7 +3,7 @@ function [ret] = x4(t,C,f0,beta,tho,deltaT)
 end
 
 function [ret] = dirac(t)
-    if (abs(t) < 0.0000001)
+    if (abs(t) < 0.0001)
         ret = 1;
     else
         ret = 0;
