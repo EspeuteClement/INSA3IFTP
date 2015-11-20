@@ -12,12 +12,12 @@ function [sampleList] = sampleFunction(theFunction, samples, lowerBound, higherB
     samplePeriod = (higherBound - lowerBound)/samples;
     for samplePosition = 1:samples
         % Our position in the sample :
-        time = lowerBound + samplePeriod*samplePosition;
+        time = lowerBound + samplePeriod*(samplePosition-1);
         
         % Put the time in the first array ...
-        sampleList(1,samplePosition) = lowerBound + samplePeriod*samplePosition;
+        sampleList(1,samplePosition) = time;
         
         % Put the sample in the second array ...
-        sampleList(2,samplePosition) = theFunction(lowerBound + samplePeriod*samplePosition,C,f0,beta,tho,deltaT);
+        sampleList(2,samplePosition) = theFunction(time,C,f0,beta,tho,deltaT);
     end
 end
