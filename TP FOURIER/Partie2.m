@@ -25,32 +25,50 @@ colormap(map);
 r_s = size(im,1);
 rectangle = zeros(r_s);
 
-a=3;
-b=3;
-for i=1:a
-    for j=1:b
-        rectangle(r_s/2+i-floor(a/2),r_s/2+j-floor(b/2)) = 255/(a*b);
+% a=5;
+% b=7;
+% for i=1:a
+%     for j=1:b
+%         rectangle(r_s/2+i-floor(a/2),r_s/2+j-floor(b/2)) = 1/(a*b);
+%     end
+%     
+% end
+
+for i=257-2:257+2
+    for j=257-3:257+3
+       rectangle(i,j) = 1/(7*5); 
     end
-    
 end
 
 
 RECTANGLE = fftshift(fft2(rectangle));
 RECTANGLE_IMG = fourToImg(RECTANGLE);
 figure(4)
-image(RECTANGLE_IMG);
+image(rectangle);
 colormap(map);
 
 I_RECTANGLE = 1./RECTANGLE;
-dIM = IM .* I_RECTANGLE;
+
+
+[imr, map]=imread('PhotoRef.png');
+
+IMr = fftshift(fft2(imr));
+Dr = IMr .* RECTANGLE;
+
+Pi = abs(IMr);
+Pb = abs(floor(Dr) - Dr);
+
+W = I_RECTANGLE .* (abs(RECTANGLE).*abs(RECTANGLE)) ./(abs(RECTANGLE).*abs(RECTANGLE) + Pb./Pi);
+
+dIM = IM .* W;
 
 figure(3)
 image(fourToImg(dIM));
 colormap(map);
 
-trueImg = ifft2(ifftshift(dIM));
+trueImg = abs(fftshift(((ifft2(ifftshift(dIM))))));
 
 figure(5)
 image(trueImg);
-colormap(map)
+colormap(map);
 end
