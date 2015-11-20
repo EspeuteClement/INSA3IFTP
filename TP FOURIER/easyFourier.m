@@ -13,7 +13,7 @@ function easyFourier(theFunction, samples, lowerBound, higherBound,C,f0,beta,tho
     if ~strcmp(spectre,'full')
         PlotableFourierData = prepareFourierData(FourierData, samples, lowerBound, higherBound,spectre);
         fig2 = figure(2);
-        set(fig2,'name','Transformée')
+        set(fig2,'name','Transformee')
         easyPlot(PlotableFourierData);
     else
         FourierReal = prepareFourierData(FourierData, samples, lowerBound, higherBound,'real');
@@ -23,7 +23,7 @@ function easyFourier(theFunction, samples, lowerBound, higherBound,C,f0,beta,tho
         
         subplot(3,2,2);
         easyPlot(FourierReal);
-        title('Partie réele')
+        title('Partie reele')
         
         subplot(3,2,3);
         easyPlot(FourierImag);
