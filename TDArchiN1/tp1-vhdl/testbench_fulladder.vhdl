@@ -1,5 +1,5 @@
 ---------  A test bench for the full adder -----------------
-library ieee; 
+library ieee;
 use ieee.std_logic_1164.all;
 library work;
 
@@ -21,24 +21,24 @@ architecture behaviorial of testbench_fulladder is
   -- Think of signals as wires inside the architecture.
   -- We give them a name. std_logic is the standard logic type.
   signal testx, testy, testcin, testcout, testsum: std_logic;
-begin 
+begin
 
   --  Instantiate the Unit Under Test (UUT)
   uut: fulladder port map (
-    x     => testx    , -- This => means: plugged to 
+    x     => testx    , -- This => means: plugged to
     y     =>   testy    ,
     cin   => testcin  ,
     sum   => testsum  , -- it works for inputs and outputs
-    cout  => testcout 
-    );      
+    cout  => testcout
+    );
 
   -- A process is an infinite loop
-   test_process :process 
+   test_process :process
    begin
      testx <= '0';
      testy <= '0';
      testcin <= '0';
-     wait for 1 ns;  
+     wait for 1 ns;
      testx <= '0';
      testy <= '0';
      testcin <= '1';
@@ -59,7 +59,7 @@ begin
      testy <= '1';
      testcin <= '1';
      wait for 1 ns;
-     
+
      -- add more tests here
    end process;
 
