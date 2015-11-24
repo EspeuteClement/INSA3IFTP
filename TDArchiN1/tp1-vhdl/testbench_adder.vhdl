@@ -1,12 +1,12 @@
 ---------  Test bench for an n-bit adder -----------------
-library ieee; 
+library ieee;
 use ieee.std_logic_1164.all;
 library work;
 
-entity testbench_adder8 is
+entity testbench_adder is
 end entity;
 
-architecture behaviorial of testbench_adder8 is
+architecture behaviorial of testbench_adder is
   -- We need to redeclare adder, because it appears in testbench,
   -- but not fulladder
   component adder is
@@ -20,7 +20,7 @@ architecture behaviorial of testbench_adder8 is
 
   signal x,y,s : std_logic_vector(7 downto 0);
   signal cin, cout : std_logic;
-begin 
+begin
   --  Instantiate the Unit Under Test (UUT)
   uut: adder
     generic map ( n => 8 )  -- at some point the size of the architecture must
@@ -28,15 +28,15 @@ begin
     port map (x => x, y => y, s => s, cin => cin,  cout => cout) ;
 
   -- A process is an infinite loop
-   test_process :process 
+   test_process :process
    begin
      cin <= '0';
      x <= "00000000"; -- double quotes for bit vectors
-     y <= "00000000"; 
-     wait for 10 ns;  
-     x <= "11111111"; 
-     y <= "00000001"; 
-     wait for 10 ns;  
+     y <= "00000000";
+     wait for 10 ns;
+     x <= "11111111";
+     y <= "00000001";
+     wait for 10 ns;
      -- add more tests here
    end process;
 

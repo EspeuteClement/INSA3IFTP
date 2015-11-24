@@ -1,6 +1,6 @@
 ---------  A full adder ------------------
 
-library ieee; 
+library ieee;
 use ieee.std_logic_1164.all;
 library work;
 
@@ -13,6 +13,6 @@ end entity;
 
 architecture rtl of fulladder is
 begin
-	cout <= (x and y) or (cin and (x xor y));
-	sum <= y xor x xor cin ;
+	cout <= (x and y) or (cin and (x xor y)) after 35 ps;
+	sum <= y xor x xor cin after 30 ps;
 end architecture;
