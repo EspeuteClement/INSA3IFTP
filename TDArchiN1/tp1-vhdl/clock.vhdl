@@ -1,4 +1,4 @@
-library ieee; 
+library ieee;
 use ieee.std_logic_1164.all;
 library work;
 
@@ -9,7 +9,7 @@ end entity;
 
 
 architecture behaviorial of clock_generator is
-   constant clock_period : time := 1 ns;
+   constant clk_period : time := 1 ns;
 
    begin
    clock_process :process

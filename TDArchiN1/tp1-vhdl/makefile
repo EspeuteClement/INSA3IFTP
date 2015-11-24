@@ -1,7 +1,7 @@
-FILES = adder.vhdl testbench_adder.vhdl fulladder.vhdl
-TARGET = testbench_adder
-TARGET_NAME = testbench_adder.out
-VCD = testbench_adder.vcd
+FILES = clock.vhdl
+TARGET = clock_generator
+TARGET_NAME = clock.out
+VCD = clock.vcd
 
 ALL : $(TARGET_NAME) makefile
 	./$(TARGET_NAME) --stop-time=20ns --vcd=$(VCD)
