@@ -41,3 +41,7 @@ doc/
 #config files
 *.sublime-project
 *.sublime-workspace
+
+#tpvhdl
+*.vcd
+*.cf
