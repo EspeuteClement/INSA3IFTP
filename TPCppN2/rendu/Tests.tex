@@ -5,7 +5,7 @@
 \title{Tests for C++ Assignment \#2}
 \author{Pair B3408 \\ {\sc Renault} Benoit, {\sc Espeute} Clément}
 \date{}
-\usepackage[top=1in, bottom=1.25in, left=1.25in, right=1.25in]{geometry}
+\usepackage[top=1in, bottom=1in, left=1.10in, right=1.10in]{geometry}
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{hyperref}
@@ -67,30 +67,30 @@ You may want to get more specific error messages. If so please set (\texttt{\#de
 To execute these run in the sources folder after updating the Main.h:
 \texttt{make run}
 
-\subsection{IterationTest\_1}
+\subsubsection{IterationTest\_1}
 Checks if the Iteration method visited every single Node in the tree exactly once. A boolean array keeps in memory which Nodes have been visited or not and the binary tree is filled with empty Sensors (that is to say, with all Stats array elements equal to 0). As we iterate through the tree, the boolean array is updated. The function returns a true boolean value if all the Node where visited once (if the entire boolean array has its elements set to true). If an error is found, a message will appear in the console either warning that a Node hasn't been visited at the end, or if a Node has been visited twice.
 
-\subsection{BalanceTest\_1}
+\subsubsection{BalanceTest\_1}
 Checks if the BinaryTree is balanced after a long series of random insertions. It creates and fills a BinaryTree with random sensors ID, and then iterates through all the Nodes, checking the balance of every Node and prompting an error if a balance of 2 or more is found (indicating that we don't fill the AVL tree requirements). Again, the function returns true if the tests are successful, and false otherwise.
 
-\subsection{SearchTest\_1}
+\subsubsection{SearchTest\_1}
 Almost a copy of the Iteration Test. It just creates the Nodes in the tree and checks if the Search function of the Node class works with all the IDs. Returns true if the test is successful and false otherwise.
 
-\subsection{SensorTest\_1}
+\subsubsection{SensorTest\_1}
 This test checks if the basic functionnalities of Sensor are working. Simply put, it creates a single Sensor object, adds events to it, and displays statistics about the sensor. It returns a boolean value of true if the test is successful, false else.
 
-\subsection{PerformanceSearch and PerformanceInsert}
+\subsubsection{PerformanceSearch and PerformanceInsert}
 These two functions are almost identical. They sole purpose is to test the performance of the BinaryTree. For that, each function initializes the tree with 1500 Sensors, then performs random Search OR Insert function calls on the tree (depending of which function is called). They are used in conjonction with the macro \texttt{MESURE\_TIME(func,name)}
 
-\subsection{\texttt{MESURE\_TIME} (in Utils.h)}
+\subsubsection{\texttt{MESURE\_TIME} (in Utils.h)}
 Useful macro that allows to measure the time that a function \emph{func} takes to execute, and display it in seconds. Used for some performance tests. \emph{name} should be a String containing the function name that is to be displayed in the output message.
 
-\section{External tests}
+\subsection{External tests}
 Those tests were created in order to see if our application was properly functioning according to the inputs/outputs described in the assignement. We used the \texttt{test.sh} file provided with some in and out files also provided in order to see if the basic functions were properly working (that is, passing them into the program, and automatically checking the results it provided). We also used a 20 000 000 instructions long file provided by another group that allowed us to see if our program was performing well under the worst case scenario for the TP.
 
 We also wrote two other pairs of i/o files, the first being viciousTests, which tests incorrect function calls like asking for statistics with an empty array to see if the program doesn't crash in front of invalid user commands.
 
-Finally, we needed to test the optional instruction \texttt{OPT}, for which no test files were provided. For that, we wrote a simple lua script : (\texttt{generateValues.lua} in the \texttt{tests/} folder) that generated the in and out files for this test. The program chooses a random minute between 2 given hours as the "optimal" path. It then writes ADD commands filling all the minutes between the 2 hours with "R" traffic except for the chosen minute where the traffic is "V" into the .in file. Multiples Sensors are created in the same way, but with the "V" traffic put so the chosen path will be fully composed of "V" traffic states. Finally, the script writes in the .out file the expected output.
+Finally, we needed to test the optional instruction \texttt{OPT}, for which no test files were provided. For that, we wrote a simple lua script : (\texttt{generateValues.lua} in the \texttt{tests/} folder) that generated the testOTP.in and testOPT.out files for this test. The program chooses a random minute between 2 given hours as the "optimal" path. It then writes ADD commands filling all the minutes between the 2 hours with "R" traffic except for the chosen minute where the traffic is "V" into the .in file. Multiples Sensors are created in the same way, but with the "V" traffic put so the chosen path will be fully composed of "V" traffic states. Finally, the script writes in the .out file the expected output.
 
 To test these run in the sources folder :
 

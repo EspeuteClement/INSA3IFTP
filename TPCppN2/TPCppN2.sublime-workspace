@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"sear",
+				"searchID"
+			],
+			[
+				"Perf",
+				"PerformanceSearch"
+			],
+			[
 				"num",
 				"numberOfTrajectSensors"
 			],
@@ -263,7 +271,7 @@
 			"file": "sources/makefile",
 			"settings":
 			{
-				"buffer_size": 3560,
+				"buffer_size": 3557,
 				"line_ending": "Unix"
 			}
 		},
@@ -279,7 +287,7 @@
 			"file": "sources/dependencies.dep",
 			"settings":
 			{
-				"buffer_size": 542,
+				"buffer_size": 521,
 				"line_ending": "Unix"
 			}
 		},
@@ -287,7 +295,7 @@
 			"file": "sources/Node.h",
 			"settings":
 			{
-				"buffer_size": 3848,
+				"buffer_size": 3993,
 				"line_ending": "Unix"
 			}
 		},
@@ -295,7 +303,7 @@
 			"file": "sources/BinaryTree.h",
 			"settings":
 			{
-				"buffer_size": 2129,
+				"buffer_size": 2364,
 				"line_ending": "Unix"
 			}
 		},
@@ -303,7 +311,7 @@
 			"file": "sources/IoEngine.h",
 			"settings":
 			{
-				"buffer_size": 3549,
+				"buffer_size": 3596,
 				"line_ending": "Unix"
 			}
 		},
@@ -315,21 +323,31 @@
 			}
 		},
 		{
-			"contents": "#include <iostream>\n#include \"Node.h\"\n#include \"Sensor.h\"\n#include \"Utils.h\"\n//#define MAP\n// AVL ALGORITHM : http://www.cise.ufl.edu/~nemo/cop3530/AVL-Tree-Rotations.pdf\n\nvoid Node::setLeft(Node *theLeft)\n{\n	left = theLeft;\n	if (left != NULL)\n	{	left->parent = this;\n	}\n	// We recompute the height because the added node\n	// could have a bigger height than the right sub\n	// tree.\n	ComputeHeight();\n}\n\nvoid Node::setRight(Node *theRight)\n{\n	right = theRight;\n	if (right != NULL)\n	{	right->parent = this;\n	}\n	ComputeHeight();\n}\n\n\nvoid Node::SwapSensor(Node *target)\n{\n	// Note : This method is used when we have to swap\n	// 2 nodes in the tree, especially in the left &\n	// right rotations. It has the advantage to not mess\n	// with the parents & child relations, and it preserves\n	// the root in the BinaryTree.\n	Sensor *tmp = this->sensor; // Buffer target sensor\n\n	//Perform the swap\n	this->sensor = target->sensor;\n	target->sensor = tmp;\n}\n\nvoid Node::LeftRotation()\n{\n	if(right != NULL)\n	{\n		// We swap this sensor ID with this node right one\n		// so pointers don't get messed up.\n		// If we don't, parent node of this node will\n		// still point to the same node after\n		// the rotation, messing the tree up.\n		SwapSensor(right);\n		Node *oldRight = right->right;\n		right->setRight(right->left);\n		right->setLeft(this->left);\n		this->setLeft(right);\n		this->setRight(oldRight);\n	}\n}\n\nvoid Node::RightRotation()\n{\n	if(left != NULL)\n	{\n		// This method is a mirror of LeftRotation.\n		SwapSensor(left);\n		Node *oldLeft = left->left;\n		left->setLeft(left->right);\n		left->setRight(this->right);\n		this->setRight(left);\n		this->setLeft(oldLeft);\n	}\n}\n\nvoid Node::DoubleLeftRotation()\n{\n	if(right!=NULL)\n	{\n		right->RightRotation();\n		LeftRotation();\n	}\n}\n\nvoid Node::DoubleRightRotation()\n{\n	if(left!=NULL)\n	{\n		left->LeftRotation();\n		RightRotation();\n	}\n}\n\nlong Node::ComputeHeight()\n{\n	//if (height != -1) return height;\n	int l = 0; // The height of the left subtree\n	int r = 0; // The height of the right subtree\n	if(left != NULL)\n	{	l = left->height;		\n	}\n	if(right != NULL)\n	{	r = right->height;\n	}\n\n	int oldH = height;\n	// The height is the max of the subtrees height, plus one\n	height = Utils::max(l,r) + 1;\n	\n	//Then we call this method for this node parent to propagate\n	//The height change (it the height has changed)\n	if( oldH != height && parent !=NULL)\n	{	parent->ComputeHeight();\n	}\n	return height;\n}\n\nvoid Node::Serialize()\n{\n\n	// The goal is to print something like this :\n	// {id,height,left={id,left={...}},right={...}}\n	std::cout << '{';\n	std::cout << \"id=\" <<GetSensorID();\n	std::cout << \",height=\" << height <<',';\n	std::cout << \"left=\";\n	\n	// Serialize the left part of the array\n	if (left != NULL)\n	{	left->Serialize();\n	}\n	else // Set the table to nil if the left node is NULL\n	{	std::cout << \"nil\";\n	}\n	std::cout << ',';\n\n	std::cout << \"right=\";\n	// Serialize the right part of the array\n	if (right != NULL)\n	{	right->Serialize();\n	}\n	else // Set the table to nil if the right node is NULL\n	{	std::cout << \"nil\";\n	}\n\n	std::cout << '}';\n}\n\nNode *node::Search(long searchID)\n{\n	//Go to the left if \n	if(searchID < GetSensorID())\n	{\n		if (left != NULL) //If there is a node, search in this subtree\n		{	return left->Search(searchID);\n		}\n		else //Else return the pointer to the left part\n		{	return NULL;\n		}\n	}\n	else if(searchID > GetSensorID())\n	{\n		if (right != NULL)\n		{	return right->Search(searchID);\n		}\n		else\n		{	return NULL;\n		}\n	}\n	else\n	{\n		return this;\n	}\n}\n\nNode *Node::Insert(int searchID)\n{	\n	if(searchID < GetSensorID())\n	{\n		if (left != NULL) //If there is a node, search in this subtree\n		{	return left->Insert(searchID);\n		}\n		else //Else return the pointer to the left part\n		{	\n			Node *n = new Node(new Sensor(searchID),this);\n			setLeft(n);\n			Rebalance();\n			\n			return n;\n		}\n	}\n	else if(searchID > GetSensorID())\n	{\n		if (right != NULL)\n		{	return right->Insert(searchID);\n		}\n		else\n		{	\n			Node *n = new Node(new Sensor(searchID),this);\n			setRight(n);\n			Rebalance();\n			return n;\n		}\n	}\n	else\n	{\n		return this;\n	}\n}\n\nlong Node::GetBalance()\n{\n	long lHeight = 0;\n	if (left != NULL)\n	{	lHeight = left->height;\n	}\n	long rHeight = 0;\n	if (right != NULL)\n	{	rHeight = right->height;\n	}\n\n	return lHeight - rHeight;\n}\n\nvoid Node::Rebalance()\n{\n	//ComputeHeight();\n	long bal = GetBalance();\n	//std::cout << \"Rebalancing. Bal : \" << bal << \"\\n\";\n	if (bal>1) // If the tree is left heavy\n	{\n		if (left->GetBalance()<=-1) // If the left subtree is right heavy\n		{\n			DoubleRightRotation();\n		}\n		else\n		{\n			RightRotation();\n		}\n	}\n	else if (bal < -1) // if the tree is right heavy\n	{\n		if (right->GetBalance()>=1) // If the right subtree is left heavy\n		{\n			DoubleLeftRotation();\n		}\n		else\n		{\n			LeftRotation();\n		}\n	}\n	if (parent != NULL)\n	{	parent->Rebalance();\n	}\n}\n\n\nNode::Node(Sensor *sensor, Node *parent, Node *left, Node *right):\n	sensor(sensor),parent(parent),left(left),right(right)\n{\n#ifdef MAP\n	std::cout << \"Constructing a <Node>\";\n#endif\n	height = 1;\n}\n\nNode::~Node(){\n#ifdef MAP\n	std::cout << \"Destructing a <Node>\";\n#endif\n	if (left != NULL)\n	{	delete left;\n	}\n	if (right != NULL)\n	{	delete right;\n	}\n	delete sensor;\n}\n\n",
-			"file": "sources/Node.cpp",
-			"file_size": 5099,
-			"file_write_time": 1447257999000000,
+			"file": "sources/Utils.h",
 			"settings":
 			{
-				"buffer_size": 5181,
+				"buffer_size": 1627,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;\" to lines/\n!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/\n!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/\n!_TAG_PROGRAM_NAME	Exuberant Ctags	//\n!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/\n!_TAG_PROGRAM_VERSION	5.9~svn20110310	//\nADDITIONAL_CLEAN	makefile	/^ADDITIONAL_CLEAN = core $(OBJS) $(EXEC)$/;\"	m\nAddEvent	Sensor.cpp	/^void Sensor::AddEvent(int d7, int h, int m, char state)$/;\"	f	class:Sensor\nAddStatsByDay	Sensor.cpp	/^void Sensor::AddStatsByDay (int d7, Stats *stats)$/;\"	f	class:Sensor\nAddStatsByHour	Sensor.cpp	/^void Sensor::AddStatsByHour (int d7, int h, Stats *stats)$/;\"	f	class:Sensor\nAddStatsBySensor	Sensor.cpp	/^void Sensor::AddStatsBySensor (Stats *stats)$/;\"	f	class:Sensor\nBINARY_TREE_H	BinaryTree.h	2;\"	d\nBOLD	Utils.cpp	/^	const string Utils::BOLD = \"=== \";$/;\"	m	class:Utils	file:\nBOLD	Utils.cpp	/^	const string Utils::BOLD = \"\\\\e[1m\";$/;\"	m	class:Utils	file:\nBOLD	Utils.h	/^	static const string BOLD;$/;\"	m	class:Utils\nBOLD	makefile	/^BOLD = \\\\033[1m$/;\"	m\nBalanceTest_1	TestEngine.cpp	/^bool TestEngine::BalanceTest_1(bool verbose)$/;\"	f	class:TestEngine\nBinaryTree	BinaryTree.cpp	/^BinaryTree::BinaryTree(Node* aRoot):root(aRoot)$/;\"	f	class:BinaryTree\nBinaryTree	BinaryTree.h	/^class BinaryTree{$/;\"	c\nCC	makefile	/^CC = g++$/;\"	m\nCC_COMP_FLAG	makefile	/^CC_COMP_FLAG = -c -Wall -Os$/;\"	m\nCC_OUTPUT_FLAG	makefile	/^CC_OUTPUT_FLAG = -o$/;\"	m\nCLEAN	makefile	/^CLEAN = clean$/;\"	m\nCLEAN_COMMAND	makefile	/^CLEAN_COMMAND = rm$/;\"	m\nCLEAN_FLAG	makefile	/^CLEAN_FLAG = -f$/;\"	m\nComputeHeight	Node.cpp	/^long Node::ComputeHeight()$/;\"	f	class:Node\nDEBUG	makefile	/^DEBUG = debug$/;\"	m\nDEFAULT_VERBOSE	TestEngine.h	27;\"	d\nDEFAULT_VERBOSE	TestEngine.h	9;\"	d\nDEP_CMD	makefile	/^DEP_CMD = lua makedep.lua $(SRC)$/;\"	m\nDEP_FILE	makefile	/^DEP_FILE = dependencies.dep$/;\"	m\nDEP_TARGET	makefile	/^DEP_TARGET = dep$/;\"	m\nDOCTARGET	makefile	/^DOCTARGET = doc$/;\"	m\nDOC_COMMAND	makefile	/^DOC_COMMAND = doxygen .\\/docConfig && ln -s -f doc\\/html\\/index.html \"open doc.html\"$/;\"	m\nDoubleLeftRotation	Node.cpp	/^void Node::DoubleLeftRotation()$/;\"	f	class:Node\nDoubleRightRotation	Node.cpp	/^void Node::DoubleRightRotation()$/;\"	f	class:Node\nEND_BOLD	Utils.cpp	/^	const string Utils::END_BOLD = \" ===\";$/;\"	m	class:Utils	file:\nEND_BOLD	Utils.cpp	/^	const string Utils::END_BOLD = \"\\\\e[21m\";$/;\"	m	class:Utils	file:\nEND_BOLD	Utils.h	/^	static const string END_BOLD;$/;\"	m	class:Utils\nEND_COLOR	Utils.cpp	/^	const string Utils::END_COLOR = \"\";$/;\"	m	class:Utils	file:\nEND_COLOR	Utils.cpp	/^	const string Utils::END_COLOR = \"\\\\e[39m\";$/;\"	m	class:Utils	file:\nEND_COLOR	Utils.h	/^	static const string END_COLOR;$/;\"	m	class:Utils\nEXEC	makefile	/^EXEC = out\\/executable.out$/;\"	m\nEXEC_FOLDER	makefile	/^EXEC_FOLDER = out\\/$/;\"	m\nEXTENDED_CONSOLE	Utils.h	6;\"	d\nGREEN	Utils.cpp	/^	const string Utils::GREEN = \"\";$/;\"	m	class:Utils	file:\nGREEN	Utils.cpp	/^	const string Utils::GREEN = \"\\\\e[32m\";$/;\"	m	class:Utils	file:\nGREEN	Utils.h	/^	static const string GREEN;$/;\"	m	class:Utils\nGetBalance	Node.cpp	/^long Node::GetBalance()$/;\"	f	class:Node\nGetDuration	Sensor.cpp	/^int Sensor::GetDuration(int d7, int h, int m)$/;\"	f	class:Sensor\nGetHeight	Node.h	/^	inline long GetHeight() const {return height;};$/;\"	f	class:Node\nGetID	Sensor.h	/^    inline long GetID()$/;\"	f	class:Sensor\nGetLeft	Node.h	/^	inline Node *GetLeft() const {return left;};$/;\"	f	class:Node\nGetRight	Node.h	/^	inline Node *GetRight() const {return right;};$/;\"	f	class:Node\nGetRoot	BinaryTree.h	/^	inline Node *GetRoot() {return root;};$/;\"	f	class:BinaryTree\nGetSensor	Node.h	/^	Sensor *GetSensor() {return sensor;};$/;\"	f	class:Node\nGetSensorID	Node.h	/^	inline long GetSensorID() const {return sensor->GetID();};$/;\"	f	class:Node\nGetStatsByMin	Sensor.cpp	/^Stats* Sensor::GetStatsByMin (int d7, int h, int m)$/;\"	f	class:Sensor\nHandleADD	IoEngine.cpp	/^void IoEngine::HandleADD()$/;\"	f	class:IoEngine\nHandleJAM_DH	IoEngine.cpp	/^void IoEngine::HandleJAM_DH()$/;\"	f	class:IoEngine\nHandleOPT	IoEngine.cpp	/^void IoEngine::HandleOPT()$/;\"	f	class:IoEngine\nHandleSTATS_C	IoEngine.cpp	/^void IoEngine::HandleSTATS_C()$/;\"	f	class:IoEngine\nHandleSTATS_D7	IoEngine.cpp	/^void IoEngine::HandleSTATS_D7()$/;\"	f	class:IoEngine\nID	Sensor.h	/^    long ID;$/;\"	m	class:Sensor\nIO_ENGINE_H	IoEngine.h	2;\"	d\nInitIterate	BinaryTree.cpp	/^void BinaryTree::InitIterate()$/;\"	f	class:BinaryTree\nInsert	BinaryTree.cpp	/^void BinaryTree::Insert(int ID, $/;\"	f	class:BinaryTree\nInsert	Node.cpp	/^Node *Node::Insert(int searchID)$/;\"	f	class:Node\nIoEngine	IoEngine.cpp	/^IoEngine::IoEngine(BinaryTree *tree):theTree(tree){}$/;\"	f	class:IoEngine\nIoEngine	IoEngine.h	/^class IoEngine$/;\"	c\nIterate	BinaryTree.cpp	/^Node *BinaryTree::Iterate()$/;\"	f	class:BinaryTree\nIteration_Test1	TestEngine.cpp	/^bool TestEngine::Iteration_Test1(bool verbose)$/;\"	f	class:TestEngine\nJ	Sensor.h	/^const int J = 1;$/;\"	v\nLINK	makefile	/^LINK = g++$/;\"	m\nLINK_FLAG	makefile	/^LINK_FLAG =$/;\"	m\nLeftRotation	Node.cpp	/^void Node::LeftRotation()$/;\"	f	class:Node\nN	Sensor.h	/^const int N = 3;$/;\"	v\nNODE_H	Node.h	2;\"	d\nNUMBER_OF_DAYS	Sensor.h	/^const int NUMBER_OF_DAYS = 7;$/;\"	v\nNUMBER_OF_HOURS	Sensor.h	/^const int NUMBER_OF_HOURS = 24;$/;\"	v\nNUMBER_OF_MINUTES	Sensor.h	/^const int NUMBER_OF_MINUTES = 60;$/;\"	v\nNUMBER_OF_STATES	Sensor.h	/^const int NUMBER_OF_STATES = 4;$/;\"	v\nNode	Node.cpp	/^Node::Node(Sensor *sensor, Node *parent, Node *left, Node *right):$/;\"	f	class:Node\nNode	Node.h	/^class Node$/;\"	c\nOBJS	makefile	/^OBJS = $(subst .cpp,.o,$(addprefix $(OBJS_FOLDER),$(SRC)))$/;\"	m\nOBJS_FOLDER	makefile	/^OBJS_FOLDER = build\\/$/;\"	m\nPRINT	makefile	/^PRINT = @printf$/;\"	m\nPrintSensorStatsRel	Sensor.cpp	/^void Sensor::PrintSensorStatsRel ()$/;\"	f	class:Sensor\nPrintStatsRel	Sensor.h	/^  void PrintStatsRel ()$/;\"	f	struct:StatsRel\nR	Sensor.h	/^const int R = 2;$/;\"	v\nRED	Utils.cpp	/^	const string Utils::RED = \"\";$/;\"	m	class:Utils	file:\nRED	Utils.cpp	/^	const string Utils::RED = \"\\\\e[31m\";$/;\"	m	class:Utils	file:\nRED	Utils.h	/^	static const string RED;$/;\"	m	class:Utils\nRESET_BOLD	makefile	/^RESET_BOLD = \\\\033[21m$/;\"	m\nRUN	makefile	/^RUN = run$/;\"	m\nRUNSAVE_FILE	makefile	/^RUNSAVE_FILE = ..\\/utils\\/dispTree\\/data.lua$/;\"	m\nRUN_AND_SAVE	makefile	/^RUN_AND_SAVE = runSave$/;\"	m\nReadInput	IoEngine.cpp	/^bool IoEngine::ReadInput()$/;\"	f	class:IoEngine\nRebalance	Node.cpp	/^void Node::Rebalance()$/;\"	f	class:Node\nRightRotation	Node.cpp	/^void Node::RightRotation()$/;\"	f	class:Node\nSENSOR_H	Sensor.h	2;\"	d\nSRC	makefile	/^SRC = Main.cpp BinaryTree.cpp Node.cpp Sensor.cpp IoEngine.cpp TestEngine.cpp Utils.cpp$/;\"	m\nSRC_FOLDER	makefile	/^SRC_FOLDER = $/;\"	m\nSearch	BinaryTree.cpp	/^Sensor *BinaryTree::Search(long ID)$/;\"	f	class:BinaryTree\nSearch	Node.cpp	/^Node *Node::Search(long searchID)$/;\"	f	class:Node\nSensor	Sensor.cpp	/^Sensor::Sensor(long searchID):ID(searchID)$/;\"	f	class:Sensor\nSensor	Sensor.h	/^class Sensor$/;\"	c\nSerialize	BinaryTree.cpp	/^void BinaryTree::Serialize()$/;\"	f	class:BinaryTree\nSerialize	Node.cpp	/^void Node::Serialize()$/;\"	f	class:Node\nStats	Sensor.h	/^  Stats ()$/;\"	f	struct:Stats\nStats	Sensor.h	/^struct Stats$/;\"	s\nStatsRel	Sensor.h	/^  StatsRel (Stats *stats) {$/;\"	f	struct:StatsRel\nStatsRel	Sensor.h	/^struct StatsRel {$/;\"	s\nSum	Sensor.h	/^  double Sum ()$/;\"	f	struct:Stats\nSwapSensor	Node.cpp	/^void Node::SwapSensor(Node *target)$/;\"	f	class:Node\nTEST_ENGINE_H	TestEngine.h	2;\"	d\nTestEngine	TestEngine.h	/^class TestEngine$/;\"	c\nUTILS_H	Utils.h	2;\"	d\nUtils	Utils.h	/^class Utils{$/;\"	c\nV	Sensor.h	/^const int V = 0;$/;\"	v\na) aWrite	makedep.lua	/^		string.gsub(line,\"#include \\\\\"(.-)\\\\\"\", function(a) aWrite(a,file) end);$/;\"	f\naWrite	makedep.lua	/^function aWrite(a,file)$/;\"	f\ncounterStats	Sensor.h	/^  double counterStats[NUMBER_OF_STATES];$/;\"	m	struct:StatsRel\ncounters	Sensor.h	/^  int counters[NUMBER_OF_STATES];$/;\"	m	struct:Stats\nheight	Node.h	/^	long height;	\\/** The height, i.e. the number of nodes in the$/;\"	m	class:Node\nindex	Sensor.h	/^    Stats ***index;$/;\"	m	class:Sensor\nleft	Node.h	/^	Node *left;		\\/**The node on the left *\\/$/;\"	m	class:Node\nmain	Main.cpp	/^int main()$/;\"	f\nmax	Utils.h	/^	static inline long max(long a, long b){return a > b ? a : b;}$/;\"	f	class:Utils\noperator +=	Sensor.h	/^  Stats& operator+=(const Stats& stats)$/;\"	f	struct:Stats\nparent	Node.h	/^	Node *parent;	\\/**	The parent node to this one. NULL if there is$/;\"	m	class:Node\nprintBold	Utils.cpp	/^void Utils::printBold(string message, bool r)$/;\"	f	class:Utils\nprintGreen	Utils.cpp	/^void Utils::printGreen(string message,bool r)$/;\"	f	class:Utils\nprintRed	Utils.cpp	/^void Utils::printRed(string message, bool r)$/;\"	f	class:Utils\nright	Node.h	/^	Node *right;	\\/**The node on the right*\\/$/;\"	m	class:Node\nroot	BinaryTree.h	/^	Node *root; \\/\\/ The first element in the binary tree.$/;\"	m	class:BinaryTree\nsensor	Node.h	/^	Sensor *sensor;	\\/**The sensor contained in the node *\\/$/;\"	m	class:Node\nsetLeft	Node.cpp	/^void Node::setLeft(Node *theLeft)$/;\"	f	class:Node\nsetRight	Node.cpp	/^void Node::setRight(Node *theRight)$/;\"	f	class:Node\nstack	BinaryTree.h	/^	Node **stack; $/;\"	m	class:BinaryTree\nstackDepth	BinaryTree.h	/^	int stackDepth; \\/\\/ The max number of elements in the stack$/;\"	m	class:BinaryTree\nstackPos	BinaryTree.h	/^	int stackPos; \\/\\/ The position of the top element in the stack$/;\"	m	class:BinaryTree\nstring.gsub(v,\"(.-).cpp\",function(a) fileName 	makedep.lua	/^	string.gsub(v,\"(.-).cpp\",function(a) fileName = a end)$/;\"	f\ntheTree	IoEngine.h	/^		BinaryTree *theTree; \\/\\/ TODO Documentation$/;\"	m	class:IoEngine\n~BinaryTree	BinaryTree.cpp	/^BinaryTree::~BinaryTree()$/;\"	f	class:BinaryTree\n~Node	Node.cpp	/^Node::~Node(){$/;\"	f	class:Node\n~Sensor	Sensor.cpp	/^Sensor::~Sensor ()$/;\"	f	class:Sensor\n",
+			"file": "sources/TestEngine.h",
+			"settings":
+			{
+				"buffer_size": 1693,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "sources/Node.cpp",
+			"settings":
+			{
+				"buffer_size": 5720,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "sources/.tags",
-			"file_size": 9801,
-			"file_write_time": 1446990142000000,
 			"settings":
 			{
 				"buffer_size": 9821,
@@ -337,10 +355,7 @@
 			}
 		},
 		{
-			"contents": "!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/\n!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;\" to lines/\n!_TAG_PROGRAM_VERSION	5.9~svn20110310	//\nBinaryTree	BinaryTree.cpp	/^BinaryTree::BinaryTree(Node* aRoot):root(aRoot)$/;\"	f	class:BinaryTree\nInitIterate	BinaryTree.cpp	/^void BinaryTree::InitIterate()$/;\"	f	class:BinaryTree\nInsert	BinaryTree.cpp	/^void BinaryTree::Insert(int ID, $/;\"	f	class:BinaryTree\nIterate	BinaryTree.cpp	/^Node *BinaryTree::Iterate()$/;\"	f	class:BinaryTree\nSearch	BinaryTree.cpp	/^Sensor *BinaryTree::Search(long ID)$/;\"	f	class:BinaryTree\nSerialize	BinaryTree.cpp	/^void BinaryTree::Serialize()$/;\"	f	class:BinaryTree\n~BinaryTree	BinaryTree.cpp	/^BinaryTree::~BinaryTree()$/;\"	f	class:BinaryTree\nBINARY_TREE_H	BinaryTree.h	2;\"	d\nBinaryTree	BinaryTree.h	/^class BinaryTree{$/;\"	c\nGetRoot	BinaryTree.h	/^	inline Node *GetRoot() {return root;};$/;\"	f	class:BinaryTree\nroot	BinaryTree.h	/^	Node *root; \\/\\/ The first element in the binary tree.$/;\"	m	class:BinaryTree\nstack	BinaryTree.h	/^	Node **stack; $/;\"	m	class:BinaryTree\nstackDepth	BinaryTree.h	/^	int stackDepth; \\/\\/ The max number of elements in the stack$/;\"	m	class:BinaryTree\nstackPos	BinaryTree.h	/^	int stackPos; \\/\\/ The position of the top element in the stack$/;\"	m	class:BinaryTree\n!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/\n!_TAG_PROGRAM_NAME	Exuberant Ctags	//\nHandleADD	IoEngine.cpp	/^void IoEngine::HandleADD()$/;\"	f	class:IoEngine\nHandleJAM_DH	IoEngine.cpp	/^void IoEngine::HandleJAM_DH()$/;\"	f	class:IoEngine\nHandleOPT	IoEngine.cpp	/^void IoEngine::HandleOPT()$/;\"	f	class:IoEngine\nHandleSTATS_C	IoEngine.cpp	/^void IoEngine::HandleSTATS_C()$/;\"	f	class:IoEngine\nHandleSTATS_D7	IoEngine.cpp	/^void IoEngine::HandleSTATS_D7()$/;\"	f	class:IoEngine\nIoEngine	IoEngine.cpp	/^IoEngine::IoEngine(BinaryTree *tree):theTree(tree){}$/;\"	f	class:IoEngine\nReadInput	IoEngine.cpp	/^bool IoEngine::ReadInput()$/;\"	f	class:IoEngine\nIO_ENGINE_H	IoEngine.h	2;\"	d\nIoEngine	IoEngine.h	/^class IoEngine$/;\"	c\ntheTree	IoEngine.h	/^		BinaryTree *theTree; \\/\\/ TODO Documentation$/;\"	m	class:IoEngine\nmain	Main.cpp	/^int main()$/;\"	f\nComputeHeight	Node.cpp	/^long Node::ComputeHeight()$/;\"	f	class:Node\nDoubleLeftRotation	Node.cpp	/^void Node::DoubleLeftRotation()$/;\"	f	class:Node\nDoubleRightRotation	Node.cpp	/^void Node::DoubleRightRotation()$/;\"	f	class:Node\nGetBalance	Node.cpp	/^long Node::GetBalance()$/;\"	f	class:Node\nInsert	Node.cpp	/^Node *Node::Insert(int searchID)$/;\"	f	class:Node\nLeftRotation	Node.cpp	/^void Node::LeftRotation()$/;\"	f	class:Node\nNode	Node.cpp	/^Node::Node(Sensor *sensor, Node *parent, Node *left, Node *right):$/;\"	f	class:Node\nRebalance	Node.cpp	/^void Node::Rebalance()$/;\"	f	class:Node\nRightRotation	Node.cpp	/^void Node::RightRotation()$/;\"	f	class:Node\nSearch	Node.cpp	/^Node *Node::Search(long searchID)$/;\"	f	class:Node\nSerialize	Node.cpp	/^void Node::Serialize()$/;\"	f	class:Node\nSwapSensor	Node.cpp	/^void Node::SwapSensor(Node *target)$/;\"	f	class:Node\nsetLeft	Node.cpp	/^void Node::setLeft(Node *theLeft)$/;\"	f	class:Node\nsetRight	Node.cpp	/^void Node::setRight(Node *theRight)$/;\"	f	class:Node\n~Node	Node.cpp	/^Node::~Node(){$/;\"	f	class:Node\nGetHeight	Node.h	/^	inline long GetHeight() const {return height;};$/;\"	f	class:Node\nGetLeft	Node.h	/^	inline Node *GetLeft() const {return left;};$/;\"	f	class:Node\nGetRight	Node.h	/^	inline Node *GetRight() const {return right;};$/;\"	f	class:Node\nGetSensor	Node.h	/^	Sensor *GetSensor() {return sensor;};$/;\"	f	class:Node\nGetSensorID	Node.h	/^	inline long GetSensorID() const {return sensor->GetID();};$/;\"	f	class:Node\nNODE_H	Node.h	2;\"	d\nNode	Node.h	/^class Node$/;\"	c\nheight	Node.h	/^	long height;	\\/** The height, i.e. the number of nodes in the$/;\"	m	class:Node\nleft	Node.h	/^	Node *left;		\\/**The node on the left *\\/$/;\"	m	class:Node\nparent	Node.h	/^	Node *parent;	\\/**	The parent node to this one. NULL if there is$/;\"	m	class:Node\nright	Node.h	/^	Node *right;	\\/**The node on the right*\\/$/;\"	m	class:Node\nsensor	Node.h	/^	Sensor *sensor;	\\/**The sensor contained in the node *\\/$/;\"	m	class:Node\nAddEvent	Sensor.cpp	/^void Sensor::AddEvent(int d7, int h, int m, char state)$/;\"	f	class:Sensor\nAddStatsByDay	Sensor.cpp	/^void Sensor::AddStatsByDay (int d7, Stats *stats)$/;\"	f	class:Sensor\nAddStatsByHour	Sensor.cpp	/^void Sensor::AddStatsByHour (int d7, int h, Stats *stats)$/;\"	f	class:Sensor\nAddStatsBySensor	Sensor.cpp	/^void Sensor::AddStatsBySensor (Stats *stats)$/;\"	f	class:Sensor\nGetDuration	Sensor.cpp	/^int Sensor::GetDuration(int d7, int h, int m)$/;\"	f	class:Sensor\nGetStatsByMin	Sensor.cpp	/^Stats* Sensor::GetStatsByMin (int d7, int h, int m)$/;\"	f	class:Sensor\nPrintSensorStatsRel	Sensor.cpp	/^void Sensor::PrintSensorStatsRel ()$/;\"	f	class:Sensor\nSensor	Sensor.cpp	/^Sensor::Sensor(long searchID):ID(searchID)$/;\"	f	class:Sensor\n~Sensor	Sensor.cpp	/^Sensor::~Sensor ()$/;\"	f	class:Sensor\nGetID	Sensor.h	/^    inline long GetID()$/;\"	f	class:Sensor\nID	Sensor.h	/^    long ID;$/;\"	m	class:Sensor\nJ	Sensor.h	/^const int J = 1;$/;\"	v\nN	Sensor.h	/^const int N = 3;$/;\"	v\nNUMBER_OF_DAYS	Sensor.h	/^const int NUMBER_OF_DAYS = 7;$/;\"	v\nNUMBER_OF_HOURS	Sensor.h	/^const int NUMBER_OF_HOURS = 24;$/;\"	v\nNUMBER_OF_MINUTES	Sensor.h	/^const int NUMBER_OF_MINUTES = 60;$/;\"	v\nNUMBER_OF_STATES	Sensor.h	/^const int NUMBER_OF_STATES = 4;$/;\"	v\nPrintStatsRel	Sensor.h	/^  void PrintStatsRel ()$/;\"	f	struct:StatsRel\nR	Sensor.h	/^const int R = 2;$/;\"	v\nSENSOR_H	Sensor.h	2;\"	d\nSensor	Sensor.h	/^class Sensor$/;\"	c\nStats	Sensor.h	/^  Stats ()$/;\"	f	struct:Stats\nStats	Sensor.h	/^struct Stats$/;\"	s\nStatsRel	Sensor.h	/^  StatsRel (Stats *stats) {$/;\"	f	struct:StatsRel\nStatsRel	Sensor.h	/^struct StatsRel {$/;\"	s\nSum	Sensor.h	/^  double Sum ()$/;\"	f	struct:Stats\nV	Sensor.h	/^const int V = 0;$/;\"	v\ncounterStats	Sensor.h	/^  double counterStats[NUMBER_OF_STATES];$/;\"	m	struct:StatsRel\ncounters	Sensor.h	/^  int counters[NUMBER_OF_STATES];$/;\"	m	struct:Stats\nindex	Sensor.h	/^    Stats ***index;$/;\"	m	class:Sensor\noperator +=	Sensor.h	/^  Stats& operator+=(const Stats& stats)$/;\"	f	struct:Stats\nBalanceTest_1	TestEngine.cpp	/^bool TestEngine::BalanceTest_1(bool verbose)$/;\"	f	class:TestEngine\nIteration_Test1	TestEngine.cpp	/^bool TestEngine::Iteration_Test1(bool verbose)$/;\"	f	class:TestEngine\nDEFAULT_VERBOSE	TestEngine.h	27;\"	d\nDEFAULT_VERBOSE	TestEngine.h	9;\"	d\nTEST_ENGINE_H	TestEngine.h	2;\"	d\nTestEngine	TestEngine.h	/^class TestEngine$/;\"	c\nBOLD	Utils.cpp	/^	const string Utils::BOLD = \"=== \";$/;\"	m	class:Utils	file:\nBOLD	Utils.cpp	/^	const string Utils::BOLD = \"\\\\e[1m\";$/;\"	m	class:Utils	file:\nEND_BOLD	Utils.cpp	/^	const string Utils::END_BOLD = \" ===\";$/;\"	m	class:Utils	file:\nEND_BOLD	Utils.cpp	/^	const string Utils::END_BOLD = \"\\\\e[21m\";$/;\"	m	class:Utils	file:\nEND_COLOR	Utils.cpp	/^	const string Utils::END_COLOR = \"\";$/;\"	m	class:Utils	file:\nEND_COLOR	Utils.cpp	/^	const string Utils::END_COLOR = \"\\\\e[39m\";$/;\"	m	class:Utils	file:\nGREEN	Utils.cpp	/^	const string Utils::GREEN = \"\";$/;\"	m	class:Utils	file:\nGREEN	Utils.cpp	/^	const string Utils::GREEN = \"\\\\e[32m\";$/;\"	m	class:Utils	file:\nRED	Utils.cpp	/^	const string Utils::RED = \"\";$/;\"	m	class:Utils	file:\nRED	Utils.cpp	/^	const string Utils::RED = \"\\\\e[31m\";$/;\"	m	class:Utils	file:\nprintBold	Utils.cpp	/^void Utils::printBold(string message, bool r)$/;\"	f	class:Utils\nprintGreen	Utils.cpp	/^void Utils::printGreen(string message,bool r)$/;\"	f	class:Utils\nprintRed	Utils.cpp	/^void Utils::printRed(string message, bool r)$/;\"	f	class:Utils\nBOLD	Utils.h	/^	static const string BOLD;$/;\"	m	class:Utils\nEND_BOLD	Utils.h	/^	static const string END_BOLD;$/;\"	m	class:Utils\nEND_COLOR	Utils.h	/^	static const string END_COLOR;$/;\"	m	class:Utils\nEXTENDED_CONSOLE	Utils.h	6;\"	d\nGREEN	Utils.h	/^	static const string GREEN;$/;\"	m	class:Utils\nRED	Utils.h	/^	static const string RED;$/;\"	m	class:Utils\nUTILS_H	Utils.h	2;\"	d\nUtils	Utils.h	/^class Utils{$/;\"	c\nmax	Utils.h	/^	static inline long max(long a, long b){return a > b ? a : b;}$/;\"	f	class:Utils\n!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/\na) aWrite	makedep.lua	/^		string.gsub(line,\"#include \\\\\"(.-)\\\\\"\", function(a) aWrite(a,file) end);$/;\"	f\naWrite	makedep.lua	/^function aWrite(a,file)$/;\"	f\nstring.gsub(v,\"(.-).cpp\",function(a) fileName 	makedep.lua	/^	string.gsub(v,\"(.-).cpp\",function(a) fileName = a end)$/;\"	f\nADDITIONAL_CLEAN	makefile	/^ADDITIONAL_CLEAN = core $(OBJS) $(EXEC)$/;\"	m\nBOLD	makefile	/^BOLD = \\\\033[1m$/;\"	m\nCC	makefile	/^CC = g++$/;\"	m\nCC_COMP_FLAG	makefile	/^CC_COMP_FLAG = -c -Wall -Os$/;\"	m\nCC_OUTPUT_FLAG	makefile	/^CC_OUTPUT_FLAG = -o$/;\"	m\nCLEAN	makefile	/^CLEAN = clean$/;\"	m\nCLEAN_COMMAND	makefile	/^CLEAN_COMMAND = rm$/;\"	m\nCLEAN_FLAG	makefile	/^CLEAN_FLAG = -f$/;\"	m\nDEBUG	makefile	/^DEBUG = debug$/;\"	m\nDEP_CMD	makefile	/^DEP_CMD = lua makedep.lua $(SRC)$/;\"	m\nDEP_FILE	makefile	/^DEP_FILE = dependencies.dep$/;\"	m\nDEP_TARGET	makefile	/^DEP_TARGET = dep$/;\"	m\nDOCTARGET	makefile	/^DOCTARGET = doc$/;\"	m\nDOC_COMMAND	makefile	/^DOC_COMMAND = doxygen .\\/docConfig && ln -s -f doc\\/html\\/index.html \"open doc.html\"$/;\"	m\nEXEC	makefile	/^EXEC = out\\/executable.out$/;\"	m\nEXEC_FOLDER	makefile	/^EXEC_FOLDER = out\\/$/;\"	m\nLINK	makefile	/^LINK = g++$/;\"	m\nLINK_FLAG	makefile	/^LINK_FLAG =$/;\"	m\nOBJS	makefile	/^OBJS = $(subst .cpp,.o,$(addprefix $(OBJS_FOLDER),$(SRC)))$/;\"	m\nOBJS_FOLDER	makefile	/^OBJS_FOLDER = build\\/$/;\"	m\nPRINT	makefile	/^PRINT = @printf$/;\"	m\nRESET_BOLD	makefile	/^RESET_BOLD = \\\\033[21m$/;\"	m\nRUN	makefile	/^RUN = run$/;\"	m\nRUNSAVE_FILE	makefile	/^RUNSAVE_FILE = ..\\/utils\\/dispTree\\/data.lua$/;\"	m\nRUN_AND_SAVE	makefile	/^RUN_AND_SAVE = runSave$/;\"	m\nSRC	makefile	/^SRC = Main.cpp BinaryTree.cpp Node.cpp Sensor.cpp IoEngine.cpp TestEngine.cpp Utils.cpp$/;\"	m\nSRC_FOLDER	makefile	/^SRC_FOLDER = $/;\"	m\n",
 			"file": "sources/.tags_sorted_by_file",
-			"file_size": 9801,
-			"file_write_time": 1446990142000000,
 			"settings":
 			{
 				"buffer_size": 9821,
@@ -351,18 +366,15 @@
 			"file": "sources/IoEngine.cpp",
 			"settings":
 			{
-				"buffer_size": 6632,
+				"buffer_size": 7217,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "#ifndef SENSOR_H\n#define SENSOR_H\n\n#include <iostream>\nusing namespace std;\n\nconst int NUMBER_OF_DAYS = 7;\nconst int NUMBER_OF_HOURS = 24;\nconst int NUMBER_OF_MINUTES = 60;\nconst int NUMBER_OF_STATES = 4;\nconst int V = 0;\nconst int J = 1;\nconst int R = 2;\nconst int N = 3;\n\n/** Stores event integer counters for each of the possible traffic states\n* (v, j, r, n).\n*/\nstruct Stats\n{\n  int counters[NUMBER_OF_STATES];\n\n  /** Default constructor sets all array elements to zero.\n  */\n  Stats ()\n  {\n    for (int i = 0; i < NUMBER_OF_STATES; i++)\n    {\n      counters[i] = 0;\n    }\n  };\n\n  /** Overloads the += operator in order to be able to add two Stats structs\n  * by adding each array element separately.\n  * @param stats is the right-side expression of the struct to be added.\n  * @return the reference to the current Stats instance.\n  */\n  Stats& operator+=(const Stats& stats)\n  {\n    for (int i = 0; i < NUMBER_OF_STATES; i++)\n    {\n      counters[i] += stats.counters[i];\n    }\n    return *this;\n  };\n\n  /** Adds the statistics together\n  * @return a double type sum of the array elements (v, j, r, n)\n  */\n  double Sum ()\n  {\n    double total = 0;\n    for (int i = 0; i < NUMBER_OF_STATES; i++)\n    {\n      total += counters[i];\n    }\n    return total;\n  }\n};\n\n/** Stores statistics for each of the possible traffic states\n* (v, j, r, n).\n*/\nstruct StatsRel {\n  double counterStats[NUMBER_OF_STATES];\n\n  /** Default constructor converts all the attributes of the passed in Stats\n  * struct into statistics relative to the sum of all the counters.\n  */\n  StatsRel (Stats *stats) {\n    double total = stats->Sum();\n    for (int i = 0; i < NUMBER_OF_STATES; i++)\n    {\n      counterStats[i] = 0;\n      if (total != 0)\n      {\n        counterStats[i] = stats->counters[i] / total;\n      }\n    }\n  };\n\n  /** Displays the attributes of the StatsRel struct one per line, rounded into\n  * percentages.\n  */\n  void PrintStatsRel ()\n  {\n    cout << \"V \" << (int)(counterStats[V]*100) << \"%\\n\";\n    cout << \"J \" << (int)(counterStats[J]*100) << \"%\\n\";\n    cout << \"R \" << (int)(counterStats[R]*100) << \"%\\n\";\n    cout << \"N \" << (int)(counterStats[N]*100) << \"%\\n\";\n  }\n};\n\n/** Stores the ID of a given sensor and a pointer to a tri-dimensional\n* index of Stats event counters thus allowing easy computation of statistics on\n* a per minute, hour, day and sensor basis.\n*/\nclass Sensor\n{\n  public :\n\n    /** Default constructor sets ID to the one given and dynamically allocates\n    * the memory required for the tri-dimensional index.\n    */\n    Sensor(long sensorID);\n\n    /** Default destructor deletes the tri-dimensional index.\n    */\n    ~Sensor();\n\n    /** Increments the suitable event state counter for a given day of week,\n    * hour and minute by one.\n    * @param d7 is the day of the week, ranging from 1 to 7 included.\n    * @param h is the hour, ranging from 0 to 23.\n    * @param m is the minute, ranging from 0 to 59.\n    * @param state is the character representing the state of traffic at the\n    * given time to be incremented.\n    */\n    void AddEvent (int d7, int h, int m, char state);\n\n    /** Getter for the sensor ID.\n    * @return the long int value of the ID.\n    */\n    inline long GetID()\n    {\n      return ID;\n    };\n\n    /** Getter for the Stats of a given time.\n    * @param d7 is the day of the week, ranging from 1 to 7 included.\n    * @param h is the hour, ranging from 0 to 23.\n    * @param m is the minute, ranging from 0 to 59.\n    * @return the pointer to the Stats struct of the index for the given time.\n    */\n    Stats* GetStatsByMin (int d7, int h, int m);\n\n    /** Adds all the Stats structs comprised in the given day and hour to the\n    * Stats struct which pointer is passed in.\n    * @param d7 is the day of the week, ranging from 1 to 7 included.\n    * @param h is the hour, ranging from 0 to 23.\n    * @param[in, out] stats contains the sum of the counters of all the minute\n    * included within a hour.\n    */\n    void AddStatsByHour (int d7, int h, Stats *stats);\n\n    /** Adds all the Stats structs comprised in the given day to the Stats\n    * struct which pointer is passed in.\n    * @param d7 is the day of the week, ranging from 1 to 7 included.\n    * @param[in, out] stats contains the sum of the counters of all the hours\n    * included within a day.\n    */\n    void AddStatsByDay (int d7, Stats *stats);\n\n    /** Adds all the Stats structs of the current Sensor to the Stats struct\n    * which pointer is passed in.\n    * @param[in, out] stats contains the sum of the counters of all the Stats\n    * structs included in the Sensor index.\n    */\n    void AddStatsBySensor (Stats *stats);\n\n    /** Computes and displays the statistics of the current Sensor for every\n    *  attribute (v, j, r, n).\n    */\n    void PrintSensorStatsRel ();\n\n    /** Computes and returns the probable duration of the journey through the\n    * road segment associated with the sensor. Each probable state is associated\n    * with a duration : (v->1, j->2, r->4, n->10). If no data if available, all\n    * the stats are equal to zero, therefore affecting 1 minute (\"v\" case).\n    * @param d7 is the day of the week, ranging from 1 to 7 included.\n    * @param h is the hour, ranging from 0 to 23.\n    * @param m is the minute, ranging from 0 to 59.\n    * @return the duration.\n    */\n    int GetDuration(int d7, int h, int m);\n\n  private :\n    /** Tri-dimensional index of Stats event counters. Dimensions are in order :\n    * Day Of The Week (d7), Hour, Minute.\n    */\n    Stats ***index;\n    /** Primary key that identifies the Sensor.*/\n    long ID;\n};\n#endif //SENSOR_H\n",
 			"file": "sources/Sensor.h",
-			"file_size": 5603,
-			"file_write_time": 1446990199000000,
 			"settings":
 			{
-				"buffer_size": 5608,
+				"buffer_size": 5771,
 				"line_ending": "Unix"
 			}
 		},
@@ -370,7 +382,7 @@
 			"file": "sources/TestEngine.cpp",
 			"settings":
 			{
-				"buffer_size": 5393,
+				"buffer_size": 7323,
 				"line_ending": "Unix"
 			}
 		},
@@ -378,7 +390,7 @@
 			"file": "sources/Sensor.cpp",
 			"settings":
 			{
-				"buffer_size": 2553,
+				"buffer_size": 2945,
 				"line_ending": "Unix"
 			}
 		},
@@ -386,7 +398,7 @@
 			"file": "sources/Main.cpp",
 			"settings":
 			{
-				"buffer_size": 591,
+				"buffer_size": 1210,
 				"line_ending": "Unix"
 			}
 		},
@@ -394,7 +406,7 @@
 			"file": "sources/BinaryTree.cpp",
 			"settings":
 			{
-				"buffer_size": 2338,
+				"buffer_size": 2925,
 				"line_ending": "Unix"
 			}
 		},
@@ -402,7 +414,7 @@
 			"file": "tests/test.sh",
 			"settings":
 			{
-				"buffer_size": 1403,
+				"buffer_size": 1835,
 				"line_ending": "Unix"
 			}
 		},
@@ -410,7 +422,7 @@
 			"file": "tests/generateTest.lua",
 			"settings":
 			{
-				"buffer_size": 1310,
+				"buffer_size": 1339,
 				"line_ending": "Unix"
 			}
 		},
@@ -418,7 +430,38 @@
 			"file": "tests/divers.3.in",
 			"settings":
 			{
-				"buffer_size": 29343,
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "sources/viciousTests.in",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tests/viciousTests.out",
+			"settings":
+			{
+				"buffer_size": 383,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tests/viciousTests.in",
+			"settings":
+			{
+				"buffer_size": 68,
 				"line_ending": "Unix"
 			}
 		}
@@ -629,9 +672,22 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"<<<<<<<",
+			"viciousTests",
+			"divers.3",
+			"add.2",
+			"add.1",
+			"$(EXEC)",
+			"$1",
+			"node",
+			"> ",
+			"divers.3",
+			"InitIterate",
+			"Search_Test1",
+			"Iteration_Test1",
 			"add.1.",
 			"add",
 			"searchID",
@@ -742,6 +798,14 @@
 		"regex": false,
 		"replace_history":
 		[
+			"$file1",
+			"$EXEC",
+			"$(EXEC)",
+			"$EXEC",
+			"Node",
+			"",
+			"SearchTest_1",
+			"IterationTest_1",
 			"searchID",
 			"matchID",
 			"theNode",
@@ -782,7 +846,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 9,
 			"sheets":
 			[
 				{
@@ -790,15 +854,15 @@
 					"file": "sources/makefile",
 					"settings":
 					{
-						"buffer_size": 3560,
+						"buffer_size": 3557,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								977,
-								977
+								293,
+								293
 							]
 						],
 						"settings":
@@ -806,7 +870,7 @@
 							"syntax": "Packages/Makefile/Makefile.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 78.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -843,7 +907,7 @@
 					"file": "sources/dependencies.dep",
 					"settings":
 					{
-						"buffer_size": 542,
+						"buffer_size": 521,
 						"regions":
 						{
 						},
@@ -869,15 +933,15 @@
 					"file": "sources/Node.h",
 					"settings":
 					{
-						"buffer_size": 3848,
+						"buffer_size": 3993,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								662,
-								662
+								0,
+								0
 							]
 						],
 						"settings":
@@ -896,34 +960,7 @@
 					"file": "sources/BinaryTree.h",
 					"settings":
 					{
-						"buffer_size": 2129,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1687,
-								1687
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 468.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "sources/IoEngine.h",
-					"settings":
-					{
-						"buffer_size": 3549,
+						"buffer_size": 2364,
 						"regions":
 						{
 						},
@@ -941,6 +978,33 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "sources/IoEngine.h",
+					"settings":
+					{
+						"buffer_size": 3596,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 468.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -969,27 +1033,21 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 3,
-			"sheets":
-			[
+				},
 				{
 					"buffer": 7,
-					"file": "sources/Node.cpp",
+					"file": "sources/Utils.h",
 					"settings":
 					{
-						"buffer_size": 5181,
+						"buffer_size": 1627,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3074,
-								3074
+								0,
+								0
 							]
 						],
 						"settings":
@@ -998,13 +1056,67 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1855.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 8,
+					"file": "sources/TestEngine.h",
+					"settings":
+					{
+						"buffer_size": 1693,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 156.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "sources/Node.cpp",
+					"settings":
+					{
+						"buffer_size": 5720,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3408.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
 					"file": "sources/.tags",
 					"settings":
 					{
@@ -1030,7 +1142,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 11,
 					"file": "sources/.tags_sorted_by_file",
 					"settings":
 					{
@@ -1056,19 +1168,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 12,
 					"file": "sources/IoEngine.cpp",
 					"settings":
 					{
-						"buffer_size": 6632,
+						"buffer_size": 7217,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5640,
-								5640
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1077,25 +1189,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3471.0,
+						"translation.y": 2496.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 13,
 					"file": "sources/Sensor.h",
 					"settings":
 					{
-						"buffer_size": 5608,
+						"buffer_size": 5771,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2545,
-								2545
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1106,76 +1218,17 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 936.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "sources/TestEngine.cpp",
-					"settings":
-					{
-						"buffer_size": 5393,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								863,
-								863
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 13,
-					"file": "sources/Sensor.cpp",
-					"settings":
-					{
-						"buffer_size": 2553,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								49,
-								49
-							],
-							[
-								62,
-								62
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 156.0,
+						"translation.y": 741.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 14,
-					"file": "sources/Main.cpp",
+					"file": "sources/TestEngine.cpp",
 					"settings":
 					{
-						"buffer_size": 591,
+						"buffer_size": 7323,
 						"regions":
 						{
 						},
@@ -1189,8 +1242,7 @@
 						"settings":
 						{
 							"syntax": "Packages/C++/C++.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1200,37 +1252,10 @@
 				},
 				{
 					"buffer": 15,
-					"file": "sources/BinaryTree.cpp",
+					"file": "sources/Sensor.cpp",
 					"settings":
 					{
-						"buffer_size": 2338,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								787,
-								776
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 16,
-					"file": "tests/test.sh",
-					"settings":
-					{
-						"buffer_size": 1403,
+						"buffer_size": 2945,
 						"regions":
 						{
 						},
@@ -1243,28 +1268,111 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 195.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 17,
-					"file": "tests/generateTest.lua",
+					"buffer": 16,
+					"file": "sources/Main.cpp",
 					"settings":
 					{
-						"buffer_size": 1310,
+						"buffer_size": 1210,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								849,
-								849
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "sources/BinaryTree.cpp",
+					"settings":
+					{
+						"buffer_size": 2925,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 312.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 18,
+					"file": "tests/test.sh",
+					"settings":
+					{
+						"buffer_size": 1835,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								964,
+								964
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 390.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 19,
+					"file": "tests/generateTest.lua",
+					"settings":
+					{
+						"buffer_size": 1339,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								395,
+								395
 							]
 						],
 						"settings":
@@ -1272,26 +1380,129 @@
 							"syntax": "Packages/SublimeLove/Love.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 17.0,
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 18,
+					"buffer": 20,
 					"file": "tests/divers.3.in",
 					"settings":
 					{
-						"buffer_size": 29343,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								240,
-								240
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 21,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 22,
+					"file": "sources/viciousTests.in",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 23,
+					"file": "tests/viciousTests.out",
+					"settings":
+					{
+						"buffer_size": 383,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								157,
+								157
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 24,
+					"file": "tests/viciousTests.in",
+					"settings":
+					{
+						"buffer_size": 68,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								62,
+								62
 							]
 						],
 						"settings":
@@ -1324,18 +1535,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.49190176182,
 			1.0
 		],
 		"rows":
@@ -1382,6 +1586,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 151.0,
 	"status_bar_visible": true
 }
