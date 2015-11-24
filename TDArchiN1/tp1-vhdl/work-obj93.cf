@@ -1,0 +1,7 @@
+v 3
+file . "testbench_fulladder.vhdl" "20151124141125.000" "20151124151337.543":
+  entity testbench_fulladder at 2( 61) + 0 on 21;
+  architecture behaviorial of testbench_fulladder at 14( 213) + 0 on 22;
+file . "fulladder.vhdl" "20151124140918.000" "20151124151315.261":
+  entity fulladder at 3( 44) + 0 on 19;
+  architecture rtl of fulladder at 14( 214) + 0 on 20;

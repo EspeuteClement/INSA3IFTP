@@ -43,6 +43,23 @@ begin
      testy <= '0';
      testcin <= '1';
      wait for 1 ns;
+     testx <= '1';
+     testy <= '0';
+     testcin <= '1';
+     wait for 1 ns;
+     testx <= '0';
+     testy <= '1';
+     testcin <= '1';
+     wait for 1 ns;
+     testx <= '1';
+     testy <= '1';
+     testcin <= '0';
+     wait for 1 ns;
+     testx <= '1';
+     testy <= '1';
+     testcin <= '1';
+     wait for 1 ns;
+     
      -- add more tests here
    end process;
 
