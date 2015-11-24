@@ -1,7 +1,0 @@
-v 4
-file . "testbench_fulladder.vhdl" "e5a1ae8eebef66dc68d5461ade93cc98f8f2ecf3" "20151124141311.783":
-  entity testbench_fulladder at 2( 61) + 0 on 23;
-  architecture behaviorial of testbench_fulladder at 14( 213) + 0 on 24;
-file . "fulladder.vhdl" "c37c86c77c83a71b548388e867b47019b1f9ecd5" "20151124141311.762":
-  entity fulladder at 3( 44) + 0 on 21;
-  architecture rtl of fulladder at 14( 214) + 0 on 22;
