@@ -1,8 +1,18 @@
-FILE = adder
+FILES = adder.vhdl testbench_adder.vhdl fulladder.vhdl
+TARGET = testbench_adder
+TARGET_NAME = testbench_adder.out
+VCD = testbench_adder.vcd
 
-ALL :
-	ghdl -a $(FILE).vhdl
-	ghdl -a testbench_$(FILE).vhdl
-	ghdl -e testbench_$(FILE)
-	./testbench_$(FILE) --stop-time=20ns --vcd=testbench_$(FILE).vcd
-	gtkwave testbench_$(FILE).vcd
+ALL : $(TARGET_NAME) makefile
+	./$(TARGET_NAME) --stop-time=20ns --vcd=$(VCD)
+	gtkwave $(VCD)
+
+$(TARGET_NAME) : $(FILES)
+	ghdl -e $(TARGET)
+	mv $(TARGET) $(TARGET_NAME)
+
+%.vhdl :
+	ghdl -a $@
+
+clean :
+	rm *.out *.o *.cf *.vcd
