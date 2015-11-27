@@ -1,0 +1,147 @@
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BinaryTree	BinaryTree.cpp	/^BinaryTree::BinaryTree(Node* aRoot):root(aRoot)$/;"	f	class:BinaryTree
+InitIterate	BinaryTree.cpp	/^void BinaryTree::InitIterate()$/;"	f	class:BinaryTree
+Insert	BinaryTree.cpp	/^void BinaryTree::Insert(int ID, $/;"	f	class:BinaryTree
+Iterate	BinaryTree.cpp	/^Node *BinaryTree::Iterate()$/;"	f	class:BinaryTree
+Search	BinaryTree.cpp	/^Sensor *BinaryTree::Search(long ID)$/;"	f	class:BinaryTree
+Serialize	BinaryTree.cpp	/^void BinaryTree::Serialize()$/;"	f	class:BinaryTree
+~BinaryTree	BinaryTree.cpp	/^BinaryTree::~BinaryTree()$/;"	f	class:BinaryTree
+BINARY_TREE_H	BinaryTree.h	2;"	d
+BinaryTree	BinaryTree.h	/^class BinaryTree{$/;"	c
+GetRoot	BinaryTree.h	/^	inline Node *GetRoot() {return root;};$/;"	f	class:BinaryTree
+root	BinaryTree.h	/^	Node *root; \/\/ The first element in the binary tree.$/;"	m	class:BinaryTree
+stack	BinaryTree.h	/^	Node **stack; $/;"	m	class:BinaryTree
+stackDepth	BinaryTree.h	/^	int stackDepth; \/\/ The max number of elements in the stack$/;"	m	class:BinaryTree
+stackPos	BinaryTree.h	/^	int stackPos; \/\/ The position of the top element in the stack$/;"	m	class:BinaryTree
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+HandleADD	IoEngine.cpp	/^void IoEngine::HandleADD()$/;"	f	class:IoEngine
+HandleJAM_DH	IoEngine.cpp	/^void IoEngine::HandleJAM_DH()$/;"	f	class:IoEngine
+HandleOPT	IoEngine.cpp	/^void IoEngine::HandleOPT()$/;"	f	class:IoEngine
+HandleSTATS_C	IoEngine.cpp	/^void IoEngine::HandleSTATS_C()$/;"	f	class:IoEngine
+HandleSTATS_D7	IoEngine.cpp	/^void IoEngine::HandleSTATS_D7()$/;"	f	class:IoEngine
+IoEngine	IoEngine.cpp	/^IoEngine::IoEngine(BinaryTree *tree):theTree(tree){}$/;"	f	class:IoEngine
+ReadInput	IoEngine.cpp	/^bool IoEngine::ReadInput()$/;"	f	class:IoEngine
+IO_ENGINE_H	IoEngine.h	2;"	d
+IoEngine	IoEngine.h	/^class IoEngine$/;"	c
+theTree	IoEngine.h	/^		BinaryTree *theTree; \/\/ TODO Documentation$/;"	m	class:IoEngine
+main	Main.cpp	/^int main()$/;"	f
+ComputeHeight	Node.cpp	/^long Node::ComputeHeight()$/;"	f	class:Node
+DoubleLeftRotation	Node.cpp	/^void Node::DoubleLeftRotation()$/;"	f	class:Node
+DoubleRightRotation	Node.cpp	/^void Node::DoubleRightRotation()$/;"	f	class:Node
+GetBalance	Node.cpp	/^long Node::GetBalance()$/;"	f	class:Node
+Insert	Node.cpp	/^Node *Node::Insert(int searchID)$/;"	f	class:Node
+LeftRotation	Node.cpp	/^void Node::LeftRotation()$/;"	f	class:Node
+Node	Node.cpp	/^Node::Node(Sensor *sensor, Node *parent, Node *left, Node *right):$/;"	f	class:Node
+Rebalance	Node.cpp	/^void Node::Rebalance()$/;"	f	class:Node
+RightRotation	Node.cpp	/^void Node::RightRotation()$/;"	f	class:Node
+Search	Node.cpp	/^Node *Node::Search(long searchID)$/;"	f	class:Node
+Serialize	Node.cpp	/^void Node::Serialize()$/;"	f	class:Node
+SwapSensor	Node.cpp	/^void Node::SwapSensor(Node *target)$/;"	f	class:Node
+setLeft	Node.cpp	/^void Node::setLeft(Node *theLeft)$/;"	f	class:Node
+setRight	Node.cpp	/^void Node::setRight(Node *theRight)$/;"	f	class:Node
+~Node	Node.cpp	/^Node::~Node(){$/;"	f	class:Node
+GetHeight	Node.h	/^	inline long GetHeight() const {return height;};$/;"	f	class:Node
+GetLeft	Node.h	/^	inline Node *GetLeft() const {return left;};$/;"	f	class:Node
+GetRight	Node.h	/^	inline Node *GetRight() const {return right;};$/;"	f	class:Node
+GetSensor	Node.h	/^	Sensor *GetSensor() {return sensor;};$/;"	f	class:Node
+GetSensorID	Node.h	/^	inline long GetSensorID() const {return sensor->GetID();};$/;"	f	class:Node
+NODE_H	Node.h	2;"	d
+Node	Node.h	/^class Node$/;"	c
+height	Node.h	/^	long height;	\/** The height, i.e. the number of nodes in the$/;"	m	class:Node
+left	Node.h	/^	Node *left;		\/**The node on the left *\/$/;"	m	class:Node
+parent	Node.h	/^	Node *parent;	\/**	The parent node to this one. NULL if there is$/;"	m	class:Node
+right	Node.h	/^	Node *right;	\/**The node on the right*\/$/;"	m	class:Node
+sensor	Node.h	/^	Sensor *sensor;	\/**The sensor contained in the node *\/$/;"	m	class:Node
+AddEvent	Sensor.cpp	/^void Sensor::AddEvent(int d7, int h, int m, char state)$/;"	f	class:Sensor
+AddStatsByDay	Sensor.cpp	/^void Sensor::AddStatsByDay (int d7, Stats *stats)$/;"	f	class:Sensor
+AddStatsByHour	Sensor.cpp	/^void Sensor::AddStatsByHour (int d7, int h, Stats *stats)$/;"	f	class:Sensor
+AddStatsBySensor	Sensor.cpp	/^void Sensor::AddStatsBySensor (Stats *stats)$/;"	f	class:Sensor
+GetDuration	Sensor.cpp	/^int Sensor::GetDuration(int d7, int h, int m)$/;"	f	class:Sensor
+GetStatsByMin	Sensor.cpp	/^Stats* Sensor::GetStatsByMin (int d7, int h, int m)$/;"	f	class:Sensor
+PrintSensorStatsRel	Sensor.cpp	/^void Sensor::PrintSensorStatsRel ()$/;"	f	class:Sensor
+Sensor	Sensor.cpp	/^Sensor::Sensor(long searchID):ID(searchID)$/;"	f	class:Sensor
+~Sensor	Sensor.cpp	/^Sensor::~Sensor ()$/;"	f	class:Sensor
+GetID	Sensor.h	/^    inline long GetID()$/;"	f	class:Sensor
+ID	Sensor.h	/^    long ID;$/;"	m	class:Sensor
+J	Sensor.h	/^const int J = 1;$/;"	v
+N	Sensor.h	/^const int N = 3;$/;"	v
+NUMBER_OF_DAYS	Sensor.h	/^const int NUMBER_OF_DAYS = 7;$/;"	v
+NUMBER_OF_HOURS	Sensor.h	/^const int NUMBER_OF_HOURS = 24;$/;"	v
+NUMBER_OF_MINUTES	Sensor.h	/^const int NUMBER_OF_MINUTES = 60;$/;"	v
+NUMBER_OF_STATES	Sensor.h	/^const int NUMBER_OF_STATES = 4;$/;"	v
+PrintStatsRel	Sensor.h	/^  void PrintStatsRel ()$/;"	f	struct:StatsRel
+R	Sensor.h	/^const int R = 2;$/;"	v
+SENSOR_H	Sensor.h	2;"	d
+Sensor	Sensor.h	/^class Sensor$/;"	c
+Stats	Sensor.h	/^  Stats ()$/;"	f	struct:Stats
+Stats	Sensor.h	/^struct Stats$/;"	s
+StatsRel	Sensor.h	/^  StatsRel (Stats *stats) {$/;"	f	struct:StatsRel
+StatsRel	Sensor.h	/^struct StatsRel {$/;"	s
+Sum	Sensor.h	/^  double Sum ()$/;"	f	struct:Stats
+V	Sensor.h	/^const int V = 0;$/;"	v
+counterStats	Sensor.h	/^  double counterStats[NUMBER_OF_STATES];$/;"	m	struct:StatsRel
+counters	Sensor.h	/^  int counters[NUMBER_OF_STATES];$/;"	m	struct:Stats
+index	Sensor.h	/^    Stats ***index;$/;"	m	class:Sensor
+operator +=	Sensor.h	/^  Stats& operator+=(const Stats& stats)$/;"	f	struct:Stats
+BalanceTest_1	TestEngine.cpp	/^bool TestEngine::BalanceTest_1(bool verbose)$/;"	f	class:TestEngine
+IterationTest_1	TestEngine.cpp	/^bool TestEngine::IterationTest_1(bool verbose)$/;"	f	class:TestEngine
+DEFAULT_VERBOSE	TestEngine.h	27;"	d
+DEFAULT_VERBOSE	TestEngine.h	9;"	d
+TEST_ENGINE_H	TestEngine.h	2;"	d
+TestEngine	TestEngine.h	/^class TestEngine$/;"	c
+BOLD	Utils.cpp	/^	const string Utils::BOLD = "=== ";$/;"	m	class:Utils	file:
+BOLD	Utils.cpp	/^	const string Utils::BOLD = "\\e[1m";$/;"	m	class:Utils	file:
+END_BOLD	Utils.cpp	/^	const string Utils::END_BOLD = " ===";$/;"	m	class:Utils	file:
+END_BOLD	Utils.cpp	/^	const string Utils::END_BOLD = "\\e[21m";$/;"	m	class:Utils	file:
+END_COLOR	Utils.cpp	/^	const string Utils::END_COLOR = "";$/;"	m	class:Utils	file:
+END_COLOR	Utils.cpp	/^	const string Utils::END_COLOR = "\\e[39m";$/;"	m	class:Utils	file:
+GREEN	Utils.cpp	/^	const string Utils::GREEN = "";$/;"	m	class:Utils	file:
+GREEN	Utils.cpp	/^	const string Utils::GREEN = "\\e[32m";$/;"	m	class:Utils	file:
+RED	Utils.cpp	/^	const string Utils::RED = "";$/;"	m	class:Utils	file:
+RED	Utils.cpp	/^	const string Utils::RED = "\\e[31m";$/;"	m	class:Utils	file:
+printBold	Utils.cpp	/^void Utils::printBold(string message, bool r)$/;"	f	class:Utils
+printGreen	Utils.cpp	/^void Utils::printGreen(string message,bool r)$/;"	f	class:Utils
+printRed	Utils.cpp	/^void Utils::printRed(string message, bool r)$/;"	f	class:Utils
+BOLD	Utils.h	/^	static const string BOLD;$/;"	m	class:Utils
+END_BOLD	Utils.h	/^	static const string END_BOLD;$/;"	m	class:Utils
+END_COLOR	Utils.h	/^	static const string END_COLOR;$/;"	m	class:Utils
+EXTENDED_CONSOLE	Utils.h	6;"	d
+GREEN	Utils.h	/^	static const string GREEN;$/;"	m	class:Utils
+RED	Utils.h	/^	static const string RED;$/;"	m	class:Utils
+UTILS_H	Utils.h	2;"	d
+Utils	Utils.h	/^class Utils{$/;"	c
+max	Utils.h	/^	static inline long max(long a, long b){return a > b ? a : b;}$/;"	f	class:Utils
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+a) aWrite	makedep.lua	/^		string.gsub(line,"#include \\"(.-)\\"", function(a) aWrite(a,file) end);$/;"	f
+aWrite	makedep.lua	/^function aWrite(a,file)$/;"	f
+string.gsub(v,"(.-).cpp",function(a) fileName 	makedep.lua	/^	string.gsub(v,"(.-).cpp",function(a) fileName = a end)$/;"	f
+ADDITIONAL_CLEAN	makefile	/^ADDITIONAL_CLEAN = core $(OBJS) $(EXEC)$/;"	m
+BOLD	makefile	/^BOLD = \\033[1m$/;"	m
+CC	makefile	/^CC = g++$/;"	m
+CC_COMP_FLAG	makefile	/^CC_COMP_FLAG = -c -Wall -Os$/;"	m
+CC_OUTPUT_FLAG	makefile	/^CC_OUTPUT_FLAG = -o$/;"	m
+CLEAN	makefile	/^CLEAN = clean$/;"	m
+CLEAN_COMMAND	makefile	/^CLEAN_COMMAND = rm$/;"	m
+CLEAN_FLAG	makefile	/^CLEAN_FLAG = -f$/;"	m
+DEBUG	makefile	/^DEBUG = debug$/;"	m
+DEP_CMD	makefile	/^DEP_CMD = lua makedep.lua $(SRC)$/;"	m
+DEP_FILE	makefile	/^DEP_FILE = dependencies.dep$/;"	m
+DEP_TARGET	makefile	/^DEP_TARGET = dep$/;"	m
+DOCTARGET	makefile	/^DOCTARGET = doc$/;"	m
+DOC_COMMAND	makefile	/^DOC_COMMAND = doxygen .\/docConfig && ln -s -f doc\/html\/index.html "open doc.html"$/;"	m
+EXEC	makefile	/^EXEC = out\/executable.out$/;"	m
+EXEC_FOLDER	makefile	/^EXEC_FOLDER = out\/$/;"	m
+LINK	makefile	/^LINK = g++$/;"	m
+LINK_FLAG	makefile	/^LINK_FLAG =$/;"	m
+OBJS	makefile	/^OBJS = $(subst .cpp,.o,$(addprefix $(OBJS_FOLDER),$(SRC)))$/;"	m
+OBJS_FOLDER	makefile	/^OBJS_FOLDER = build\/$/;"	m
+PRINT	makefile	/^PRINT = @printf$/;"	m
+RESET_BOLD	makefile	/^RESET_BOLD = \\033[21m$/;"	m
+RUN	makefile	/^RUN = run$/;"	m
+RUNSAVE_FILE	makefile	/^RUNSAVE_FILE = ..\/utils\/dispTree\/data.lua$/;"	m
+RUN_AND_SAVE	makefile	/^RUN_AND_SAVE = runSave$/;"	m
+SRC	makefile	/^SRC = Main.cpp BinaryTree.cpp Node.cpp Sensor.cpp IoEngine.cpp TestEngine.cpp Utils.cpp$/;"	m
+SRC_FOLDER	makefile	/^SRC_FOLDER = $/;"	m

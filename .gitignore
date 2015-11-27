@@ -45,3 +45,6 @@ doc/
 #tpvhdl
 *.vcd
 *.cf
+
+#tplog
+*.log
