@@ -18,7 +18,7 @@ EXEC = out/executable.out
 # Nom des fichiers sources
 SRC = Main.cpp
 # Nom du dossier avec les fichiers sources
-SRC_FOLDER = 
+SRC_FOLDER =  src/
 # Le dossier où metre les fichiers objs
 OBJS_FOLDER = build/
 # Le dossier où metre l'exec
@@ -38,7 +38,7 @@ DEP_TARGET = dep
 
 DEP_CMD = lua makedep.lua $(SRC)
 
-DEP_FILE = dependencies.dep
+DEP_FILE = dep/dependencies.dep
 
 # Création de la doc
 DOCTARGET = doc
