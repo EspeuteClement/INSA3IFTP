@@ -24,7 +24,7 @@
 
 # Executables
 *.exe
-*.out
+#*.out
 *.app
 
 *.swp
@@ -45,3 +45,10 @@ doc/
 #tpvhdl
 *.vcd
 *.cf
+
+#tplog
+*.log
+*.dot
+
+*.sublime-workspace
+*.sublime-project

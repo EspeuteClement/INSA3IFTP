@@ -20,7 +20,7 @@ architecture rtl of adder is
    port ( x, y, cin : in std_logic;
           cout, sum : out  std_logic );
     end component;
-
+-- YAY
 -- the vector of internal carries. Note that it is n+1 bits
   signal  c : std_logic_vector (n downto 0);
 
