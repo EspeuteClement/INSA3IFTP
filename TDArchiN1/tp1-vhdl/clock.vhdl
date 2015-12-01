@@ -3,12 +3,12 @@ use ieee.std_logic_1164.all;
 library work;
 
 
-entity clock_generator is
+entity clock is
    port ( clk : out  std_logic );
 end entity;
 
 
-architecture behaviorial of clock_generator is
+architecture behaviorial of clock is
    constant clk_period : time := 1 ns;
 
    begin
