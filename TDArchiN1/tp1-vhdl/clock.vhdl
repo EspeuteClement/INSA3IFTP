@@ -9,7 +9,7 @@ end entity;
 
 
 architecture behaviorial of clock is
-   constant clk_period : time := 1 ns;
+   constant clk_period : time := 0.01 ns;
 
    begin
    clock_process :process
