@@ -4,7 +4,7 @@ TARGET_NAME = testbench_compteur.out
 VCD = testbench_compteur.vcd
 
 ALL : $(TARGET_NAME) makefile
-	./$(TARGET_NAME) --stop-time=60ns --vcd=$(VCD)
+	./$(TARGET_NAME) --stop-time=1ns --vcd=$(VCD)
 	gtkwave $(VCD)
 
 $(TARGET_NAME) : $(FILES)
