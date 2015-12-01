@@ -45,8 +45,10 @@ begin
    test_process :process
    begin
      testreset <= '1';
+     wait for 2 ns;
      testreset <= '0';
      wait for 10 ns;
+     wait;
    end process;
 
 end;

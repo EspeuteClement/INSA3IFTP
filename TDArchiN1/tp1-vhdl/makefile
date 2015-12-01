@@ -4,15 +4,15 @@ TARGET_NAME = testbench_compteur.out
 VCD = testbench_compteur.vcd
 
 ALL : $(TARGET_NAME) makefile
-	./$(TARGET_NAME) --stop-time=60ns --vcd=$(VCD)
-	gtkwave $(VCD)
+	out/$(TARGET_NAME) --stop-time=20ns --vcd=out/$(VCD)
+	gtkwave out/$(VCD)
 
 $(TARGET_NAME) : $(FILES)
-	ghdl -e $(TARGET)
-	mv $(TARGET) $(TARGET_NAME)
+	cd out && ghdl -e $(TARGET) && cd ..
+	cd out && mv $(TARGET) $(TARGET_NAME) && cd ..
 
 %.vhdl :
-	ghdl -a $@
+	cd out && ghdl -a ../$@ && cd ..
 
 clean :
 	rm *.out *.o *.cf *.vcd

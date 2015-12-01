@@ -11,7 +11,11 @@ end entity;
 architecture behaviorial of registre1bit is
    -- Registre avec enable
    begin
-   with_enable_process :process
+   with_enable_process :process(clk)
+   -- Process(clk) signifie Liste de sensibilité = Clk : Le processeur
+   -- réactivera ce process ssi l'état de clk change dans le temps.
+   -- Sinon le process tourne à l'infini, et le programme de test aussi !
+   
    begin
      if rising_edge(clk) then
        if enable = '1' then
