@@ -22,7 +22,7 @@ SRC_FOLDER =  src/
 # Le dossier où metre les fichiers objs
 OBJS_FOLDER = build/
 # Le dossier où metre l'exec
-EXEC_FOLDER = out/
+EXEC_FOLDER = bin/
 
 ### CLEAN
 CLEAN = clean
