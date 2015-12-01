@@ -1,0 +1,6 @@
+Match tout les sites :
+\[\d+\/\w+\/\d+:\d+:.*"GET (\S+).*" (\d+).*"(\w+:\/\/|)(\S+)"
+#1 : Site de destination
+#2 : Code HTTP
+#3 : Protocole
+#3 : Site d'origine
