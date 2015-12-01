@@ -9,7 +9,7 @@ entity registre1bit is
 end entity;
 
 architecture behaviorial of registre1bit is
-   -- Registre sans enable
+   -- Registre avec enable
    begin
    with_enable_process :process
    begin

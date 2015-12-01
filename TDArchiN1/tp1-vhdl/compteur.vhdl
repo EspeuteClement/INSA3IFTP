@@ -27,11 +27,34 @@ architecture rtl of compteur is
          cout : out std_logic );
   end component;
 
+  signal one : std_logic_vector(n-1 downto 0);
+  signal AdderOutToRegisterIn, RegisterOutToAdderIn : std_logic_vector(n-1 downto 0);
 
   begin
-  compteur_process :process
-  begin
-    -- Ajouter incrémentation
-  end process;
+    one <= (n-1 downto 1 => '0') & '1';
+
+    registrenbitsinstance:
+      registrenbits
+        generic map(n => n)
+        port map (
+        d => AdderOutToRegisterIn,
+        q => RegisterOutToAdderIn,
+        clk => clk,
+        enable => '1',
+        reset => reset
+        );
+
+    adderinstance:
+      adder
+        generic map(n => n)
+        port map (
+        x => RegisterOutToAdderIn,
+        y => one,
+        s => AdderOutToRegisterIn,
+        cin => '0'
+        );
+
+      -- Output
+      q <= RegisterOutToAdderIn;
 
 end architecture;
