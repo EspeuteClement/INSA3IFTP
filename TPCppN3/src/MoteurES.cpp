@@ -25,6 +25,25 @@ void FaireGraphe (string nomDuFichier) const
 {
 }
 
+CodeRetourMoteurES MoteurES::OuvrirFichierLog(string chemin)
+{
+	fichierLog.open(chemin,in);
+	if (!FichierEstOuvert())
+	{
+		return FICHIER_ERR;
+	}
+	return FICHIER_OK;
+}
+
+CodeRetourMoteurES MoteurES::FermerFichierLog()
+{
+
+}
+
+
+
+
+
 //-------------------------------------------- Constructeurs - destructeur
 MoteurES::MoteurES (const unsigned int uneTaille)
 {
