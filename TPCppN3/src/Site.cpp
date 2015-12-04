@@ -62,19 +62,25 @@ string Site::GetAdresse () const
     return adresse;
 }
 
-Fichier * Site::GetFichier (const string cheminFichier) const
+Fichier * Site::GetFichier (const string cheminFichier)
 {
-    return fichiers[cheminFichier];
+    if (fichiers.find() != fichiers.end())
+    {
+        return fichiers[cheminFichier];
+    }
+    else
+    {
+        return NULL;
+    }
 }
 
-//----------------------------------------------------- Méthodes privées
-void Site::AjouterFichier(string chemin)
+Fichier * Site::GetExterne () const
 {
-    fichiers[chemin] = new Fichier(chemin);
+    return fichierExterne;
 }
 
 //-------------------------------------------- Constructeurs - destructeur
-Site::Site (string uneAdresse)
+Site::Site (const string uneAdresse)
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Site>" << endl;
@@ -96,4 +102,12 @@ Site::~Site ()
         delete iterator->second;
     }
     delete fichierExterne;
+}
+
+//----------------------------------------------------------------- PRIVE
+
+//----------------------------------------------------- Méthodes privées
+void Site::AjouterFichier(const string chemin)
+{
+    fichiers[chemin] = new Fichier(chemin);
 }

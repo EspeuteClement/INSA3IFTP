@@ -29,21 +29,25 @@ string Fichier::GetChemin () const
     return chemin;
 }
 
-int Fichier::GetHits () const
+uint32_t Fichier::GetHits () const
 {
     return totalHits;
 }
 
-int Fichier::GetHits (const Fichier * const fichierSource) const
+uint32_t Fichier::GetHits (Fichier * fichierSource)
 {
     if (hits.find(fichierSource) != hits.end())
     {
         return hits[fichierSource];
     }
+    else
+    {
+        return 0;
+    }
 }
 
 //-------------------------------------------- Constructeurs - destructeur
-Fichier::Fichier (string unChemin)
+Fichier::Fichier (const string unChemin)
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Fichier>" << endl;

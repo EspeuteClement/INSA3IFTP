@@ -59,14 +59,20 @@ public:
     // Contrat :
     //
 
-    Fichier * GetFichier (const string cheminFichier) const;
+    Fichier * GetFichier (const string cheminFichier);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    Fichier * GetExterne () const;
     // Mode d'emploi :
     //
     // Contrat :
     //
 
 //-------------------------------------------- Constructeurs - destructeur
-    Site (string uneAdresse);
+    Site (const string uneAdresse);
     // Mode d'emploi :
     //
 
@@ -83,7 +89,7 @@ private:
     FichierMap fichiers;
     Fichier * fichierExterne;
 
-    void AjouterFichier(string chemin);
+    void AjouterFichier(const string chemin);
 };
 
 #endif // SITE_H
