@@ -1,6 +1,8 @@
-Match tout les sites :
-\[\d+\/\w+\/\d+:\d+:.*"GET (\S+).*" (\d+).*"(\w+:\/\/|)(\S+)"
+Match tout les sites dont l'extension n'est pas dans la blacklist:
+\[\d+\/\w+\/\d+:\d+:.*"GET ([^ ?]+\.((?!html|ico)\w+)).*" (\d+).*"(\w+:\/\/|)([^//]*)(\S+)"
 #1 : Site de destination
-#2 : Code HTTP
-#3 : Protocole
-#3 : Site d'origine
+#2 : Extension du site
+#3 : Code HTTP
+#4 : Protocole
+#5 : Site d'origine
+#6 : Fichier d'origine

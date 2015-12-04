@@ -6,7 +6,7 @@ LINK = g++
 # Argument pour changer le nom de la sortie du compilo
 CC_OUTPUT_FLAG = -o
 # Arguments pour le stade d'édition des liens
-LINK_FLAG =
+LINK_FLAG = -lboost_regex
 # Arguments pour le stade de compilation
 CC_COMP_FLAG = -c -std=c++11 -Wall
 # Commande d'affichage
