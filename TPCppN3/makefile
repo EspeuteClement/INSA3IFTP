@@ -16,7 +16,7 @@ PRINT = @printf
 # Nom du fichier de sortie
 EXEC = out/executable.out
 # Nom des fichiers sources
-SRC = Main.cpp MoteurES.cpp
+SRC = Fichier.cpp Site.cpp Main.cpp
 # Nom du dossier avec les fichiers sources
 SRC_FOLDER =  src/
 # Le dossier où metre les fichiers objs
@@ -94,7 +94,7 @@ $(DEP_FILE) :
 	$(DEP_CMD)
 
 .PHONY : $(DOCTARGET)
-$(DOCTARGET) : 
+$(DOCTARGET) :
 	$(DOC_COMMAND)
 
 

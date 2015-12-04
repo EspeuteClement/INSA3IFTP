@@ -19,12 +19,8 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "Site.h"
 
 //----------------------------------------------------------- Enumérations
-enum CodesRetour
-{
-};
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Fichier>
@@ -36,14 +32,33 @@ class Fichier
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void AjouterVisite (string source) const;
+    void AjouterVisite (Fichier * fichierSource);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+//----------------------------------------------------- Getters
+    string GetChemin () const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    int GetHits () const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    int GetHits (const Fichier * const fichierSource) const;
     // Mode d'emploi :
     //
     // Contrat :
     //
 
 //-------------------------------------------- Constructeurs - destructeur
-    Fichier ();
+    Fichier (string unChemin);
     // Mode d'emploi :
     //
 
@@ -55,9 +70,10 @@ public:
 
 private:
 //------------------------------------------------------- Attributs privés
-    string nom;
-    Site siteSource;
-    map<*Fichier, int> hits;
+    string chemin;
+    typedef map<Fichier *, int> HitMap;
+    HitMap hits;
+    int totalHits;
 };
 
 #endif // FICHIER_H
