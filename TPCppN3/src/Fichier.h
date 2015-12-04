@@ -38,6 +38,16 @@ public:
     // Contrat :
     //
 
+//----------------------------------------------------- Surcharge d'opérateurs
+    inline bool operator < (const Fichier& fichier1, const Fichier& fichier2)
+    {
+        return (fichier1.GetHits() < fichier2.GetHits());
+    }
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
 //----------------------------------------------------- Getters
     string GetChemin () const;
     // Mode d'emploi :
