@@ -69,7 +69,7 @@ public:
 
 //------------------------------------------------------------------ PRIVE
 
-private:
+//private:
 //------------------------------------------------------- Attributs privés
     string adresse;
     typedef map<string, Fichier*> FichierMap;

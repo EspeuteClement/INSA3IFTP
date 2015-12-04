@@ -83,6 +83,10 @@ Site::~Site ()
 #ifdef MAP
     cout << "Appel au destructeur de <Site>" << endl;
 #endif
-    fichiers.erase(fichiers.begin(), fichiers.end());
+    typedef map<string, Fichier*> :: iterator FI;
+    for (FI iterator = fichiers.begin(); iterator != fichiers.end(); iterator++)
+    {
+        delete iterator->second;
+    }
     delete fichierExterne;
 }
