@@ -32,14 +32,14 @@ class Fichier
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void AjouterVisite (Fichier * source);
+    void AjouterVisite (Fichier * fichierSource);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
 //-------------------------------------------- Constructeurs - destructeur
-    Fichier (string unNom);
+    Fichier (string unChemin);
     // Mode d'emploi :
     //
 
@@ -49,9 +49,9 @@ public:
 
 //------------------------------------------------------------------ PRIVE
 
-private:
+//private:
 //------------------------------------------------------- Attributs privés
-    string nom;
+    string chemin;
     typedef map<Fichier *, int> HitMap;
     HitMap hits;
 };

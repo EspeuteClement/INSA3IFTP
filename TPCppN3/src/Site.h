@@ -20,7 +20,7 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "Fichier.h";
+#include "Fichier.h"
 
 //----------------------------------------------------------- Enumérations
 
@@ -34,19 +34,19 @@ class Site
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void AjouterFichier (Fichier * unFichier);
+    void AjouterVisite (string cheminDestination);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void AjouterVisite (string source, string destination);
+    void AjouterVisite (string cheminSource, string cheminDestination);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    Fichier * Trouver (string nomFichier);
+    Fichier * Trouver (string cheminFichier);
     // Mode d'emploi :
     //
     // Contrat :
@@ -59,7 +59,7 @@ public:
     //
 
 //-------------------------------------------- Constructeurs - destructeur
-    Site ();
+    Site (string uneAdresse);
     // Mode d'emploi :
     //
 
@@ -71,9 +71,12 @@ public:
 
 private:
 //------------------------------------------------------- Attributs privés
-    string nom;
-    map<Site *, int> listeFichiers;
-    Fichier * externes;
+    string adresse;
+    typedef map<string, Fichier*> FichierMap;
+    FichierMap fichiers;
+    Fichier * fichierExterne;
+
+    void AjouterFichier(string chemin);
 };
 
 #endif // SITE_H

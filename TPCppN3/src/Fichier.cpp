@@ -17,19 +17,19 @@
 //----------------------------------------------------------------- PUBLIC
 
 //------------------------------------------------------ Méthodes publiques
-void Fichier::AjouterVisite (Fichier * source)
+void Fichier::AjouterVisite (Fichier * fichierSource)
 {
-    hits[source]++;
+    hits[fichierSource]++;
 }
 
 //-------------------------------------------- Constructeurs - destructeur
-Fichier::Fichier (string unNom)
+Fichier::Fichier (string unChemin)
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Fichier>" << endl;
 #endif
 
-    nom = unNom;
+    chemin = unChemin;
 }
 
 Fichier::~Fichier ()
