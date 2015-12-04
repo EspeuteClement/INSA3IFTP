@@ -38,6 +38,25 @@ public:
     // Contrat :
     //
 
+//----------------------------------------------------- Getters
+    string GetChemin () const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    int GetHits () const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    int GetHits (const Fichier * const fichierSource) const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
 //-------------------------------------------- Constructeurs - destructeur
     Fichier (string unChemin);
     // Mode d'emploi :
@@ -49,11 +68,12 @@ public:
 
 //------------------------------------------------------------------ PRIVE
 
-//private:
+private:
 //------------------------------------------------------- Attributs privés
     string chemin;
     typedef map<Fichier *, int> HitMap;
     HitMap hits;
+    int totalHits;
 };
 
 #endif // FICHIER_H

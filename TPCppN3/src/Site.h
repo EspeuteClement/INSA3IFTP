@@ -34,25 +34,32 @@ class Site
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void AjouterVisite (string cheminDestination);
+    void AjouterVisite (const string cheminDestination);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void AjouterVisite (string cheminSource, string cheminDestination);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    Fichier * Trouver (string cheminFichier);
+    void AjouterVisite (const string cheminSource, const string cheminDestination);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
     vector<Fichier*> * GetListe ();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+//----------------------------------------------------- Getters
+    string GetAdresse () const;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    Fichier * GetFichier (const string cheminFichier) const;
     // Mode d'emploi :
     //
     // Contrat :
@@ -69,7 +76,7 @@ public:
 
 //------------------------------------------------------------------ PRIVE
 
-//private:
+private:
 //------------------------------------------------------- Attributs privés
     string adresse;
     typedef map<string, Fichier*> FichierMap;

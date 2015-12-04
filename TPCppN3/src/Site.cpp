@@ -17,7 +17,7 @@
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void Site::AjouterVisite (string cheminDestination)
+void Site::AjouterVisite (const string cheminDestination)
 {
     // Créer le fichier destination s'il n'existe pas déjà
     if (fichiers.find(cheminDestination) == fichiers.end())
@@ -31,7 +31,7 @@ void Site::AjouterVisite (string cheminDestination)
 
 }
 
-void Site::AjouterVisite (string cheminSource, string cheminDestination)
+void Site::AjouterVisite (const string cheminSource, const string cheminDestination)
 {
     // Créer le fichier destination s'il n'existe pas déjà
     if (fichiers.find(cheminDestination) == fichiers.end())
@@ -49,18 +49,25 @@ void Site::AjouterVisite (string cheminSource, string cheminDestination)
     fichiers[cheminDestination]->AjouterVisite(fichiers[cheminSource]);
 }
 
-Fichier * Site::Trouver (string cheminFichier)
-{
-    return fichiers[cheminFichier];
-}
+
 
 vector<Fichier*> * GetListe ()
 {
     return NULL;
 }
 
-//----------------------------------------------------- Méthodes privées
+//----------------------------------------------------- Getters
+string Site::GetAdresse () const
+{
+    return adresse;
+}
 
+Fichier * Site::GetFichier (const string cheminFichier) const
+{
+    return fichiers[cheminFichier];
+}
+
+//----------------------------------------------------- Méthodes privées
 void Site::AjouterFichier(string chemin)
 {
     fichiers[chemin] = new Fichier(chemin);

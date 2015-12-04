@@ -20,6 +20,26 @@
 void Fichier::AjouterVisite (Fichier * fichierSource)
 {
     hits[fichierSource]++;
+    totalHits++;
+}
+
+//----------------------------------------------------- Getters
+string Fichier::GetChemin () const
+{
+    return chemin;
+}
+
+int Fichier::GetHits () const
+{
+    return totalHits;
+}
+
+int Fichier::GetHits (const Fichier * const fichierSource) const
+{
+    if (hits.find(fichierSource) != hits.end())
+    {
+        return hits[fichierSource];
+    }
 }
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -30,6 +50,7 @@ Fichier::Fichier (string unChemin)
 #endif
 
     chemin = unChemin;
+    totalHits = 0;
 }
 
 Fichier::~Fichier ()
