@@ -17,15 +17,29 @@
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void Site::AjouterVisite (string source) const
+void AjouterFichier (Fichier * unFichier)
 {
 }
 
+void Site::AjouterVisite (string source, string destination)
+{
+}
+
+Fichier * Trouver (string nomFichier)
+{
+  return NULL;
+}
+
+vector<Fichier*> * GetListe ()
+{
+  return NULL;
+}
+
 //-------------------------------------------- Constructeurs - destructeur
-Site::Site (const unsigned int uneTaille)
+Site::Site ()
 {
 #ifdef MAP
-    cout << "Appel au premier constructeur de <Site>" << endl;
+    cout << "Appel au constructeur de <Site>" << endl;
 #endif
 }
 

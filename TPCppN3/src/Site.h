@@ -16,14 +16,13 @@
 //-------------------------------------------------------- Include système
 #include <string>
 #include <map>
+#include <vector>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
+#include "Fichier.h";
 
 //----------------------------------------------------------- Enumérations
-enum CodesRetour
-{
-};
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Site>
@@ -35,13 +34,25 @@ class Site
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void AjouterFichier (*Fichier unFichier);
+    void AjouterFichier (Fichier * unFichier);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    void AjouterFichier (*Fichier unFichier);
+    void AjouterVisite (string source, string destination);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    Fichier * Trouver (string nomFichier);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    vector<Fichier*> * GetListe ();
     // Mode d'emploi :
     //
     // Contrat :
@@ -61,8 +72,8 @@ public:
 private:
 //------------------------------------------------------- Attributs privés
     string nom;
-    map<*Site, int> listeFichiers;
-    Fichier externes;
+    map<Site *, int> listeFichiers;
+    Fichier * externes;
 };
 
 #endif // SITE_H

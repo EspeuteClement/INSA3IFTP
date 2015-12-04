@@ -1,5 +1,5 @@
 #File generated with makedep.lua
-build/Main.o : src/Main.cpp src/Main.h src/Config.h src/MoteurES.h 
+build/Fichier.o : src/Fichier.cpp src/Fichier.h src/Fichier.h src/Site.h 
 
-build/MoteurES.o : src/MoteurES.cpp src/MoteurES.h src/MoteurES.h 
+build/Site.o : src/Site.cpp src/Site.h src/Site.h src/Fichier.h 
 

@@ -16,17 +16,20 @@
 
 //----------------------------------------------------------------- PUBLIC
 
-//----------------------------------------------------- Méthodes publiques
-void Fichier::AjouterVisite (string source) const
+//------------------------------------------------------ Méthodes publiques
+void Fichier::AjouterVisite (Fichier * source)
 {
+    hits[source]++;
 }
 
 //-------------------------------------------- Constructeurs - destructeur
-Fichier::Fichier (const unsigned int uneTaille)
+Fichier::Fichier (string unNom)
 {
 #ifdef MAP
-    cout << "Appel au premier constructeur de <Fichier>" << endl;
+    cout << "Appel au constructeur de <Fichier>" << endl;
 #endif
+
+    nom = unNom;
 }
 
 Fichier::~Fichier ()
