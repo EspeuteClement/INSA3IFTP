@@ -49,12 +49,6 @@ public:
     //
 
 //----------------------------------------------------- Getters
-    string GetChemin () const;
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
     uint32_t GetHits () const;
     // Mode d'emploi :
     //

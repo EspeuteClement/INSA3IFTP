@@ -10,6 +10,8 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
+#include <iostream>
+using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Site.h"
@@ -27,7 +29,7 @@ void Site::AjouterVisite (const string cheminDestination)
 
     // Ajouter une visite du fichier externe source dans celui (interne)
     // destination
-    fichiers[cheminDestination]->AjouterVisite(fichierExterne);
+    fichiers[cheminDestination]->AjouterVisite(fichiers[CHEMIN_FICHIER_EXTERNE]);
 
 }
 
@@ -62,21 +64,32 @@ string Site::GetAdresse () const
     return adresse;
 }
 
-Fichier * Site::GetFichier (const string cheminFichier)
+uint32_t Site::GetHits (const string cheminDestination)
 {
-    if (fichiers.find(cheminFichier) != fichiers.end())
+    // Si le chemin du fichier donné est bien repertorié
+    if (fichiers.find(cheminDestination) != fichiers.end())
     {
-        return fichiers[cheminFichier];
+        return fichiers[cheminDestination]->GetHits();
     }
+    // Si le chemin du fichier donné n'est pas répertorié
     else
     {
-        return NULL;
+        return 0;
     }
 }
 
-Fichier * Site::GetExterne () const
+uint32_t Site::GetHits (const string cheminSource, const string cheminDestination)
 {
-    return fichierExterne;
+    // Si le chemin du fichier donné est bien repertorié
+    if (fichiers.find(cheminDestination) != fichiers.end())
+    {
+        return fichiers[cheminDestination]->GetHits(fichiers[cheminSource]);
+    }
+    // Si le chemin du fichier donné n'est pas répertorié
+    else
+    {
+        return 0;
+    }
 }
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -87,8 +100,7 @@ Site::Site (const string uneAdresse)
 #endif
 
     adresse = uneAdresse;
-
-    fichierExterne = new Fichier("Externe");
+    fichiers[CHEMIN_FICHIER_EXTERNE] = new Fichier(CHEMIN_FICHIER_EXTERNE);
 }
 
 Site::~Site ()

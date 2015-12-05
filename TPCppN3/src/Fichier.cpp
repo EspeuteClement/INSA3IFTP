@@ -24,11 +24,6 @@ void Fichier::AjouterVisite (Fichier * fichierSource)
 }
 
 //----------------------------------------------------- Getters
-string Fichier::GetChemin () const
-{
-    return chemin;
-}
-
 uint32_t Fichier::GetHits () const
 {
     return totalHits;
