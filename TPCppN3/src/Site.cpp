@@ -64,7 +64,7 @@ string Site::GetAdresse () const
 
 Fichier * Site::GetFichier (const string cheminFichier)
 {
-    if (fichiers.find() != fichiers.end())
+    if (fichiers.find(cheminFichier) != fichiers.end())
     {
         return fichiers[cheminFichier];
     }

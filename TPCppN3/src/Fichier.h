@@ -39,9 +39,9 @@ public:
     //
 
 //----------------------------------------------------- Surcharge d'opérateurs
-    inline bool operator < (const Fichier& fichier1, const Fichier& fichier2)
+    inline bool operator < (const Fichier& fichier2)
     {
-        return (fichier1.GetHits() < fichier2.GetHits());
+        return (this->GetHits() < fichier2.GetHits());
     }
     // Mode d'emploi :
     //
