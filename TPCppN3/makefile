@@ -16,7 +16,7 @@ PRINT = @printf
 # Nom du fichier de sortie
 EXEC = out/executable.out
 # Nom des fichiers sources
-SRC = Fichier.cpp Site.cpp Main.cpp
+SRC = MoteurES.cpp Main.cpp
 # Nom du dossier avec les fichiers sources
 SRC_FOLDER =  src/
 # Le dossier où metre les fichiers objs

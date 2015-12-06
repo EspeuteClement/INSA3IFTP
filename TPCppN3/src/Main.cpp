@@ -5,11 +5,8 @@ using namespace std;
 
 int main(int nombreArguments, char* arguments[])
 {
-	MoteurES testMoteur;
-	vector<string> bl = vector<string>();
-	bl.push_back("html");
-	bl.push_back("php");
-	testMoteur.ModifierMatchs(bl,11);
+	MoteurES testMoteur(nombreArguments, arguments);
+
 	cout<<testMoteur.OuvrirFichierLog("log/anonyme.log")<<endl;
 	DonneesLog resultat("",0,"","","",END_FILE);
 	do
@@ -22,7 +19,6 @@ int main(int nombreArguments, char* arguments[])
 	} while(resultat.Etat != END_FILE);
 
 	testMoteur.FermerFichierLog();
-
 }
 
 /*

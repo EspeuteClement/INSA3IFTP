@@ -143,7 +143,7 @@ public:
     // Renvoie vrai si un fichier est actuellement ouvert par
     // ce MoteurES.
 
-    void ModifierMatchs(vector<string> extensions = vector<string>(), int heure = -1);
+    void ModifierMatchs(int heure = -1);
     // Mode d'emploi :
     // Modifie la manière dont le MoteurES cherche les sites
     // dans le log
@@ -151,14 +151,17 @@ public:
     // extensions : La liste des extensions à exclure
     // heure : L'heure à choisir. Mettre -1 pour ignorer.
 
+    void GestionArguments(int nombreArguments, char* arguments[]);
+
 //-------------------------------------------- Constructeurs - destructeur
-    MoteurES ();
+    MoteurES (int nombreArguments, char* arguments[]);
     // Mode d'emploi :
     //
 
     virtual ~MoteurES ();
     // Mode d'emploi :
-    //
+    // Crée un Moteur d'Entrées Sorties.
+    // Les arguments sont ceux du main
 
 //------------------------------------------------------------------ PRIVE
 
@@ -168,6 +171,8 @@ private:
     vector<string> blackListExtension; /*La liste des extensions de fichiers ignorée*/
     regex apacheLogRegex;
     ifstream fichierLog; /**Le fichier de log que l'on lit*/
+
+
 };
 
 

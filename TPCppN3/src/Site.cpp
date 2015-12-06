@@ -51,9 +51,15 @@ void Site::AjouterVisite (const string cheminSource, const string cheminDestinat
 
 
 
-vector<Fichier*> * GetListe ()
+vector<Fichier*> GetListe ()
 {
-    return NULL;
+    vector<Fichier*> liste;
+
+    for( MapType::iterator it = mFichierMap.begin(); it != FichierMap.end(); ++it ) {
+        liste.push_back( it->second );
+    }
+
+    return liste;
 }
 
 //----------------------------------------------------- Getters

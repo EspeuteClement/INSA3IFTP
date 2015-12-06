@@ -46,7 +46,7 @@ public:
     // Contrat :
     //
 
-    vector<Fichier*> * GetListe ();
+    vector<Fichier*> GetListe ();
     // Mode d'emploi :
     //
     // Contrat :
