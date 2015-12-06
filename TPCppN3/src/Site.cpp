@@ -10,6 +10,8 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
+#include <iostream>
+using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Site.h"
@@ -27,7 +29,7 @@ void Site::AjouterVisite (const string cheminDestination)
 
     // Ajouter une visite du fichier externe source dans celui (interne)
     // destination
-    fichiers[cheminDestination]->AjouterVisite(fichierExterne);
+    fichiers[cheminDestination]->AjouterVisite(fichiers[CHEMIN_FICHIER_EXTERNE]);
 
 }
 
@@ -68,27 +70,43 @@ string Site::GetAdresse () const
     return adresse;
 }
 
-Fichier * Site::GetFichier (const string cheminFichier) const
+uint32_t Site::GetHits (const string cheminDestination)
 {
-    return fichiers[cheminFichier];
+    // Si le chemin du fichier donné est bien repertorié
+    if (fichiers.find(cheminDestination) != fichiers.end())
+    {
+        return fichiers[cheminDestination]->GetHits();
+    }
+    // Si le chemin du fichier donné n'est pas répertorié
+    else
+    {
+        return 0;
+    }
 }
 
-//----------------------------------------------------- Méthodes privées
-void Site::AjouterFichier(string chemin)
+uint32_t Site::GetHits (const string cheminSource, const string cheminDestination)
 {
-    fichiers[chemin] = new Fichier(chemin);
+    // Si le chemin du fichier donné est bien repertorié
+    if (fichiers.find(cheminDestination) != fichiers.end())
+    {
+        return fichiers[cheminDestination]->GetHits(fichiers[cheminSource]);
+    }
+    // Si le chemin du fichier donné n'est pas répertorié
+    else
+    {
+        return 0;
+    }
 }
 
 //-------------------------------------------- Constructeurs - destructeur
-Site::Site (string uneAdresse)
+Site::Site (const string uneAdresse)
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Site>" << endl;
 #endif
 
     adresse = uneAdresse;
-
-    fichierExterne = new Fichier("Externe");
+    fichiers[CHEMIN_FICHIER_EXTERNE] = new Fichier(CHEMIN_FICHIER_EXTERNE);
 }
 
 Site::~Site ()
@@ -102,4 +120,12 @@ Site::~Site ()
         delete iterator->second;
     }
     delete fichierExterne;
+}
+
+//----------------------------------------------------------------- PRIVE
+
+//----------------------------------------------------- Méthodes privées
+void Site::AjouterFichier(const string chemin)
+{
+    fichiers[chemin] = new Fichier(chemin);
 }

@@ -22,7 +22,8 @@ using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Fichier.h"
 
-//----------------------------------------------------------- Enumérations
+//----------------------------------------------------------- Constantes
+const string CHEMIN_FICHIER_EXTERNE = "Externe";
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Site>
@@ -59,14 +60,20 @@ public:
     // Contrat :
     //
 
-    Fichier * GetFichier (const string cheminFichier) const;
+    uint32_t GetHits (const string cheminDestination);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    uint32_t GetHits (const string cheminSource, const string cheminDestination);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
 //-------------------------------------------- Constructeurs - destructeur
-    Site (string uneAdresse);
+    Site (const string uneAdresse);
     // Mode d'emploi :
     //
 
@@ -83,7 +90,7 @@ private:
     FichierMap fichiers;
     Fichier * fichierExterne;
 
-    void AjouterFichier(string chemin);
+    void AjouterFichier(const string chemin);
 };
 
 #endif // SITE_H
