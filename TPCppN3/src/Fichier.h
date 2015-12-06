@@ -20,7 +20,9 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 
-//----------------------------------------------------------- Enumérations
+//----------------------------------------------------------- Types utilisateur
+typedef map<Fichier *, uint32_t> HitMap;
+typedef map<Fichier *, uint32_t> :: iterator FI;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Fichier>
@@ -33,6 +35,12 @@ class Fichier
 public:
 //----------------------------------------------------- Méthodes publiques
     void AjouterVisite (Fichier * fichierSource);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    void FaireGraphe (ofstream &theStream, string cheminCourant);
     // Mode d'emploi :
     //
     // Contrat :
@@ -74,7 +82,6 @@ public:
 
 private:
 //------------------------------------------------------- Attributs privés
-    string chemin;
     typedef map<Fichier *, uint32_t> HitMap;
     HitMap hits;
     uint32_t totalHits;

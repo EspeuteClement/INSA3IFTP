@@ -25,6 +25,10 @@ using namespace std;
 //----------------------------------------------------------- Constantes
 const string CHEMIN_FICHIER_EXTERNE = "Externe";
 
+//----------------------------------------------------------- Types utilisateur
+typedef map<string, Fichier*> FichierMap;
+typedef map<string, Fichier*> :: iterator SI;
+
 //------------------------------------------------------------------------
 // Rôle de la classe <Site>
 //
@@ -48,6 +52,12 @@ public:
     //
 
     vector<Fichier*> * GetListe ();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    void FaireGraphe (ofstream &theStream);
     // Mode d'emploi :
     //
     // Contrat :
@@ -86,7 +96,6 @@ public:
 private:
 //------------------------------------------------------- Attributs privés
     string adresse;
-    typedef map<string, Fichier*> FichierMap;
     FichierMap fichiers;
     Fichier * fichierExterne;
 

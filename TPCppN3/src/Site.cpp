@@ -51,11 +51,29 @@ void Site::AjouterVisite (const string cheminSource, const string cheminDestinat
     fichiers[cheminDestination]->AjouterVisite(fichiers[cheminSource]);
 }
 
-
-
-vector<Fichier*> * GetListe ()
+vector<Fichier*> * Site::GetListe ()
 {
     return NULL;
+}
+
+void Site::FaireGraphe (ofstream &theStream)
+{
+    theStream << "digraph {" << endl;
+
+    // Ajouter tous les fichiers comme bulles
+    for (SI iterator = fichiers.begin(); iterator != fichiers.end(); iterator++)
+    {
+        theStream << "\t" << iterator->first << ";" << endl;
+    }
+
+    // Ajouter tous les hits relatifs comme liens
+    for (SI siteIterator = fichiers.begin(); siteIterator != fichiers.end(); siteIterator++)
+    {
+        siteIterator->second->FaireGraphe(theStream, siteIterator->first);
+    }
+
+
+    theStream << "}" << endl;
 }
 
 //----------------------------------------------------- Getters
@@ -108,8 +126,7 @@ Site::~Site ()
 #ifdef MAP
     cout << "Appel au destructeur de <Site>" << endl;
 #endif
-    typedef map<string, Fichier*> :: iterator FI;
-    for (FI iterator = fichiers.begin(); iterator != fichiers.end(); iterator++)
+    for (SI iterator = fichiers.begin(); iterator != fichiers.end(); iterator++)
     {
         delete iterator->second;
     }

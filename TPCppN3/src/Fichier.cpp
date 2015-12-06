@@ -23,6 +23,14 @@ void Fichier::AjouterVisite (Fichier * fichierSource)
     totalHits++;
 }
 
+void Fichier::FaireGraphe (ofstream &theStream, string cheminCourant)
+{
+  for (FI fichierIterator = hits.begin(); fichierIterator != hits.end(); fichierIterator++)
+  {
+      theStream << "\t" << chemin << " -> " << cheminCourant << " [label=\"" << fichierIterator->second << "\"];" << endl;
+  }
+}
+
 //----------------------------------------------------- Getters
 uint32_t Fichier::GetHits () const
 {
@@ -48,7 +56,6 @@ Fichier::Fichier (const string unChemin)
     cout << "Appel au constructeur de <Fichier>" << endl;
 #endif
 
-    chemin = unChemin;
     totalHits = 0;
 }
 
