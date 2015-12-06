@@ -1,0 +1,37 @@
+\documentclass[11pt]{article}
+
+\usepackage{custom}
+
+\usepackage[french,onelanguage]{algorithm2e}
+
+
+\title{Algorithmique}
+\author{{\sc Espeute} Clément}
+\date{14 septembre 2015}
+
+\begin{document}
+\pagestyle{fancy}
+\maketitle
+\newpage
+Objectifs : Introduire les paradigmes et les mécaniques pour faire des applications réseaux.
+
+Le client envoie une requête au serveur. Celui ci va interpréter les données en fonction du protocole utilisé. Il va faire des opérations en fonction des données envoyées, puis renvoyer ces informations au client (ex : une page web).
+$$1.\text{ requête} \to 2.\text{ traitement} \to 3.\text{ réponse}$$
+
+\subsection{IP}
+Couche réseau sur le modèle OSI.
+S'occupe de l'adressage, le routage et le transport des packets.
+\subsection{TCP}
+Protocole fiable, il garanti l'envoi de toutes les données, dans le bon ordre.
+\subsection{UDP}
+Protocole non fiable, plus rapide.
+
+\section{Socket}
+Un canal de communication entre 2 processus. Identifiée par une adresses IP et un numéro de port.
+
+\begin{enumerate}
+	\item Le serveur crée un socket serveur (associé à un port) et attends des connexions. 
+	\item Le client se connecte au serveur socket, et 2 socket sont crées : On a un client socket du coté client, et sur le serveur un client service socket. Les 2 sont reliés.
+\end{enumerate}
+
+\end{document}
