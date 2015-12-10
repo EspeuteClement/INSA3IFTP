@@ -86,7 +86,6 @@ private:
 //------------------------------------------------------- Attributs privés
     string adresse;
     FichierMap fichiers;
-    Fichier * fichierExterne;
 
     void AjouterFichier(const string chemin);
 };

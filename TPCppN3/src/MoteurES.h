@@ -9,7 +9,7 @@
 #if ! defined ( MOTEURES_H )
 #define MOTEURES_H
 #define DEBUG
-#define MAP
+//#define MAP
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -23,7 +23,7 @@
 using namespace std;
 using namespace boost;
 //------------------------------------------------------ Include personnel
-
+#include "Site.h"
 
 //----------------------------------------------------------- Enumérations
 
@@ -44,6 +44,16 @@ enum EtatDonneesLog
     NON_MATCH,   // Si la lecture n'a pas donné de résultat (Parce que ignoré)
     END_FILE    // Si on est arrivé à la fin du fichier
 };
+
+// Liste les codes de retour de la fonction
+// GestionArguments
+enum CodeRetourArgument
+{
+    OK_ARG,         // Tout c'est bien passé
+    ERR_ARG,        // Les arguments sont mal formés
+    AIDE_ARG        // L’utilisateur à demandé l'affichage de l'aide.
+};
+
 //-------------------------------------------------------- Types de classe
 
 // Représente l'ensemble des données utiles (pour notre application)
@@ -151,17 +161,26 @@ public:
     // extensions : La liste des extensions à exclure
     // heure : L'heure à choisir. Mettre -1 pour ignorer.
 
-    void GestionArguments(int nombreArguments, char* arguments[]);
-
-//-------------------------------------------- Constructeurs - destructeur
-    MoteurES (int nombreArguments, char* arguments[]);
+    CodeRetourArgument GestionArguments(int nombreArguments, char* arguments[]);
     // Mode d'emploi :
-    //
+    // Gère la gestion des arguments passés au programme par l’utilisateur.
+    // Les arguments sont ceux fournis par le main.
+
+    void AfficherAide();
+    // Mode d'emploi :
+    // Affiche l'aide du programme dans la sortie standard
+
+    void ParserLog();
+
+    void FaireGraphe();
+//-------------------------------------------- Constructeurs - destructeur
+    MoteurES ();
+    // Mode d'emploi :
+    // Crée un Moteur d'Entrées Sorties.
 
     virtual ~MoteurES ();
     // Mode d'emploi :
-    // Crée un Moteur d'Entrées Sorties.
-    // Les arguments sont ceux du main
+    // Détruit le moteur
 
 //------------------------------------------------------------------ PRIVE
 
@@ -171,7 +190,12 @@ private:
     vector<string> blackListExtension; /*La liste des extensions de fichiers ignorée*/
     regex apacheLogRegex;
     ifstream fichierLog; /**Le fichier de log que l'on lit*/
+    bool verbose = false; /* Si l'on doit afficher chaque information lue dans le ficher log */
+    Site leSite = Site("intranet-if.insa-lyon.fr");
+    string leSiteNom = "intranet-if.insa-lyon.fr";
+    string nomFichierSortie = "";
 
+    bool afficherSiteExternes = false;
 
 };
 

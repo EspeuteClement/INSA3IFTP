@@ -36,18 +36,18 @@ CodeRetourMoteurES MoteurES::OuvrirFichierLog(string chemin)
 		// à ouvrir le fichier.
 		if (FichierEstOuvert())
 		{
-#ifdef MAP
-			cout << "L'ouverture du fichier " << chemin << " à réussie" << endl;
-#endif
+	#ifdef MAP
+				cout << "L'ouverture du fichier " << chemin << " à réussie" << endl;
+	#endif
 		return FICHIER_OK;
 		}
 
 
 	}
 
-#ifdef MAP
-		cout << "L'ouverture du fichier " << chemin << " à échouée" << endl;
-#endif
+	#ifdef MAP
+			cout << "L'ouverture du fichier " << chemin << " à échouée" << endl;
+	#endif
 	return FICHIER_ERR;
 }
 
@@ -58,16 +58,16 @@ CodeRetourMoteurES MoteurES::FermerFichierLog()
 		fichierLog.close();
 		if (!FichierEstOuvert())
 		{
-#ifdef MAP
-			cout << "La fermeture du fichier à réussie" << endl;
-#endif
+	#ifdef MAP
+				cout << "La fermeture du fichier à réussie" << endl;
+	#endif
 			return FICHIER_OK;
 		}
 	}
 
-#ifdef MAP
-		cout << "La fermeture du fichier à échouée" << endl;
-#endif
+	#ifdef MAP
+			cout << "La fermeture du fichier à échouée" << endl;
+	#endif
 
 	return FICHIER_ERR;
 }
@@ -96,6 +96,16 @@ DonneesLog MoteurES::LireLigneLog()
 					DonneesRetour.SiteSource 		 = std::string(matchLog[5].first, matchLog[5].second);
 					DonneesRetour.FichierSource      = std::string(matchLog[6].first, matchLog[6].second);
 					DonneesRetour.Etat = OK;
+					// Si on est en mode verbose, afficher toutes les infos lues
+					if (verbose)
+					{
+						cout << 
+						DonneesRetour.FichierDestination << " " <<
+						DonneesRetour.CodeHttp << " " <<
+						DonneesRetour.Protocole << " " <<
+						DonneesRetour.SiteSource << " " <<
+						DonneesRetour.FichierSource << endl;
+					}
 				}
 				else
 				{
@@ -111,9 +121,56 @@ DonneesLog MoteurES::LireLigneLog()
 			}
 		}
 	}
+
 	return DonneesRetour;
 }
 
+void MoteurES::ParserLog()
+{
+	DonneesLog resultat("",0,"","","",END_FILE);
+	do
+	{
+		resultat = LireLigneLog();
+		if(resultat.Etat == OK)
+		{
+			// Si lien interne
+			if(0==resultat.SiteSource.compare(leSite.GetAdresse()))
+			{
+				leSite.AjouterVisite(resultat.FichierSource,resultat.FichierDestination);
+			}
+			else
+			{
+				if (!afficherSiteExternes)
+				{
+					leSite.AjouterVisite(resultat.FichierDestination);
+				}
+				else
+				{
+					string source = "externe : "+resultat.SiteSource+resultat.FichierSource;
+					leSite.AjouterVisite(source,resultat.FichierDestination);
+				}
+			}
+		}
+
+		
+	} while(resultat.Etat != END_FILE);
+}
+
+void MoteurES::FaireGraphe()
+{
+	// Si le chemin de sortie n'est pas vide
+	if (nomFichierSortie.compare("") != 0)
+	{
+		ofstream fichierSortie(nomFichierSortie);
+		if(fichierSortie.is_open())
+		{
+			leSite.FaireGraphe(fichierSortie);
+
+			fichierSortie.close();
+		}
+		
+	}
+}
 
 void MoteurES::ModifierMatchs(int heure)
 {
@@ -126,29 +183,48 @@ void MoteurES::ModifierMatchs(int heure)
 	{
 		constructeur+="\\d+";
 	}
-	constructeur+=":.*\"GET (\\S*[/.](\\w*))[ ?].*\" (\\d+).*\"(\\w+:\\/\\/|)([^//]*)(\\S+)\"";
+	constructeur+=":.*\"GET ([^\\s?;]*[/.]([^\\s?;]*))[ ?;].*\" (\\d+).*\"(\\w+:\\/\\/|)([^//]*)(\\S+)\"";
 
 	apacheLogRegex = regex(constructeur);
 }
 
-void MoteurES::GestionArguments(int nombreArguments, char* arguments[])
+CodeRetourArgument MoteurES::GestionArguments(int nombreArguments, char* arguments[])
 {
-	if (nombreArguments > 0)
+
+	#ifdef MAP
+		cout << "Nombre d'arguments : " << nombreArguments << endl;
+	#endif
+
+	if (nombreArguments > 1)
 	{
-		string nomFichierSortie;
+		
 		vector<string> blackList = vector<string>();
 		int heure = -1;
 		int i;
-		for (i = 0; i<nombreArguments-1; i++)
+		for (i = 0; i<nombreArguments; i++)
 		{
 			if (arguments[i][0] == '-')
 			{
 				switch (arguments[i][1]){
-					case 'g':
+					case 'h': // Afficher l'aide
+	#ifdef MAP
+		cout << "Argument h parsé" << endl;
+	#endif
+						return AIDE_ARG;
+					break;
+
+					case 'g': // Ajouter fichier de sortie
+					#ifdef MAP
+						cout << "Argument g parsé" << endl;
+					#endif
 						i++;
 						nomFichierSortie = string(arguments[i]);
 					break;
-					case 'e':
+
+					case 'e': // Exclure les fichiers donnés
+					#ifdef MAP
+						cout << "Argument e parsé" << endl;
+					#endif
 						blackListExtension.push_back("png");
 						blackListExtension.push_back("jpg");
 						blackListExtension.push_back("jpeg");
@@ -156,28 +232,76 @@ void MoteurES::GestionArguments(int nombreArguments, char* arguments[])
 						blackListExtension.push_back("css");
 						blackListExtension.push_back("js");
 					break;
-					case 't':
+
+					case 'v': // Mode verbose (pour les tests)
+						verbose = true;
+					break;
+
+					case 'x': // Mode verbose (pour les tests)
+						afficherSiteExternes = true;
+					break;
+
+					case 't': // Prendre en compte une heure donnée.
+					#ifdef MAP
+						cout << "Argument t parsé" << endl;
+					#endif
 						i++;
 						heure = atoi(arguments[i]);
 					break;
 				}
 			}
 		}
+		
+		// On choisis le dernier argument comme étant le chemin à choisir,
+		// peu importe les autres arguments lu (Le programme affichera une)
+		// erreur si le fichier n'existe pas.
 		string chemin(arguments[nombreArguments-1]);
-		OuvrirFichierLog(chemin);
+		#ifdef MAP
+			cout << "Argument chemin parsé :" << chemin << endl;
+		#endif
 
+		// Si on arrive pas à ouvrir le fichier, erreur d'argument
+		if (OuvrirFichierLog(chemin) != FICHIER_OK)
+		{
+			cout << "Erreur : Fichier " << chemin << " introuvable." << endl;
+			return ERR_ARG;
+		}
+
+		// Enfin, on initialise l'heure choisie pour le filtrage 
+		// (par défaut -1 donc toutes les heures)
 		ModifierMatchs(heure);
-	}
-	else
-	{
-		cout << "Nombre d'arguments incorrect" << endl;
-	}
+
+		return OK_ARG;
+	
+	} // endif nombreArgument > 0
+	
+	cout << "Nombre d'arguments incorrect" << endl;
+	return ERR_ARG;
+}
+
+void MoteurES::AfficherAide()
+{
+	cout << "\
+=== Aide ===\n\
+Analyse un fichier de log Appache pour faire la liste des liens entre\
+les différentes pages.\n\
+Usage : ./analog [options] nomfichier.log\n\
+\n\
+Options :\n\
+-h : Affiche cette aide\n\
+-g nomfichier.dot : Crée un fichier GraphViz des liens entre les pages\
+visitées dans le fichier fourni en argument\n\
+-e : Exclus les extensions de type .png, .jpg, .jpeg, .ico, .css, .js \
+dans l'analyse du log.\
+-t heure : Permets de ne prendre en compte que les visites qui ont eu lieu \
+à l'heure donnée en paramètre.\n\
+-v : affiche chaque information lue dans le log pour chaque ligne de celui ci\n";
 
 }
 
 
 //-------------------------------------------- Constructeurs - destructeur
-MoteurES::MoteurES (int nombreArguments, char* arguments[])
+MoteurES::MoteurES()
 {
 #ifdef MAP
     cout << "Appel au premier constructeur de <MoteurES>" << endl;

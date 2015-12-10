@@ -76,7 +76,7 @@ void Site::FaireGraphe (ofstream &theStream)
     // Ajouter tous les fichiers comme bulles
     for (SI iterator = fichiers.begin(); iterator != fichiers.end(); iterator++)
     {
-        theStream << "\t" << iterator->first << ";" << endl;
+        theStream << "\t\"" << iterator->first << "\";" << endl;
     }
 
     // Ajouter tous les hits relatifs comme liens
@@ -115,7 +115,6 @@ Site::~Site ()
     {
         delete iterator->second;
     }
-    delete fichierExterne;
 }
 
 //----------------------------------------------------------------- PRIVE

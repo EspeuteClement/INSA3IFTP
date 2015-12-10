@@ -1,0 +1,6 @@
+Ce test permet de vérifier que le programme
+lis bien chaque ligne du log.
+
+Le programme est exécuté en mode verbose, ce qui
+fait qu'il affiche toutes les données qu'il comprends
+pour chaque ligne du log.
