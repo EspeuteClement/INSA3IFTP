@@ -115,7 +115,7 @@ DonneesLog MoteurES::LireLigneLog()
 }
 
 
-void MoteurES::ModifierMatchs(vector<string> extensions, int heure)
+void MoteurES::ModifierMatchs(int heure)
 {
 	string constructeur = "\\[\\d+\\/\\w+\\/\\d+:";
 	if (heure >= 0 && heure <= 23)
@@ -128,14 +128,56 @@ void MoteurES::ModifierMatchs(vector<string> extensions, int heure)
 	}
 	constructeur+=":.*\"GET (\\S*[/.](\\w*))[ ?].*\" (\\d+).*\"(\\w+:\\/\\/|)([^//]*)(\\S+)\"";
 
-	blackListExtension = extensions;
-
 	apacheLogRegex = regex(constructeur);
+}
+
+void MoteurES::GestionArguments(int nombreArguments, char* arguments[])
+{
+	if (nombreArguments > 0)
+	{
+		string nomFichierSortie;
+		vector<string> blackList = vector<string>();
+		int heure = -1;
+		int i = 0;
+		for (int i = 0; i<nombreArguments-1; i++)
+		{
+			if (arguments[i][0] == '-')
+			{
+				switch (arguments[i][1]){
+					case 'g':
+						i++;
+						nomFichierSortie = string(arguments[i]);
+					break;
+					case 'e':
+						blackListExtension.push_back("png");
+						blackListExtension.push_back("jpg");
+						blackListExtension.push_back("jpeg");
+						blackListExtension.push_back("ico");
+						blackListExtension.push_back("css");
+						blackListExtension.push_back("js");
+					break;
+					case 't':
+						i++;
+						heure = atoi(arguments[i]);
+					break;
+				}
+			}
+		}
+		string chemin(arguments[nombreArguments-1])
+		OuvrirFichierLog(chemin);
+
+		ModifierMatchs(heure);
+	}
+	else
+	{
+		cout << "Nombre d'arguments incorrect" << endl;
+	}
+	
 }
 
 
 //-------------------------------------------- Constructeurs - destructeur
-MoteurES::MoteurES ()
+MoteurES::MoteurES (int nombreArguments, char* arguments[])
 {
 #ifdef MAP
     cout << "Appel au premier constructeur de <MoteurES>" << endl;

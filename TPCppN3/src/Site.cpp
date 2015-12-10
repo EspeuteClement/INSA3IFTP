@@ -51,9 +51,21 @@ void Site::AjouterVisite (const string cheminSource, const string cheminDestinat
     fichiers[cheminDestination]->AjouterVisite(fichiers[cheminSource]);
 }
 
+<<<<<<< HEAD
 vector<Fichier*> * Site::GetListe ()
+=======
+
+
+vector<Fichier*> GetListe ()
+>>>>>>> 33f0f9f73fcf71deb88deaad7b26ce29ecaaea93
 {
-    return NULL;
+    vector<Fichier*> liste;
+
+    for( MapType::iterator it = mFichierMap.begin(); it != FichierMap.end(); ++it ) {
+        liste.push_back( it->second );
+    }
+
+    return liste;
 }
 
 void Site::FaireGraphe (ofstream &theStream)

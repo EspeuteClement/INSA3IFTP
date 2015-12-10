@@ -1,7 +1,7 @@
-FILES = testbench_compteur.vhdl fulladder.vhdl adder.vhdl clock.vhdl registre1bit.vhdl registrenbits.vhdl compteur.vhdl
-TARGET = testbench_compteur
-TARGET_NAME = testbench_compteur.out
-VCD = testbench_compteur.vcd
+FILES = testbench_addersub.vhdl fulladder.vhdl adder.vhdl clock.vhdl registre1bit.vhdl registrenbits.vhdl compteur.vhdl addersub.vhdl
+TARGET = testbench_addersub
+TARGET_NAME = testbench_addersub.out
+VCD = testbench_addersub.vcd
 
 ALL : $(TARGET_NAME) makefile
 	out/$(TARGET_NAME) --stop-time=20ns --vcd=out/$(VCD)
