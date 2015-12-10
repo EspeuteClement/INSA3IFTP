@@ -51,8 +51,9 @@ void Site::AjouterVisite (const string cheminSource, const string cheminDestinat
     fichiers[cheminDestination]->AjouterVisite(fichiers[cheminSource]);
 }
 
-list<Fichier*> Site::FaireListe ()
+void Site::Afficher10Premiers ()
 {
+    // Tri des fichiers en fonction de leur nombre de hits
     list<Fichier*> liste;
 
     for(SI iterator = fichiers.begin(); iterator != fichiers.end(); iterator++)
@@ -64,9 +65,36 @@ list<Fichier*> Site::FaireListe ()
         }
     }
 
-    liste.sort(&Fichier::CompareHitsFichiers);
+    liste.sort(&Fichier::PlusPetitNbHits);
 
-    return liste;
+    // Affichage des fichiers triés par nombre de hits décroissant.
+    int i;
+    int tailleListe = liste.size();
+    // Quitter la méthode si rien à afficher.
+    if (tailleListe == 0)
+    {
+        return;
+    }
+    // Affichage de tous les fichiers si leur nombre est inférieur à 10.
+    else if (tailleListe < 10)
+    {
+        for (i = 0; i < tailleListe; i++)
+        {
+            cout << liste.back()->GetChemin() << " (" << liste.back()->GetHits() <<
+            " hits)" << endl;
+            liste.pop_back();
+        }
+    }
+    // Affichage des 10 premiers seulement si leur nombre est supérieur à 10.
+    else
+    {
+        for (i = 0; i < 10; i++)
+        {
+          cout << liste.back()->GetChemin() << " (" << liste.back()->GetHits() <<
+          " hits)" << endl;
+          liste.pop_back();
+        }
+    }
 }
 
 void Site::FaireGraphe (ofstream &theStream)

@@ -23,7 +23,11 @@ using namespace std;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Fichier>
-//
+// Pour chaque fichier d'un site web, cette classe stocke un identifiant unique
+// (chemin), le nombre de fois qu'il a été visité (totalHits), ainsi qu'un
+// dictionnaire reliant le nombre de fois que quelqu'un est arrivé au fichier
+// courant à partir d'un autre fichier, qui sert de clef dudit dictionnaire (les
+// redondances ne sont donc pas permises).
 //------------------------------------------------------------------------
 class Fichier
 {
@@ -43,7 +47,7 @@ public:
     // Contrat :
     //
 
-    static bool CompareHitsFichiers (const Fichier* fichier1, const Fichier* fichier2)
+    static bool PlusPetitNbHits (const Fichier* fichier1, const Fichier* fichier2)
     {
         return (fichier1->GetHits() < fichier2->GetHits());
     }
