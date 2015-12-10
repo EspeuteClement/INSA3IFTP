@@ -43,9 +43,9 @@ public:
     // Contrat :
     //
 
-    static bool CompareHitsFichiers (const Fichier* fichier1, const Fichier* fichier2)
+    static bool PlusGrandNbHits (const Fichier* fichier1, const Fichier* fichier2)
     {
-        return (fichier1->GetHits() < fichier2->GetHits());
+        return (fichier1->GetHits() > fichier2->GetHits());
     }
     // Mode d'emploi :
     //

@@ -52,7 +52,7 @@ public:
     // Contrat :
     //
 
-    list<Fichier*> FaireListe ();
+    void Afficher10Premiers ();
     // Mode d'emploi :
     //
     // Contrat :
