@@ -10,6 +10,8 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
+#include <iostream>
+using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Fichier.h"
@@ -25,10 +27,12 @@ void Fichier::AjouterVisite (Fichier * fichierSource)
 
 void Fichier::FaireGraphe (ofstream &theStream)
 {
-  for (FI fichierIterator = hits.begin(); fichierIterator != hits.end(); fichierIterator++)
-  {
-      theStream << "\t" << fichierIterator->first->GetChemin() << " -> " << chemin << " [label=\"" << fichierIterator->second << "\"];" << endl;
-  }
+    // Pour le fichier courant, créer tous les liens des autres fichiers vers lui.
+    for (FI fichierIterator = hits.begin(); fichierIterator != hits.end(); fichierIterator++)
+    {
+        theStream << "\t" << fichierIterator->first->GetChemin() << " -> " <<
+        chemin << " [label=\"" << fichierIterator->second << "\"];" << endl;
+    }
 }
 
 //----------------------------------------------------- Getters

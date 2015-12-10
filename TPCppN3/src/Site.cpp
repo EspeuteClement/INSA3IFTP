@@ -65,15 +65,17 @@ void Site::Afficher10Premiers ()
         }
     }
 
-    liste.sort(&Fichier::PlusGrandNbHits);
+    liste.sort(&Fichier::PlusPetitNbHits);
 
-    // Affichage des 10 fichiers aux plus grand nombre de hits.
+    // Affichage des fichiers triés par nombre de hits décroissant.
     int i;
     int tailleListe = liste.size();
+    // Quitter la méthode si rien à afficher.
     if (tailleListe == 0)
     {
         return;
     }
+    // Affichage de tous les fichiers si leur nombre est inférieur à 10.
     else if (tailleListe < 10)
     {
         for (i = 0; i < tailleListe; i++)
@@ -83,6 +85,7 @@ void Site::Afficher10Premiers ()
             liste.pop_back();
         }
     }
+    // Affichage des 10 premiers seulement si leur nombre est supérieur à 10.
     else
     {
         for (i = 0; i < 10; i++)
