@@ -23,11 +23,11 @@ void Fichier::AjouterVisite (Fichier * fichierSource)
     totalHits++;
 }
 
-void Fichier::FaireGraphe (ofstream &theStream, string cheminCourant)
+void Fichier::FaireGraphe (ofstream &theStream)
 {
   for (FI fichierIterator = hits.begin(); fichierIterator != hits.end(); fichierIterator++)
   {
-      theStream << "\t" << chemin << " -> " << cheminCourant << " [label=\"" << fichierIterator->second << "\"];" << endl;
+      theStream << "\t" << fichierIterator->first->GetChemin() << " -> " << chemin << " [label=\"" << fichierIterator->second << "\"];" << endl;
   }
 }
 
@@ -37,16 +37,9 @@ uint32_t Fichier::GetHits () const
     return totalHits;
 }
 
-uint32_t Fichier::GetHits (Fichier * fichierSource)
+string Fichier::GetChemin () const
 {
-    if (hits.find(fichierSource) != hits.end())
-    {
-        return hits[fichierSource];
-    }
-    else
-    {
-        return 0;
-    }
+    return chemin;
 }
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -55,7 +48,7 @@ Fichier::Fichier (const string unChemin)
 #ifdef MAP
     cout << "Appel au constructeur de <Fichier>" << endl;
 #endif
-
+    chemin = unChemin;
     totalHits = 0;
 }
 

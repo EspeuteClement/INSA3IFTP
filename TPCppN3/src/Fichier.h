@@ -16,13 +16,10 @@
 //-------------------------------------------------------- Include système
 #include <string>
 #include <map>
+#include <fstream>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-
-//----------------------------------------------------------- Types utilisateur
-typedef map<Fichier *, uint32_t> HitMap;
-typedef map<Fichier *, uint32_t> :: iterator FI;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Fichier>
@@ -40,16 +37,15 @@ public:
     // Contrat :
     //
 
-    void FaireGraphe (ofstream &theStream, string cheminCourant);
+    void FaireGraphe (ofstream &theStream);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-//----------------------------------------------------- Surcharge d'opérateurs
-    inline bool operator < (const Fichier& fichier2)
+    static bool CompareHitsFichiers (const Fichier* fichier1, const Fichier* fichier2)
     {
-        return (this->GetHits() < fichier2.GetHits());
+        return (fichier1->GetHits() < fichier2->GetHits());
     }
     // Mode d'emploi :
     //
@@ -63,7 +59,7 @@ public:
     // Contrat :
     //
 
-    uint32_t GetHits (Fichier * fichierSource);
+    string GetChemin () const;
     // Mode d'emploi :
     //
     // Contrat :
@@ -82,9 +78,11 @@ public:
 
 private:
 //------------------------------------------------------- Attributs privés
-    typedef map<Fichier *, uint32_t> HitMap;
-    HitMap hits;
+    string chemin;
     uint32_t totalHits;
+    typedef map<Fichier *, uint32_t> HitMap;
+    typedef map<Fichier *, uint32_t> :: iterator FI;
+    HitMap hits;
 };
 
 #endif // FICHIER_H

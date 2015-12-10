@@ -48,7 +48,8 @@ int main()
 		fichier1->AjouterVisite(fichier2);
 		fichier1->AjouterVisite(fichier2);
 		fichier1->AjouterVisite(fichier2);
-		cout << "Nombre de hits de blog depuis yolo (on veut 5) : " << fichier1->GetHits(fichier2) << endl << "\n";
+		cout << "Test GetChemin() sur fichier1 (attendu : /blog/index.html) : " << fichier1->GetChemin() << endl;
+		cout << "Test GetHits() sur fichier1 (attendu : 5) : " << fichier1->GetHits() << endl;
 
 		delete fichier1;
 		delete fichier2;
@@ -71,11 +72,6 @@ int main()
 		site->AjouterVisite(cheminDestination1);
 		site->AjouterVisite(cheminDestination2);
 
-		cout << "Nombre de hits de /blog/index.html depuis Externe (on veut 2) : " <<
-			site->GetHits(CHEMIN_FICHIER_EXTERNE, cheminDestination1) << endl << "\n";
-		cout << "Nombre de hits de /blog/view.php depuis Externe (on veut 1) : " <<
-			site->GetHits(CHEMIN_FICHIER_EXTERNE, cheminDestination2) << endl << "\n";
-
 		cout << "----------Ajout de visites venant de l'intérieur----------" << endl;
 		string cheminSource1 = "/moodle/index.html";
 		string cheminSource2 = "/gradle/view.php";
@@ -84,11 +80,6 @@ int main()
 		site->AjouterVisite(cheminSource1, cheminDestination1);
 		site->AjouterVisite(cheminSource2, cheminDestination2);
 		site->AjouterVisite(cheminSource2, cheminDestination2);
-
-		cout << "Nombre de hits de /blog/index.html depuis /moodle/index.html (on veut 3) : " <<
-			site->GetHits(cheminSource1, cheminDestination1) << endl;
-		cout << "Nombre de hits de /blog/view.php depuis /gradle/view.php (on veut 2) : " <<
-			site->GetHits(cheminSource2, cheminDestination2) << endl;
 
 		delete site;
 		cout << "-----------------------------------------------" << endl;

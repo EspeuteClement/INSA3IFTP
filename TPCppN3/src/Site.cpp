@@ -51,19 +51,20 @@ void Site::AjouterVisite (const string cheminSource, const string cheminDestinat
     fichiers[cheminDestination]->AjouterVisite(fichiers[cheminSource]);
 }
 
-<<<<<<< HEAD
-vector<Fichier*> * Site::GetListe ()
-=======
-
-
-vector<Fichier*> GetListe ()
->>>>>>> 33f0f9f73fcf71deb88deaad7b26ce29ecaaea93
+list<Fichier*> Site::FaireListe ()
 {
-    vector<Fichier*> liste;
+    list<Fichier*> liste;
 
-    for( MapType::iterator it = mFichierMap.begin(); it != FichierMap.end(); ++it ) {
-        liste.push_back( it->second );
+    for(SI iterator = fichiers.begin(); iterator != fichiers.end(); iterator++)
+    {
+        // On n'ajoute pas le fichier externe à la liste des documents consultés
+        if (iterator->second->GetChemin().compare(CHEMIN_FICHIER_EXTERNE) > 0)
+        {
+            liste.push_back(iterator->second);
+        }
     }
+
+    liste.sort(&Fichier::CompareHitsFichiers);
 
     return liste;
 }
@@ -81,7 +82,7 @@ void Site::FaireGraphe (ofstream &theStream)
     // Ajouter tous les hits relatifs comme liens
     for (SI siteIterator = fichiers.begin(); siteIterator != fichiers.end(); siteIterator++)
     {
-        siteIterator->second->FaireGraphe(theStream, siteIterator->first);
+        siteIterator->second->FaireGraphe(theStream);
     }
 
 
@@ -92,34 +93,6 @@ void Site::FaireGraphe (ofstream &theStream)
 string Site::GetAdresse () const
 {
     return adresse;
-}
-
-uint32_t Site::GetHits (const string cheminDestination)
-{
-    // Si le chemin du fichier donné est bien repertorié
-    if (fichiers.find(cheminDestination) != fichiers.end())
-    {
-        return fichiers[cheminDestination]->GetHits();
-    }
-    // Si le chemin du fichier donné n'est pas répertorié
-    else
-    {
-        return 0;
-    }
-}
-
-uint32_t Site::GetHits (const string cheminSource, const string cheminDestination)
-{
-    // Si le chemin du fichier donné est bien repertorié
-    if (fichiers.find(cheminDestination) != fichiers.end())
-    {
-        return fichiers[cheminDestination]->GetHits(fichiers[cheminSource]);
-    }
-    // Si le chemin du fichier donné n'est pas répertorié
-    else
-    {
-        return 0;
-    }
 }
 
 //-------------------------------------------- Constructeurs - destructeur

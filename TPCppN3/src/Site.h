@@ -16,7 +16,8 @@
 //-------------------------------------------------------- Include système
 #include <string>
 #include <map>
-#include <vector>
+#include <list>
+#include <fstream>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
@@ -51,7 +52,7 @@ public:
     // Contrat :
     //
 
-    vector<Fichier*> GetListe ();
+    list<Fichier*> FaireListe ();
     // Mode d'emploi :
     //
     // Contrat :
@@ -65,18 +66,6 @@ public:
 
 //----------------------------------------------------- Getters
     string GetAdresse () const;
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    uint32_t GetHits (const string cheminDestination);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    uint32_t GetHits (const string cheminSource, const string cheminDestination);
     // Mode d'emploi :
     //
     // Contrat :

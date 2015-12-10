@@ -48,7 +48,7 @@ CodeRetourMoteurES MoteurES::OuvrirFichierLog(string chemin)
 #ifdef MAP
 		cout << "L'ouverture du fichier " << chemin << " à échouée" << endl;
 #endif
-	return FICHIER_ERR;	
+	return FICHIER_ERR;
 }
 
 CodeRetourMoteurES MoteurES::FermerFichierLog()
@@ -57,13 +57,13 @@ CodeRetourMoteurES MoteurES::FermerFichierLog()
 	{
 		fichierLog.close();
 		if (!FichierEstOuvert())
-		{	
+		{
 #ifdef MAP
 			cout << "La fermeture du fichier à réussie" << endl;
 #endif
 			return FICHIER_OK;
 		}
-	} 
+	}
 
 #ifdef MAP
 		cout << "La fermeture du fichier à échouée" << endl;
@@ -82,7 +82,7 @@ DonneesLog MoteurES::LireLigneLog()
 		string ligneLue;
 		if(getline(fichierLog,ligneLue))
 		{
-			
+
 			smatch matchLog;
 			if (regex_search(ligneLue,matchLog,apacheLogRegex))
 			{
@@ -101,7 +101,7 @@ DonneesLog MoteurES::LireLigneLog()
 				{
 					DonneesRetour.Etat = NON_MATCH;
 				}
-				
+
 			}
 			else
 			{
@@ -138,8 +138,8 @@ void MoteurES::GestionArguments(int nombreArguments, char* arguments[])
 		string nomFichierSortie;
 		vector<string> blackList = vector<string>();
 		int heure = -1;
-		int i = 0;
-		for (int i = 0; i<nombreArguments-1; i++)
+		int i;
+		for (i = 0; i<nombreArguments-1; i++)
 		{
 			if (arguments[i][0] == '-')
 			{
@@ -163,7 +163,7 @@ void MoteurES::GestionArguments(int nombreArguments, char* arguments[])
 				}
 			}
 		}
-		string chemin(arguments[nombreArguments-1])
+		string chemin(arguments[nombreArguments-1]);
 		OuvrirFichierLog(chemin);
 
 		ModifierMatchs(heure);
@@ -172,7 +172,7 @@ void MoteurES::GestionArguments(int nombreArguments, char* arguments[])
 	{
 		cout << "Nombre d'arguments incorrect" << endl;
 	}
-	
+
 }
 
 
