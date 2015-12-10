@@ -37,7 +37,7 @@ CodeRetourMoteurES MoteurES::OuvrirFichierLog(string chemin)
 		if (FichierEstOuvert())
 		{
 	#ifdef MAP
-				cout << "L'ouverture du fichier " << chemin << " à réussie" << endl;
+				cout << "L'ouverture du fichier " << chemin << " a réussi" << endl;
 	#endif
 		return FICHIER_OK;
 		}
@@ -46,7 +46,7 @@ CodeRetourMoteurES MoteurES::OuvrirFichierLog(string chemin)
 	}
 
 	#ifdef MAP
-			cout << "L'ouverture du fichier " << chemin << " à échouée" << endl;
+			cout << "L'ouverture du fichier " << chemin << " a échoué" << endl;
 	#endif
 	return FICHIER_ERR;
 }
@@ -59,14 +59,14 @@ CodeRetourMoteurES MoteurES::FermerFichierLog()
 		if (!FichierEstOuvert())
 		{
 	#ifdef MAP
-				cout << "La fermeture du fichier à réussie" << endl;
+				cout << "La fermeture du fichier a réussi" << endl;
 	#endif
 			return FICHIER_OK;
 		}
 	}
 
 	#ifdef MAP
-			cout << "La fermeture du fichier à échouée" << endl;
+			cout << "La fermeture du fichier a échoué" << endl;
 	#endif
 
 	return FICHIER_ERR;
@@ -99,7 +99,7 @@ DonneesLog MoteurES::LireLigneLog()
 					// Si on est en mode verbose, afficher toutes les infos lues
 					if (verbose)
 					{
-						cout << 
+						cout <<
 						DonneesRetour.FichierDestination << " " <<
 						DonneesRetour.CodeHttp << " " <<
 						DonneesRetour.Protocole << " " <<
@@ -152,7 +152,7 @@ void MoteurES::ParserLog()
 			}
 		}
 
-		
+
 	} while(resultat.Etat != END_FILE);
 }
 
@@ -168,7 +168,7 @@ void MoteurES::FaireGraphe()
 
 			fichierSortie.close();
 		}
-		
+
 	}
 }
 
@@ -197,7 +197,7 @@ CodeRetourArgument MoteurES::GestionArguments(int nombreArguments, char* argumen
 
 	if (nombreArguments > 1)
 	{
-		
+
 		vector<string> blackList = vector<string>();
 		int heure = -1;
 		int i;
@@ -251,7 +251,7 @@ CodeRetourArgument MoteurES::GestionArguments(int nombreArguments, char* argumen
 				}
 			}
 		}
-		
+
 		// On choisis le dernier argument comme étant le chemin à choisir,
 		// peu importe les autres arguments lu (Le programme affichera une)
 		// erreur si le fichier n'existe pas.
@@ -267,14 +267,14 @@ CodeRetourArgument MoteurES::GestionArguments(int nombreArguments, char* argumen
 			return ERR_ARG;
 		}
 
-		// Enfin, on initialise l'heure choisie pour le filtrage 
+		// Enfin, on initialise l'heure choisie pour le filtrage
 		// (par défaut -1 donc toutes les heures)
 		ModifierMatchs(heure);
 
 		return OK_ARG;
-	
+
 	} // endif nombreArgument > 0
-	
+
 	cout << "Nombre d'arguments incorrect" << endl;
 	return ERR_ARG;
 }

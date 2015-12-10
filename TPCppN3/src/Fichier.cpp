@@ -33,7 +33,8 @@ void Fichier::FaireGraphe (ofstream &theStream)
 {
   for (FI fichierIterator = hits.begin(); fichierIterator != hits.end(); fichierIterator++)
   {
-      theStream << "\t\"" << fichierIterator->first->GetChemin() << "\" -> \"" << chemin << "\" [label=\"" << fichierIterator->second << "\"];" << endl;
+      theStream << "\t\"" << fichierIterator->first->GetChemin() << "\" -> \"" <<
+       chemin << "\" [label=\"" << fichierIterator->second << "\"];" << endl;
   }
 }
 
