@@ -8,7 +8,7 @@ CC_OUTPUT_FLAG = -o
 # Arguments pour le stade d'édition des liens
 LINK_FLAG = -lboost_regex
 # Arguments pour le stade de compilation
-CC_COMP_FLAG = -c -std=c++11 -Wall
+CC_COMP_FLAG = -c -std=c++11 -Wall -g
 # Commande d'affichage
 PRINT = @printf
 

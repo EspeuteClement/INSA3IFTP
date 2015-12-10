@@ -31,12 +31,10 @@ void Fichier::AjouterVisite (Fichier * fichierSource)
 
 void Fichier::FaireGraphe (ofstream &theStream)
 {
-    // Pour le fichier courant, créer tous les liens des autres fichiers vers lui.
-    for (FI fichierIterator = hits.begin(); fichierIterator != hits.end(); fichierIterator++)
-    {
-        theStream << "\t" << fichierIterator->first->GetChemin() << " -> " <<
-        chemin << " [label=\"" << fichierIterator->second << "\"];" << endl;
-    }
+  for (FI fichierIterator = hits.begin(); fichierIterator != hits.end(); fichierIterator++)
+  {
+      theStream << "\t\"" << fichierIterator->first->GetChemin() << "\" -> \"" << chemin << "\" [label=\"" << fichierIterator->second << "\"];" << endl;
+  }
 }
 
 //----------------------------------------------------- Getters

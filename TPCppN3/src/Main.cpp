@@ -5,20 +5,23 @@ using namespace std;
 
 int main(int nombreArguments, char* arguments[])
 {
-	MoteurES testMoteur(nombreArguments, arguments);
+	MoteurES testMoteur;
+	CodeRetourArgument ret = testMoteur.GestionArguments(nombreArguments, arguments);
 
-	cout<<testMoteur.OuvrirFichierLog("log/anonyme.log")<<endl;
-	DonneesLog resultat("",0,"","","",END_FILE);
-	do
+	if (ret == OK_ARG)
 	{
-		resultat = testMoteur.LireLigneLog();
-		if(resultat.Etat == OK)
-		{
-			cout << resultat.FichierDestination<< endl;
-		}
-	} while(resultat.Etat != END_FILE);
-
-	testMoteur.FermerFichierLog();
+		testMoteur.ParserLog();
+		testMoteur.FaireGraphe();
+		testMoteur.FermerFichierLog();
+	}
+	else if(ret == ERR_ARG)
+	{
+		cout << "Arguments incorrects. Utilisez -h pour l'aide du programme." << endl;
+	}
+	else if(ret == AIDE_ARG)
+	{
+		testMoteur.AfficherAide();
+	}
 }
 
 /*
