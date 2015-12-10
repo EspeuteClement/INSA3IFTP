@@ -21,6 +21,10 @@ using namespace std;
 //------------------------------------------------------ Méthodes publiques
 void Fichier::AjouterVisite (Fichier * fichierSource)
 {
+    if (fichierSource == NULL)
+    {
+        return;
+    }
     hits[fichierSource]++;
     totalHits++;
 }
