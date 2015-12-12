@@ -111,7 +111,7 @@ class MoteurES
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    CodeRetourMoteurES OuvrirFichierLog(string chemin);
+    CodeRetourMoteurES OuvrirFichierLog(string const chemin);
     // Mode d'emploi :
     // Tente d'ouvrir le fichier situé au chemin
     // donné en paramètre.
@@ -144,7 +144,7 @@ public:
     // Renvoie vrai si un fichier est actuellement ouvert par
     // ce MoteurES.
 
-    void ModifierMatchs(int heure = -1);
+    void ModifierMatchs(int const heure = -1);
     // Mode d'emploi :
     // Modifie la manière dont le MoteurES cherche les sites
     // dans le log
@@ -152,18 +152,18 @@ public:
     // extensions : La liste des extensions à exclure
     // heure : L'heure à choisir. Mettre -1 pour ignorer.
 
-    CodeRetourArgument GestionArguments(int nombreArguments, char* arguments[]);
+    CodeRetourArgument GestionArguments(int const nombreArguments, char* const arguments[]);
     // Mode d'emploi :
     // Gère la gestion des arguments passés au programme par l’utilisateur.
     // Les arguments sont ceux fournis par le main.
 
-    void AfficherAide();
+    void AfficherAide() const;
     // Mode d'emploi :
     // Affiche l'aide du programme dans la sortie standard
 
     void ParserLog();
 
-    void FaireGraphe();
+    void FaireGraphe() const;
 //-------------------------------------------- Constructeurs - destructeur
     MoteurES ();
     // Mode d'emploi :
@@ -182,11 +182,13 @@ private:
     regex apacheLogRegex;
     ifstream fichierLog; /**Le fichier de log que l'on lit*/
     bool verbose = false; /* Si l'on doit afficher chaque information lue dans le ficher log */
-    Site leSite = Site("intranet-if.insa-lyon.fr");
+    Site *leSite = NULL;
     string leSiteNom = "intranet-if.insa-lyon.fr";
+    
     string nomFichierSortie = "";
-
     bool afficherSiteExternes = false;
+
+    bool afficher10 = true;
 
 };
 

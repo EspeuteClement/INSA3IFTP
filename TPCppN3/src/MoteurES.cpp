@@ -16,7 +16,7 @@
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-CodeRetourMoteurES MoteurES::OuvrirFichierLog(string chemin)
+CodeRetourMoteurES MoteurES::OuvrirFichierLog(string const chemin)
 {
 	// Si il n'y à pas déjà un fichier ouvert
 	if (!FichierEstOuvert())
@@ -126,20 +126,20 @@ void MoteurES::ParserLog()
 		if(resultat.Etat == OK)
 		{
 			// Si lien interne
-			if(0==resultat.SiteSource.compare(leSite.GetAdresse()))
+			if(0==resultat.SiteSource.compare(leSite->GetAdresse()))
 			{
-				leSite.AjouterVisite(resultat.FichierSource,resultat.FichierDestination);
+				leSite->AjouterVisite(resultat.FichierSource,resultat.FichierDestination);
 			}
 			else
 			{
 				if (!afficherSiteExternes)
 				{
-					leSite.AjouterVisite(resultat.FichierDestination);
+					leSite->AjouterVisite(resultat.FichierDestination);
 				}
 				else
 				{
 					string source = "externe : "+resultat.SiteSource+resultat.FichierSource;
-					leSite.AjouterVisite(source,resultat.FichierDestination);
+					leSite->AjouterVisite(source,resultat.FichierDestination);
 				}
 			}
 		}
@@ -147,10 +147,14 @@ void MoteurES::ParserLog()
 
 	} while(resultat.Etat != END_FILE);
 
-	leSite.AfficherPremiers(NB_PREMIERS);
+	if (afficher10)
+	{
+		leSite->AfficherPremiers(NB_PREMIERS);
+	}
+	
 }
 
-void MoteurES::FaireGraphe()
+void MoteurES::FaireGraphe() const
 {
 	// Si le chemin de sortie n'est pas vide
 	if (nomFichierSortie.compare("") != 0)
@@ -158,7 +162,7 @@ void MoteurES::FaireGraphe()
 		ofstream fichierSortie(nomFichierSortie);
 		if(fichierSortie.is_open())
 		{
-			leSite.FaireGraphe(fichierSortie);
+			leSite->FaireGraphe(fichierSortie);
 
 			fichierSortie.close();
 		}
@@ -166,7 +170,7 @@ void MoteurES::FaireGraphe()
 	}
 }
 
-void MoteurES::ModifierMatchs(int heure)
+void MoteurES::ModifierMatchs(int const heure)
 {
 	string constructeur = "\\[\\d+\\/\\w+\\/\\d+:";
 	if (heure >= 0 && heure <= 23)
@@ -182,7 +186,7 @@ void MoteurES::ModifierMatchs(int heure)
 	apacheLogRegex = regex(constructeur);
 }
 
-CodeRetourArgument MoteurES::GestionArguments(int nombreArguments, char* arguments[])
+CodeRetourArgument MoteurES::GestionArguments(int const nombreArguments, char* const arguments[])
 {
 
 	#ifdef MAP
@@ -212,7 +216,7 @@ CodeRetourArgument MoteurES::GestionArguments(int nombreArguments, char* argumen
 						cout << "Argument g parsé" << endl;
 					#endif
 						i++;
-						nomFichierSortie = string(arguments[i]);
+						leSiteNom = string(arguments[i]);
 					break;
 
 					case 'e': // Exclure les fichiers donnés
@@ -220,6 +224,7 @@ CodeRetourArgument MoteurES::GestionArguments(int nombreArguments, char* argumen
 						cout << "Argument e parsé" << endl;
 					#endif
 						blackListExtension.push_back("png");
+						blackListExtension.push_back("gif");
 						blackListExtension.push_back("jpg");
 						blackListExtension.push_back("jpeg");
 						blackListExtension.push_back("ico");
@@ -227,10 +232,18 @@ CodeRetourArgument MoteurES::GestionArguments(int nombreArguments, char* argumen
 						blackListExtension.push_back("js");
 					break;
 
+					case 's':
+						i++;
+						leSiteNom = arguments[i];
+					break;
+
 					case 'v': // Mode verbose (pour les tests)
 						verbose = true;
 					break;
 
+					case 'q':
+						afficher10 = false;
+					break;
 					case 'x': // Mode verbose (pour les tests)
 						afficherSiteExternes = true;
 					break;
@@ -264,7 +277,7 @@ CodeRetourArgument MoteurES::GestionArguments(int nombreArguments, char* argumen
 		// Enfin, on initialise l'heure choisie pour le filtrage
 		// (par défaut -1 donc toutes les heures)
 		ModifierMatchs(heure);
-
+		leSite = new Site(leSiteNom);
 		return OK_ARG;
 
 	} // endif nombreArgument > 0
@@ -273,7 +286,7 @@ CodeRetourArgument MoteurES::GestionArguments(int nombreArguments, char* argumen
 	return ERR_ARG;
 }
 
-void MoteurES::AfficherAide()
+void MoteurES::AfficherAide() const
 {
 	cout << "\
 === Aide ===\n\
@@ -308,4 +321,9 @@ MoteurES::~MoteurES ()
 #ifdef MAP
     cout << "Appel au destructeur de <MoteurES>" << endl;
 #endif
+    if (leSite != NULL)
+    {
+    	delete leSite;
+    }
+    
 }

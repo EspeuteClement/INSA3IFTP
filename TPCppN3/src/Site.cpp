@@ -143,9 +143,7 @@ Site::~Site ()
 #endif
     for (SI iterator = fichiers.begin(); iterator != fichiers.end(); iterator++)
     {
-        if (iterator->second != NULL) {
-            delete iterator->second;
-        }
+        delete iterator->second;
     }
 }
 
