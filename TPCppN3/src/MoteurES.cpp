@@ -154,6 +154,8 @@ void MoteurES::ParserLog()
 
 
 	} while(resultat.Etat != END_FILE);
+	
+	leSite.Afficher10Premiers();
 }
 
 void MoteurES::FaireGraphe()

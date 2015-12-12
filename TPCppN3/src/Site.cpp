@@ -56,6 +56,8 @@ void Site::Afficher10Premiers ()
     // Tri des fichiers en fonction de leur nombre de hits
     list<Fichier*> liste;
 
+    cout << "COUCOU" <<endl;
+
     for(SI iterator = fichiers.begin(); iterator != fichiers.end(); iterator++)
     {
         // On n'ajoute pas le fichier externe à la liste des documents consultés
