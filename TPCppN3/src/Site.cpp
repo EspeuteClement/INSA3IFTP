@@ -56,12 +56,12 @@ void Site::Afficher10Premiers ()
     // Tri des fichiers en fonction de leur nombre de hits
     list<Fichier*> liste;
 
-    cout << "COUCOU" <<endl;
+    cout << "Entrée dans la méthode Afficher10Premiers :" <<endl;
 
     for(SI iterator = fichiers.begin(); iterator != fichiers.end(); iterator++)
     {
         // On n'ajoute pas le fichier externe à la liste des documents consultés
-        if (iterator->second->GetChemin().compare(CHEMIN_FICHIER_EXTERNE) > 0)
+        if (iterator->second->GetChemin().compare(CHEMIN_FICHIER_EXTERNE) != 0)
         {
             liste.push_back(iterator->second);
         }
