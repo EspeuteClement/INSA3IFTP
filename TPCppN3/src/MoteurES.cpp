@@ -16,14 +16,6 @@
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-void MoteurES::Afficher10Premiers ()
-{
-}
-
-void MoteurES::FaireGraphe (string nomDuFichier) const
-{
-}
-
 CodeRetourMoteurES MoteurES::OuvrirFichierLog(string chemin)
 {
 	// Si il n'y à pas déjà un fichier ouvert
@@ -154,8 +146,8 @@ void MoteurES::ParserLog()
 
 
 	} while(resultat.Etat != END_FILE);
-	
-	leSite.Afficher10Premiers();
+
+	leSite.AfficherPremiers(NB_PREMIERS);
 }
 
 void MoteurES::FaireGraphe()

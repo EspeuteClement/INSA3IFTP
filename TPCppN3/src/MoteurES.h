@@ -25,6 +25,9 @@ using namespace boost;
 //------------------------------------------------------ Include personnel
 #include "Site.h"
 
+//----------------------------------------------------------- Constantes
+const uint32_t NB_PREMIERS = 10;
+
 //----------------------------------------------------------- Enumérations
 
 /** L'ensemble des codes retours utilisées par les
@@ -67,7 +70,7 @@ struct DonneesLog{
 
         //TODO : Voir si on mets pas ça en enum ...
         string Protocole;       /* Le protocole qui à été utilisé pour la requête*/
-        
+
         string SiteSource;      /* */
         string FichierSource;      /* Le Fichier d'où l'on vient */
 
@@ -76,7 +79,7 @@ struct DonneesLog{
         // données de la structure dans l'ordre dans
         // lesquelles elles sont situés dans le
         // log apache.
-        DonneesLog( string FichierDestination, 
+        DonneesLog( string FichierDestination,
                     unsigned int codeHttp,
                     string protocole,
                     string SiteSource,
@@ -108,18 +111,6 @@ class MoteurES
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void Afficher10Premiers ();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    void FaireGraphe (string nomDuFichier) const;
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
     CodeRetourMoteurES OuvrirFichierLog(string chemin);
     // Mode d'emploi :
     // Tente d'ouvrir le fichier situé au chemin

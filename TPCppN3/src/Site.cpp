@@ -51,12 +51,10 @@ void Site::AjouterVisite (const string cheminSource, const string cheminDestinat
     fichiers[cheminDestination]->AjouterVisite(fichiers[cheminSource]);
 }
 
-void Site::Afficher10Premiers ()
+void Site::AfficherPremiers (uint32_t nbPremiers)
 {
     // Tri des fichiers en fonction de leur nombre de hits
     list<Fichier*> liste;
-
-    cout << "Entrée dans la méthode Afficher10Premiers :" <<endl;
 
     for(SI iterator = fichiers.begin(); iterator != fichiers.end(); iterator++)
     {
@@ -72,15 +70,15 @@ void Site::Afficher10Premiers ()
     liste.sort(&Fichier::PlusPetitNbHits);
 
     // Affichage des fichiers triés par nombre de hits décroissant.
-    int i;
-    int tailleListe = liste.size();
+    uint32_t i;
+    uint32_t tailleListe = liste.size();
     // Quitter la méthode si rien à afficher.
     if (tailleListe == 0)
     {
         return;
     }
-    // Affichage de tous les fichiers si leur nombre est inférieur à 10.
-    else if (tailleListe < 10)
+    // Affichage de tous les fichiers si leur nombre est inférieur à nbPremiers.
+    else if (tailleListe < nbPremiers)
     {
         for (i = 0; i < tailleListe; i++)
         {
@@ -89,10 +87,10 @@ void Site::Afficher10Premiers ()
             liste.pop_back();
         }
     }
-    // Affichage des 10 premiers seulement si leur nombre est supérieur à 10.
+    // Affichage des nbPremiers premiers seulement si leur nombre est supérieur à nbPremiers.
     else
     {
-        for (i = 0; i < 10; i++)
+        for (i = 0; i < nbPremiers; i++)
         {
           cout << liste.back()->GetChemin() << " (" << liste.back()->GetHits() <<
           " hits)" << endl;

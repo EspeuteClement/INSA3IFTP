@@ -45,7 +45,7 @@ public:
     // Mode d'emploi :
     // Fais appel à la méthode AjouterVisite (en lui passant
     // CHEMIN_FICHIER_EXTERNE en paramètre) du Fichier identifié par
-    // cheminDestination. Si le Fichier identifié par cheminDestination n'exist
+    // cheminDestination. Si le Fichier identifié par cheminDestination n'existe
     // pas déjà dans le dictionnaire du Site, une instance de Fichier
     // correspondante est créée et ajoutée au dictionnaire du Site.
     // Contrat :
@@ -62,12 +62,12 @@ public:
     // cheminSource et cheminDestination doivent désigner tous deux des Fichiers
     // internes au Site.
 
-    void Afficher10Premiers ();
+    void AfficherPremiers (uint32_t nbPremiers);
     // Mode d'emploi :
     // Créé une liste des fichiers du Site courant, triés par ordre croissant de
     // leurs nombre de hits total, et affiche les chemins et le nombre de hits
-    // total des 10 plus visités, dans l'ordre décroissant de leur nombre de
-    // hits total. S'il y a moins de 10 fichiers, ils sont tous affichés de la
+    // total des nbPremiers plus visités, dans l'ordre décroissant de leur nombre de
+    // hits total. S'il y a moins de nbPremiers fichiers, ils sont tous affichés de la
     // même manière. Si un Fichier a 0 hits, il n'est pas pris en compte. S'il
     // n'y en a aucun, la méthode ne fait rien.
 
