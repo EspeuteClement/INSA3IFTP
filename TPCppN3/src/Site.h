@@ -68,7 +68,8 @@ public:
     // leurs nombre de hits total, et affiche les chemins et le nombre de hits
     // total des 10 plus visités, dans l'ordre décroissant de leur nombre de
     // hits total. S'il y a moins de 10 fichiers, ils sont tous affichés de la
-    // même manière. S'il n'y en a aucun, la méthode ne fait rien.
+    // même manière. Si un Fichier a 0 hits, il n'est pas pris en compte. S'il
+    // n'y en a aucun, la méthode ne fait rien.
 
     void FaireGraphe (ofstream &theStream);
     // Mode d'emploi :

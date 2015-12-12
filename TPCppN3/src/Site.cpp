@@ -61,7 +61,9 @@ void Site::Afficher10Premiers ()
     for(SI iterator = fichiers.begin(); iterator != fichiers.end(); iterator++)
     {
         // On n'ajoute pas le fichier externe à la liste des documents consultés
-        if (iterator->second->GetChemin().compare(CHEMIN_FICHIER_EXTERNE) != 0)
+        // ainsi que les Fichiers ayant 0 hits.
+        if (iterator->second->GetChemin().compare(CHEMIN_FICHIER_EXTERNE) != 0
+              && iterator->second->GetHits() != 0)
         {
             liste.push_back(iterator->second);
         }
