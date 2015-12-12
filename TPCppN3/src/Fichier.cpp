@@ -19,7 +19,7 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //------------------------------------------------------ Méthodes publiques
-void Fichier::AjouterVisite (Fichier * fichierSource)
+void Fichier::AjouterVisite (Fichier * const fichierSource)
 {
     if (fichierSource == NULL)
     {

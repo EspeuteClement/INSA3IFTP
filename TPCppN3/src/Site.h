@@ -62,7 +62,7 @@ public:
     // cheminSource et cheminDestination doivent désigner tous deux des Fichiers
     // internes au Site.
 
-    void AfficherPremiers (uint32_t nbPremiers);
+    void AfficherPremiers (const uint32_t nbPremiers);
     // Mode d'emploi :
     // Créé une liste des fichiers du Site courant, triés par ordre croissant de
     // leurs nombre de hits total, et affiche les chemins et le nombre de hits
