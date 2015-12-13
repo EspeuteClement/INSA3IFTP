@@ -13,6 +13,10 @@
 
 //------------------------------------------------------ Include personnel
 #include "MoteurES.h"
+
+//----------------------------------------------------------- Constantes
+const uint32_t NB_PREMIERS = 10;
+
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
@@ -153,7 +157,7 @@ void MoteurES::ParserLog()
 
 		} while(resultat.Etat != END_FILE);
 
-		if (afficher10)
+		if (afficherFichiersPlusConsultes)
 		{
 			leSite->AfficherPremiers(NB_PREMIERS);
 		}
@@ -178,7 +182,7 @@ void MoteurES::FaireGraphe() const
 void MoteurES::ModifierMatchs(int const heure)
 {
 	// Cette méthode construit le string Regex utilisé pour lire les lignes de
-	// log Appache.
+	// log Apache.
 
 	/*
 	Explications du REGEX :	(note dans le code c++ les \ ont du être échappés
@@ -223,7 +227,7 @@ void MoteurES::ModifierMatchs(int const heure)
 	// La base du regex permet de s'assurer que chaque ligne commence par
 	// la date
 	string constructeur = "\\[\\d+\\/\\w+\\/\\d+:";
-	
+
 	// Ensuite, si on a décidé d'exclure une heure, on la rajoute au regex
 	if (heure >= 0 && heure <= 23)
 	{
@@ -297,7 +301,7 @@ CodeRetourArgument MoteurES::GestionArguments(int const nombreArguments, char* c
 					break;
 
 					case 'q':
-						afficher10 = false;
+						afficherFichiersPlusConsultes = false;
 					break;
 					case 'x': // Mode verbose (pour les tests)
 						afficherSiteExternes = true;
@@ -346,7 +350,7 @@ void MoteurES::AfficherAide() const
 {
 	cout << endl;
 	cout << "=== Aide ===\n" << endl;
-	cout << "Analyse un fichier de log Appache pour faire la liste des liens \
+	cout << "Analyse un fichier de log Apache pour faire la liste des liens \
 entre les différentes pages." << endl;
 	cout << "Usage : ./analog [options] nomfichier.log" << endl;
 	cout << "Options :" << endl;
@@ -371,6 +375,15 @@ MoteurES::MoteurES()
     cout << "Appel au premier constructeur de <MoteurES>" << endl;
 #endif
     ModifierMatchs();
+
+		verbose = false;
+		leSite = NULL;
+		leSiteNom = "intranet-if.insa-lyon.fr";
+
+		nomFichierSortie = "";
+		afficherSiteExternes = false;
+
+		afficherFichiersPlusConsultes = true;
 }
 
 MoteurES::~MoteurES ()
@@ -382,5 +395,5 @@ MoteurES::~MoteurES ()
     {
     	delete leSite;
     }
-    
+
 }

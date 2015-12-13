@@ -23,9 +23,6 @@ using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Fichier.h"
 
-//----------------------------------------------------------- Constantes
-const string CHEMIN_FICHIER_EXTERNE = "Externe";
-
 //------------------------------------------------------------------------
 // Rôle de la classe <Site>
 // Stocke un identifiant unique (adresse) désignant un site web, ainsi qu'un
@@ -33,7 +30,9 @@ const string CHEMIN_FICHIER_EXTERNE = "Externe";
 // site à un pointeur vers ce Fichier (redondances impossibles). Ce dictionnaire
 // contient aussi un identifiant CHEMIN_FICHIER_EXTERNE constant, désignant un
 // pointeur vers un Fichier représentant l'ensemble des Fichiers externes au
-// site
+// site. Si l'utilisateur choisit d'afficher toutes les adresses sources de
+// externes, elles seront alors stockées comme des fichiers internes, dans le
+// dictionnaire.
 //------------------------------------------------------------------------
 class Site
 {
