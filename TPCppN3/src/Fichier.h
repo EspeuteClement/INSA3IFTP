@@ -35,7 +35,7 @@ class Fichier
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    void AjouterVisite (Fichier * fichierSource);
+    void AjouterVisite (Fichier * const fichierSource);
     // Mode d'emploi :
     // Incrémente d'un le nombre de hits total du Fichier courant et le nombre
     // de hits associé au pointeur du Fichier source donné. Ne fais rien si le

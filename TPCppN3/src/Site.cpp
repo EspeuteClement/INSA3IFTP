@@ -51,7 +51,7 @@ void Site::AjouterVisite (const string cheminSource, const string cheminDestinat
     fichiers[cheminDestination]->AjouterVisite(fichiers[cheminSource]);
 }
 
-void Site::AfficherPremiers (uint32_t nbPremiers)
+void Site::AfficherPremiers (const uint32_t nbPremiers)
 {
     // Tri des fichiers en fonction de leur nombre de hits
     list<Fichier*> liste;

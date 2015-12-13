@@ -80,8 +80,10 @@ DonneesLog MoteurES::LireLigneLog()
 			{
 				// Vérifier si l'extension du fichier visité n'est pas ignorée
 				string extension = std::string(matchLog[2].first, matchLog[2].second);
-				if (blackListExtension.size()==0 || ! (find(blackListExtension.begin(), blackListExtension.end(), extension ) != blackListExtension.end()))
+				if (blackListExtension.size()==0 || ! (find(blackListExtension.begin(),
+				 	blackListExtension.end(), extension ) != blackListExtension.end()))
 				{
+					//Extraire une par une toutes les données lue par le regex
 					DonneesRetour.FichierDestination = std::string(matchLog[1].first, matchLog[1].second);
 					DonneesRetour.CodeHttp 			 = atoi(std::string(matchLog[3].first, matchLog[3].second).c_str());
 					DonneesRetour.Protocole 	     = std::string(matchLog[4].first, matchLog[4].second);
@@ -120,38 +122,41 @@ DonneesLog MoteurES::LireLigneLog()
 void MoteurES::ParserLog()
 {
 	DonneesLog resultat("",0,"","","",END_FILE);
-	do
+	if (leSite != NULL)
 	{
-		resultat = LireLigneLog();
-		if(resultat.Etat == OK)
+		do
 		{
-			// Si lien interne
-			if(0==resultat.SiteSource.compare(leSite->GetAdresse()))
+			//On lit une par une les lignes du log
+			resultat = LireLigneLog();
+			if(resultat.Etat == OK)
 			{
-				leSite->AjouterVisite(resultat.FichierSource,resultat.FichierDestination);
-			}
-			else
-			{
-				if (!afficherSiteExternes)
+				// Si lien interne
+				if(0==resultat.SiteSource.compare(leSite->GetAdresse()))
 				{
-					leSite->AjouterVisite(resultat.FichierDestination);
+					leSite->AjouterVisite(resultat.FichierSource,resultat.FichierDestination);
 				}
 				else
 				{
-					string source = "externe : "+resultat.SiteSource+resultat.FichierSource;
-					leSite->AjouterVisite(source,resultat.FichierDestination);
+					if (!afficherSiteExternes)
+					{
+						leSite->AjouterVisite(resultat.FichierDestination);
+					}
+					else
+					{
+						string source = "externe : "+resultat.SiteSource+resultat.FichierSource;
+						leSite->AjouterVisite(source,resultat.FichierDestination);
+					}
 				}
 			}
+
+
+		} while(resultat.Etat != END_FILE);
+
+		if (afficher10)
+		{
+			leSite->AfficherPremiers(NB_PREMIERS);
 		}
-
-
-	} while(resultat.Etat != END_FILE);
-
-	if (afficher10)
-	{
-		leSite->AfficherPremiers(NB_PREMIERS);
 	}
-	
 }
 
 void MoteurES::FaireGraphe() const
@@ -166,23 +171,41 @@ void MoteurES::FaireGraphe() const
 
 			fichierSortie.close();
 		}
-
 	}
 }
 
 void MoteurES::ModifierMatchs(int const heure)
 {
+	// Cette méthode construit le string Regex utilisé pour lire les lignes de
+	// log Appache.
+
+	/*	Voici les différents champs captés par le regex :
+		#1 : Site de destination
+		#2 : Extension du site
+		#3 : Code HTTP
+		#4 : Protocole
+		#5 : Site d'origine
+		#6 : Fichier d'origine
+	*/
+
+	// La base du regex permet de s'assurer que chaque ligne commence par
+	// la date
 	string constructeur = "\\[\\d+\\/\\w+\\/\\d+:";
+	
+	// Ensuite, si on a décidé d'exclure une heure, on la rajoute au regex
 	if (heure >= 0 && heure <= 23)
 	{
 		constructeur+=to_string(heure);
 	}
 	else
 	{
+		// Sinon on ajoute simplement le code pour n'importe quel chiffre
 		constructeur+="\\d+";
 	}
-	constructeur+=":.*\"GET ([^\\s?;]*[/.]([^\\s?;]*))[ ?;].*\" (\\d+).*\"(\\w+:\\/\\/|)([^//]*)(\\S+)\"";
+	// Enfin, on ajoute le reste du regex.
+	constructeur+=":.*\"GET ([^\\s?;]*[/\\. ]([^\\s?;]*))[ ?;].*\" (\\d+).*\"(\\w+:\\/\\/|)([^//]*)(\\S+)\"";
 
+	// On construit le regex avec le string que l'on à crée.
 	apacheLogRegex = regex(constructeur);
 }
 
@@ -286,24 +309,26 @@ CodeRetourArgument MoteurES::GestionArguments(int const nombreArguments, char* c
 	return ERR_ARG;
 }
 
+
 void MoteurES::AfficherAide() const
 {
-	cout << "\
-=== Aide ===\n\
-Analyse un fichier de log Appache pour faire la liste des liens entre\
-les différentes pages.\n\
-Usage : ./analog [options] nomfichier.log\n\
-\n\
-Options :\n\
--h : Affiche cette aide\n\
--g nomfichier.dot : Crée un fichier GraphViz des liens entre les pages\
-visitées dans le fichier fourni en argument\n\
--e : Exclus les extensions de type .png, .jpg, .jpeg, .ico, .css, .js \
-dans l'analyse du log.\
--t heure : Permets de ne prendre en compte que les visites qui ont eu lieu \
-à l'heure donnée en paramètre.\n\
--v : affiche chaque information lue dans le log pour chaque ligne de celui ci\n";
-
+	cout << endl;
+	cout << "=== Aide ===\n" << endl;
+	cout << "Analyse un fichier de log Appache pour faire la liste des liens \
+entre les différentes pages." << endl;
+	cout << "Usage : ./analog [options] nomfichier.log" << endl;
+	cout << "Options :" << endl;
+	cout << "-h : Affiche cette aide" << endl;
+	cout << "-g nomfichier.dot : Crée un fichier GraphViz des liens entre les\
+pages visitées dans le fichier fourni en argument" << endl;
+	cout << "-e : Exclus les extensions de type .png, .jpg, .jpeg, .ico, .css,\
+	 .js, .gif dans l'analyse du log." << endl;
+	cout << "-t heure : Permets de ne prendre en compte que les visites qui \
+ont eu lieu à l'heure donnée en paramètre." << endl;
+	cout << "-v : (débug) affiche chaque information lue dans le log pour \
+chaque ligne de celui ci" << endl;
+	cout << "-q : N'affiche pas la liste des 10 pages les plus visitées" << endl;
+	cout << "-s nom_du_site : Change le nom du site à analyser" << endl;
 }
 
 
