@@ -79,7 +79,8 @@ struct DonneesLog{
                     string protocole,
                     string SiteSource,
                     string FichierSource,
-                    EtatDonneesLog etat):
+                    EtatDonneesLog etat
+                  ):
                     FichierDestination(FichierDestination),
                     CodeHttp(codeHttp),
                     Protocole(protocole),
@@ -172,17 +173,16 @@ public:
 
     virtual ~MoteurES ();
     // Mode d'emploi :
-    // Détruit le moteur
+    // Détruit le moteur et le site relié.
 
 //------------------------------------------------------------------ PRIVE
 
 private:
 //------------------------------------------------------- Attributs privés
-    //Site leSite;
-    vector<string> blackListExtension; /*La liste des extensions de fichiers ignorée*/
+    vector<string> blackListExtension; // La liste des extensions de fichiers ignorée.
     regex apacheLogRegex;
-    ifstream fichierLog; /**Le fichier de log que l'on lit*/
-    bool verbose; /* Si l'on doit afficher chaque information lue dans le ficher log */
+    ifstream fichierLog; // Le fichier de log que l'on lit.
+    bool verbose; // Si l'on doit afficher chaque information lue dans le ficher log.
     Site *leSite;
     string leSiteNom;
 
