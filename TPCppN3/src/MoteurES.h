@@ -181,7 +181,6 @@ public:
 
 private:
 //------------------------------------------------------- Attributs privés
-    //Site leSite;
     vector<string> blackListExtension; /*La liste des extensions de fichiers ignorée*/
     regex apacheLogRegex;
     ifstream fichierLog; /**Le fichier de log que l'on lit*/

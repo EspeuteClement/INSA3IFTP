@@ -111,6 +111,7 @@ DonneesLog MoteurES::LireLigneLog()
 			{
 				// Si le regex n'a pas fait de match, dire qu'il n'y à pas
 				// eu de match.
+				
 				DonneesRetour.Etat = NON_MATCH;
 			}
 		}
@@ -179,7 +180,38 @@ void MoteurES::ModifierMatchs(int const heure)
 	// Cette méthode construit le string Regex utilisé pour lire les lignes de
 	// log Appache.
 
-	/*	Voici les différents champs captés par le regex :
+	/*
+	Explications du REGEX :	(note dans le code c++ les \ ont du être échappés
+	d'où le fait qu'on ai des \\ dans le code.)
+	
+	Lecture du timestamp :
+	\[\d+\/\w+\/\d+:
+	
+	Lecture de l'heure d'arrivée du message : Note : il suffit de remplacer
+	ce code par un nombre pour ignorer tout les logs qui ne sont pas arrivé
+	à une heure donnée.
+	\d+
+	
+	Lecture de la page demandée :
+		:.*\"GET 
+		Groupe de captures :
+	 	|		#1               |
+		|	       	   |   #2  | |
+		([^\s?;]*[/\. ]([^\s?;]*))
+		Fin du block page demandée
+		[ ?;].*\"
+	
+	Capture du code HTML (non utilisé mais peut être utile pour l'évolution
+	du programme)
+	 (\d+)
+
+	Lecture de la page source :
+		 |    4#   ||  #5  || #6|
+	 .*\"(\w+:\/\/|)([^//]*)(\S+)\"
+
+	Le reste du message (l'user agent ) est ignoré.
+
+	Voici les différents champs captés par le regex :
 		#1 : Site de destination
 		#2 : Extension du site
 		#3 : Code HTTP
@@ -293,7 +325,7 @@ CodeRetourArgument MoteurES::GestionArguments(int const nombreArguments, char* c
 		// Si on arrive pas à ouvrir le fichier, erreur d'argument
 		if (OuvrirFichierLog(chemin) != FICHIER_OK)
 		{
-			cout << "Erreur : Fichier " << chemin << " introuvable." << endl;
+			cerr << "Erreur : Fichier " << chemin << " introuvable." << endl;
 			return ERR_ARG;
 		}
 

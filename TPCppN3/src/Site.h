@@ -103,7 +103,6 @@ private:
     typedef map<string, Fichier*> FichierMap;
     typedef map<string, Fichier*> :: iterator SI;
     FichierMap fichiers;
-
     void AjouterFichier(const string chemin);
 };
 
