@@ -23,9 +23,6 @@ using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Fichier.h"
 
-//----------------------------------------------------------- Constantes
-const string CHEMIN_FICHIER_EXTERNE = "Externe";
-
 //------------------------------------------------------------------------
 // Rôle de la classe <Site>
 // Stocke un identifiant unique (adresse) désignant un site web, ainsi qu'un

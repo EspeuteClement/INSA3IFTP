@@ -25,9 +25,6 @@ using namespace boost;
 //------------------------------------------------------ Include personnel
 #include "Site.h"
 
-//----------------------------------------------------------- Constantes
-const uint32_t NB_PREMIERS = 10;
-
 //----------------------------------------------------------- Enumérations
 
 /** L'ensemble des codes retours utilisées par les
@@ -65,7 +62,7 @@ struct DonneesLog{
     public :
         //Note : L'ordre correspond à l'ordre des données dans le log apache
 
-        string FichierDestination; // Le chemin du fichier vers lequel la 
+        string FichierDestination; // Le chemin du fichier vers lequel la
                                    // requête pointe
         unsigned int CodeHttp;     // Le code Http de la requête
 
@@ -76,7 +73,7 @@ struct DonneesLog{
                                     // requête
 
         EtatDonneesLog Etat;    /* L'état des données lues*/
-        
+
         DonneesLog( string FichierDestination,
                     unsigned int codeHttp,
                     string protocole,
@@ -185,14 +182,14 @@ private:
     vector<string> blackListExtension; /*La liste des extensions de fichiers ignorée*/
     regex apacheLogRegex;
     ifstream fichierLog; /**Le fichier de log que l'on lit*/
-    bool verbose = false; /* Si l'on doit afficher chaque information lue dans le ficher log */
-    Site *leSite = NULL;
-    string leSiteNom = "intranet-if.insa-lyon.fr";
-    
-    string nomFichierSortie = "";
-    bool afficherSiteExternes = false;
+    bool verbose; /* Si l'on doit afficher chaque information lue dans le ficher log */
+    Site *leSite;
+    string leSiteNom;
 
-    bool afficher10 = true;
+    string nomFichierSortie;
+    bool afficherSiteExternes;
+
+    bool afficherFichiersPlusConsultes;
 
 };
 
