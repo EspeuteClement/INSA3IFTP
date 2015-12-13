@@ -65,20 +65,18 @@ struct DonneesLog{
     public :
         //Note : L'ordre correspond à l'ordre des données dans le log apache
 
-        string FichierDestination; /* Le Fichier vers où l'on va */
-        unsigned int CodeHttp;  /* Le code http correspondant à la */
+        string FichierDestination; // Le chemin du fichier vers lequel la 
+                                   // requête pointe
+        unsigned int CodeHttp;     // Le code Http de la requête
 
-        //TODO : Voir si on mets pas ça en enum ...
-        string Protocole;       /* Le protocole qui à été utilisé pour la requête*/
+        string Protocole;           // Le protocole utilisé par la requête
 
-        string SiteSource;      /* */
-        string FichierSource;      /* Le Fichier d'où l'on vient */
+        string SiteSource;          // Le site d'origine de la requête
+        string FichierSource;       // Le chemin de le fichier d'origine de la
+                                    // requête
 
         EtatDonneesLog Etat;    /* L'état des données lues*/
-        // Constructeur qui initialise l'ensemble des
-        // données de la structure dans l'ordre dans
-        // lesquelles elles sont situés dans le
-        // log apache.
+        
         DonneesLog( string FichierDestination,
                     unsigned int codeHttp,
                     string protocole,
@@ -94,11 +92,16 @@ struct DonneesLog{
         {
 
         };
+        // Mode d'emploi
+        // Constructeur qui initialise l'ensemble des
+        // données de la structure dans l'ordre dans
+        // lesquelles elles sont situés dans le
+        // log apache.
 
         inline bool FinDuFichier() const {return Etat == END_FILE;};
         // Mode d'emploi :
-        // Permet de savoir si on a atteint la fin du fichier après une
-        // lecture d'une ligne du log
+        // Renvoie vrai si l'on à atteint la fin du fichier lu par la
+        // méthode LireLigneLog
 };
 
 //------------------------------------------------------------------------
@@ -111,7 +114,7 @@ class MoteurES
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    CodeRetourMoteurES OuvrirFichierLog(string chemin);
+    CodeRetourMoteurES OuvrirFichierLog(string const chemin);
     // Mode d'emploi :
     // Tente d'ouvrir le fichier situé au chemin
     // donné en paramètre.
@@ -119,6 +122,8 @@ public:
     //      FICHIER_OK si l'ouverture du fichier s'est bien
     //      déroulée,
     //      FICHIER_ERR si le fichier n'a pas pu être ouvert
+    //      (Par exemple si le fichier n'existe pas ou qu'il
+    //      est en lecture seule)
 
     CodeRetourMoteurES FermerFichierLog();
     // Mode d'emploi :
@@ -144,26 +149,25 @@ public:
     // Renvoie vrai si un fichier est actuellement ouvert par
     // ce MoteurES.
 
-    void ModifierMatchs(int heure = -1);
+    void ModifierMatchs(int const heure = -1);
     // Mode d'emploi :
     // Modifie la manière dont le MoteurES cherche les sites
     // dans le log
     // Paramètres :
-    // extensions : La liste des extensions à exclure
     // heure : L'heure à choisir. Mettre -1 pour ignorer.
 
-    CodeRetourArgument GestionArguments(int nombreArguments, char* arguments[]);
+    CodeRetourArgument GestionArguments(int const nombreArguments, char* const arguments[]);
     // Mode d'emploi :
     // Gère la gestion des arguments passés au programme par l’utilisateur.
-    // Les arguments sont ceux fournis par le main.
+    // Les arguments sont les même arguments que ceux de la fonction main.
 
-    void AfficherAide();
+    void AfficherAide() const;
     // Mode d'emploi :
     // Affiche l'aide du programme dans la sortie standard
 
     void ParserLog();
 
-    void FaireGraphe();
+    void FaireGraphe() const;
 //-------------------------------------------- Constructeurs - destructeur
     MoteurES ();
     // Mode d'emploi :
@@ -182,11 +186,13 @@ private:
     regex apacheLogRegex;
     ifstream fichierLog; /**Le fichier de log que l'on lit*/
     bool verbose = false; /* Si l'on doit afficher chaque information lue dans le ficher log */
-    Site leSite = Site("intranet-if.insa-lyon.fr");
+    Site *leSite = NULL;
     string leSiteNom = "intranet-if.insa-lyon.fr";
+    
     string nomFichierSortie = "";
-
     bool afficherSiteExternes = false;
+
+    bool afficher10 = true;
 
 };
 

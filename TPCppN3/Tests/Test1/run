@@ -1,1 +1,1 @@
-../../out/executable.out -v -t 15 fichier.txt
+../../out/executable.out -v -t -1 -q fichier.txt
