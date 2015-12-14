@@ -25,9 +25,9 @@ end
 table.sort(liste)
 
 i = 1
-while i <= nbre do
+while i < nbre do
 	if (liste[i] == liste[i+1]) then
-		table[i+1] = table[i+1] + 1
+		liste[i+1] = liste[i+1] + 1
 	else
 		i = i + 1	
 	end
