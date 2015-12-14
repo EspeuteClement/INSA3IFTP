@@ -37,8 +37,6 @@ CodeRetourMoteurES MoteurES::OuvrirFichierLog(string const chemin)
 	#endif
 		return FICHIER_OK;
 		}
-
-
 	}
 
 	#ifdef MAP
@@ -78,7 +76,6 @@ DonneesLog MoteurES::LireLigneLog()
 		string ligneLue;
 		if(getline(fichierLog,ligneLue))
 		{
-
 			smatch matchLog;
 			if (regex_search(ligneLue,matchLog,apacheLogRegex))
 			{
@@ -215,7 +212,7 @@ void MoteurES::ModifierMatchs(int const heure)
 		 |    4#   ||  #5  || #6|
 	 .*\"(\w+:\/\/|)([^//]*)(\S+)\"
 
-	Le reste du message (l'user agent ) est ignoré.
+	Le reste du message (l'user agent ) n'est pas pris en compte.
 
 	Voici les différents champs captés par le regex :
 		#1 : Site de destination
@@ -348,7 +345,7 @@ CodeRetourArgument MoteurES::GestionArguments(int const nombreArguments, char* c
 		leSite = new Site(leSiteNom);
 		return OK_ARG;
 
-	} // endif nombreArgument > 0
+	} // ( nombreArgument > 0 )
 
 	cout << "Nombre d'arguments incorrect" << endl;
 	return ERR_ARG;
@@ -373,7 +370,7 @@ ont eu lieu à l'heure donnée en paramètre." << endl;
 	cout << "-v : (débug) affiche chaque information lue dans le log pour \
 chaque ligne de celui-ci" << endl;
 	cout << "-q : N'affiche pas la liste des 10 pages les plus visitées" << endl;
-	cout << "-s nom_du_site : Change le nom du site à analyser" << endl;
+	cout << "-s nom_du_site : Change le nom du site à analyser par nom_du_site" << endl;
 }
 
 
