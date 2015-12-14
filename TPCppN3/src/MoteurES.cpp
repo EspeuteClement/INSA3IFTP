@@ -22,10 +22,10 @@ const uint32_t NB_PREMIERS = 10;
 //----------------------------------------------------- Méthodes publiques
 CodeRetourMoteurES MoteurES::OuvrirFichierLog(string const chemin)
 {
-	// Si il n'y à pas déjà un fichier ouvert
+	// Si il n'y a pas déjà un fichier ouvert.
 	if (!FichierEstOuvert())
 	{
-		// On tente d'ouvrir le fichier
+		// On tente d'ouvrir le fichier.
 		fichierLog.open(chemin,ifstream::in);
 
 		// Messages de retour en fonction de si on à réussi ou pas
@@ -68,8 +68,8 @@ CodeRetourMoteurES MoteurES::FermerFichierLog()
 
 DonneesLog MoteurES::LireLigneLog()
 {
-	// Créer un objet DonneesRetour avec pour données le
-	// cas où l'on a atteint la fin du fichier
+	// Créer un DonneesRetour avec pour données le
+	// cas où l'on a atteint la fin du fichier.
 	DonneesLog DonneesRetour("",0,"","","",END_FILE);
 	if (FichierEstOuvert())
 	{
@@ -79,18 +79,18 @@ DonneesLog MoteurES::LireLigneLog()
 			smatch matchLog;
 			if (regex_search(ligneLue,matchLog,apacheLogRegex))
 			{
-				// Vérifier si l'extension du fichier visité n'est pas ignorée
+				// Vérifier si l'extension du fichier visité n'est pas ignorée.
 				string extension = std::string(matchLog[2].first, matchLog[2].second);
 				if (blackListExtension.size()==0 || ! (blackListExtension.find(extension) != blackListExtension.end()))
 				{
-					//Extraire une par une toutes les données lue par le regex
+					//Extraire une par une toutes les données lues par la regex.
 					DonneesRetour.FichierDestination = std::string(matchLog[1].first, matchLog[1].second);
 					DonneesRetour.CodeHttp 			 = atoi(std::string(matchLog[3].first, matchLog[3].second).c_str());
 					DonneesRetour.Protocole 	     = std::string(matchLog[4].first, matchLog[4].second);
 					DonneesRetour.SiteSource 		 = std::string(matchLog[5].first, matchLog[5].second);
 					DonneesRetour.FichierSource      = std::string(matchLog[6].first, matchLog[6].second);
 					DonneesRetour.Etat = OK;
-					// Si on est en mode verbose, afficher toutes les infos lues
+					// Si on est en mode verbose, afficher toutes les infos lues.
 					if (verbose)
 					{
 						cout <<
@@ -109,7 +109,7 @@ DonneesLog MoteurES::LireLigneLog()
 			}
 			else
 			{
-				// Si le regex n'a pas fait de match, dire qu'il n'y à pas
+				// Si la regex n'a pas fait de match, dire qu'il n'y a pas
 				// eu de match.
 
 				DonneesRetour.Etat = NON_MATCH;
@@ -127,11 +127,11 @@ void MoteurES::ParserLog()
 	{
 		do
 		{
-			//On lit une par une les lignes du log
+			//On lit une par une les lignes du log.
 			resultat = LireLigneLog();
 			if(resultat.Etat == OK)
 			{
-				// Si lien interne
+				// Si lien interne.
 				if(0==resultat.SiteSource.compare(leSite->GetAdresse()))
 				{
 					leSite->AjouterVisite(resultat.FichierSource,resultat.FichierDestination);
@@ -162,7 +162,7 @@ void MoteurES::ParserLog()
 
 bool MoteurES::FaireGraphe() const
 {
-	// Si le chemin de sortie n'est pas vide
+	// Si le chemin de sortie n'est pas vide.
 	if (nomFichierSortie.compare("") != 0)
 	{
 		ofstream fichierSortie(nomFichierSortie);
@@ -180,18 +180,18 @@ bool MoteurES::FaireGraphe() const
 
 void MoteurES::ModifierMatchs(int const heure)
 {
-	// Cette méthode construit le string Regex utilisé pour lire les lignes de
+	// Cette méthode construit la string Regex utilisé pour lire les lignes de
 	// log Apache.
 
 	/*
 	Explications du REGEX :	(note dans le code c++ les \ ont du être échappés
-	d'où le fait qu'on ai des \\ dans le code.)
+	d'où le fait qu'on ait des \\ dans le code.)
 
 	Lecture du timestamp :
 	\[\d+\/\w+\/\d+:
 
 	Lecture de l'heure d'arrivée du message : Note : il suffit de remplacer
-	ce code par un nombre pour ignorer tous les logs qui ne sont pas arrivé
+	ce code par un nombre pour ignorer tous les logs qui ne sont pas arrivés
 	à une heure donnée.
 	\d+
 
@@ -224,10 +224,10 @@ void MoteurES::ModifierMatchs(int const heure)
 	*/
 
 	// La base du regex permet de s'assurer que chaque ligne commence par
-	// la date
+	// la date.
 	string constructeur = "\\[\\d+\\/\\w+\\/\\d+:";
 
-	// Ensuite, si on a décidé d'exclure une heure, on la rajoute au regex
+	// Ensuite, si on a décidé d'exclure une heure, on la rajoute à la regex.
 	if (heure >= 0 && heure <= 23)
 	{
 		if (heure/10 >= 1)
@@ -241,13 +241,13 @@ void MoteurES::ModifierMatchs(int const heure)
 	}
 	else
 	{
-		// Sinon on ajoute simplement le code pour n'importe quel chiffre
+		// Sinon on ajoute simplement le code pour n'importe quel chiffre.
 		constructeur+="\\d+";
 	}
-	// Enfin, on ajoute le reste du regex.
+	// Enfin, on ajoute le reste de la regex.
 	constructeur+=":.*\"GET ([^\\s?;]*[/\\. ]([^\\s?;]*))[ ?;].*\" (\\d+).*\"(\\w+:\\/\\/|)([^//]*)(\\S+)\"";
 
-	// On construit le regex avec le string que l'on à crée.
+	// On construit la regex avec la string que l'on a crée.
 	apacheLogRegex = regex(constructeur);
 }
 
@@ -269,14 +269,14 @@ CodeRetourArgument MoteurES::GestionArguments(int const nombreArguments, char* c
 			if (arguments[i][0] == '-')
 			{
 				switch (arguments[i][1]){
-					case 'h': // Afficher l'aide
+					case 'h': // Afficher l'aide.
 	#ifdef MAP
 		cout << "Argument h parsé" << endl;
 	#endif
 						return AIDE_ARG;
 					break;
 
-					case 'g': // Ajouter fichier de sortie
+					case 'g': // Ajouter fichier de sortie.
 					#ifdef MAP
 						cout << "Argument g parsé" << endl;
 					#endif
@@ -284,7 +284,7 @@ CodeRetourArgument MoteurES::GestionArguments(int const nombreArguments, char* c
 						leSiteNom = string(arguments[i]);
 					break;
 
-					case 'e': // Exclure les fichiers donnés
+					case 'e': // Exclure les extensions de fichier données.
 					#ifdef MAP
 						cout << "Argument e parsé" << endl;
 					#endif
@@ -302,14 +302,14 @@ CodeRetourArgument MoteurES::GestionArguments(int const nombreArguments, char* c
 						leSiteNom = arguments[i];
 					break;
 
-					case 'v': // Mode verbose (pour les tests)
+					case 'v': // Mode verbose (pour les tests).
 						verbose = true;
 					break;
 
 					case 'q':
 						afficherFichiersPlusConsultes = false;
 					break;
-					case 'x': // Mode verbose (pour les tests)
+					case 'x': // Mode verbose (pour les tests).
 						afficherSiteExternes = true;
 					break;
 
@@ -325,14 +325,14 @@ CodeRetourArgument MoteurES::GestionArguments(int const nombreArguments, char* c
 		}
 
 		// On choisit le dernier argument comme étant le chemin à choisir,
-		// peu importe les autres arguments lu (Le programme affichera une)
-		// erreur si le fichier n'existe pas.
+		// peu importe les autres arguments lus (Le programme affichera une
+		// erreur si le fichier n'existe pas).
 		string chemin(arguments[nombreArguments-1]);
 		#ifdef MAP
 			cout << "Argument chemin parsé :" << chemin << endl;
 		#endif
 
-		// Si on arrive pas à ouvrir le fichier, erreur d'argument
+		// Si on arrive pas à ouvrir le fichier, erreur d'argument.
 		if (OuvrirFichierLog(chemin) != FICHIER_OK)
 		{
 			cerr << "Erreur : Impossible d'ouvrir le fichier de log " << chemin << endl;
@@ -340,7 +340,7 @@ CodeRetourArgument MoteurES::GestionArguments(int const nombreArguments, char* c
 		}
 
 		// Enfin, on initialise l'heure choisie pour le filtrage
-		// (par défaut -1 donc toutes les heures)
+		// (par défaut -1, donc toutes les heures).
 		ModifierMatchs(heure);
 		leSite = new Site(leSiteNom);
 		return OK_ARG;
