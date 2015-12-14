@@ -111,7 +111,7 @@ DonneesLog MoteurES::LireLigneLog()
 			{
 				// Si le regex n'a pas fait de match, dire qu'il n'y à pas
 				// eu de match.
-				
+
 				DonneesRetour.Etat = NON_MATCH;
 			}
 		}
@@ -186,24 +186,24 @@ void MoteurES::ModifierMatchs(int const heure)
 	/*
 	Explications du REGEX :	(note dans le code c++ les \ ont du être échappés
 	d'où le fait qu'on ai des \\ dans le code.)
-	
+
 	Lecture du timestamp :
 	\[\d+\/\w+\/\d+:
-	
+
 	Lecture de l'heure d'arrivée du message : Note : il suffit de remplacer
 	ce code par un nombre pour ignorer tous les logs qui ne sont pas arrivé
 	à une heure donnée.
 	\d+
-	
+
 	Lecture de la page demandée :
-		:.*\"GET 
+		:.*\"GET
 		Groupe de captures :
 	 	|		#1               |
 		|	       	   |   #2  | |
 		([^\s?;]*[/\. ]([^\s?;]*))
 		Fin du block page demandée
 		[ ?;].*\"
-	
+
 	Capture du code HTML (non utilisé mais peut être utile pour l'évolution
 	du programme)
 	 (\d+)
@@ -232,7 +232,7 @@ void MoteurES::ModifierMatchs(int const heure)
 	{
 		if (heure/10 >= 1)
 		{
-			constructeur+=to_string(heure);	
+			constructeur+=to_string(heure);
 		}
 		else
 		{
@@ -363,12 +363,12 @@ entre les différentes pages." << endl;
 	cout << "-h : Affiche cette aide" << endl;
 	cout << "-g nomfichier.dot : Crée un fichier GraphViz des liens entre les\
 pages visitées dans le fichier fourni en argument" << endl;
-	cout << "-e : Exclus les extensions de type .png, .jpg, .jpeg, .ico, .css,\
+	cout << "-e : Exclue les extensions de type .png, .jpg, .jpeg, .ico, .css,\
 	 .js, .gif dans l'analyse du log." << endl;
-	cout << "-t heure : Permets de ne prendre en compte que les visites qui \
+	cout << "-t heure : Permet de ne prendre en compte que les visites qui \
 ont eu lieu à l'heure donnée en paramètre." << endl;
 	cout << "-v : (débug) affiche chaque information lue dans le log pour \
-chaque ligne de celui ci" << endl;
+chaque ligne de celui-ci" << endl;
 	cout << "-q : N'affiche pas la liste des 10 pages les plus visitées" << endl;
 	cout << "-s nom_du_site : Change le nom du site à analyser par nom_du_site" << endl;
 }
