@@ -15,7 +15,7 @@
 
 //-------------------------------------------------------- Include système
 #include <string>
-
+#include <unordered_set>
 #include <iostream>
 #include <fstream>
 #include <boost/regex.hpp>
@@ -189,7 +189,7 @@ public:
 private:
 //------------------------------------------------------- Attributs privés
 
-    set<string> blackListExtension; // La liste des extensions de fichiers ignorée.
+    unordered_set<string> blackListExtension; // La liste des extensions de fichiers ignorée.
 
     regex apacheLogRegex;
     ifstream fichierLog; // Le fichier de log que l'on lit.
