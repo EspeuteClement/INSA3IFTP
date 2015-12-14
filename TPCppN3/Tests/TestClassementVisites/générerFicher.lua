@@ -12,7 +12,7 @@ fin = io.open("fichier.txt", "w")
 fout = io.open("std.out","w")
 frun = io.open("run","w")
 
-frun:write("../../out/executable.out fichier.txt")
+frun:write("../../out/analog fichier.txt")
 
 -- Génere une liste de nbre nombres et la trie, puis génère une liste de
 -- nbre noms aléatoires
@@ -27,7 +27,7 @@ table.sort(liste)
 i = 1
 while i <= nbre do
 	if (liste[i] == liste[i+1]) then
-		table[i+1] = i + 1
+		table[i+1] = table[i+1] + 1
 	else
 		i = i + 1	
 	end

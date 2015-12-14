@@ -1,3 +1,3 @@
-echo "../../out/executable.out fichier.txt" > run
-echo "Erreur : Fichier fichier.txt introuvable." > stderr.out
-echo "Arguments incorrects. Utilisez -h pour l'aide du programme." > std.out
+echo "../../out/analog fichier.txt" > run
+echo "Erreur : Impossible d'ouvrir le fichier de log fichier.txt" > stderr.out
+echo "" > std.out

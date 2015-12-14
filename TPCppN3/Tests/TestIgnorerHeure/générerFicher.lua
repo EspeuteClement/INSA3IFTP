@@ -2,6 +2,12 @@ nombreLignes,banHeure,configBanned = ...
 
 banHeure = tonumber(banHeure)
 
+if banHeure < 10 then
+		banHeure = "0"..banHeure
+else
+		banHeure = "".. banHeure
+end
+
 if configBanned == "false" then
 	configBanned = false;
 else
@@ -29,7 +35,7 @@ suffixBanned = {".jpg",".css",".ico",".js"}
 
 suffix2 = {"","",";sdifsjdf","?tests"}
 
-frun:write("../../out/executable.out -v -t "..banHeure.." -q")
+frun:write("../../out/analog -v -t "..banHeure.." -q")
 if (configBanned) then
 	frun:write(" -e")
 end
@@ -39,6 +45,13 @@ for i = 1, nombreLignes do
 	-- Adresse IP :
 	ip = "" .. math.random(0,255) .. "." .. math.random(0,255) .. "." .. math.random(0,255) .. "." .. math.random(0,255)
 	randHeure = math.random(0,23);
+
+	if randHeure < 10 then
+		randHeure = "0"..randHeure
+	else
+		randHeure = "".. randHeure
+	end
+
 
 	banned = false
 	if (math.random(10) < 7) then
@@ -71,7 +84,7 @@ for i = 1, nombreLignes do
 		fin:write("\r\n")
 	end
 
-	if (banHeure == -1 or randHeure == banHeure) and not banned then
+	if (banHeure == "0-1" or randHeure == banHeure) and not banned then
 		fout:write(randAdresse.." ")
 		fout:write(codeHttp.." ")
 		fout:write("http:// intranet-if.insa-lyon.fr ")

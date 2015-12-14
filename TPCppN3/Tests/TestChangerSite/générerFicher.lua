@@ -29,7 +29,7 @@ suffixBanned = {".jpg",".css",".ico",".js"}
 
 suffix2 = {"","",";sdifsjdf","?tests"}
 
-frun:write("../../out/executable.out -v -x autreSite.com -t "..banHeure.." -q")
+frun:write("../../out/analog -v -x autreSite.com -t "..banHeure.." -q")
 if (configBanned) then
 	frun:write(" -e")
 end

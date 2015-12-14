@@ -1,1 +1,1 @@
-../../out/executable.out -v -t -1 -q -e fichier.txt
+../../out/analog -v -t -1 -q -e fichier.txt

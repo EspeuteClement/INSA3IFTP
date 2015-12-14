@@ -51,7 +51,8 @@ enum CodeRetourArgument
 {
     OK_ARG,         // Tout c'est bien passé
     ERR_ARG,        // Les arguments sont mal formés
-    AIDE_ARG        // L’utilisateur à demandé l'affichage de l'aide.
+    AIDE_ARG,       // L’utilisateur à demandé l'affichage de l'aide.
+    PAS_FICHIER     // Le fichier demandé n'est pas trouvé 
 };
 
 //-------------------------------------------------------- Types de classe
@@ -164,8 +165,16 @@ public:
     // Affiche l'aide du programme dans la sortie standard
 
     void ParserLog();
+    // Mode d'emploi :
+    // Lis l'intégralité du log ouvert précédemment à l'aide de
+    // OuvrirFichierLog(). Ne fait rien si aucun fichier n'a été ouvert.
 
-    void FaireGraphe() const;
+    bool FaireGraphe() const;
+    // Mode d'emploi :
+    // Crée le graphe dans un fichier ayant pour nom la string
+    // nomFichierSortie. Renvoie false si le fichier ne peut
+    // pas être crée ou écrit, sinon renvoie true.
+
 //-------------------------------------------- Constructeurs - destructeur
     MoteurES ();
     // Mode d'emploi :
@@ -180,7 +189,7 @@ public:
 private:
 //------------------------------------------------------- Attributs privés
 
-    vector<string> blackListExtension; // La liste des extensions de fichiers ignorée.
+    set<string> blackListExtension; // La liste des extensions de fichiers ignorée.
 
     regex apacheLogRegex;
     ifstream fichierLog; // Le fichier de log que l'on lit.
