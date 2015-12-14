@@ -14,7 +14,7 @@ PRINT = @printf
 
 ### FICHIERS
 # Nom du fichier de sortie
-EXEC = out/executable.out
+EXEC = out/analog
 # Nom des fichiers sources
 SRC = MoteurES.cpp Main.cpp Site.cpp Fichier.cpp
 # Nom du dossier avec les fichiers sources

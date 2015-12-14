@@ -102,7 +102,6 @@ private:
     typedef unordered_map<string, Fichier*> FichierMap;
     typedef unordered_map<string, Fichier*> :: iterator SI;
     FichierMap fichiers;
-
     void AjouterFichier(const string chemin);
 };
 

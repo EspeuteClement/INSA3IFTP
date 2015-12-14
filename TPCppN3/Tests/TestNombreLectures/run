@@ -1,0 +1,2 @@
+grep GET anonyme.log| wc -l > std.out &&
+../../out/analog -v -q anonyme.log | wc -l

@@ -1,6 +1,10 @@
 Test ID;Return code validation;Out result;StdErr result;File creation result;Global result
-Test1;2;1;2;2;1
-Test2;2;1;2;2;1
-Test3;2;1;2;2;1
-Test4;2;1;2;2;1
-Test5;2;1;2;2;1
+TestChangerSite;2;1;2;2;1
+TestClassementVisites;2;1;2;2;1
+TestFichierEcritureSeule;2;1;1;2;1
+TestFichierExistePas;2;1;1;2;1
+TestFichierVide;2;1;2;2;1
+TestIgnorerExtensions;2;1;2;2;1
+TestIgnorerHeure;2;1;2;2;1
+TestLireLog;2;1;2;2;1
+TestNombreLectures;2;1;2;2;1

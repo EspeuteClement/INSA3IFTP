@@ -5,6 +5,7 @@ using namespace std;
 int main(int nombreArguments, char* arguments[])
 {
 	MoteurES testMoteur;
+
 	CodeRetourArgument ret = testMoteur.GestionArguments(nombreArguments, arguments);
 
 	if (ret == OK_ARG)

@@ -1,0 +1,1 @@
+../../out/analog -v -t -1 -q -e fichier.txt

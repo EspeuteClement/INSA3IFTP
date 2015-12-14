@@ -84,8 +84,7 @@ DonneesLog MoteurES::LireLigneLog()
 			{
 				// Vérifier si l'extension du fichier visité n'est pas ignorée
 				string extension = std::string(matchLog[2].first, matchLog[2].second);
-				if (blackListExtension.size()==0 || ! (find(blackListExtension.begin(),
-				 	blackListExtension.end(), extension ) != blackListExtension.end()))
+				if (blackListExtension.size()==0 || ! (blackListExtension.find(extension) != blackListExtension.end()))
 				{
 					//Extraire une par une toutes les données lue par le regex
 					DonneesRetour.FichierDestination = std::string(matchLog[1].first, matchLog[1].second);
@@ -115,6 +114,7 @@ DonneesLog MoteurES::LireLigneLog()
 			{
 				// Si le regex n'a pas fait de match, dire qu'il n'y à pas
 				// eu de match.
+				
 				DonneesRetour.Etat = NON_MATCH;
 			}
 		}
@@ -163,7 +163,7 @@ void MoteurES::ParserLog()
 	}
 }
 
-void MoteurES::FaireGraphe() const
+bool MoteurES::FaireGraphe() const
 {
 	// Si le chemin de sortie n'est pas vide
 	if (nomFichierSortie.compare("") != 0)
@@ -174,16 +174,50 @@ void MoteurES::FaireGraphe() const
 			leSite->FaireGraphe(fichierSortie);
 
 			fichierSortie.close();
+			return true;
 		}
+		cerr << "Erreur : Impossible d'écrire le fichier " << nomFichierSortie;
 	}
+	return false;
 }
 
 void MoteurES::ModifierMatchs(int const heure)
 {
 	// Cette méthode construit le string Regex utilisé pour lire les lignes de
-	// log Appache.
+	// log Apache.
 
-	/*	Voici les différents champs captés par le regex :
+	/*
+	Explications du REGEX :	(note dans le code c++ les \ ont du être échappés
+	d'où le fait qu'on ai des \\ dans le code.)
+	
+	Lecture du timestamp :
+	\[\d+\/\w+\/\d+:
+	
+	Lecture de l'heure d'arrivée du message : Note : il suffit de remplacer
+	ce code par un nombre pour ignorer tout les logs qui ne sont pas arrivé
+	à une heure donnée.
+	\d+
+	
+	Lecture de la page demandée :
+		:.*\"GET 
+		Groupe de captures :
+	 	|		#1               |
+		|	       	   |   #2  | |
+		([^\s?;]*[/\. ]([^\s?;]*))
+		Fin du block page demandée
+		[ ?;].*\"
+	
+	Capture du code HTML (non utilisé mais peut être utile pour l'évolution
+	du programme)
+	 (\d+)
+
+	Lecture de la page source :
+		 |    4#   ||  #5  || #6|
+	 .*\"(\w+:\/\/|)([^//]*)(\S+)\"
+
+	Le reste du message (l'user agent ) est ignoré.
+
+	Voici les différents champs captés par le regex :
 		#1 : Site de destination
 		#2 : Extension du site
 		#3 : Code HTTP
@@ -199,7 +233,14 @@ void MoteurES::ModifierMatchs(int const heure)
 	// Ensuite, si on a décidé d'exclure une heure, on la rajoute au regex
 	if (heure >= 0 && heure <= 23)
 	{
-		constructeur+=to_string(heure);
+		if (heure/10 >= 1)
+		{
+			constructeur+=to_string(heure);	
+		}
+		else
+		{
+			constructeur+="0"+to_string(heure);
+		}
 	}
 	else
 	{
@@ -250,13 +291,13 @@ CodeRetourArgument MoteurES::GestionArguments(int const nombreArguments, char* c
 					#ifdef MAP
 						cout << "Argument e parsé" << endl;
 					#endif
-						blackListExtension.push_back("png");
-						blackListExtension.push_back("gif");
-						blackListExtension.push_back("jpg");
-						blackListExtension.push_back("jpeg");
-						blackListExtension.push_back("ico");
-						blackListExtension.push_back("css");
-						blackListExtension.push_back("js");
+						blackListExtension.insert("png");
+						blackListExtension.insert("gif");
+						blackListExtension.insert("jpg");
+						blackListExtension.insert("jpeg");
+						blackListExtension.insert("ico");
+						blackListExtension.insert("css");
+						blackListExtension.insert("js");
 					break;
 
 					case 's':
@@ -297,8 +338,8 @@ CodeRetourArgument MoteurES::GestionArguments(int const nombreArguments, char* c
 		// Si on arrive pas à ouvrir le fichier, erreur d'argument
 		if (OuvrirFichierLog(chemin) != FICHIER_OK)
 		{
-			cout << "Erreur : Fichier " << chemin << " introuvable." << endl;
-			return ERR_ARG;
+			cerr << "Erreur : Impossible d'ouvrir le fichier de log " << chemin << endl;
+			return PAS_FICHIER;
 		}
 
 		// Enfin, on initialise l'heure choisie pour le filtrage
@@ -318,7 +359,7 @@ void MoteurES::AfficherAide() const
 {
 	cout << endl;
 	cout << "=== Aide ===\n" << endl;
-	cout << "Analyse un fichier de log Appache pour faire la liste des liens \
+	cout << "Analyse un fichier de log Apache pour faire la liste des liens \
 entre les différentes pages." << endl;
 	cout << "Usage : ./analog [options] nomfichier.log" << endl;
 	cout << "Options :" << endl;
