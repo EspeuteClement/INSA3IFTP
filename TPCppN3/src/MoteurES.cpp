@@ -37,8 +37,6 @@ CodeRetourMoteurES MoteurES::OuvrirFichierLog(string const chemin)
 	#endif
 		return FICHIER_OK;
 		}
-
-
 	}
 
 	#ifdef MAP
@@ -70,7 +68,7 @@ CodeRetourMoteurES MoteurES::FermerFichierLog()
 
 DonneesLog MoteurES::LireLigneLog()
 {
-	// Créer un Données Retour avec pour données le
+	// Créer un objet DonneesRetour avec pour données le
 	// cas où l'on a atteint la fin du fichier
 	DonneesLog DonneesRetour("",0,"","","",END_FILE);
 	if (FichierEstOuvert())
@@ -78,7 +76,6 @@ DonneesLog MoteurES::LireLigneLog()
 		string ligneLue;
 		if(getline(fichierLog,ligneLue))
 		{
-
 			smatch matchLog;
 			if (regex_search(ligneLue,matchLog,apacheLogRegex))
 			{
@@ -194,7 +191,7 @@ void MoteurES::ModifierMatchs(int const heure)
 	\[\d+\/\w+\/\d+:
 	
 	Lecture de l'heure d'arrivée du message : Note : il suffit de remplacer
-	ce code par un nombre pour ignorer tout les logs qui ne sont pas arrivé
+	ce code par un nombre pour ignorer tous les logs qui ne sont pas arrivé
 	à une heure donnée.
 	\d+
 	
@@ -215,7 +212,7 @@ void MoteurES::ModifierMatchs(int const heure)
 		 |    4#   ||  #5  || #6|
 	 .*\"(\w+:\/\/|)([^//]*)(\S+)\"
 
-	Le reste du message (l'user agent ) est ignoré.
+	Le reste du message (l'user agent ) n'est pas pris en compte.
 
 	Voici les différents champs captés par le regex :
 		#1 : Site de destination
@@ -327,7 +324,7 @@ CodeRetourArgument MoteurES::GestionArguments(int const nombreArguments, char* c
 			}
 		}
 
-		// On choisis le dernier argument comme étant le chemin à choisir,
+		// On choisit le dernier argument comme étant le chemin à choisir,
 		// peu importe les autres arguments lu (Le programme affichera une)
 		// erreur si le fichier n'existe pas.
 		string chemin(arguments[nombreArguments-1]);
@@ -348,7 +345,7 @@ CodeRetourArgument MoteurES::GestionArguments(int const nombreArguments, char* c
 		leSite = new Site(leSiteNom);
 		return OK_ARG;
 
-	} // endif nombreArgument > 0
+	} // ( nombreArgument > 0 )
 
 	cout << "Nombre d'arguments incorrect" << endl;
 	return ERR_ARG;
@@ -373,7 +370,7 @@ ont eu lieu à l'heure donnée en paramètre." << endl;
 	cout << "-v : (débug) affiche chaque information lue dans le log pour \
 chaque ligne de celui ci" << endl;
 	cout << "-q : N'affiche pas la liste des 10 pages les plus visitées" << endl;
-	cout << "-s nom_du_site : Change le nom du site à analyser" << endl;
+	cout << "-s nom_du_site : Change le nom du site à analyser par nom_du_site" << endl;
 }
 
 

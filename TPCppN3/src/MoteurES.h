@@ -27,9 +27,8 @@ using namespace boost;
 
 //----------------------------------------------------------- Enumérations
 
-/** L'ensemble des codes retours utilisées par les
-*   méthodes de la classe MoteurES
-*/
+//L'ensemble des codes retours utilisées par les
+//  méthodes de la classe MoteurES
 enum CodeRetourMoteurES
 {
     FICHIER_OK = 0, // L'ouverture du fichier à bien eu lieu
@@ -41,7 +40,7 @@ enum CodeRetourMoteurES
 enum EtatDonneesLog
 {
     OK,         // Si la lecture s'est déroulée sans accrocs
-    NON_MATCH,   // Si la lecture n'a pas donné de résultat (Parce que ignoré)
+    NON_MATCH,  // Si la lecture n'a pas donné de résultat (Parce que ignoré)
     END_FILE    // Si on est arrivé à la fin du fichier
 };
 
@@ -142,7 +141,6 @@ public:
     // Si la lecture est terminée, ou qu'aucun fichier n'est ouvert,
     // DonnesLog.FinDuFichier() renverra true.
 
-
     inline bool FichierEstOuvert() const {return fichierLog.is_open();} ;
     // Mode d'emploi :
     // Renvoie vrai si un fichier est actuellement ouvert par
@@ -193,7 +191,7 @@ private:
 
     regex apacheLogRegex;
     ifstream fichierLog; // Le fichier de log que l'on lit.
-    bool verbose; // Si l'on doit afficher chaque information lue dans le ficher log.
+    bool verbose;        // Si l'on doit afficher chaque information lue dans le ficher log.
     Site *leSite;
     string leSiteNom;
 
