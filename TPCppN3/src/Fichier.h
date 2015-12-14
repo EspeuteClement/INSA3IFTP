@@ -15,7 +15,7 @@
 
 //-------------------------------------------------------- Include système
 #include <string>
-#include <map>
+#include <unordered_map>
 #include <fstream>
 using namespace std;
 
@@ -86,8 +86,8 @@ private:
 //------------------------------------------------------- Attributs privés
     string chemin;
     uint32_t totalHits;
-    typedef map<Fichier *, uint32_t> HitMap;
-    typedef map<Fichier *, uint32_t> :: iterator FI;
+    typedef unordered_map<Fichier *, uint32_t> HitMap;
+    typedef unordered_map<Fichier *, uint32_t> :: iterator FI;
     HitMap hits;
 };
 

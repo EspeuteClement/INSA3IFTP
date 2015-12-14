@@ -15,7 +15,7 @@
 
 //-------------------------------------------------------- Include système
 #include <string>
-#include <map>
+#include <unordered_map>
 #include <list>
 #include <fstream>
 using namespace std;
@@ -99,8 +99,8 @@ public:
 private:
 //------------------------------------------------------- Attributs privés
     string adresse;
-    typedef map<string, Fichier*> FichierMap;
-    typedef map<string, Fichier*> :: iterator SI;
+    typedef unordered_map<string, Fichier*> FichierMap;
+    typedef unordered_map<string, Fichier*> :: iterator SI;
     FichierMap fichiers;
 
     void AjouterFichier(const string chemin);
