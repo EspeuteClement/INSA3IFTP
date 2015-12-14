@@ -104,7 +104,11 @@ struct DonneesLog{
 
 //------------------------------------------------------------------------
 // Rôle de la classe <MoteurES>
-//
+// La classe MoteurES est chargée de la gestion des Entrées Sorties du
+// programme. Entre autres, elle gère les arguments passés au programme et
+// l'ouverture des différents fichiers. C'est aussi cette classe qui va
+// s'occuper de parser le log et de donner les informations importantes
+// à la classe Site.
 //------------------------------------------------------------------------
 class MoteurES
 {
