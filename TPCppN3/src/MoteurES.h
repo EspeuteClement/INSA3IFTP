@@ -27,31 +27,31 @@ using namespace boost;
 
 //----------------------------------------------------------- Enumérations
 
-//L'ensemble des codes retours utilisées par les
-//  méthodes de la classe MoteurES
+// L'ensemble des codes retours utilisées par les
+// méthodes de la classe MoteurES.
 enum CodeRetourMoteurES
 {
-    FICHIER_OK = 0, // L'ouverture du fichier à bien eu lieu
-    FICHIER_ERR = 1 // L'ouverture du fichier à échouée.
+    FICHIER_OK = 0, // L'ouverture du fichier a bien eu lieu.
+    FICHIER_ERR = 1 // L'ouverture du fichier a échoué.
 };
 
 // L'ensemble des états que peut prendre la struct DonneesLog.
-// Voir LireLigneLog() pour plus de détails
+// Voir LireLigneLog() pour plus de détails.
 enum EtatDonneesLog
 {
-    OK,         // Si la lecture s'est déroulée sans accrocs
-    NON_MATCH,  // Si la lecture n'a pas donné de résultat (Parce que ignoré)
-    END_FILE    // Si on est arrivé à la fin du fichier
+    OK,         // Si la lecture s'est déroulée sans accrocs.
+    NON_MATCH,  // Si la lecture n'a pas donné de résultat (car ignoré).
+    END_FILE    // Si on est arrivé à la fin du fichier.
 };
 
 // Liste les codes de retour de la fonction
-// GestionArguments
+// GestionArguments.
 enum CodeRetourArgument
 {
-    OK_ARG,         // Tout c'est bien passé
-    ERR_ARG,        // Les arguments sont mal formés
-    AIDE_ARG,       // L’utilisateur à demandé l'affichage de l'aide.
-    PAS_FICHIER     // Le fichier demandé n'est pas trouvé 
+    OK_ARG,         // Tout s'est bien passé.
+    ERR_ARG,        // Les arguments sont mal formés.
+    AIDE_ARG,       // L’utilisateur a demandé l'affichage de l'aide.
+    PAS_FICHIER     // Le fichier demandé n'est pas trouvé.
 };
 
 //-------------------------------------------------------- Types de classe
@@ -63,16 +63,16 @@ struct DonneesLog{
         //Note : L'ordre correspond à l'ordre des données dans le log apache
 
         string FichierDestination; // Le chemin du fichier vers lequel la
-                                   // requête pointe
-        unsigned int CodeHttp;     // Le code Http de la requête
+                                   // requête pointe.
+        unsigned int CodeHttp;     // Le code Http de la requête.
 
-        string Protocole;           // Le protocole utilisé par la requête
+        string Protocole;          // Le protocole utilisé par la requête.
 
-        string SiteSource;          // Le site d'origine de la requête
-        string FichierSource;       // Le chemin de le fichier d'origine de la
-                                    // requête
+        string SiteSource;         // Le site d'origine de la requête.
+          string FichierSource;    // Le chemin du fichier d'origine de la
+                                   // requête.
 
-        EtatDonneesLog Etat;    /* L'état des données lues*/
+        EtatDonneesLog Etat;       // L'état des données lues.
 
         DonneesLog( string FichierDestination,
                     unsigned int codeHttp,
@@ -90,16 +90,16 @@ struct DonneesLog{
         {
 
         };
-        // Mode d'emploi
+        // Mode d'emploi :
         // Constructeur qui initialise l'ensemble des
         // données de la structure dans l'ordre dans
-        // lesquelles elles sont situés dans le
+        // lesquelles elles sont situées dans le
         // log apache.
 
         inline bool FinDuFichier() const {return Etat == END_FILE;};
         // Mode d'emploi :
-        // Renvoie vrai si l'on à atteint la fin du fichier lu par la
-        // méthode LireLigneLog
+        // Renvoie vrai si l'on a atteint la fin du fichier lu par la
+        // méthode LireLigneLog.
 };
 
 //------------------------------------------------------------------------
@@ -121,7 +121,7 @@ public:
     //      déroulée,
     //      FICHIER_ERR si le fichier n'a pas pu être ouvert
     //      (Par exemple si le fichier n'existe pas ou qu'il
-    //      est en lecture seule)
+    //      est en lecture seule).
 
     CodeRetourMoteurES FermerFichierLog();
     // Mode d'emploi :
@@ -130,7 +130,7 @@ public:
     // La méthode renvoie un CodeRetourMoteurES qui vaut :
     //      FICHIER_OK si la fermeture du fichier s'est bien
     //      déroulée,
-    //      FICHIER_ERR si le fichier n'a pas pu être fermé
+    //      FICHIER_ERR si le fichier n'a pas pu être fermé.
 
     DonneesLog LireLigneLog();
     // Mode d'emploi :
@@ -149,8 +149,8 @@ public:
     void ModifierMatchs(int const heure = -1);
     // Mode d'emploi :
     // Modifie la manière dont le MoteurES cherche les sites
-    // dans le log
-    // Paramètres :
+    // dans le log.
+    // Précisions sur le paramètre :
     // heure : L'heure à choisir. Mettre -1 pour ignorer.
 
     CodeRetourArgument GestionArguments(int const nombreArguments, char* const arguments[]);
@@ -160,7 +160,7 @@ public:
 
     void AfficherAide() const;
     // Mode d'emploi :
-    // Affiche l'aide du programme dans la sortie standard
+    // Affiche l'aide du programme dans la sortie standard.
 
     void ParserLog();
     // Mode d'emploi :
@@ -187,7 +187,7 @@ public:
 private:
 //------------------------------------------------------- Attributs privés
 
-    unordered_set<string> blackListExtension; // La liste des extensions de fichiers ignorée.
+    unordered_set<string> blackListExtension; // La liste des extensions de fichier ignorées.
 
     regex apacheLogRegex;
     ifstream fichierLog; // Le fichier de log que l'on lit.
@@ -201,6 +201,5 @@ private:
     bool afficherFichiersPlusConsultes;
 
 };
-
 
 #endif // MOTEURES_H
