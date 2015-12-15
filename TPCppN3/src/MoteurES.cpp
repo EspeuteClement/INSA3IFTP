@@ -196,13 +196,13 @@ void MoteurES::ModifierMatchs(int const heure)
 	\d+
 
 	Lecture de la page demandée :
-		:.*\"GET
+		:.*"GET 
 		Groupe de captures :
 	 	|		#1               |
 		|	       	   |   #2  | |
 		([^\s?;]*[/\. ]([^\s?;]*))
 		Fin du block page demandée
-		[ ?;].*\"
+		[ ?;].*"
 
 	Capture du code HTML (non utilisé mais peut être utile pour l'évolution
 	du programme)
@@ -210,7 +210,7 @@ void MoteurES::ModifierMatchs(int const heure)
 
 	Lecture de la page source :
 		 |    4#   ||  #5  || #6|
-	 .*\"(\w+:\/\/|)([^//]*)(\S+)\"
+	 .*"(\w+:\/\/|)([^//]*)([^\s?;]+)\S*".
 
 	Le reste du message (l'user agent ) n'est pas pris en compte.
 
@@ -245,7 +245,7 @@ void MoteurES::ModifierMatchs(int const heure)
 		constructeur+="\\d+";
 	}
 	// Enfin, on ajoute le reste de la regex.
-	constructeur+=":.*\"GET ([^\\s?;]*[/\\. ]([^\\s?;]*))[ ?;].*\" (\\d+).*\"(\\w+:\\/\\/|)([^//]*)(\\S+)\"";
+	constructeur+=":.*\"GET ([^\\s?;]*[/\\. ]([^\\s?;]*))[ ?;].*\" (\\d+).*\"(\\w+:\\/\\/|)([^//]*)([^\\s?;]+)\\S*\".";
 
 	// On construit la regex avec la string que l'on a crée.
 	apacheLogRegex = regex(constructeur);
@@ -281,7 +281,7 @@ CodeRetourArgument MoteurES::GestionArguments(int const nombreArguments, char* c
 						cout << "Argument g parsé" << endl;
 					#endif
 						i++;
-						leSiteNom = string(arguments[i]);
+						nomFichierSortie = string(arguments[i]);
 					break;
 
 					case 'e': // Exclure les extensions de fichier données.

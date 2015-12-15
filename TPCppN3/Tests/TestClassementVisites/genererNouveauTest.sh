@@ -1,1 +1,1 @@
-lua générerFicher.lua 50
+lua générerFicher.lua 25
